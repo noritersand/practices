@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-auto-rows</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-auto-rows</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-auto-rows는 그리드 컨테이너에서 명시적으로 행 트랙 크기를 정의하지 않았을 때
+        동적으로 생성되는 암시적 행의 크기를 설정하는 프로퍼티다.</p>
+      <p>grid-template-rows로 지정된 명시적 범위를 벗어나 그리드 아이템이 추가되거나,
+        grid-row 등을 통해 명시적 영역 밖에 아이템을 배치할 때 자동으로 만들어지는 행에 적용된다.</p>
+      <p>이 프로퍼티는 그리드 컨테이너에 지정하며, 기본값은 auto다.</p>
+    </section>
+
+    <section>
+      <h2>특이사항</h2>
+      <h4>grid-template-rows와의 차이</h4>
+      <p>grid-template-rows는 몇 번째 행이 몇 px인지 미리 정의하는 명시적(Explicit) 설정이고, grid-auto-rows는 정의된 범위를
+        넘어선 아이템들이 유입될 때 적용되는 암시적(Implicit) 설정이다.</p>
+      <h4>grid-auto-flow와의 관계</h4>
+      <p>기본적으로 grid-auto-flow는 row로 설정되어 있어 아이템이 넘치면 아래쪽으로 새로운 행이 생성되므로 grid-auto-rows가 적용된다. 만약
+        grid-auto-flow: column으로 변경하여 열 방향으로 아이템이 늘어나게 설정한 경우에는 grid-auto-rows가 아닌 grid-auto-columns 프로퍼티가 작동한다.</p>
+      <h4>음수 인덱스 배치 시 주의점</h4>
+      <p>grid-row: -1 등의 음수 인덱스로 아이템을 배치하거나 명시적 트랙 상단(1번 라인 이전)으로 아이템을 밀어 넣을 때 생성되는 암시적 행에도
+        grid-auto-rows의 크기 규격이 동일하게 적용된다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword values */
+      grid-auto-rows: min-content;
+      grid-auto-rows: max-content;
+      grid-auto-rows: auto;
+
+      /* <length> values */
+      grid-auto-rows: 100px;
+      grid-auto-rows: 20cm;
+      grid-auto-rows: 50vmax;
+
+      /* <percentage> values */
+      grid-auto-rows: 10%;
+      grid-auto-rows: 33.3%;
+
+      /* <flex> values */
+      grid-auto-rows: 0.5fr;
+      grid-auto-rows: 3fr;
+
+      /* minmax() values */
+      grid-auto-rows: minmax(100px, auto);
+      grid-auto-rows: minmax(max-content, 2fr);
+      grid-auto-rows: minmax(20%, 80vmax);
+
+      /* fit-content() values */
+      grid-auto-rows: fit-content(400px);
+      grid-auto-rows: fit-content(5cm);
+      grid-auto-rows: fit-content(20%);
+
+      /* multiple track-size values */
+      grid-auto-rows: min-content max-content auto;
+      grid-auto-rows: 100px 150px 390px;
+      grid-auto-rows: 10% 33.3%;
+      grid-auto-rows: 0.5fr 3fr 1fr;
+      grid-auto-rows: minmax(100px, auto) minmax(max-content, 2fr) minmax(20%, 80vmax);
+      grid-auto-rows: 100px minmax(100px, auto) 10% 0.5fr fit-content(400px);
+
+      /* Global values */
+      grid-auto-rows: inherit;
+      grid-auto-rows: initial;
+      grid-auto-rows: revert;
+      grid-auto-rows: revert-layer;
+      grid-auto-rows: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>auto</h3>
+      <p>기본값으로, 내부 콘텐츠의 높이에 맞춰 암시적 행의 크기가 자동으로 결정된다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: auto
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-auto">
+          <div class="item">Item 1 (Auto height)</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3<br>Content line 2</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>One Value (Length, minmax, fit-content)</h3>
+      <p>단일 값을 지정하여 생성되는 모든 암시적 행에 동일한 크기 규칙을 적용한다.</p>
+
+      <h4>Fixed Length</h4>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: 80px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-px">
+          <div class="item">Item 1 (80px)</div>
+          <div class="item">Item 2 (80px)</div>
+          <div class="item">Item 3 (80px)</div>
+          <div class="item">Item 4 (80px)</div>
+        </div>
+      </div>
+
+      <h4>minmax()</h4>
+      <p>최소 높이를 보장하되, 콘텐츠가 많아지면 높이가 자율적으로 늘어난다(auto).</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: minmax(60px, auto)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-minmax">
+          <div class="item">Short</div>
+          <div class="item">Short</div>
+          <div class="item">Long Content<br>Line 2<br>Line 3<br>Line 4</div>
+          <div class="item">Short</div>
+        </div>
+      </div>
+
+      <h4>fit-content()</h4>
+      <p>콘텐츠 크기에 맞추되 지정한 상한선을 넘지 않는다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: fit-content(100px)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-fit-content">
+          <div class="item">Short</div>
+          <div class="item">Short</div>
+          <div class="item">Very Long Content<br>Line 2<br>Line 3<br>Line 4<br>Line 5<br>Line 6</div>
+          <div class="item">Short</div>
+        </div>
+      </div>
+
+      <h3>Multiple Track-size Values</h3>
+      <p>공백으로 구분된 패턴이 행이 추가될 때마다 순차적으로 반복 적용된다.</p>
+
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: min-content max-content auto
+      --></code></pre>
+      <p>이 경우 네 번째 행은 min-content가 적용된다.</p>
+      <div class="code-result">
+        <div class="container ex-multi-keywords">
+          <div class="item">Row 1 (min-content)</div>
+          <div class="item">Row 1</div>
+          <div class="item">Row 2 (max-content)</div>
+          <div class="item">Row 2</div>
+          <div class="item">Row 3 (auto)</div>
+          <div class="item">Row 3</div>
+          <div class="item">Row 4 (min-content)</div>
+          <div class="item">Row 4</div>
+        </div>
+      </div>
+
+      <h4>px</h4>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      grid-auto-rows: 100px 150px 390px
+      --></code></pre>
+      <p>마찬가지로 네 번째 행은 100px이 적용된다.</p>
+      <div class="code-result">
+        <div class="container ex-multi-px">
+          <div class="item">Row 1 (100px)</div>
+          <div class="item">Row 1</div>
+          <div class="item">Row 2 (150px)</div>
+          <div class="item">Row 2</div>
+          <div class="item">Row 3 (390px)</div>
+          <div class="item">Row 3</div>
+          <div class="item">Row 4 (100px)</div>
+          <div class="item">Row 4</div>
+        </div>
+      </div>
+
+      <h4>fr</h4>
+      <p>비율 단위(fr)는 컨테이너의 명시적인 높이(height)가 존재할 때 해당 잔여 공간을 지정된 비율로 분배한다.</p>
+      <div class="important">
+        <p>fr 단위를 grid-auto-rows에서 복수로 사용할 경우 컨테이너 고정 높이가 지정되어 있지 않으면 콘텐츠 높이에 의존하여 제대로 비율 분배가 되지 않으므로 height 설정을 유의해야
+          한다.</p>
+      </div>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 1fr)
+      height: 400px
+      grid-template-rows: 100px
+      grid-auto-rows: 0.5fr 3fr 1fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-multi-fr">
+          <div class="item">Row 1 (100px 명시적)</div>
+          <div class="item">Row 1</div>
+          <div class="item">Row 2 (0.5fr 암시적)</div>
+          <div class="item">Row 2</div>
+          <div class="item">Row 3 (3fr 암시적)</div>
+          <div class="item">Row 3</div>
+          <div class="item">Row 4 (1fr 암시적)</div>
+          <div class="item">Row 4</div>
+          <div class="item">Row 5 (0.5fr 암시적)</div>
+          <div class="item">Row 5</div>
+          <div class="item">Row 6 (3fr 암시적)</div>
+          <div class="item">Row 6</div>
+          <div class="item">Row 7 (1fr 암시적)</div>
+          <div class="item">Row 7</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

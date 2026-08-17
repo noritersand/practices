@@ -1,0 +1,78 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+  width: 45%
+  height: 40px
+
+  &.auto-height
+    height: auto
+
+  &.large-item
+    height: 70px
+
+  &.font-large
+    font-size: 32px
+    padding-top: 20px
+
+  &.font-small
+    font-size: 14px
+
+.container
+  display: flex
+  flex-wrap: wrap
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  height: 250px
+
+  // Normal alignment
+  &.ex-normal
+    align-content: normal
+
+  // Basic positional alignment
+  &.ex-start
+    align-content: start
+
+  &.ex-center
+    align-content: center
+
+  &.ex-end
+    align-content: end
+
+  // Baseline alignment
+  &.ex-baseline
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    align-content: first baseline
+
+  // Distributed alignment
+  &.ex-space-between
+    align-content: space-between
+
+  &.ex-space-around
+    align-content: space-around
+
+  &.ex-space-evenly
+    align-content: space-evenly
+
+  &.ex-stretch
+    align-content: stretch
+
+  // Overflow alignment
+  &.ex-safe-center
+    height: 120px
+    overflow: auto
+    align-content: safe center
+
+  &.ex-unsafe-center
+    height: 120px
+    overflow: auto
+    align-content: unsafe center

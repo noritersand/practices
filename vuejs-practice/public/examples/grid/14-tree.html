@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <div id="grid"></div> 
+
+      <p>트리를 만드는 방법은 기존 그리드와 크게 다르지 않습니다. 단지 생성 옵션에 <code class="language-js">treeColumnOptions</code>이 있어야 한다는 것과:</p>
+      <pre><code class="language-markup"><!--
+        <div id="grid"></div>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        const grid = new tui.Grid({
+          el: document.getElementById("grid"),
+          data: treeData,
+          rowHeaders: ["checkbox"],
+          bodyHeight: 500,
+          treeColumnOptions: {
+            name: "name",
+            useCascadingCheckbox: true,
+          },
+          columns: [
+
+          ...
+      --></code></pre>
+      <p>그리드 데이터가 아래처럼 <code class="language-js">_children</code> 항목이 있을 수도 있다는 점만 빼고요:</p>
+      <pre><code class="language-js"><!--
+        const treeData = [
+          {
+            name: "Beautiful Lies",
+            artist: "Birdy",
+            type: "Deluxe",
+            release: "2016.03.26",
+            genre: "Pop",
+            _attributes: { expanded: true },
+            _children: [
+              {
+                name: "Chaos And The Calm",
+                artist: "James Bay",
+                type: "EP", 
+                release: "2015.03.23",
+                genre: "Pop,Rock",
+                _children: []
+              },
+
+              ...
+      --></code></pre>
+      <p>아 그리고 몇몇 API 작동도 약간 달라진다 합니다. <a href="https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/tree.md#%EB%8B%A4%EB%A5%B4%EA%B2%8C-%EC%9E%91%EB%8F%99%ED%95%98%EB%8A%94-api">여기를</a> 보세요.</p>
+      
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "14. Tree",
+            docs: [
+              {
+                title: "https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/tree.md",
+                url: "https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/tree.md",
+              },
+            ],
+          };
+        },
+      }).mount("#app");
+
+      const treeData = [
+        {
+          name: "Beautiful Lies",
+          artist: "Birdy",
+          type: "Deluxe",
+          release: "2016.03.26",
+          genre: "Pop",
+          _attributes: { expanded: true },
+          _children: [
+            {
+              name: "Chaos And The Calm",
+              artist: "James Bay",
+              type: "EP",
+              release: "2015.03.23",
+              genre: "Pop,Rock",
+              _children: []
+            },
+            {
+              name: "The Magic Whip",
+              artist: "Blur",
+              type: "EP",
+              release: "2015.04.27",
+              genre: "Rock",
+            },
+            {
+              name: "I'm Not The Only One",
+              artist: "Sam Smith",
+              type: "Single",
+              release: "2014.09.15",
+              genre: "Pop,R&B",
+              _attributes: { expanded: true },
+              _children: [
+                {
+                  name: "This Is Acting",
+                  artist: "Sia",
+                  type: "EP",
+                  release: "2016.10.22",
+                  genre: "Pop",
+                  _attributes: { expanded: true },
+                  _children: [
+                    {
+                      name: "Blue Skies",
+                      artist: "Lenka",
+                      type: "Single",
+                      release: "2015.03.18",
+                      genre: "Pop,Rock",
+                    },
+                    {
+                      name: "I Won't Give Up",
+                      artist: "Jason Mraz",
+                      type: "Single",
+                      release: "2012.01.03",
+                      genre: "Pop",
+                    },
+                    {
+                      name: "Following My Intuition",
+                      artist: "Craig David",
+                      type: "Deluxe",
+                      release: "2016.10.01",
+                      genre: "R&B,Electronic",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "X",
+          artist: "Ed Sheeran",
+          type: "Deluxe",
+          release: "2014.06.24",
+          genre: "Pop",
+        },
+        {
+          name: "Moves Like Jagger",
+          artist: "Maroon5",
+          type: "Single",
+          release: "2011.08.08",
+          genre: "Pop,Rock",
+        },
+        {
+          name: "A Head Full Of Dreams",
+          artist: "Coldplay",
+          type: "Deluxe",
+          release: "2015.12.04",
+          genre: "Rock",
+          _children: [
+            {
+              name: "4",
+              artist: "Beyoncé",
+              type: "Deluxe",
+              release: "2011.07.26",
+              genre: "Pop",
+            },
+            {
+              name: "21",
+              artist: "Adele",
+              type: "Deluxe",
+              release: "2011.01.21",
+              genre: "Pop,R&B",
+            },
+          ],
+        },
+        {
+          name: "Warm On A Cold Night",
+          artist: "HONNE",
+          type: "EP",
+          release: "2016.07.22",
+          genre: "R&B,Electronic",
+        },
+        {
+          name: "Take Me To The Alley",
+          artist: "Gregory Porter",
+          type: "Deluxe",
+          release: "2016.09.02",
+          genre: "Jazz",
+        },
+        {
+          name: "Make Out",
+          artist: "LANY",
+          type: "EP",
+          release: "2015.12.11",
+          genre: "Electronic",
+        },
+        {
+          name: "Get Lucky",
+          artist: "Daft Punk",
+          type: "Single",
+          release: "2013.04.23",
+          genre: "Pop,Funk",
+        },
+        {
+          name: "Valtari",
+          artist: "Sigur Rós",
+          type: "EP",
+          release: "2012.05.31",
+          genre: "Rock",
+        },
+      ];
+
+      
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: treeData,
+        rowHeaders: ["checkbox"],
+        bodyHeight: 500,
+        treeColumnOptions: {
+          name: "name",
+          useCascadingCheckbox: true,
+        },
+        columns: [
+          {
+            header: "Name",
+            name: "name",
+            width: 300,
+          },
+          {
+            header: "Artist",
+            name: "artist",
+          },
+          {
+            header: "Type",
+            name: "type",
+          },
+          {
+            header: "Release",
+            name: "release",
+          },
+          {
+            header: "Genre",
+            name: "genre",
+          },
+        ],
+      });
+
+      grid.on("expand", (ev) => {
+        const { rowKey } = ev;
+        const descendantRows = grid.getDescendantRows(rowKey);
+
+        console.log("rowKey: " + rowKey);
+        console.log("descendantRows: " + descendantRows);
+
+        if (!descendantRows.length) {
+          grid.appendRow(
+            {
+              name: "dynamic loading data",
+              _children: [
+                {
+                  name: "leaf row",
+                },
+                {
+                  name: "internal row",
+                  _children: [],
+                },
+              ],
+            },
+            { parentRowKey: rowKey }
+          );
+        }
+      });
+
+      grid.on("collapse", (ev) => {
+        const { rowKey } = ev;
+        const descendantRows = grid.getDescendantRows(rowKey);
+
+        console.log("rowKey: " + rowKey);
+        console.log("descendantRows: " + descendantRows);
+      });
+    </script>
+  </body>
+</html>

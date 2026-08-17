@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>justify-items</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>justify-items</h1>
+
+    <section>
+      <h2>개요</h2>
+      <p><code class="language-css">justify-items</code>는 Grid 컨테이너나 블록 컨테이너 내부의 모든
+        아이템들의 인라인(가로) 축 방향 정렬 방식을 일괄적으로 설정하는 프로퍼티다.</p>
+      <p>Flexbox 레이아웃의 컨테이너에 적용할 경우 이 프로퍼티는 무시된다. (Flexbox에서는 주축 정렬에 <code
+        class="language-css">justify-content</code>를 사용하며, 교차 축 개별 정렬에는 <code class="language-css">align-self</code>를
+        사용한다.)</p>
+      <p>컨테이너에 적용하는 프로퍼티로, 생략했을 때의 기본값은 <code class="language-css">legacy</code>(특수 문맥) 또는 <code class="language-css">normal</code>이다.
+        (Grid 컨테이너에서는 보통 <code class="language-css">stretch</code>처럼 작동한다)</p>
+    </section>
+
+    <section>
+      <h2>특이사항</h2>
+      <h4>Flexbox에서의 무시</h4>
+      <p>Flexbox 컨테이너에 <code class="language-css">justify-items</code>를 지정하더라도 아무런 효과가 나타나지 않는다. Flexbox 자식 요소의 가로/주축
+        정렬을 통제하려면 컨테이너의 <code class="language-css">justify-content</code>나 개별 아이템의 정렬 프로퍼티를 활용해야 한다.</p>
+      <h4>Overflow Alignment (safe / unsafe)</h4>
+      <p>아이템의 크기가 컨테이너나 그리드 영역보다 커서 넘칠 때, <code class="language-css">safe</code> 키워드를 함께 사용하면 정렬 방식을 <code
+        class="language-css">start</code>로 강제 전환하여 콘텐츠의 시작 부분이 화면 밖으로 잘려 나가는 현상을 방지한다. 반면 <code class="language-css">unsafe</code>는
+        넘침 여부와 상관없이 지정한 정렬 위치를 강제로 유지하므로 데이터 손실(잘림)이 발생할 수 있다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-sass"><!--
+      // Basic keywords
+      justify-items: normal;
+      justify-items: stretch;
+
+      // Positional alignment
+      justify-items: center;
+      justify-items: start;
+      justify-items: end;
+      justify-items: flex-start;
+      justify-items: flex-end;
+      justify-items: self-start;
+      justify-items: self-end;
+      justify-items: left;
+      justify-items: right;
+      justify-items: anchor-center;
+
+      // Baseline alignment
+      justify-items: baseline;
+      justify-items: first baseline;
+      justify-items: last baseline;
+
+      // Overflow alignment
+      justify-items: safe center;
+      justify-items: unsafe center;
+
+      // Legacy alignment
+      justify-items: legacy left;
+      justify-items: legacy right;
+      justify-items: legacy center;
+
+      // Global values
+      justify-items: inherit;
+      justify-items: initial;
+      justify-items: revert;
+      justify-items: revert-layer;
+      justify-items: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>Basic Keywords</h3>
+
+      <h4>normal</h4>
+      <p>레이아웃 키워드에 따라 기본 작동을 수행한다. Grid에서는 <code class="language-css">stretch</code>와 유사하다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: normal
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-normal">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+        </div>
+      </div>
+
+      <h4>stretch</h4>
+      <p>아이템의 너비가 명시적으로 지정되지 않은 경우, 그리드 영역의 가로 너비를 채우기 위해 강제로 늘어난다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: stretch
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-stretch">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+        </div>
+      </div>
+
+      <h3>Positional Alignment</h3>
+
+      <h4>start / center / end</h4>
+      <p>그리드 영역 내에서 아이템을 각각 시작점, 중앙, 끝점으로 정렬한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(3, 1fr)
+      justify-items: start // 또는 center, end
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-start">
+          <div class="item">start</div>
+        </div>
+        <div class="container ex-center">
+          <div class="item">center</div>
+        </div>
+        <div class="container ex-end">
+          <div class="item">end</div>
+        </div>
+      </div>
+
+      <h4>flex-start / flex-end (Grid vs Flexbox 비교)</h4>
+      <p>Grid 레이아웃에서는 <code class="language-css">start</code>, <code class="language-css">end</code>와 동일하게 작동한다. 하지만
+        Flexbox 레이아웃 컨테이너에서는 <code class="language-css">justify-items</code> 프로퍼티 자체가 완전히 무시된다.</p>
+      <pre><code class="language-sass"><!--
+      // Grid 컨테이너: flex-start 정상 작동
+      display: grid
+      grid-template-columns: 1fr
+      justify-items: flex-start
+
+      // Flexbox 컨테이너: justify-items 설정이 무시됨
+      display: flex
+      justify-items: flex-end
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-flex-start-grid">
+          <div class="item">Grid (flex-start 작동)</div>
+        </div>
+        <div class="container ex-flex-end-flexbox">
+          <div class="item">Flexbox (justify-items 무시됨)</div>
+        </div>
+      </div>
+
+      <h4>self-start / self-end</h4>
+      <p>아이템 자체의 쓰기 방향(writing-mode) 축 시작점과 끝점을 기준으로 정렬한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: self-start
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-self-start">
+          <div class="item">self-start</div>
+          <div class="item alt-dir">self-start (rtl)</div>
+        </div>
+      </div>
+
+      <h4>left / right</h4>
+      <p>쓰기 방향과 상관없이 무조건 물리적인 왼쪽(left) 또는 오른쪽(right)으로 정렬한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: left // 또는 right
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-left">
+          <div class="item">left</div>
+        </div>
+        <div class="container ex-right">
+          <div class="item">right</div>
+        </div>
+      </div>
+
+      <h4>anchor-center</h4>
+      <p>Anchor Positioning 사양에서 앵커 요소의 중앙에 정렬할 때 사용한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: 1fr
+      justify-items: anchor-center
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-anchor-center">
+          <div class="item">anchor-center</div>
+        </div>
+      </div>
+
+      <h3>Baseline Alignment</h3>
+      <p>아이템 내부 첫 번째 또는 마지막 텍스트 줄의 베이스라인(기준선)을 맞춰 정렬한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      justify-items: baseline // 또는 first baseline, last baseline
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-baseline">
+          <div class="item fs-large">Base Line 1</div>
+          <div class="item fs-small">Base Line 2</div>
+        </div>
+      </div>
+
+      <h3>Overflow Alignment</h3>
+
+      <h4>safe center vs unsafe center</h4>
+      <p>아이템이 컨테이너 크기보다 클 때, <code class="language-css">safe</code>는 화면 밖으로 잘리지 않도록 <code
+        class="language-css">start</code> 정렬로 전환하며, <code class="language-css">unsafe</code>는 중앙 정렬을 강제하여 넘친 영역이 잘리도록
+        둔다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: 100px
+      justify-items: safe center // 또는 unsafe center
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-safe">
+          <div class="item overflow-text">Safe Center<br />Overflow Content</div>
+        </div>
+        <div class="container ex-unsafe">
+          <div class="item overflow-text">Unsafe Center<br />Overflow Content</div>
+        </div>
+      </div>
+
+      <h3>Legacy Alignment</h3>
+      <p>부모 컨테이너의 정렬 특성을 자손 요소들에게 상속(Legacy)시키며 정렬한다.</p>
+      <pre><code class="language-sass"><!--
+      display: grid
+      grid-template-columns: 1fr
+      justify-items: legacy center
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-legacy">
+          <div class="item">Legacy Center</div>
+        </div>
+      </div>
+
+    </section>
+
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

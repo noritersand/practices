@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>form empty check</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  <script>
+    function check() {
+      var empty = true;
+      $('#searchForm input, #searchForm select').each(function(idx, ele) {
+        if ($(this).val()) {
+          empty = false;
+        }
+      });
+      if (empty) {
+        alert('검색 조건을 하나라도 입력하쇼');
+      }
+    }
+  </script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>form empty check</h1>
+    <form id="searchForm">
+      <input type="text" name="abc1" /><input type="text" name="abc2" /><input
+      type="text"
+      name="abc3"
+    /><input type="text" name="abc4" /><input type="text" name="abc5" /><br />
+      <input type="text" name="abc6" /><input type="text" name="abc7" /><input
+      type="text"
+      name="abc8"
+    /><input type="text" name="abc9" /><input type="text" name="abc10" /><br />
+      <select>
+        <option></option>
+        <option value="1">1</option>
+      </select>
+    </form>
+    <button type="button" onclick="check()">check</button>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

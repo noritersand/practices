@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>input-date event test</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  <script>
+    $(function() {
+      $('#dt').on('input', function() {
+        $('#input-result').text($('#dt').val());
+      });
+      $('#dt').on('change', function() {
+        $('#change-result').text($('#dt').val());
+      });
+    });
+  </script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>input-date event test</h1>
+    <p>change 이벤트 말고 input 이벤트가 따로 있음.</p>
+    <input type="date" class="medium" id="dt" />
+    <section>
+      <h4>input-result:</h4>
+      <p id="input-result"></p>
+      <h4>change-result:</h4>
+      <p id="change-result"></p>
+    </section>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

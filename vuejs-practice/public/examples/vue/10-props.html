@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>Props</h2>
+      <p>Props는 간단히 말해서 읽기 전용 프로퍼티 집합입니다.</p>
+      <p><code class="language-js">props</code> 속성으로 앱을 만들 때 직접 할당하거나 타입만 선언할 수 있습니다.</p>
+      <pre><code class="language-markup"><!--
+        <child-component-1></child-component-1>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        createApp({
+          props: {
+            msg: { type: String, required: true },
+          }
+        }, { msg: 'Hello Props?' }).mount("#app");
+      --></code></pre>
+      <div class="result">
+        <p>{{msg}}</p>
+      </div>
+      <div class="result">
+        <child-component-1></child-component-1>
+      </div>
+
+      <p>이렇게 쓰는 것임</p>
+      <pre><code class="language-markup"><!--
+        <single-upper-org-picker ref="orgPicker" :pick-this="'A3456'"></single-upper-org-picker>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        createApp({
+          props: {
+            pickThis: {
+              type: String,
+              default: null,
+              required: false
+            }
+          },
+        }).mount('#app');
+      --></code></pre>
+      <pre><code class="language-markup"><!--
+        <multi-place-picker ref="placePicker" :pick-these="['A1234', 'B5678', 'B6789']"></multi-place-picker>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        createApp({
+          props: {
+            pickthese: {
+              type: Array(String),
+              default: [],
+              required: false
+            }
+          },
+        }).mount('#app');
+      --></code></pre>
+
+      <h2>props vs data</h2>
+      <p>data로 선언한 프로퍼티들은 (마치 리엑트의 state처럼) 자동으로 랜더링된다는 것은 이제 아시쥬?</p>
+      <p>props는 안됩니다. 애초에 읽기 전용 데이터라 값 변경도 안되거든요</p>
+      <p><button type="button" @click="fn1">fn1 버튼</button></p>
+      <pre><code class="language-markup"><!--
+        <section id="vueApp">
+          <p id="result2">{{msg}}</p>
+        </section>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        props: {
+          msg: { type: String, required: true },
+        },
+        methods: {
+          fn1() {
+            try {
+              this.msg = 'wasssssssup';   
+            } catch (error) {
+              document.querySelector('#result2').innerText = error;
+            }
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p id="result2">{{msg}}</p>
+      </div>
+      <p>props 값을 변경하고 싶으면 변수 할당 표현식 대신 <code class="language-js">emit()</code>을 호출해야 합니다.</p>
+      <p>TOOD</p>
+
+      <h2>boolean 타입의 props</h2>
+      <p>이렇게 쓸 수 잇슴</p>
+      <pre><code class="language-markup"><!--
+        <child-component-2 usable></child-component-2>
+      --></code></pre>
+      <div class="result">
+        <child-component-2 usable></child-component-2>
+      </div>
+      
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module" src="/examples/vue/10-props.js"></script>
+  </body>
+</html>

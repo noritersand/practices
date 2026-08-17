@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>flex-basis</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>flex-basis</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>flex-basis는 Flexbox에서 플렉스 아이템의 기본 크기를 설정하는 프로퍼티다.</p>
+      <p>이 값은 아이템이 주축에서 차지할 초기 크기를 결정하며, flex-grow의 자동 크기 조절에 영향을 끼친다. 가령 flex-grow가 같은 아이템이 있더라도 flex-basis 값이 양수로
+        지정된 아이템이 다른 아이템보다 남은 공간을 더 많이 차지하게 된다. 이는 기본 크기가 다르기 때문이다.</p>
+      <p>flex-shrink에도 영향이 있는데, 플렉스 아이템이 자동으로 줄어들 때 flex-basis보다 줄어들지 않게 된다.</p>
+      <p>플렉스 아이템에 지정한다.</p>
+    </section>
+
+    <section>
+      <h2>width, height, min-width, min-height와의 차이점</h2>
+      <p>flex-basis는 플렉스 아이템의 초기 크기와 최소 크기를 결정하는 프로퍼티다.</p>
+      <p>width(축이 수직일 때는 height로 대체됨)는 Flexbox에서 flex-basis가 없을 때만 적용되며 flex-basis의 역할을 대신한다.</p>
+      <p>min-width(축이 수직일 때는 min-height로 대체됨)는 플렉스 아이템이 자동으로 축소될 때의 최소 크기를 제한하지만, flex-basis 값이 더 크게 선언되어 있으면 해당 값이
+        우선한다.</p>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>절대값 혹은 퍼센테이지로 입력 가능.</p>
+
+      <div class="code-result">
+        <div class="container">
+          <div class="item" style="flex-basis: 100px;">100px</div>
+          <div class="item" style="flex-basis: 200px;">200px</div>
+          <div class="item" style="flex-basis: 300px;">300px</div>
+          <div class="item" style="flex-basis: 400px;">400px</div>
+          <!--              <div class="item" style="flex-basis: 500px;">500px</div>-->
+        </div>
+        <div class="container">
+          <div class="item" style="flex-basis: 30%;">30%</div>
+          <div class="item" style="flex-basis: 70%;">70%</div>
+        </div>
+        <div class="container">
+          <div class="item" style="flex-basis: 30%;">30%</div>
+          <div class="item" style="flex-basis: 100%;">100%</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

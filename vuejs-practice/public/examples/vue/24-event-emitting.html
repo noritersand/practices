@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>개요</h2>
+      <p>emit이란 컴포넌트에서 부모로 이벤트를 내보내는 것을 말합니다. (직역하면 방사 혹은 방출)</p>
+      <p>사실 부모도 컴포넌트라서 '부모 컴포넌트'와 '자식 컴포넌트'가 정확하지만, 여기선 부모와 컴포넌트라고만 표현하겠습니다.</p>
+      
+      <h2>기본 사용법</h2>
+      <p>컴포넌트에서 특정 시점에 <code class="language-js">$emit()</code> 함수를 호출하는 방식으로 작성합니다. <code class="language-js">$emit()</code>의 첫 번째 인자는 이벤트 타입, 두 번째는 전달할 메시지입니다.</p>
+      <p>이벤트 타입은 마음대로 정의할 수 있습니다.</p>
+      <pre><code class="language-js"><!--
+        export const emittingTest = {
+          template: `
+            <button type="button" @click="$emit('custom-event:press', '이 메시지는 컴포넌트에서 시작되어...')">이걸 눌러보면?</button>
+          `,
+          emits: ['custom-event:press'],
+          data() {
+            return {}
+          }
+        };
+      --></code></pre>
+      <pre><code class="language-markup"><!--
+        <emitting-test  @custom-event:press="handle"></emitting-test>
+        <p>{{messageFromChild}}</p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        createApp({
+          components: {
+            emittingTest
+          },
+          data() {
+            return {
+              messageFromChild: ''
+            };
+          },
+          methods: {
+            handle(message) {
+              this.messageFromChild = message;
+              setTimeout(() => this.messageFromChild = '', 500);
+            }
+          }
+        }).mount("#app");
+      --></code></pre>
+      <div class="result">
+        <emitting-test @custom-event:press="handle"></emitting-test>
+        <p>{{messageFromChild}}</p>
+      </div>
+      다른 인풋 태그도 크게 다르지 않습니다. 예를 들어 <code class="language-markup">&lt;select&gt;</code> 태그는 이런식으로 작성합니다:
+      <pre><code class="language-js"><!--
+        export const emittingTest2 = {
+          template: `
+            <select @change="$emit('custom:event-change', $event.target.value)">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          `
+        };
+      --></code></pre>
+      <div class="result">
+        <emitting-test2 @custom:event-change="handle2"></emitting-test2>
+        <p>{{messageFromChild2}}</p>
+      </div>
+
+      <h2>부모의 반응형 모델과 동기화하기</h2>
+      <pre><code class="language-markup"><!--
+        <emitting-test3 v-model="messageFromChild3"></emitting-test3>
+        <p>{{messageFromChild3}}</p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        export const emittingTest3 = {
+          template: `
+            <input type="text" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)">
+          `,
+          props: ['modelValue'],
+          emits: ['update:modelValue'],
+        };
+      --></code></pre>
+      <div class="result">
+        <emitting-test3 v-model="messageFromChild3"></emitting-test3>
+        <p>{{messageFromChild3}}</p>
+      </div>
+      
+      <code class="language-js">modelValue</code> 프로퍼티는 이름을 생략할 때 사용되는 기본값인데, 이름을 지정한다면 아래처럼 사용할 수 있습니다.
+      
+      <pre><code class="language-markup"><!--
+        <emitting-test4 v-model:selected-value="messageFromChild4"></emitting-test4>
+        <p>messageFromChild4: {{messageFromChild4}}</p>
+        <p>Is messageFromChild4 null? {{messageFromChild4 === null}}</p>
+        <p>Is messageFromChild4 null string? {{messageFromChild4 === ''}}</p>
+        <button type="button" @click="messageFromChild4 = null">let messageFromChild4 is null</button>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        export const emittingTest4 = {
+          template: `
+            <select :value="selectedValue" @input="$emit('update:selected-value', $event.target.value)">
+              <option :value="null">널 값</option>
+              <option :value="''">빈 문자열</option>
+              <option :value="1">1</option>
+              <option :value="2">2</option>
+            </select>
+          `,
+          props: ['selectedValue'],
+          emits: ['update:selected-value']
+        };
+      --></code></pre>
+      <div class="result">
+        <emitting-test4 v-model:selected-value="messageFromChild4"></emitting-test4>
+        <p>messageFromChild4: {{messageFromChild4}}</p>
+        <p>Is messageFromChild4 null? {{messageFromChild4 === null}}</p>
+        <p>Is messageFromChild4 null string? {{messageFromChild4 === ''}}</p>
+        <button type="button" @click="messageFromChild4 = null">let messageFromChild4 is null</button>
+      </div>
+
+      <p>근데 잘 보면 모델 값이 null일 때 동기화 처리가 잘 안되는 것을 확인할 수 있습니다.</p>
+      <p>정확한 null 처리가 필요하다면, 아래처럼 <code class="language-js">computed</code>를 활용해야 합니다:</p>
+      
+      <pre><code class="language-markup"><!--
+        <emitting-test5 v-model:selected-value="messageFromChild5"></emitting-test5>
+        <p>messageFromChild5: {{messageFromChild5}}</p>
+        <p>Is messageFromChild5 null? {{messageFromChild5 === null}}</p>
+        <p>Is messageFromChild5 null string? {{messageFromChild5 === ''}}</p>
+        <button type="button" @click="messageFromChild5 = null">let messageFromChild5 is null</button>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        export const emittingTest5 = {
+          template: `
+            <select v-model="computedModel">
+              <option :value="null">널 값</option>
+              <option :value="''">빈 문자열</option>
+              <option :value="1">1</option>
+              <option :value="2">2</option>
+            </select>
+          `,
+          props: ['selected'],
+          emits: ['update:selected'],
+          computed: {
+            computedModel: {
+              get() {
+                return this.selected;
+              },
+              set(value) {
+                this.$emit('update:selected', value);
+              }
+            }
+          }
+        };
+      --></code></pre>
+      <div class="result">
+        <emitting-test5 v-model:selected-value="messageFromChild5"></emitting-test5>
+        <p>messageFromChild5: {{messageFromChild5}}</p>
+        <p>Is messageFromChild5 null? {{messageFromChild5 === null}}</p>
+        <p>Is messageFromChild5 null string? {{messageFromChild5 === ''}}</p>
+        <button type="button" @click="messageFromChild5 = null">let messageFromChild5 is null</button>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+      
+      import { emittingTest, emittingTest2, emittingTest3, emittingTest4, emittingTest5 } from '/examples/vue/component/emitting-test.js';
+
+      window.vm = createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+          emittingTest, emittingTest2, emittingTest3, emittingTest4, emittingTest5
+        },
+        data() {
+          return {
+            pageTitle: "Event emitting",
+            docs: [
+              { title: "https://v3-docs.vuejs-korea.org/guide/essentials/component-basics.html#listening-to-events", url: "https://v3-docs.vuejs-korea.org/guide/essentials/component-basics.html#listening-to-events" },
+              { title: "https://v3-docs.vuejs-korea.org/api/options-state.html#emits", url: "https://v3-docs.vuejs-korea.org/api/options-state.html#emits" },
+            ],
+            message: "Hello Vue! ✌️",
+            messageFromChild: '',
+            messageFromChild2: '선택 전',
+            messageFromChild3: '',
+            messageFromChild4: null,
+            messageFromChild5: null
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        methods: {
+          handle(message) {
+            this.messageFromChild = message;
+            setTimeout(() => this.messageFromChild = '', 500);
+          },
+          handle2(message) {
+            this.messageFromChild2 = message;
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

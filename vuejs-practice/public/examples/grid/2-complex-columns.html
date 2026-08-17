@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast UI Grid</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <div id="grid"></div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "2. Complex columns",
+          };
+        },
+      }).mount("#app");
+
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", release: "2016.03.26", type: "Deluxe", genre: "Pop", price: 10000, downloadCount: 1000, listenCount: 5000 },
+        { name: "X", artist: "Ed Sheeran", release: "2014.06.24", type: "Deluxe", genre: "Pop", price: 20000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "Moves Like Jagger",
+          release: "2011.08.08",
+          artist: "Maroon5",
+          type: "Single",
+          genre: "Pop,Rock",
+          price: 7000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        {
+          name: "A Head Full Of Dreams",
+          artist: "Coldplay",
+          release: "2015.12.04",
+          type: "Deluxe",
+          genre: "Rock",
+          price: 25000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        { name: "21", artist: "Adele", release: "2011.01.21", type: "Deluxe", genre: "Pop,R&B", price: 15000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "Warm On A Cold Night",
+          artist: "HONNE",
+          release: "2016.07.22",
+          type: "EP",
+          genre: "R&B,Electronic",
+          price: 11000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        {
+          name: "Take Me To The Alley",
+          artist: "Gregory Porter",
+          release: "2016.09.02",
+          type: "Deluxe",
+          genre: "Jazz",
+          price: 30000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        { name: "Make Out", artist: "LANY", release: "2015.12.11", type: "EP", genre: "Electronic", price: 12000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "Get Lucky",
+          artist: "Daft Punk",
+          release: "2013.04.23",
+          type: "Single",
+          genre: "Pop,Funk",
+          price: 9000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        { name: "Valtari", artist: "Sigur Rós", release: "2012.05.31", type: "EP", genre: "Rock", price: 10000, downloadCount: 1000, listenCount: 5000 },
+        { name: "Bush", artist: "Snoop Dogg", release: "2015.05.12", type: "EP", genre: "Hiphop", price: 18000, downloadCount: 1000, listenCount: 5000 },
+        { name: "2", artist: "Beyoncé", release: "2011.07.26", type: "Deluxe", genre: "Pop", price: 12000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "I Won't Give Up",
+          artist: "Jason Mraz",
+          release: "2012.01.03",
+          type: "Single",
+          genre: "Pop",
+          price: 7000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        {
+          name: "Following My Intuition",
+          artist: "Craig David",
+          release: "2016.10.01",
+          type: "Deluxe",
+          genre: "R&B,Electronic",
+          price: 15000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        { name: "Blue Skies", release: "2015.03.18", artist: "Lenka", type: "Single", genre: "Pop,Rock", price: 6000, downloadCount: 1000, listenCount: 5000 },
+        { name: "This Is Acting", artist: "Sia", release: "2016.10.22", type: "EP", genre: "Pop", price: 20000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "Blurryface",
+          artist: "Twenty One Pilots",
+          release: "2015.05.19",
+          type: "EP",
+          genre: "Rock",
+          price: 13000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        {
+          name: "I'm Not The Only One",
+          artist: "Sam Smith",
+          release: "2014.09.15",
+          type: "Single",
+          genre: "Pop,R&B",
+          price: 8000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        },
+        { name: "The Magic Whip", artist: "Blur", release: "2015.04.27", type: "EP", genre: "Rock", price: 15000, downloadCount: 1000, listenCount: 5000 },
+        {
+          name: "Chaos And The Calm",
+          artist: "James Bay",
+          release: "2015.03.23",
+          type: "EP",
+          genre: "Pop,Rock",
+          price: 12000,
+          downloadCount: 1000,
+          listenCount: 5000,
+        }
+      ];
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        scrollX: false,
+        scrollY: false,
+        data: gridData,
+        header: {
+          height: 160,
+          complexColumns: [
+            { header: "Basic", name: "mergeColumn1", childNames: ["name", "artist"] },
+            { header: "Extra", name: "mergeColumn2", childNames: ["type", "release", "genre"] },
+            { header: "Detail", name: "mergeColumn3", childNames: ["mergeColumn1", "mergeColumn2"] },
+            { header: "Count", name: "mergeColumn4", childNames: ["downloadCount", "listenCount"] },
+            { header: "Album Info", name: "mergeColumn5", childNames: ["price", "mergeColumn3", "mergeColumn4"] },
+          ],
+        },
+        columns: [
+          { header: "Name", name: "name" },
+          { header: "Artist", name: "artist" },
+          { header: "Type", name: "type" },
+          { header: "Release", name: "release" },
+          { header: "Genre", name: "genre" },
+          { header: "Price", name: "price" },
+          { header: "Download", name: "downloadCount" },
+          { header: "Listen", name: "listenCount" },
+        ],
+      });
+    </script>
+  </body>
+</html>

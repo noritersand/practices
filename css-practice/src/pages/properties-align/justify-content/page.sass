@@ -1,0 +1,90 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+
+.container
+  display: flex
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 100px
+  margin-bottom: 10px
+
+  // Positional alignment
+  &.ex-center
+    justify-content: center
+
+  &.ex-start
+    justify-content: start
+
+  &.ex-end
+    justify-content: end
+
+  &.ex-flex-start
+    justify-content: flex-start
+
+  &.ex-flex-end
+    justify-content: flex-end
+
+  &.ex-left
+    justify-content: left
+
+  &.ex-right
+    justify-content: right
+
+  // Normal alignment
+  &.ex-normal-flex
+    display: flex
+    justify-content: normal
+
+  &.ex-normal-grid
+    display: grid
+    grid-template-columns: auto auto
+    justify-content: normal
+
+  // Distributed alignment
+  &.ex-space-between
+    justify-content: space-between
+
+  &.ex-space-around
+    justify-content: space-around
+
+  &.ex-space-evenly
+    justify-content: space-evenly
+
+  &.ex-stretch
+    display: grid
+    grid-template-columns: auto auto
+    justify-content: stretch
+
+    .item
+      white-space: normal
+
+  // Overflow alignment
+  &.ex-safe-center
+    display: flex
+    justify-content: safe center
+    overflow-x: auto
+    width: 800px
+
+    .item
+      flex-shrink: 0
+      width: 200px
+
+  &.ex-unsafe-center
+    display: flex
+    justify-content: unsafe center
+    overflow-x: auto
+    width: 800px
+
+    .item
+      flex-shrink: 0
+      width: 200px

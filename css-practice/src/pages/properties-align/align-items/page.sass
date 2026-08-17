@@ -1,0 +1,98 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+
+  &.long-item
+    min-height: 140px
+
+.container
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  margin-bottom: 15px
+
+  // Basic Keywords 예시
+  &.flex-ex-stretch
+    display: flex
+    align-items: stretch
+    height: 120px
+
+  &.grid-ex-normal
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    align-items: normal
+    height: 120px
+
+  // Positional Alignment 예시
+  &.flex-ex-center
+    display: flex
+    align-items: center
+    height: 120px
+
+  &.grid-ex-start
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    align-items: start
+    height: 120px
+
+  &.grid-ex-end
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    align-items: end
+    height: 120px
+
+  // Baseline Alignment 예시
+  &.flex-ex-baseline
+    display: flex
+    align-items: baseline
+    height: 120px
+
+    .item:nth-child(1)
+      font-size: 14px
+
+    .item:nth-child(2)
+      font-size: 32px
+
+  // Overflow Alignment 예시
+  &.flex-ex-safe
+    display: flex
+    flex-direction: column
+    align-items: safe center
+    height: 80px
+    overflow: auto
+
+  // Anchor Positioning 예시
+  &.ex-anchor-position
+    position: relative
+    height: 180px
+    display: flex
+    justify-content: center
+    align-items: center
+
+    .anchor-target
+      anchor-name: --my-anchor
+      background-color: darkslategrey
+      color: white
+      padding: 15px
+      border-radius: 4px
+
+    .absolute-item
+      position: absolute
+      position-anchor: --my-anchor
+      // 앵커 요소의 아래쪽에 배치하고 중앙 정렬
+      top: anchor(bottom)
+      justify-self: anchor-center
+      align-self: anchor-center
+      background-color: crimson
+      color: white
+      padding: 8px 12px
+      margin-top: 8px
+      border-radius: 4px

@@ -1,0 +1,22 @@
+{
+  "name": "css-practice",
+  "version": "1.0.0",
+  "description": "CSS practice project",
+  "main": "index.js",
+  "scripts": {
+    "sass:build": "sass src:public",
+    "sass:watch": "sass --watch src:public",
+    "live": "live-server public --port=6002",
+    "dev": "concurrently 'yarn sass:watch' 'yarn live'"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^10.0.3",
+    "live-server": "^1.2.2",
+    "repomix": "^1.16.1",
+    "sass": "^1.101.0"
+  },
+  "packageManager": "yarn@4.17.1"
+}

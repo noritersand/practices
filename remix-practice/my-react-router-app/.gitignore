@@ -1,0 +1,14 @@
+.DS_Store
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+.yarn
+yarn.lock
+.pnp.cjs
+.pnp.loader.mjs
+
+.idea
+

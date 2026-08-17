@@ -1,0 +1,86 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+
+.container
+  display: flex
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 180px
+
+  &.ex-flex
+    // flex 기본 컨테이너
+
+  &.ex-parent-center
+    // auto 예시용: 부모에 align-items: center를 설정하여 상속 동작 확인
+    align-items: center
+
+  &.ex-overflow
+    height: 80px
+    overflow: hidden
+
+  .item-target
+    background-color: coral
+
+    // Keyword Values
+    &.ex-auto
+      align-self: auto
+
+    &.ex-normal
+      align-self: normal
+
+    // Positional Alignment (center, start, end)
+    &.ex-start
+      align-self: start
+
+    &.ex-center
+      align-self: center
+
+    &.ex-end
+      align-self: end
+
+    // Self & Flex Positional
+    &.ex-self-start
+      writing-mode: vertical-lr
+      align-self: self-start
+
+    &.ex-self-end
+      writing-mode: vertical-lr
+      align-self: self-end
+
+    &.ex-flex-start
+      align-self: flex-start
+
+    &.ex-flex-end
+      align-self: flex-end
+
+    &.ex-anchor-center
+      align-self: anchor-center
+
+    // Baseline Alignment
+    &.ex-first-baseline
+      align-self: first baseline
+
+    &.ex-last-baseline
+      align-self: last baseline
+
+    &.ex-stretch
+      align-self: stretch
+
+    // Overflow Alignment
+    &.ex-safe-center
+      height: 250px
+      align-self: safe center
+
+    &.ex-unsafe-center
+      height: 250px
+      align-self: unsafe center

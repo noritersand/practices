@@ -1,0 +1,53 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 150px
+  /* 열 방향으로 암시적 트랙이 배치되도록 설정 */
+  grid-template-rows: repeat(2, 1fr)
+  grid-auto-flow: column
+
+  /* auto 지정 */
+  &.ex-auto
+    grid-auto-columns: auto
+
+  /* One Value 예시들 */
+  &.ex-px
+    grid-auto-columns: 120px
+
+  &.ex-minmax
+    grid-auto-columns: minmax(100px, auto)
+
+  &.ex-fit-content
+    grid-auto-columns: fit-content(150px)
+
+    .item
+      white-space: normal
+      word-break: break-word
+
+  /* Multiple Track-size Values 예시들 */
+  &.ex-multi-keywords
+    grid-auto-columns: min-content max-content auto
+
+  &.ex-multi-px
+    grid-auto-columns: 100px 150px 390px
+
+  &.ex-multi-fr
+    width: 800px
+    /* 1번 열은 200px 고정 명시적 열로 지정 */
+    grid-template-columns: 200px
+    /* 2번 열부터: 최소 너비를 0으로 강제하여 콘텐츠 크기에 상관없이 0.5 : 3 : 1 비율 적용 */
+    grid-auto-columns: minmax(0, 0.5fr) minmax(0, 3fr) minmax(0, 1fr)

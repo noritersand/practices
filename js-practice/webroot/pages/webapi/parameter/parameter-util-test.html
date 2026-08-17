@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>parameter util test</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  <script>
+    var parameterUtil = {
+      getByName: function(name, url) {
+        if (!url) {
+          url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+        if (!results) {
+          return null;
+        }
+        if (!results[2]) {
+          return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+      }
+    };
+    console.log(
+      'parameterUtil.getByName:',
+      '"' +
+      parameterUtil.getByName(
+        'q',
+        'https://www.google.com/search?newwindow=1&client=firefox-b-d&ei=gNWhXPP-KISl8QWCtJDYDA&q=javascript+replace&oq=javascript+replace'
+      ) +
+      '"'
+    );
+  </script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>parameter util test</h1>
+    <p>Open the console, and type:</p>
+    <pre><code class="language-js"><!--
+    parameterUtil.getByName('client', 'https://localhost/?client=firefox');
+    --></code></pre>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

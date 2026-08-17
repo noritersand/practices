@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <h2>$refs</h2>
+      <p>DOM 요소에 직접 접근해야 할 때 사용합니다.</p>
+      <pre><code class="language-markup"><!--
+        <input ref="focusMe" />
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        mounted() {
+          this.$refs.focusMe.focus()
+        }
+      --></code></pre>
+      <div class="result">
+        <input ref="focusMe" v-model="vv" />
+      </div>
+      <p>속성 바인딩 표현식 안에서도 쓸 수 있습니다.</p>
+      <pre><code class="language-markup"><!--
+        <input ref="focusMe2" v-model="vvv" />
+        <button type="button" @click="$refs.focusMe2.focus()">눌러봐유</button>
+      --></code></pre>
+      <div class="result">
+        <input ref="focusMe2" v-model="vvv" style="width: 175px" />
+        <button type="button" @click="$refs.focusMe2.focus()">눌러봐유</button>
+      </div>
+      <div class="description">
+        <p>⚠️ <code class="language-js">focus()</code>에서 괄호를 빼면 <span class="error">Uncaught TypeError: Cannot read properties of undefined (reading 'focus')</span> 에러가 발생하니 주의하세요.</p>
+      </div>
+
+      <h2>??</h2>
+      <p><code class="language-js">$refs</code>는 요소 접근외에 Child 앱의 자원을 가져올 때 사용합니다...만, 이런 식으로 하위 계층의 뷰 앱을 직접 다루는 것은 권장하지 않습니다. 대신 <code class="language-js">props</code>와 <code class="language-js">emit</code>을 사용하세요.</p>
+      <p>TODO</p>
+
+      <h2>v-for에서 사용하기</h2>
+      <p></p>
+      <pre><code class="language-markup"><!--
+        <template v-for="(ele, index) in elements" :key="index">
+          <div ref="whoisdis" :style="{ backgroundColor: ele }" style="width: 100px; height: 100px"></div>
+        </template>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            elements: ['darkred', 'darkblue', 'darkgreen']
+          };
+        }
+      --></code></pre>
+      <div class="result">
+        <div style="display: flex;">
+          <template v-for="(ele, index) in elements" :key="index">
+            <div ref="whoisdis" :style="{ backgroundColor: ele }" style="width: 100px; height: 100px"></div>
+          </template>
+        </div>
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        data() {
+          return {
+            pageTitle: "Template Refs",
+            message: "Hello Vue! ✌️",
+            vv: '여기에 포커스가 있쥬?',
+            vvv: '옆에 버튼 누르면 포커스 생김',
+            elements: [
+              'darkred', 'darkblue', 'darkgreen',
+              'rgb(255, 0, 0)', 'rgb(255, 127, 0)', 'rgb(255, 255, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)', 'rgb(75, 0, 130)', 'rgb(148, 0, 211)'
+            ]
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        mounted() {
+          this.$refs.focusMe.focus();
+          this.$refs.whoisdis.forEach(ele => {
+            console.log(ele.style.backgroundColor);
+          });
+          // darkred
+          // darkblue
+          // darkgreen
+          console.log(this.$refs.whoisdis); // Array(3) [ div, div, div ]
+
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

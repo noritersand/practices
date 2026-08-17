@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>다중 비동기 작업을 지원하는 로딩 오버레이</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+
+  <style>
+      /* Loading Overlay Styles */
+      .loading-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .loading-overlay.active {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      .loading-content {
+          background: white;
+          padding: 2rem;
+          border-radius: 8px;
+          text-align: center;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          max-width: 300px;
+          width: 90%;
+      }
+
+      .spinner {
+          width: 40px;
+          height: 40px;
+          border: 3px solid #f3f3f3;
+          border-top: 3px solid #007bff;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem;
+      }
+
+      @keyframes spin {
+          0% {
+              transform: rotate(0deg);
+          }
+          100% {
+              transform: rotate(360deg);
+          }
+      }
+
+      .loading-text {
+          color: #666;
+          font-size: 1rem;
+          margin: 0;
+      }
+
+      .loading-counter {
+          color: #999;
+          font-size: 0.8rem;
+          margin-top: 0.5rem;
+      }
+
+      /* Demo Styles */
+      .demo-button {
+          background: #007bff;
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 1rem;
+          margin: 0.5rem;
+          transition: background-color 0.2s;
+      }
+
+      .demo-button:hover {
+          background: #0056b3;
+      }
+
+      .demo-form {
+          max-width: 400px;
+          margin: 2rem 0;
+      }
+
+      .form-group {
+          margin-bottom: 1rem;
+      }
+
+      .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+      }
+
+      .form-group input {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 1rem;
+      }
+
+      .status-message {
+          margin-top: 1rem;
+          padding: 1rem;
+          border-radius: 4px;
+          display: none;
+      }
+
+      .status-message.success {
+          background: #d4edda;
+          color: #155724;
+          border: 1px solid #c3e6cb;
+      }
+
+      .status-message.error {
+          background: #f8d7da;
+          color: #721c24;
+          border: 1px solid #f5c6cb;
+      }
+
+      .demo-section {
+          margin: 2rem 0;
+          padding: 1.5rem;
+          border: 1px solid #eee;
+          border-radius: 8px;
+          background: #f9f9f9;
+      }
+  </style>
+</head>
+
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>다중 비동기 작업을 지원하는 로딩 오버레이</h1>
+
+    <section>
+      <div id="toc" class="mrgn-btm"></div>
+    </section>
+
+    <section>
+      <p>
+        카운터 방식으로 동시 진행 중인 모든 작업을 추적하여 마지막 작업 완료 시에만 로딩이 종료되는
+        로딩 오버레이를 구현해보자. 여러 API 호출이 동시에 발생해도 안전하게 처리되며,
+        사용자 입력을 완전히 차단한다.
+      </p>
+    </section>
+
+    <section>
+      <h2>기본 사용법</h2>
+      <p>아래 버튼들을 클릭해서 카운터 기반 로딩 오버레이가 어떻게 동작하는지 확인해보자.</p>
+
+      <div class="demo-section">
+        <h3>단일 작업</h3>
+        <button class="demo-button" onclick="singleTask()">
+          일반 작업 (3초)
+        </button>
+
+        <button class="demo-button" onclick="errorTask()">
+          에러 시뮬레이션
+        </button>
+      </div>
+
+      <div class="demo-section">
+        <h3>동시 실행 테스트</h3>
+        <button class="demo-button" onclick="parallelTasks()">
+          3개 작업 동시 실행
+        </button>
+
+        <button class="demo-button" onclick="sequentialTasks()">
+          3개 작업 순차 실행 (비교용)
+        </button>
+      </div>
+
+      <div id="statusMessage" class="status-message"></div>
+    </section>
+
+    <section>
+      <h2>폼 제출 예제</h2>
+      <p>폼 제출 시에도 카운터 시스템이 적용된다. 중복 제출을 방지하면서 다른 작업과도 조화롭게 동작한다.</p>
+
+      <form id="demoForm" class="demo-form">
+        <div class="form-group">
+          <label for="username">사용자명</label>
+          <input type="text" id="username" name="username" value="testuser" required>
+        </div>
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" value="test@example.com" required>
+        </div>
+        <button type="submit" class="demo-button">폼 제출 (2초)</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>핵심 JavaScript 구현</h2>
+      <p>다음은 카운터 기반 로딩 오버레이의 핵심 구현이다.</p>
+
+      <pre><code class="language-javascript"><!--
+      class LoadingOverlay {
+        constructor() {
+          this.overlay = null;
+          this.loadingCount = 0;  // 핵심: 카운터로 작업 수 추적
+          this.previousActiveElement = null;
+          this.currentMessage = '처리 중입니다...';
+          this.createOverlay();
+          this.initEventListeners();
+        }
+
+        show(message = '처리 중입니다...') {
+          this.loadingCount++;  // 작업 시작시 카운터 증가
+
+          // 첫 번째 작업일 때만 오버레이 표시
+          if (this.loadingCount === 1) {
+            this.previousActiveElement = document.activeElement;
+            this.overlay.style.opacity = '1';
+            this.overlay.style.visibility = 'visible';
+            document.body.style.overflow = 'hidden';
+          }
+
+          this.updateDisplay(message);
+        }
+
+        hide() {
+          if (this.loadingCount <= 0) return;
+
+          this.loadingCount--;  // 작업 완료시 카운터 감소
+
+          // 모든 작업이 완료되었을 때만 오버레이 숨김
+          if (this.loadingCount === 0) {
+            this.overlay.style.opacity = '0';
+            this.overlay.style.visibility = 'hidden';
+            document.body.style.overflow = '';
+
+            if (this.previousActiveElement?.focus) {
+              this.previousActiveElement.focus();
+            }
+          } else {
+            // 아직 진행 중인 작업이 있으면 카운터만 업데이트
+            this.updateDisplay();
+          }
+        }
+
+        updateDisplay(newMessage = null) {
+          if (newMessage) {
+            this.currentMessage = newMessage;
+          }
+
+          const loadingText = this.overlay.querySelector('.loading-text');
+          const loadingCounter = this.overlay.querySelector('.loading-counter');
+
+          loadingText.textContent = this.currentMessage;
+          loadingCounter.textContent = `진행 중: ${this.loadingCount}개`;
+        }
+      }
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>사용 패턴</h2>
+
+      <h3>자동 관리 (권장)</h3>
+      <pre><code class="language-javascript"><!--
+      // 래퍼 함수 사용
+      async function withLoading(asyncFn, message = '처리 중입니다...') {
+        try {
+          loadingOverlay.show(message);
+          return await asyncFn();
+        } finally {
+          loadingOverlay.hide();
+        }
+      }
+
+      // 단일 작업
+      await withLoading(fetchData, '데이터 로딩 중...');
+
+      // 동시 다중 작업
+      await Promise.all([
+        withLoading(task1, '작업1 중...'),
+        withLoading(task2, '작업2 중...'),
+        withLoading(task3, '작업3 중...')
+      ]);
+      --></code></pre>
+
+      <h3>수동 관리</h3>
+      <pre><code class="language-javascript"><!--
+      try {
+        loadingOverlay.show('작업1 시작');
+        loadingOverlay.show('작업2 시작'); // 카운터: 2
+
+        await task1();
+        loadingOverlay.hide(); // 카운터: 1
+
+        await task2();
+        loadingOverlay.hide(); // 카운터: 0, 오버레이 숨김
+      } catch (error) {
+        loadingOverlay.forceReset(); // 에러시 강제 리셋
+      }
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>주요 특징</h2>
+      <ul>
+        <li><strong>카운터 기반 관리</strong>: 동시 다중 작업을 안전하게 처리</li>
+        <li><strong>완전한 입력 차단</strong>: 클릭, 키보드, 스크롤 모두 차단</li>
+        <li><strong>포커스 관리</strong>: 접근성을 위한 포커스 상태 보존</li>
+        <li><strong>실시간 카운터 표시</strong>: 사용자에게 진행 상황 알림</li>
+        <li><strong>에러 복구</strong>: forceReset()으로 비상 상황 대응</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>실무 활용 시나리오</h2>
+      <ul>
+        <li>여러 API 엔드포인트에서 데이터를 동시에 가져올 때</li>
+        <li>파일 업로드와 메타데이터 저장을 병렬로 처리할 때</li>
+        <li>사용자가 빠르게 여러 버튼을 클릭하는 상황</li>
+        <li>자동 저장과 수동 저장이 겹치는 경우</li>
+      </ul>
+    </section>
+  </article>
+  <aside></aside>
+</main>
+
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+
+<script>
+  class LoadingOverlay {
+    constructor() {
+      this.overlay = null;
+      this.loadingCount = 0;
+      this.previousActiveElement = null;
+      this.currentMessage = '처리 중입니다...';
+      this.createOverlay();
+      this.initEventListeners();
+    }
+
+    createOverlay() {
+      this.overlay = document.createElement('div');
+      this.overlay.className = 'loading-overlay';
+      this.overlay.innerHTML = `
+      <div class="loading-content">
+        <div class="spinner"></div>
+        <p class="loading-text">처리 중입니다...</p>
+        <div class="loading-counter">진행 중: 1개</div>
+      </div>
+    `;
+      document.body.appendChild(this.overlay);
+    }
+
+    initEventListeners() {
+      document.addEventListener('keydown', this.blockInput.bind(this));
+
+      this.overlay.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    }
+
+    show(message = '처리 중입니다...') {
+      this.loadingCount++;
+
+      if (this.loadingCount === 1) {
+        this.previousActiveElement = document.activeElement;
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      this.updateDisplay(message);
+      console.log(`[LoadingOverlay] 작업 시작 (${this.loadingCount}개 진행 중): ${message}`);
+    }
+
+    hide() {
+      if (this.loadingCount <= 0) {
+        console.warn('[LoadingOverlay] hide() 호출되었지만 진행 중인 작업이 없습니다.');
+        return;
+      }
+
+      this.loadingCount--;
+      console.log(`[LoadingOverlay] 작업 완료 (${this.loadingCount}개 남음)`);
+
+      if (this.loadingCount === 0) {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+
+        if (this.previousActiveElement && this.previousActiveElement.focus) {
+          this.previousActiveElement.focus();
+        }
+
+        console.log('[LoadingOverlay] 모든 작업 완료, 오버레이 숨김');
+      } else {
+        this.updateDisplay();
+      }
+    }
+
+    updateDisplay(newMessage = null) {
+      if (newMessage) {
+        this.currentMessage = newMessage;
+      }
+
+      const loadingText = this.overlay.querySelector('.loading-text');
+      const loadingCounter = this.overlay.querySelector('.loading-counter');
+
+      loadingText.textContent = this.currentMessage;
+      loadingCounter.textContent = `진행 중: ${this.loadingCount}개`;
+    }
+
+    forceReset() {
+      console.warn('[LoadingOverlay] 강제 리셋 실행');
+      this.loadingCount = 0;
+      this.overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    blockInput(e) {
+      if (this.loadingCount === 0) return;
+
+      const allowedKeys = ['F5', 'F12', 'Escape'];
+      if (!allowedKeys.includes(e.key)) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+
+    isLoading() {
+      return this.loadingCount > 0;
+    }
+
+    getLoadingCount() {
+      return this.loadingCount;
+    }
+  }
+
+  // 전역 인스턴스
+  const loadingOverlay = new LoadingOverlay();
+
+  // 래퍼 함수
+  async function withLoading(asyncFn, message = '처리 중입니다...') {
+    try {
+      loadingOverlay.show(message);
+      return await asyncFn();
+    } finally {
+      loadingOverlay.hide();
+    }
+  }
+
+  // 데모 함수들
+  async function singleTask() {
+    try {
+      await withLoading(async () => {
+        await new Promise(resolve => setTimeout(resolve, 3000));
+      }, '일반 작업 처리 중...');
+      showStatus('작업이 완료되었습니다!', 'success');
+    } catch (error) {
+      showStatus('작업 실패: ' + error.message, 'error');
+    }
+  }
+
+  async function errorTask() {
+    try {
+      await withLoading(async () => {
+        await new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('서버 연결 실패')), 2000)
+        );
+      }, '서버 연결 중...');
+    } catch (error) {
+      showStatus('오류: ' + error.message, 'error');
+    }
+  }
+
+  async function parallelTasks() {
+    try {
+      const startTime = performance.now();
+
+      await Promise.all([
+        withLoading(() => new Promise(resolve => setTimeout(resolve, 2000)), '작업 A'),
+        withLoading(() => new Promise(resolve => setTimeout(resolve, 3000)), '작업 B'),
+        withLoading(() => new Promise(resolve => setTimeout(resolve, 1000)), '작업 C')
+      ]);
+
+      const duration = Math.round(performance.now() - startTime);
+      showStatus(`3개 작업 동시 완료! (${duration}ms)`, 'success');
+    } catch (error) {
+      showStatus('동시 작업 실패', 'error');
+    }
+  }
+
+  async function sequentialTasks() {
+    try {
+      const startTime = performance.now();
+
+      await withLoading(() => new Promise(resolve => setTimeout(resolve, 2000)), '작업 A');
+      await withLoading(() => new Promise(resolve => setTimeout(resolve, 3000)), '작업 B');
+      await withLoading(() => new Promise(resolve => setTimeout(resolve, 1000)), '작업 C');
+
+      const duration = Math.round(performance.now() - startTime);
+      showStatus(`3개 작업 순차 완료! (${duration}ms)`, 'success');
+    } catch (error) {
+      showStatus('순차 작업 실패', 'error');
+    }
+  }
+
+  // 폼 제출 처리
+  document.getElementById('demoForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    if (!data.username || !data.email) {
+      showStatus('모든 필드를 입력해주세요.', 'error');
+      return;
+    }
+
+    try {
+      await withLoading(async () => {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }, '폼 데이터 전송 중...');
+
+      showStatus('폼이 성공적으로 제출되었습니다!', 'success');
+    } catch (error) {
+      showStatus('폼 제출에 실패했습니다.', 'error');
+    }
+  });
+
+  function showStatus(message, type) {
+    const statusEl = document.getElementById('statusMessage');
+    statusEl.textContent = message;
+    statusEl.className = `status-message ${type}`;
+    statusEl.style.display = 'block';
+
+    setTimeout(() => {
+      statusEl.style.display = 'none';
+    }, 5000);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/air-datepicker/air-datepicker.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/air-datepicker/air-datepicker.js"></script>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>기본</h2>
+      <pre><code class="language-markup"><!--
+        <input type="text" id="dp0" placeholder="날 눌러봐유"/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { LOCALE_KR } from '/lib/air-datepicker/locale-kr.js';
+        
+        createApp({
+          mounted() {
+            new AirDatepicker('#dp0', {
+              locale: LOCALE_KR,
+              selectedDates: ['2023-05-12']
+            });
+          }
+        }).mount("#app");
+      --></code></pre>
+      <div class="result">
+        <input type="text" id="dp0" placeholder="날 눌러봐유"/>
+      </div>
+
+      <h2>다른 요소를 클릭했을 때 강제 포커싱</h2>
+      <pre><code class="language-markup"><!--
+        <button type="button" @click="$refs.dp1.focus()">focus() 테스트</button>
+        <input type="text" id="dp1" ref="dp1" placeholder="날 눌러봐유"/>
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="$refs.dp1.focus()">focus() 테스트</button>
+        </div>
+        <input type="text" id="dp1" ref="dp1" placeholder="날 눌러봐유"/>
+      </div>
+
+      <h2>모바일 기기 모드(모달 레이어 팝업)</h2>
+      <pre><code class="language-markup"><!--
+        <input type="text" id="dp2" placeholder="날 눌러봐유"/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        new AirDatepicker('#dp2', {
+          locale: LOCALE_KR,
+          isMobile: true,
+          autoClose: true
+        });
+      --></code></pre>
+      <div class="result">
+        <input type="text" id="dp2" placeholder="날 눌러봐유"/>
+      </div>
+      
+      <h2>올해 내의 일자만 선택 가능</h2>
+      <pre><code class="language-markup"><!--
+        <input type="text" id="dp3" v-model="dp3" maxlength="10" 
+            @keyup="replcaeNotDateString($event)" placeholder="날 눌러봐유"/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            dp3: null
+          };
+        },
+        mounted() {
+          let currentYear = new Date().getFullYear();
+          let $this = this;
+          let dp3 = new AirDatepicker('#dp3', {
+            locale: LOCALE_KR,
+            minDate: `${currentYear}-01-01`,
+            maxDate: `${currentYear}-12-31`,
+            onShow() {
+              if ($this.dp3 && $this.dp3.length === 10) {
+                let dateStr = currentYear + $this.dp3.substring(4, 10);
+                $this.dp3 = dateStr;
+                dp3.setViewDate(dateStr);
+              }
+            }
+          });
+        },
+        methods: {
+          replcaeNotDateString(e) {
+            let val = e.target.value;
+            console.log('e.target.value:', val);
+            e.target.value = val.replace(/[^0-9-]/g, '');
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <input type="text" id="dp3" v-model="dp3" maxlength="10" @keyup="replcaeNotDateString($event)" placeholder="날 눌러봐유"/>
+      </div>
+
+      <h2>onSelect</h2>
+      <p>onSelect 핸들러는 유일한 인자로 선택한 날짜의 date 객체, 설정된 날짜 포맷, datepicker 객체가 있는 <code class="language-js">obj</code>를 넘겨줍니다:</p>
+      <pre><code class="language-markup"><!--
+        <input type="text" id="dp5" placeholder="날 눌러봐유"/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        new AirDatepicker('#dp5', {
+          locale: LOCALE_KR,
+          selectedDates: ['2021-05-05'],
+          onSelect(obj) {
+            console.log(obj);
+          }
+        });
+      --></code></pre>
+      <div class="result">
+        <input type="text" id="dp5" placeholder="날 눌러봐유"/>
+      </div>
+
+      <h2>공사중</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <input type="text" id="dp6" placeholder="날 눌러봐유"/>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+      import { LOCALE_KR } from '/lib/air-datepicker/locale-kr.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        data() {
+          return {
+            pageTitle: "Air Datepicker",
+            docs: [
+              { title: "https://air-datepicker.com/examples", url: "https://air-datepicker.com/examples" },
+              { title: "https://air-datepicker.com/docs", url: "https://air-datepicker.com/docs" },
+              { title: "https://air-datepicker.com/methods", url: "https://air-datepicker.com/methods" },
+            ],
+            message: "Hello Vue! ✌️",
+            dp3: null
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        mounted() {
+          new AirDatepicker('#dp0', {
+            locale: LOCALE_KR,
+            selectedDates: ['2023-05-12'],
+
+          });
+
+          new AirDatepicker('#dp1', {
+            locale: LOCALE_KR
+          });
+
+          new AirDatepicker('#dp2', {
+            locale: LOCALE_KR,
+            isMobile: true,
+            autoClose: true
+          });
+
+          let currentYear = new Date().getFullYear();
+
+          let $this = this;
+          let dp3 = new AirDatepicker('#dp3', {
+            locale: LOCALE_KR,
+            minDate: `${currentYear}-01-01`,
+            maxDate: `${currentYear}-12-31`,
+            onShow() {
+              if ($this.dp3 && $this.dp3.length === 10) {
+                let dateStr = currentYear + $this.dp3.substring(4, 10);
+                $this.dp3 = dateStr;
+                dp3.setViewDate(dateStr);
+              }
+            }
+          });
+
+          new AirDatepicker('#dp4');
+
+          new AirDatepicker('#dp5', {
+            locale: LOCALE_KR,
+            selectedDates: ['2021-05-05'],
+            onSelect(obj) {
+              console.log(obj);
+            }
+          });
+        },
+        methods: {
+          replcaeNotDateString(e) {
+            let val = e.target.value;
+            console.log('e.target.value:', val);
+            e.target.value = val.replace(/[^0-9-]/g, '');
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

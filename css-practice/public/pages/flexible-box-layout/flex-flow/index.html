@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>flex-flow</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>flex-flow</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>flex-flow는 Flexbox 컨테이너에서 아이템들이 배치되는 방향과 줄바꿈을 설정하는 단축 프로퍼티다.</p>
+      <pre><code class="language-sass"><!--
+      flex-flow: flex-direction flex-wrap
+      --></code></pre>
+      <p>flex-direction과 flex-wrap을 한 번에 설정하며, 각 프로퍼티는 공백으로 구분한다.</p>
+      <p>둘 중 하나만 써도 어차피 키워드가 다르기 때문에 알아서 인식한다.</p>
+      <p>Flexbox 컨테이너에 지정하며, 기본값은 row nowrap이다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* flex-flow: <'flex-direction'> */
+      flex-flow: row;
+      flex-flow: row-reverse;
+      flex-flow: column;
+      flex-flow: column-reverse;
+
+      /* flex-flow: <'flex-wrap'> */
+      flex-flow: nowrap;
+      flex-flow: wrap;
+      flex-flow: wrap-reverse;
+
+      /* flex-flow: <'flex-direction'>과 <'flex-wrap'> */
+      flex-flow: row nowrap;
+      flex-flow: column wrap;
+      flex-flow: column-reverse wrap-reverse;
+
+      /* 전역 값 */
+      flex-flow: inherit;
+      flex-flow: initial;
+      flex-flow: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>flex-flow의 기본값은 <code class="language-js">row nowrap</code>이다.</p>
+
+      <h3>row nowrap</h3>
+      <div class="code-result">
+        <div class="container row-nowrap">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>column</h3>
+      <div class="code-result">
+        <div class="container column">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>wrap-reverse</h3>
+      <div class="code-result">
+        <div class="container wrap-reverse">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>column wrap</h3>
+      <div class="code-result">
+        <div class="container column-wrap">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>column-reverse wrap-reverse</h3>
+      <div class="code-result">
+        <div class="container column-reverse-wrap-reverse">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

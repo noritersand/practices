@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>gap</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>gap</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>gap은 행과 열 사이의 간격(gutters라고도 함)을 설정하는 프로퍼티다. Multi-column Layout과 Flexbox, Grid에서 모두 사용된다.</p>
+      <p>사실 gap은 row-gap과 column-gap의 단축 프로퍼티로, 값을 하나만 지정해 둘을 동시에 설정하거나 값을 두 개 지정할 수 있다.</p>
+      <p>값이 두 개인 경우, 첫 번째 값은 row-gap에, 두 번째 값은 column-gap에 적용된다.</p>
+      <p></p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword value */
+      gap: normal;
+
+      /* One value */
+      gap: 20px;
+      gap: 1em;
+      gap: 3vmin;
+      gap: 0.5cm;
+      gap: 16%;
+      gap: 100%;
+      gap: calc(10% + 20px);
+
+      /* Two values */
+      gap: 20px 10px;
+      gap: 1em 0.5em;
+      gap: 3vmin 2vmax;
+      gap: 0.5cm 2mm;
+      gap: 16% 100%;
+      gap: 21px 82%;
+      gap: calc(20px + 10%) calc(10% - 5px);
+
+      /* Global values */
+      gap: inherit;
+      gap: initial;
+      gap: revert;
+      gap: revert-layer;
+      gap: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Examples</h2>
+
+      <pre><code class="language-sass"><!--
+      gap: 5px
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="flex-container first">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      gap: 30px
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="flex-container forth">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      gap: 1px 20px
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="flex-container second">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+          <div class="flex-item">4</div>
+          <div class="flex-item">5</div>
+          <div class="flex-item">6</div>
+          <div class="flex-item">7</div>
+          <div class="flex-item">8</div>
+        </div>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      gap: 30px 1px
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="flex-container third">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+          <div class="flex-item">4</div>
+          <div class="flex-item">5</div>
+          <div class="flex-item">6</div>
+          <div class="flex-item">7</div>
+          <div class="flex-item">8</div>
+          <div class="flex-item">9</div>
+          <div class="flex-item">10</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-template-columns</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-template-columns</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-template-columns는 열의 개수와 너비를 지정할 때 사용한다.</p>
+      <p>그리드 컨테이너에 지정하며, 기본값은 none이다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword value */
+      grid-template-columns: none;
+
+      /* <track-list> values */
+      grid-template-columns: 100px 1fr;
+      grid-template-columns: [line-name] 100px;
+      grid-template-columns: [line-name1] 100px [line-name2 line-name3];
+      grid-template-columns: minmax(100px, 1fr);
+      grid-template-columns: fit-content(40%);
+      grid-template-columns: repeat(3, 200px);
+      grid-template-columns: subgrid;
+      grid-template-columns: masonry;
+
+      /* <auto-track-list> values */
+      grid-template-columns: 200px repeat(auto-fill, 100px) 300px;
+      grid-template-columns:
+        minmax(100px, max-content)
+        repeat(auto-fill, 200px) 20%;
+      grid-template-columns:
+        [line-name1] 100px [line-name2]
+        repeat(auto-fit, [line-name3 line-name4] 300px)
+        100px;
+      grid-template-columns:
+        [line-name1 line-name2] 100px
+        repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+      /* Global values */
+      grid-template-columns: inherit;
+      grid-template-columns: initial;
+      grid-template-columns: revert;
+      grid-template-columns: revert-layer;
+      grid-template-columns: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>grid-template-columns는 특수한 경우(상품 페이지처럼 행이 무한히 생성)가 아니면 보통 grid-template-rows와 같이 사용한다.</p>
+      <p>grid-template-columns만 사용하면 명시적 열만 설정되고, 행은 자동 배치에 따라 암시적으로 생성된다. 이때 암시적 행의 높이는 auto 처리된다.</p>
+
+      <h3>px</h3>
+      <p>열의 너비를 고정 수치로 지정하는 방식.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: 100px 150px 200px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex01">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>fr</h3>
+      <p>열 트랙이 차지할 너비를 비율로 지정하는 방식</p>
+      <p>fr은 Grid Layout에서만 쓰이는 특수한 단위로, 그리드 컨테이너 내부에서 고정 크기를 가진 요소들을 제외한 남은 공간(leftover space) 중 grid track이 차지할
+        비율을 나타내는 값이다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: 1fr 2fr 3fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex02">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>repeat()</h3>
+      <p>동일한 너비의 열을 반복 지정할 때 사용한다. 첫 번째 인수는 반복 횟수, 두 번째 인수는 반복할 열 크기를 의미한다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(2, 150px)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex03">
+          <div class="item">1</div>
+          <div class="item">2</div>
+        </div>
+      </div>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(3, 1fr)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex04">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>auto</h3>
+      <P>auto는 기본적으로 콘텐츠 크기를 기준으로 열 너비를 결정하며, 컨테이너에 여유 공간이 있으면 정렬/트랙 크기 계산에 따라 늘어날 수 있다.</P>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: 50px auto 50px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex05">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>max-content</h3>
+      <p>열(Column) 트랙의 너비를 해당 열에 포함된 자식 엘리먼트들의 최대 콘텐츠 너비(<code class="language-css">max-content</code>)에 맞춰 설정한다. 텍스트
+        줄바꿈 없이 콘텐츠가 가진 최대 너비만큼 트랙이 확장된다.</p>
+      <p>max-content는 자식 엘리먼트 콘텐츠의 고유 크기(Intrinsic Size)를 최우선으로 보장하기 때문에 컨테이너가 작으면 오버플로우가 발생할 수 있다.</p>
+      <pre><code class="language-sass"><!--
+      width: 600px
+      grid-template-columns: 1fr max-content
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-template-cols-max-content">
+          <div class="item">Short</div>
+          <div class="item">Super Ultra Long Long Long Content Text</div>
+        </div>
+      </div>
+
+      <h3>min-content</h3>
+      <p>열(Column) 트랙의 너비를 해당 열에 포함된 자식 엘리먼트들이 가질 수 있는 최소 너비(<code class="language-css">min-content</code>)에 맞춰 설정한다.
+        텍스트 단어 중 가장 긴 단어의 너비에 맞춰 트랙이 최소한으로 줄어들고 나머지 단어는 줄바꿈된다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: 1fr min-content 1fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-template-cols-min-content">
+          <div class="item">Col 1</div>
+          <div class="item">This text is long! ⚡⚡⚡ CSS Grid Rules!</div>
+          <div class="item">Col 3</div>
+        </div>
+      </div>
+
+      <h3>minmax()</h3>
+      <p>열의 최소 너비와 최대 너비를 범위로 지정한다. 첫 번째 인수가 최소 너비, 두 번째 인수가 최대 너비다.</p>
+      <p>이 값을 지정하면 컨테이너의 너비 변화에 따라 열 트랙의 크기가 지정한 범위 안에서 커지거나 줄어든다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr)
+      --></code></pre>
+      <p>width: 200px</p>
+      <div class="code-result">
+        <div class="container ex-minmax w-200">
+          <div class="item">1</div>
+          <div class="item">2</div>
+        </div>
+      </div>
+      <p>width: 600px</p>
+      <div class="code-result">
+        <div class="container ex-minmax w-600">
+          <div class="item">1</div>
+          <div class="item">2</div>
+        </div>
+      </div>
+
+      <h3>auto-fill과 auto-fit</h3>
+      <p><code class="language-css">repeat()</code> 함수와 함께 사용할 때 컨테이너 너비에 맞춰 열(Column)의 개수를 자동으로 계산하여 배치한다. 창 크기나 컨테이너 너비가 변하면 열 개수가 가변적으로 반응한다.</p>
+      <p>두 값 모두 컨테이너 공간이 부족하면 자동으로 줄바꿈(Wrap)되지만, 아이템 개수가 적어서 **컨테이너에 빈 공간이 남을 때** 서로 다르게 반응한다.</p>
+      <ul>
+        <li><code class="language-css">auto-fill</code>: 아이템이 채워지고 공간이 남더라도, 트랙 너비 기준에 맞춰 <strong>빈 트랙(Gaps)을 계속 유지하고 생성</strong>한다.</li>
+        <li><code class="language-css">auto-fit</code>: 남는 빈 트랙들을 <strong>0px로 축소(Collapse)시키고 기존 아이템 트랙을 확장</strong>하여 컨테이너 빈 공간을 가득 채운다.</li>
+      </ul>
+
+      <h4>1. 기본 작동 방식</h4>
+      <p><code class="language-css">minmax(150px, 1fr)</code>처럼 <code class="language-css">1fr</code>과 조합하면 컨테이너 폭에 따라 열 개수가 자동 조절될 뿐만 아니라, 남는 여백을 기존 아이템들이 나눠 가가지며 컨테이너 전체 너비를 여백 없이 가득 채운다.</p>
+      <pre><code class="language-sass"><!--
+      // auto-fill: 남는 공간에 빈 트랙을 유지하므로 아이템이 일정 너비 이상 과도하게 확장되지 않음
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+
+      // auto-fit: 남는 빈 트랙을 0px로 접어서 기존 아이템들이 컨테이너 전체를 가득 채움
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+      --></code></pre>
+      <div class="code-result">
+        <p><strong>auto-fill (repeat(auto-fill, minmax(150px, 1fr)))</strong></p>
+        <div class="container ex-auto-fill-minmax">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+        </div>
+
+        <p><strong>auto-fit (repeat(auto-fit, minmax(150px, 1fr)))</strong></p>
+        <div class="container ex-auto-fit-minmax">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+        </div>
+      </div>
+
+      <h4>2. 컨테이너 너비에 따른 자동 열 개수 조정</h4>
+      <p><code class="language-css">minmax</code> 없이 고정 너비(<code class="language-css">130px</code>)만 사용하더라도, 컨테이너 너비가 넓어짐에 따라 130px 트랙이 들어갈 수 있는 개수를 자동 계산하여 1열, 2열, 3열로 열 수가 자동 조절된다.</p>
+
+      <h5>auto-fill (repeat(auto-fill, 130px))</h5>
+      <p>컨테이너 너비가 넓어져도 아이템 너비는 130px로 고정되며, 남는 공간에는 빈 트랙이 유지된다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(auto-fill, 130px)
+      --></code></pre>
+      <div class="code-result">
+        <p><strong>width: 150px (1열 배치)</strong></p>
+        <div class="container ex-auto-fill-fixed w-150">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+
+        <p><strong>width: 300px (2열 배치)</strong></p>
+        <div class="container ex-auto-fill-fixed w-300">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+
+        <p><strong>width: 450px (3열 배치)</strong></p>
+        <div class="container ex-auto-fill-fixed w-450">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+      </div>
+
+      <h5>auto-fit (repeat(auto-fit, 130px))</h5>
+      <p>고정 너비만 지정한 상태에서 아이템 개수가 트랙 수보다 부족하면 남는 빈 트랙을 0px로 접는다. 단, <code class="language-css">1fr</code>이 없으므로 아이템 자체 너비는 130px로 유지되고 남는 공간은 우측 여백으로 남는다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(auto-fit, 130px)
+      --></code></pre>
+      <div class="code-result">
+        <p><strong>width: 150px (1열 배치)</strong></p>
+        <div class="container ex-auto-fit-fixed w-150">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+
+        <p><strong>width: 300px (2열 배치)</strong></p>
+        <div class="container ex-auto-fit-fixed w-300">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+
+        <p><strong>width: 450px (3열 배치)</strong></p>
+        <div class="container ex-auto-fit-fixed w-450">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

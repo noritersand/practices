@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <h2>Vue 앱 만들기</h2>
+      <p><a href="https://vuejs.org/guide/quick-start.html">Vue 앱을 만드는 방식은 여러가지가 있습니다</a>만, 우리는 그 중에서 HTML 파일 안에 external(=linked)로 가져오는 방식을 사용합니다.</p>
+
+      <p>head-external.jsp 파일에 이미 필요한 라이브러리를 가져오도록 작성돼 있습니다:</p>
+      <pre><code class="language-markup"><!--
+        <link rel="stylesheet" type="text/css" media="all" href="/resources/css/tui-grid.css" />
+        <script src="/resources/js/vue.global.js"></script>
+        <script src="/resources/js/tui-grid.js"></script>
+        <script src="/resources/js/axios.min.js"></script>
+      --></code></pre>
+      <br>
+      <p>첫 번째로 JSP에서 아래처럼 루트가 될 태그를 정하고 식별자를 부여합니다:</p>
+      <pre><code class="language-markup"><!--
+        <section id="vueApp">
+          ...
+        </section>
+      --></code></pre>
+      <p>만약 id가 이미 사용중이라면 아래처럼 작성해도 됩니다. 유일한 속성인 게 중요하며, 이 경우 CSS 셀렉터는 <code class="language-js">[data-id="vueApp"]</code> 입니다.</p>
+      <pre><code class="language-markup"><!--
+        <section id="ly-Content" data-id="vueApp">
+          ...
+        </section>
+      --></code></pre>
+      <p>그리고 스크립트(새 스크립트 파일은 /resources/scripts 경로 아래에 만듭니다) 파일에서 아래처럼 앱을 생성합니다:</p>
+      <pre><code class="language-js"><!--
+        const { createApp } = Vue;
+
+        createApp({
+          data() {
+            return {
+              message: "Hello Vue! ✌️"
+            };
+          }
+        }).mount("#vueApp"); // id가 vueApp인 태그를 찾아 마운트
+      --></code></pre>
+      <p>마지막으로 루트 태그로 돌아가서 원하는 표현식을 작성합니다:</p>
+      <pre><code class="language-markup"><!--
+        <section id="vueApp">
+          <p>{{message}}</p>
+        </section>
+      --></code></pre>
+      <p>그리고 페이지를 새로고침하면!</p>
+      <div class="result">
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        data() {
+          return {
+            pageTitle: "Vue 시작하기",
+            message: "Hello Vue! ✌️"
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

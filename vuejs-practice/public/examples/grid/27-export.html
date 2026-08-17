@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <div id="grid"></div>
+      <p>공사중</p>
+
+      <h2>beforeExport 커스텀 이벤트</h2>
+      <pre><code class="language-js"><!--
+        grid.on('beforeExport', async ev => {
+          ev.stop();
+          let { exportFn, data, exportOptions } = ev;
+          let params = {
+            posNm: vm.params.posNm,
+            perPage: 99999,
+            page: 1
+          };
+          let response = await axios.get(`/execute/member/positionList?${coconut.objectToQuerystring(params)}`);
+          console.log(response);
+          // 기존 데이터의 컬럼 순서와 서버에서 받아 온 데이터의 컬럼 데이터 순서를 반드시 일치시켜 주어야 한다.
+          let targetData = response?.data?.data?.contents;
+          if (!targetData) {
+            alert('서버에서 데이터를 받아올 수 없습니다.');
+            return;
+          }
+          console.log('exportOptions:', exportOptions);
+          let header = ['직무/직급명'];
+          let columns = ['posNm'];
+          let exportMe = [header];
+          targetData.forEach((row) => {
+            exportMe.push(columns.map((col) => {
+              return row[col]
+            }));
+          })
+          exportFn(exportMe);
+        });
+      --></code></pre>
+      여기서 <code class="language-js">exportMe</code>는 2중 배열이다:
+      <pre><code class="language-js"><!--
+        exportMe = [
+          ["직무/직급명", "등록일"],
+          ["대리", "오늘"],
+          ["사원", "어제"]
+        ];
+      --></code></pre>
+      <h2>context menu(마우스 우클릭 메뉴)</h2>
+      <p>TODO</p>
+      <h3>context menu를 비활성화 하는 방법</h3>
+      <p>그냥 null을 할당하면 됨</p>
+      <pre><code class="language-js"><!--
+        new tui.Grid({
+          contextMenu: null
+        })
+      --></code></pre>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      createApp({
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "공사중"
+          };
+        },
+      }).mount("#app");
+
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", release: "2016.03.26", type: "Deluxe", genre: "Pop" },
+        {
+          name: "X",
+          artist: "Ed Sheeran",
+          release: "2014.06.24",
+          type: "Deluxe",
+          genre: "Pop",
+          _attributes: {
+            disabled: true, // A current row is disabled
+          },
+        },
+        {
+          name: "Moves Like Jagger",
+          release: "2011.08.08",
+          artist: "Maroon5",
+          type: "Single",
+          genre: "Pop,Rock",
+          _attributes: {
+            checkDisabled: true, // A checkbox is disabled only
+          },
+        },
+        {
+          name: "A Head Full Of Dreams",
+          artist: "Coldplay",
+          release: "2015.12.04",
+          type: "Deluxe",
+          genre: "Rock",
+          _attributes: {
+            checked: true, // A checkbox is already checked while rendering
+            className: {
+              // Add class name on a row
+              row: ["red"], // red 클래스의 배경색은 11라인에 정의돼 있음
+            },
+          },
+        },
+        {
+          name: "19",
+          artist: "Adele",
+          release: "2008.01.27",
+          type: "EP",
+          genre: "Pop,R&B",
+          _attributes: {
+            rowSpan: {
+              // Merge rows
+              artist: 3,
+              genre: 2,
+            },
+          },
+        },
+        {
+          name: "21",
+          artist: "Adele",
+          release: "2011.01.21",
+          type: "Deluxe",
+          genre: "Pop,R&B",
+        },
+        {
+          name: "25",
+          artist: "Adele",
+          release: "2015.11.20",
+          type: "EP",
+          genre: "Pop",
+          _attributes: {
+            className: {
+              // Add class name on each columns
+              column: {
+                type: ["blue"], // blue 클래스의 배경색은 14라인에 정의돼 있음
+                genre: ["blue"],
+              },
+            },
+          },
+        },
+      ];
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        rowHeaders: ["checkbox"],
+        columns: [
+          { header: "Name", name: "name" },
+          { header: "Artist", name: "artist" },
+          { header: "Type", name: "type" },
+          { header: "Release", name: "release" },
+          { header: "Genre", name: "genre" },
+        ],
+        contextMenu: ({ rowKey, columnName }) => (
+          [
+            [
+              {
+                name: 'export',
+                label: '내보내기',
+                action: () => {
+                  // 옵션을 전달하지 않으면 초기 설정 옵션으로 내보내기가 수행된다.
+                  grid.export('csv');
+                }
+              }
+            ]
+          ]
+        )
+      });
+    </script>
+  </body>
+</html>

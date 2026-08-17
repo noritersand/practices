@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>flex-wrap</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>flex-wrap</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>flex-wrap은 Flexbox에서 플렉스 아이템들이 한 줄에 모두 배치될 공간이 부족할 때, 줄 바꿈을 결정하는 프로퍼티다.</p>
+      <p>이 값이 없거나 nowrap일 경우 플렉스 아이템들은 (flex-basis나 flex-shrink가 없는 한) 부족한 공간만큼 자동으로 줄어들게 된다.</p>
+
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>flex-wrap의 기본값은 <code class="language-js">nowrap</code>이다.</p>
+
+      <h3>nowrap</h3>
+      <div class="code-result">
+        <div class="container nowrap">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>wrap</h3>
+      <div class="code-result">
+        <div class="container wrap">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+      <h3>wrap-reverse</h3>
+      <div class="code-result">
+        <div class="container wrap-reverse">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ index로 돌아가기</a>
+</footer>
+</body>
+</html>

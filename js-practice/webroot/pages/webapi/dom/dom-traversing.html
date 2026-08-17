@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>DOM Traversing</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+</head>
+
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>DOM Traversing</h1>
+
+    <section>
+      <p>DOM 탐색을 위한 Web API 테스트</p>
+      <div class="important">
+        개발자 도구 열어서 콘솔 확인할 것
+      </div>
+    </section>
+
+    <section>
+      <h2>조건을 만족하는 부모 찾기</h2>
+      <pre><code class="language-markup"><!--
+      <div class="root">
+        <div class="gnb">
+          <ul>
+            <li class="root gnb" onclick="handleClick(event, '.root')">'root' 클래스를 포함하는 부모 찾기</li>
+            <li onclick="handleClick(event, '.gnb')">'gnb' 클래스를 포함하는 부모 찾기</li>
+            <li onclick="handleClick(event, '.qweqwe')">'qweqwe' 클래스를 포함하는 부모 찾기(없음)</li>
+            <li onclick="handleClick(event)">조건이 없을땐 바로 상위 요소 반환</li>
+          </ul>
+        </div>
+      </div>
+      <script>
+      function handleClick(event, findMe) {
+        let parent = findParent(event.target, findMe && (element => element.classList.contains(findMe.replace(/\./, ''))));
+        console.log('parent:', parent);
+      }
+      function findParent(eventTarget, condition) {
+        let current = eventTarget.parentElement;
+        if (condition === undefined || !current) {
+          return current;
+        }
+        while (!condition(current)) {
+          current = current.parentElement;
+          if (!current) {
+            return null;
+          }
+        }
+        return current;
+      }
+      </script>
+      --></code></pre>
+      <div class="root">
+        <div class="gnb">
+          <ul>
+            <li class="root gnb" onclick="handleClick(event, '.root')">
+              'root' 클래스를 포함하는 부모 찾기
+            </li>
+            <li onclick="handleClick(event, '.gnb')">'gnb' 클래스를 포함하는 부모 찾기</li>
+            <li onclick="handleClick(event, '.qweqwe')">
+              'qweqwe' 클래스를 포함하는 부모 찾기(없음)
+            </li>
+            <li onclick="handleClick(event)">조건이 없을땐 바로 상위 요소 반환</li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        function handleClick(event, findMe) {
+          let parent = findParent(
+            event.target,
+            findMe && (element => element.classList.contains(findMe.replace(/\./, '')))
+          );
+          console.log('parent:', parent);
+        }
+
+        function findParent(eventTarget, condition) {
+          let current = eventTarget.parentElement;
+          if (condition === undefined || !current) {
+            return current;
+          }
+          while (!condition(current)) {
+            current = current.parentElement;
+            if (!current) {
+              return null;
+            }
+          }
+          return current;
+        }
+      </script>
+    </section>
+
+    <section>
+      <h2>조건을 만족하는 앞의 형제 요소 찾기</h2>
+
+      <pre><code class="language-markup"><!--
+      <ul>
+        <li class="first" onclick="handleClick2(event, 'second')">첫째</li>
+        <li class="second" onclick="handleClick2(event)">둘째</li>
+        <li class="third" onclick="handleClick2(event, 'first')">셋째</li>
+        <li class="fourth" onclick="handleClick2(event, 'second')">넷째</li>
+      </ul>
+      <script>
+      function handleClick2(event, findMe) {
+        let sibling = findPreviousSibling(event.target, findMe && (element => element.classList.contains(findMe.replace(/\./, ''))));
+        console.log('sibling:', sibling);
+      }
+      function findPreviousSibling(eventTarget, condition) {
+        let current = eventTarget.previousElementSibling;
+        if (condition === undefined || !current) {
+          return current;
+        }
+        while (!condition(current)) {
+          current = current.previousElementSibling;
+          if (!current) {
+            return null;
+          }
+        }
+        return current;
+      }
+      </script>
+      --></code></pre>
+
+      <div class="root2">
+        <div class="gnb2">
+          <ul>
+            <li class="first" onclick="handleClick2(event, 'second')">첫째</li>
+            <li class="second" onclick="handleClick2(event)">둘째</li>
+            <li class="third" onclick="handleClick2(event, 'first')">셋째</li>
+            <li class="fourth" onclick="handleClick2(event, 'second')">넷째</li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        function handleClick2(event, findMe) {
+          let sibling = findPreviousSibling(
+            event.target,
+            findMe && (element => element.classList.contains(findMe.replace(/\./, '')))
+          );
+          console.log('sibling:', sibling);
+        }
+
+        function findPreviousSibling(eventTarget, condition) {
+          let current = eventTarget.previousElementSibling;
+          if (condition === undefined || !current) {
+            return current;
+          }
+          while (!condition(current)) {
+            current = current.previousElementSibling;
+            if (!current) {
+              return null;
+            }
+          }
+          return current;
+        }
+      </script>
+    </section>
+
+    <section>
+      <h2>조건을 만족하는 다음의 형제 요소 찾기</h2>
+      <pre><code class="language-markup"><!--
+      <ul>
+        <li class="first" onclick="handleClick3(event, '.qwer')">'qwer' 클래스를 포함하는 다음의 형제 요소 찾기(없음)</li>
+        <li class="second" onclick="handleClick3(event)">조건이 없을땐 바로 다음 형제 요소 반환</li>
+        <li class="third" onclick="handleClick3(event, '.fourth')">'fourth' 클래스를 포함하는 다음의 형제 요소 찾기</li>
+        <li class="fourth" onclick="handleClick3(event, '.second')">'second' 클래스를 포함하는 다음의 형제 요소 찾기(없음)</li>
+      </ul>
+      <script>
+      function handleClick3(event, findMe) {
+        let sibling = findNextSibling(event.target, findMe && (element => element.classList.contains(findMe.replace(/\./, ''))));
+        console.log('sibling:', sibling);
+      }
+      function findNextSibling(eventTarget, condition) {
+        let current = eventTarget.nextElementSibling;
+        if (condition === undefined || !current) {
+          return current;
+        }
+        while (!condition(current)) {
+          current = current.nextElementSibling;
+          if (!current) {
+            return null;
+          }
+        }
+        return current;
+      }
+      </script>
+      --></code></pre>
+      <div class="root3">
+        <div class="gnb3">
+          <ul>
+            <li class="first" onclick="handleClick3(event, '.qwer')">
+              'qwer' 클래스를 포함하는 다음의 형제 요소 찾기(없음)
+            </li>
+            <li class="second" onclick="handleClick3(event)">
+              조건이 없을땐 바로 다음 형제 요소 반환
+            </li>
+            <li class="third" onclick="handleClick3(event, '.fourth')">
+              'fourth' 클래스를 포함하는 다음의 형제 요소 찾기
+            </li>
+            <li class="fourth" onclick="handleClick3(event, '.second')">
+              'second' 클래스를 포함하는 다음의 형제 요소 찾기(없음)
+            </li>
+          </ul>
+        </div>
+      </div>
+      <script>
+        function handleClick3(event, findMe) {
+          let sibling = findNextSibling(
+            event.target,
+            findMe && (element => element.classList.contains(findMe.replace(/\./, '')))
+          );
+          console.log('sibling:', sibling);
+        }
+
+        function findNextSibling(eventTarget, condition) {
+          let current = eventTarget.nextElementSibling;
+          if (condition === undefined || !current) {
+            return current;
+          }
+          while (!condition(current)) {
+            current = current.nextElementSibling;
+            if (!current) {
+              return null;
+            }
+          }
+          return current;
+        }
+      </script>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@use '../../../styles/global'
+
+.fade-in-box.blue
+  background-color: #2771c6
+
+.fade-in-box.green
+  background-color: #488f31
+
+.fade-in-box
+  height: 60px
+  width: 180px
+  display: none
+
+.fade-in-box.active
+  display: block
+  animation: fadeIn 0.3s ease-in-out forwards
+
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(10px)
+  /* ?댁쭩 ?꾨줈 ?щ씪?ㅻ뒗 ?④낵 異붽? 媛??*/
+  to
+    opacity: 1
+    transform: translateY(0)
+
+/* ************************************************ */
+
+.sun
+  background-color: yellow
+  border-radius: 50%
+  /* creates a circular background */
+  height: 100vh
+  /* makes the sun the size of the viewport */
+  aspect-ratio: 1 / 1
+  animation: 4s linear 0s infinite alternate sun-rise
+
+@keyframes sun-rise
+  from
+    /* pushes the sun down past the viewport */
+    transform: translateY(110vh)
+  to
+    /* returns the sun to its default position */
+    transform: translateY(0)
+

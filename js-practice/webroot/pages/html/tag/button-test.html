@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>button tag test</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+  <script>
+    function fn1() {
+      alert(1);
+    }
+
+    function fn2() {
+      alert(2);
+    }
+  </script>
+</head>
+
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>button tag test</h1>
+
+    <section>
+      <div id="toc" class="mrgn-btm"></div>
+    </section>
+
+    <section>
+      <p>버튼 태그 테스트 페이지</p>
+    </section>
+
+    <section>
+      <h2>disabled</h2>
+      <p>disabled 처리된 버튼은 클릭 이벤트가 발생하지 않음</p>
+      <div class="code-result">
+        <button class="buttons" type="button" onclick="fn1()">눌러봐</button>
+        <button class="buttons" type="button" disabled onclick="fn2()">나도 눌러봐</button>
+      </div>
+    </section>
+  </article>
+  <aside></aside>
+</main>
+
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

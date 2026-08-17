@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script> -->
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <pre><code class="language-markup"><!--
+        <p>이 밑에 안보이쥬?</p>
+        <template>
+          <p>뭔지는 나도 모르겠고 화면엔 안보임</p>
+        </template>
+      --></code></pre>
+      <div class="result">
+        <p>이 밑에 안보이쥬?</p>
+        <template>
+          <p>뭔지는 나도 모르겠고 화면엔 안보임</p>
+        </template>
+      </div>
+      <p>사실 <code class="language-js"><!--<template>--></code> 태그는 HTML 표준 기술로 내부의 태그들이 화면에 안보이도록 설계됨: <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element/template">https://developer.mozilla.org/ko/docs/Web/HTML/Element/template</a></p>
+      <p>그리고 Vue에선 Node.js 빌드 환경일 때 요딴식으로:</p>
+      <pre><code class="language-markup"><!--
+        <script>
+        export default {
+          data() {
+            return {
+              count: 0
+            }
+          }
+        }
+        </script>
+        
+        <template>
+          <button @click="count++">
+            You clicked me {{ count }} times.
+          </button>
+        </template>
+      --></code></pre>
+      <p>Vue 파일에서 컴포넌트를 정의하려는 목적으로 사용합니다.</p>
+      <a href="https://vuejs.org/api/options-rendering.html#template">도움말</a>을 보면 템플릿 컴파일러가 포함된 Vue 빌드에서만 사용 가능하다고 함.
+      <br><br>
+      <p>그래도 쓰고 싶으면 <a href="https://github.com/FranckFreiburger/vue3-sfc-loader">vue3-sfc-loader</a> 필요.</p>
+      
+      <back-to-home></back-to-home>
+    </div>
+    <script type="vue-template" id="ref-me">
+      <button>Click Me!{{text}}</button>
+    </script>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        data() {
+          return {
+            pageTitle: "<template>이란 무엇인가",
+            message: "This is parent message ✌️"
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

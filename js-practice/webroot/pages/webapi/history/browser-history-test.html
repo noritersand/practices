@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>browser history test</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script>
+    function handleKeyup(event) {
+      var keyCode = event.keyCode || event.which;
+      if (keyCode == '13') {
+        location.href = '/pages/webapi/history/browser-history-test-child.html';
+      }
+    }
+
+    function moveToChild() {
+      location.href = '/pages/webapi/history/browser-history-test-child.html';
+    }
+  </script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>browser history test</h1>
+    <h2>GET 메서드 form</h2>
+    <form method="get" action="/pages/webapi/history/browser-history-test-child.html">
+      <fieldset>
+        <legend>폼 안의 입력란</legend>
+        name 있는 입력란: <input type="text" name="aaa" /><br />
+        name 없는 입력란: <input type="text" />
+        <input type="submit" value="submit" />
+      </fieldset>
+    </form>
+    <h2>POST 메서드 form</h2>
+    <form method="post" action="/pages/webapi/history/browser-history-test-child.html">
+      <fieldset>
+        <legend>폼 안의 입력란</legend>
+        name 있는 입력란: <input type="text" name="aaa" /><br />
+        name 없는 입력란: <input type="text" />
+        <input type="submit" value="submit" />
+      </fieldset>
+    </form>
+    <h2>폼 없는 입력란</h2>
+    name 있는 입력란: <input type="text" name="aaa" onkeyup="handleKeyup(event)" /><br />
+    name 없는 입력란: <input type="text" onkeyup="handleKeyup(event)" />
+    <button type="button" onclick="moveToChild()">이동</button>
+    <br /><br /><br /><br /><br />
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

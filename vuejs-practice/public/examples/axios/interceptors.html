@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+      #loading { 
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: #ffffff36; 
+        z-index: 9999; 
+        background-image: url("./loading.gif"); 
+        background-repeat: no-repeat; 
+        background-attachment: fixed; 
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+      <p><a href="https://axios-http.com/kr/docs/intro" target="_blank">공식 도움말 페이지</a></p>
+      
+      <h2>전역 인터셉터 추가</h2>
+      <button type="button" @click="fn3">1번: 추가</button>
+      <pre><code class="language-js">
+        let reqItcpts = [];
+        let resItcpts = [];
+        function fn3() {
+          // 요청 인터셉터 추가하기
+          let itcp = axios.interceptors.request.use(function (config) {
+              // 요청이 전달되기 전에 작업 수행
+              console.log('Hello this is request-success interceptor');
+              return config;
+            }, function (error) {
+              // 요청 오류가 있는 작업 수행
+              console.log('Hello this is request-error interceptor')
+              return Promise.reject(error);
+            });
+          reqItcpts.push(itcp);
+
+          // 응답 인터셉터 추가하기
+          let itcp2 = axios.interceptors.response.use(function (response) {
+              // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+              // 응답 데이터가 있는 작업 수행
+              console.log('Hello this is response-success interceptor');
+              return response;
+            },
+            function (error) {
+              // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+              // 응답 오류가 있는 작업 수행
+              console.log('Hello this is response-error interceptor')
+              return Promise.reject(error);
+            });
+          
+          resItcpts.push(itcp2);
+        }
+      </code></pre>
+      
+      <h3>전역 인터셉터 모두 제거</h3>
+      <button type="button" @click="fn4">2번: 모두 제거</button>
+      <pre><code class="language-js">
+        function fn4() {
+          for (let i = 0; i < reqItcpts.length; ++i) {
+            axios.interceptors.request.eject(reqItcpts[i]);
+          }
+          for (let i = 0; i < resItcpts.length; ++i) {
+            axios.interceptors.response.eject(resItcpts[i]);
+          }
+        }
+      </code></pre>
+      
+      <h3>통신하기</h3>
+      <button type="button" @click="fn1">3번: 통신</button>
+      <pre><code class="language-js">
+        let response = await axios.get("/success-json.data");
+        document.querySelector("#result1").innerText = JSON.stringify(response.data);  
+      </code></pre>
+      <div class="result">
+        <h4>result1:</h4>
+        <p id="result1"></p>
+      </div>
+      
+      <h2>인스턴스별 인터셉터 추가/제거</h2>
+      <pre><code class="language-js">
+      const instance = axios.create();
+      // 추가
+      let itcept = instance.interceptors.request.use(function () {/*...*/});
+      // 제거
+      instance.interceptors.request.eject(itcept);
+      </code></pre>
+      <p><code class="language-js">axios.create()</code>로 생성되는 인스턴스마다 인터셉터를 각각 할당하는 방식.</p>
+      
+      <h2>통신 중 로딩 바 노출</h2>
+      <pre><code class="language-markup"><!--
+        <style>
+          #loading { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: #ffffff36; 
+            z-index: 9999; 
+            background-image: url("./loading-bar.gif"); 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+            background-position: center;
+          }
+        </style>
+        <div id="loading"></div>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        mounted() {
+          function onLoad() {
+            let $ele = document.querySelector('#loading');
+            $ele.style = 'display: block';
+          }
+          function onLoaded() {
+            let $ele = document.querySelector('#loading');
+            $ele.style = 'display: none';
+          }
+          axios.interceptors.request.use(function (config) {
+              onLoad();
+              return config;
+            }, function (error) {
+              
+              return Promise.reject(error);
+            });
+          axios.interceptors.response.use(function (response) {
+              onLoaded();
+              return response;
+            }, function (error) {
+              onLoaded();
+              return Promise.reject(error);
+            });
+        },
+        methods: {
+          async fn2() {
+            let response = await axios.get("/delayed-response.data");
+            console.log(response.data);
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="fn2">날 눌러줘요</button>
+        </div>
+        <div id="loading"></div>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      // Vue는 안봐도 됨
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        mounted() {
+          function onLoad() {
+            let $ele = document.querySelector('#loading');
+            $ele.style = 'display: block';
+          }
+          function onLoaded() {
+            let $ele = document.querySelector('#loading');
+            $ele.style = 'display: none';
+          }
+          axios.interceptors.request.use(function (config) {
+              onLoad();
+              return config;
+            }, function (error) {
+              
+              return Promise.reject(error);
+            });
+          axios.interceptors.response.use(function (response) {
+              onLoaded();
+              return response;
+            }, function (error) {
+              onLoaded();
+              return Promise.reject(error);
+            });
+
+        },
+        data() {
+          return {
+            pageTitle: "인터셉터",
+            reqItcpts: [],
+            resItcpts: []
+          };
+        },
+        methods: {
+          // 전역 인터셉터 추가하기
+          fn3() {
+            // 요청 전용 인터셉터
+            let itcp = axios.interceptors.request.use(function (config) {
+                // 요청이 전달되기 전에 작업 수행
+                console.log('Hello this is request-success interceptor');
+                return config;
+              }, function (error) {
+                // 요청 오류가 있는 작업 수행
+                console.log('Hello this is request-error interceptor')
+                return Promise.reject(error);
+              });
+            this.reqItcpts.push(itcp);
+
+            // 응답 전용 인터셉터
+            let itcp2 = axios.interceptors.response.use(function (response) {
+                // 2xx 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+                // 응답 데이터가 있는 작업 수행
+                console.log('Hello this is response-success interceptor');
+                return response;
+              },
+              function (error) {
+                // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
+                // 응답 오류가 있는 작업 수행
+                console.log('Hello this is response-error interceptor')
+                return Promise.reject(error);
+              });
+            
+            this.resItcpts.push(itcp2);
+          },
+          // 인터셉터 모두 제거
+          fn4() {
+            for (let i = 0; i < this.reqItcpts.length; ++i) {
+              axios.interceptors.request.eject(this.reqItcpts[i]);
+            }
+            for (let i = 0; i < this.resItcpts.length; ++i) {
+              axios.interceptors.response.eject(this.resItcpts[i]);
+            }
+          },
+          // 통신하기
+          async fn1() {
+            let response = await axios.get("/success-json.data");
+            document.querySelector("#result1").innerText = JSON.stringify(response.data);
+          },
+          async fn2() {
+            let response = await axios.get("/delayed-response.data");
+            console.log(response.data);
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

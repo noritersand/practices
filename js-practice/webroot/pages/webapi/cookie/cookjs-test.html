@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>cookie util test</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  <script src="/static/scripts/cook.js"></script>
+  <script>
+    function createCookie(sameSite) {
+      var nameInput = document.querySelector('#cookieName');
+      var valueInput = document.querySelector('#cookieValue');
+      Cook.setItem({
+        key: nameInput.value,
+        value: valueInput.value,
+        sameSite: sameSite,
+        expire: null,
+        path: '/'
+      });
+      drawCookieList();
+      nameInput.value = '';
+      valueInput.value = '';
+      nameInput.focus();
+    }
+
+    function removeAllCookie() {
+      var keys = Cook.keys();
+      for (var i in keys) {
+        var ele = keys[i];
+        Cook.removeItem({key: ele});
+        Cook.removeItem({key: ele, path: '/'});
+      }
+      drawCookieList();
+      var nameInput = document.querySelector('#cookieName');
+      nameInput.focus();
+    }
+
+    function drawCookieList() {
+      var keys = Cook.keys();
+      var cookieListUl = document.querySelector('#cookieList');
+      cookieListUl.innerHTML = '';
+      for (var i in keys) {
+        var ele = keys[i];
+        if (!ele) {
+          continue;
+        }
+        var li = document.createElement('li');
+        li.innerText = ele + ': ' + Cook.getItem(ele);
+        cookieListUl.append(li);
+      }
+    }
+
+    window.onload = function() {
+      // drawCookieList();
+      var nameInput = document.querySelector('#cookieName');
+      var valueInput = document.querySelector('#cookieValue');
+      nameInput.onkeyup = function(event) {
+        var keyCode = event.keyCode ? event.keyCode : event.which;
+        if (keyCode == 13) {
+          valueInput.focus();
+        }
+      };
+      valueInput.onkeyup = function(event) {
+        var keyCode = event.keyCode ? event.keyCode : event.which;
+        if (keyCode == 13) {
+          createCookie();
+        }
+      };
+    };
+  </script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>cook.js test</h1>
+    <div>
+      이름: <input type="text" id="cookieName" /> 값: <input type="text" id="cookieValue" />
+    </div>
+    <div>
+      추가하기:
+      <button type="button" onclick="createCookie('strict')">sameSite: Strict</button>
+      <button type="button" onclick="createCookie('lax')">sameSite: Lax</button>
+      <button type="button" onclick="createCookie('none')">sameSite: None</button>
+    </div>
+    <br />
+    <button type="button" onclick="removeAllCookie()">쿠키 모두 삭제</button>
+    <button type="button" onclick="drawCookieList()">쿠키 목록 그리기</button>
+    <h4>쿠키 목록:</h4>
+    <ul id="cookieList"></ul>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

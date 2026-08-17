@@ -1,0 +1,61 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  min-height: 200px
+
+  &.h-100
+    height: 100px
+
+  &.h-200
+    height: 200px
+
+  &.h-300
+    height: 300px
+
+  &.ex01
+    grid-template-rows: 40px 80px 40px
+
+  &.ex02
+    grid-template-rows: 1fr 2fr 3fr
+
+  &.ex03
+    grid-template-rows: repeat(2, 80px)
+
+  &.ex04
+    grid-template-rows: repeat(3, 1fr)
+
+  &.ex05
+    grid-template-rows: 50px auto 50px
+
+  &.ex-template-rows-max-content
+    grid-template-rows: max-content 50px
+
+  &.ex-template-rows-min-content
+    grid-template-rows: min-content min-content
+
+  &.ex06
+    grid-template-rows: minmax(10px, 30px) minmax(50px, 80px) minmax(10px, 100px)
+
+  // --- 추가된 auto-fill / auto-fit 관련 클래스 ---
+
+  // 1. 기본 작동 방식 (minmax + 1fr 조합, 1열 고정)
+  &.ex-template-rows-auto-fill-minmax
+    grid-template-columns: 1fr
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr))
+
+  &.ex-template-rows-auto-fit-minmax
+    grid-template-columns: 1fr
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr))
+

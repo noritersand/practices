@@ -1,0 +1,11 @@
+.idea
+
+
+# #########################
+result.txt
+result/
+output/
+
+poetry-test
+temp
+summary.md

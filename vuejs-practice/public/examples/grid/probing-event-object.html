@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+    <style>
+      .underline {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <div id="grid"></div>
+      <p><code class="language-js">ev.rowKey</code>는 헤더일 때 <code class="language-js">undefined</code>를 반환하니 특정 컬럼 클릭 시 팝업을 띄운다고 한다면:</p>
+      <pre><code class="language-js"><!--
+        grid.on('click', ev => {
+          if (ev.rowKey !== undefined && ev.columnName === "artist") {
+            // 팝업 열기
+            result2 = "열렸다고 쳐";
+          } else {
+            result2 = "그 셀이 아님";
+          }
+      });        
+      --></code></pre>
+      이렇게 하면 됩니다.
+      <div class="result">
+        <p id="result2"></p>
+      </div>
+      <h2>이벤트 객체에 있는 모든 정보</h2>
+      <pre><code class="language-js"><!--
+        grid.on("click", (ev) => {
+          console.log("instance:", ev.instance);
+          console.log("nativeEvent:", ev.nativeEvent);
+
+          let result = "targetType:" + ev.targetType;
+          result += "\ncolumnName:" + ev.columnName;
+          result += "\nrowKey:" + ev.rowKey;
+          result += "\nstopped:" + ev.stopped;
+          document.querySelector("#result1").innerText = result;
+        });
+      --></code></pre>
+      <div class="result">
+        <p id="result1"></p>
+      </div>
+    </div>
+    <script type="module">
+      import { createApp } from "/lib/vue/vue.esm-browser.js";
+
+      createApp({
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "글제목",
+            message: "Hello Vue! ✌️",
+          };
+        },
+      }).mount("#app");
+
+      const gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", release: "2016.03.26", type: "Deluxe", genre: "Pop" },
+        { name: "X", artist: "Ed Sheeran", release: "2014.06.24", type: "Deluxe", genre: "Pop", },
+        { name: "Moves Like Jagger", release: "2011.08.08", artist: "Maroon5", type: "Single", genre: "Pop,Rock", },
+        { name: "A Head Full Of Dreams", artist: "Coldplay", release: "2015.12.04", type: "Deluxe", genre: "Rock", },
+        { name: "Nineteen", artist: "Adele", release: "2008.01.27", type: "EP", genre: "Pop,R&B", },
+      ];
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        columns: [
+          {
+            header: "Name",
+            name: "name",
+          },
+          {
+            header: "Artist",
+            name: "artist",
+            className: "underline",
+          },
+          {
+            header: "Type",
+            name: "type",
+          },
+          {
+            header: "Release",
+            name: "release",
+          },
+          {
+            header: "Genre",
+            name: "genre",
+          },
+        ],
+      });
+
+      grid.on("click", (ev) => {
+        console.log("instance:", ev.instance);
+        console.log("nativeEvent:", ev.nativeEvent);
+
+        let result = "targetType:" + ev.targetType;
+        result += "\ncolumnName:" + ev.columnName;
+        result += "\nrowKey:" + ev.rowKey;
+        result += "\nstopped:" + ev.stopped;
+        document.querySelector("#result1").innerText = result;
+
+        let result2 = "";
+        if (ev.rowKey !== undefined && ev.columnName === "artist") {
+          // 팝업 열기
+          result2 = "열렸다고 쳐";
+        } else {
+          result2 = "그 셀이 아님";
+        }
+        document.querySelector("#result2").innerText = result2;
+      });
+    </script>
+  </body>
+</html>

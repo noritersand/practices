@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가이드 페이지 작성 방법</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>copy-me.html 파일 복사</h2>
+      <p>examples/vue/copy-me.html 파일과 examples/grid/copy-me.html이 있으니 이 파일 중 하나를 복사해서 작성합니다.</p>
+
+      <h2>목차 만들기</h2>
+      <p>Vue 컴포넌트를 이용해 헤더 태그를 기준으로 목차를 자동 생성합니다.</p>
+      <pre><code class="language-markup"><!--
+        <table-of-contents></table-of-contents>
+        <h2>이 항목이 목차로 자동 생성됨</h2>
+        <h1>h1은 무시함</h1>
+        <h3>h3과 h4는 추가 예정</h3>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+        createApp({
+          components: {
+            tableOfContents,
+          },
+          ...
+      --></code></pre>
+
+      <h2>INDEX 페이지로 돌아가는 백버튼</h2>
+      <p>이것도 Vue 컴포넌트로 만들어놨으니 아래처럼만 작성하면 됩니다:</p>
+      <pre><code class="language-markup"><!--
+        <back-to-home></back-to-home>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { backToHome } from '/examples/vue/component/back-to-home.js';
+        
+        createApp({
+          components: {
+            backToHome,
+          },
+          ...
+      --></code></pre>
+
+      <h2>테스트 결과 영역 표현하기</h2>
+      <pre><code class="language-markup"><!--
+        <div class="result">
+          여기는 테스트 결과를 노출하는 영역입니다.
+        </div>
+      --></code></pre>
+      <div class="result">
+        여기는 테스트 결과를 노출하는 영역입니다.
+      </div>
+      
+      <h2>설명 영역 표현하기</h2>
+      <p>설명은 그냥 <code class="language-markup"><!--<p>--></code> 태그를 쓰면 되지만 특별히 강조하고 싶다면 아래처럼 작성합니다:</p>
+      <pre><code class="language-markup"><!--
+        <div class="description">
+          여기는 강조하여 설명하는 영역입니다.
+        </div>
+      --></code></pre>
+      <div class="description">
+        여기는 강조하여 설명하는 영역입니다.
+      </div>
+
+      <h2>코드 하이라이팅</h2>
+      <p>코드를 가독성있게 표현하기 위해 <a href="https://prismjs.com/">Prism.js</a>를 적용했습니다. 인라인 코드와 코드 블록으로 나뉩니다.</p>
+      <h3>인라인 코드</h3>
+      <pre><code class="language-markup"><!--
+        이런식으로 <code class="language-js">console.log(123)</code> 작성하세요.
+      --></code></pre>
+      <div class="result">
+        <h4>결과:</h4>
+        이런식으로 <code class="language-js">console.log(123)</code> 작성하세요.
+      </div>
+      <h3>코드 블록</h3>
+      <pre><code class="language-markup"><!--
+        <pre><code class="language-js">
+        code 태그를 pre 태그로 감싸면 코드 블록이 됩니다;
+        let obj = { a: 1 };
+        </code></pre>
+      --></code></pre>
+      <div class="result">
+        <h4>결과:</h4>
+        <pre><code class="language-js">
+        code 태그를 pre 태그로 감싸면 코드 블록이 됩니다;
+        let obj = { a: 1 };
+        </code></pre>
+      </div>
+      <pre><code class="language-markup"><!--
+        <pre><code class="language-markup">
+        <p>HTML 같은 마크업 코드를 쓸 땐</p>
+        <p>class를 'language-markup'으로 적용합니다.</p>
+        </code></pre>
+      --></code></pre>
+      <div class="result">
+        <h4>결과:</h4>
+        <pre><code class="language-markup">
+        <p>HTML 같은 마크업 코드를 쓸 땐</p>
+        <p>class를 'language-markup'으로 적용합니다.</p>
+        </code></pre>
+      </div>
+      <h3>코드를 있는 그대로 노출하기</h3>
+      <p>태그나 Vue 표현식이 escape 되지 않도록 작성하려면 XML 코멘트로 감싸면 됩니다.</p>
+      <p>예시와 정확히 동일하게 코멘트를 작성해야 하고, 코멘트 안의 또 다른 코멘트는 작동하지 않습니다.</p>
+      <p>*작성 예시는 이 파일을 직접 열어서 확인하세요.</p>
+      <div class="result">
+        <h4>결과:</h4>
+        <pre><code class="language-markup"><!--
+          <p>h1</p> 이 코드는 작성한 그대로 노출됩니다.
+        --></code></pre>
+      </div>
+      <div class="result">
+        <h4>결과:</h4>
+        <pre><code class="language-js"><!--
+          {{message}} 이 코드는 작동하지 않습니다.
+        --></code></pre>
+      </div>
+      <h4>코드 하이라이팅 가능한 언어 목록</h4>
+      <p>현재는 이마아아안큼:</p>
+      <ul>
+        <li>markup</li>
+        <li>css</li>
+        <li>clike</li>
+        <li>javascript</li>
+        <li>bash</li>
+        <li>java</li>
+        <li>javadoc</li>
+        <li>javadoclike</li>
+        <li>jsdoc</li>
+        <li>json</li>
+        <li>log</li>
+        <li>sql</li>
+        <li>typescript</li>
+      </ul>
+      <p>만 쓸 수 있습니다. 추가하려면 Prism.js에서 새로 받으면 되는데, 그냥 방문하지 말고 prism.js 파일의 코멘트에 있는 URL을 통해 접속하세요.</p>
+      <h3>끗</h3>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        data() {
+          return {
+            pageTitle: "가이드 페이지 작성 방법",
+            docs: [
+              { title: "어디어디", url: "어디어디" },
+              { title: "어디어디", url: "어디어디" },
+              { title: "어디어디", url: "어디어디" },
+            ],
+            message: "Hello Vue! ✌️"
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

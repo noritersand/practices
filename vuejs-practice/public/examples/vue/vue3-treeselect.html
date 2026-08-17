@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <link rel="stylesheet" href="/lib/vue3-treeselect/vue3-treeselect.css" />
+    <title>Vue3 Treeselect</title>
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/vue/vue.global.js"></script>
+    <script src="/lib/vue3-treeselect/vue3-treeselect.umd.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@next"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue3-treeselect@^0.1.0/dist/vue3-treeselect.umd.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.umd.min.js"></script> -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@next"></script> -->
+    <!-- include vue-treeselect & its styles. you can change the version tag to better suit your needs. -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue3-treeselect@^0.1.0/dist/vue3-treeselect.umd.min.js"></script> -->
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>기본 기능</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <treeselect v-model="value" :multiple="true" :options="options" />
+      </div>
+
+      <h2>소제목1</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <p></p>
+      </div>
+
+      <h2>소제목2</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <p></p>
+      </div>
+    </div>
+    <script type="module">
+      // import { createApp } from '/lib/vue/vue.esm-browser.js';
+      // import Treeselect from '/lib/vue3-treeselect.common.js';
+      const { createApp } = Vue;
+
+      console.log(typeof Treeselect);
+      console.log(typeof VueTreeselect);
+
+      // createApp({
+      //   data() {
+      //     return {
+      //       pageTitle: "Vue3 Treeselect",
+      //       docs: [
+      //         { title: "https://vue-treeselect.js.org/", url: "https://vue-treeselect.js.org/" },
+      //         { title: "https://github.com/megafetis/vue3-treeselect", url: "https://github.com/megafetis/vue3-treeselect" },
+      //       ],
+      //       components: {
+      //         Treeseelect: VueTreeselect.Treeselect,
+      //       },
+      //       // define the default value
+      //       value: null,
+      //       // define options
+      //       options: [
+      //         {
+      //           id: "a",
+      //           label: "a",
+      //           children: [
+      //             {
+      //               id: "aa",
+      //               label: "aa",
+      //             },
+      //             {
+      //               id: "ab",
+      //               label: "ab",
+      //             },
+      //           ],
+      //         },
+      //         {
+      //           id: "b",
+      //           label: "b",
+      //         },
+      //         {
+      //           id: "c",
+      //           label: "c",
+      //         },
+      //       ],
+      //     };
+      //   },
+      //   created() {
+      //     document.title += `: ${this.pageTitle}`;
+      //   }
+      // }).mount("#app");
+    </script>
+  </body>
+</html>

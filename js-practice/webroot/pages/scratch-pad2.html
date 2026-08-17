@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>연습장 #2</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+</head>
+
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>연습장 #2</h1>
+
+    <section>
+      <div id="toc" class="mrgn-btm"></div>
+    </section>
+
+    <section>
+      <p>콘솔창을 열어볼 것</p>
+      <div id="note"></div>
+    </section>
+  </article>
+</main>
+
+<script>
+  const {log} = console;
+  var exam = {
+    do: something => {
+      // 안중복코드
+      return this.getSome(something);
+    },
+    do2(something) {
+      // 안중복코드
+      return this.getSome(something);
+    },
+    getSome: something => {
+      // 중복코드
+      return something;
+    }
+  };
+  // log(exam.do('a')); // 에러
+  log(exam.do2('a'));
+</script>
+</body>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</html>

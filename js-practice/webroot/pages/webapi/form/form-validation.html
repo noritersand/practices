@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>HTML5 Input Types</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Client-side form validation</h1>
+    <section>
+      <h2>required attribute</h2>
+      <div class="code-result">
+        <form action="/return-my-form-data.data" method="post">
+          <p>
+            <button type="button" class="buttons" onclick="validate()">
+              이건 수동 트리거(JS Web API)
+            </button>
+            <button type="submit" class="buttons">
+              이거 누르면 네이티브로 작동(서브밋 버튼)
+            </button>
+          </p>
+          <p><input type="text" name="a" required /></p>
+          <p>
+            <input type="checkbox" name="b" value="1" required />
+            <input type="checkbox" name="b" value="2" required />
+            <input type="radio" name="c" value="1" required />
+            <input type="radio" name="c" value="2" required />
+          </p>
+          <p>
+            <select name="chooseme" required>
+              <option><!-- 여기에 뭐 써넣으면 고른걸로 취급됨 --></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </p>
+          <p>
+            <textarea name="area" required></textarea>
+          </p>
+        </form>
+      </div>
+    </section>
+    <script>
+      let attempt = 0;
+
+      function validate() {
+        attempt++;
+        var form = document.querySelector('form');
+        if (form.reportValidity()) {
+          console.log(`${attempt}:성공!`);
+        } else {
+          console.log(`${attempt}:패실`);
+        }
+      }
+    </script>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

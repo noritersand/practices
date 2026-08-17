@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-pagination.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+      <p>이 문서에서는 토스트 그리드에 테마를 적용하는 방법에 대해서 설명합니다.</p>
+      <p>제공되는 테마 프리셋은 default, striped, clean 세 종류 입니다. 스태틱 메서드인 <code class="language-js">tui.Grid.applyTheme()</code>를 호출해서 적용하면 됩니다. 이 메서드를 호출하지 않으면 기본값인 default 테마가 적용됩니다.</p>
+      <p>프리셋이 마음에 안들면 사용자 정의 스타일을 적용할 수 있습니다. <code class="language-js">tui.Grid.applyTheme()</code>의 첫 번째 인자는 <code class="language-js">null</code>로, 두 번째 인자로 사용자 정의 객체를 넘기면 됩니다. 이 객체를 어떻게 정의해야 하는지는 <a href="https://nhn.github.io/tui.grid/latest/Grid#applyTheme" target="_blank">여기</a>를 보세요.</a></p>
+      <p>아래 버튼들을 눌러보세요.</p>
+      <div>
+        <button type="button" @click="changeTheme('default')">default</button>
+        <button type="button" @click="changeTheme('striped')">striped</button>
+        <button type="button" @click="changeTheme('clean')">clean</button>
+        <button type="button" @click="changeTheme(null)">custom</button>
+      </div><br>
+      <div id="grid"></div>
+      <div class="description">
+        <p></p>
+      </div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import customTheme from '/examples/grid/custom-theme-original.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            docs: [
+              { title: "https://nhn.github.io/tui.grid/latest/tutorial-example07-themes", url: "https://nhn.github.io/tui.grid/latest/tutorial-example07-themes" },
+              { title: "https://nhn.github.io/tui.grid/latest/Grid#applyTheme", url: "https://nhn.github.io/tui.grid/latest/Grid#applyTheme" },
+            ],
+            pageTitle: '7. Themes',
+          };
+        },
+        methods: {
+          readData() {
+            grid.readData(1);
+          },
+          changeTheme(theme) {
+            if (theme === null) {
+              tui.Grid.applyTheme(null, customTheme);
+              return;
+            }
+            tui.Grid.applyTheme(theme);
+          }
+        }
+      }).mount('#app');
+
+      const gridData = null;
+
+      tui.Grid.applyTheme(null, customTheme);
+      let grid = new tui.Grid({
+        el: document.getElementById('grid'),
+        scrollX: false,
+        scrollY: false,
+        minBodyHeight: 30,
+        rowHeaders: ['rowNum', 'checkbox'],
+        data: {
+          api: {
+            readData: { url: '/read-paged-grid-data.data', method: 'GET' },
+          },
+        },
+        pageOptions: {
+          perPage: 20,
+        },
+        columns: [
+          {
+            header: 'Name',
+            name: 'name',
+            align: 'center'
+          },
+          {
+            header: 'Artist',
+            name: 'artist',
+            align: 'center'
+          },
+          {
+            header: 'Type',
+            name: 'type',
+            align: 'center'
+          },
+          {
+            header: 'Release',
+            name: 'release',
+            align: 'center'
+          },
+          {
+            header: 'Genre',
+            name: 'genre',
+            align: 'center'
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>

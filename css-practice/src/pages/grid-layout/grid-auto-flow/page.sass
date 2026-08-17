@@ -1,0 +1,43 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+
+  /* dense 배치 효과를 명확히 확인하기 위해 특정 아이템에 크기 지정 */
+  &.item-wide
+    grid-column: span 2
+    background-color: darkslategrey
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  height: 200px
+  grid-template-columns: repeat(3, 1fr)
+  grid-template-rows: repeat(3, 1fr)
+
+  /* row 지정 (기본값) */
+  &.ex-row
+    grid-auto-flow: row
+
+  /* column 지정 */
+  &.ex-column
+    grid-auto-flow: column
+
+  /* dense 지정 (row dense와 동일) */
+  &.ex-dense
+    grid-auto-flow: dense
+
+  /* row dense 지정 */
+  &.ex-row-dense
+    grid-auto-flow: row dense
+
+  /* column dense 지정 */
+  &.ex-column-dense
+    grid-auto-flow: column dense

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <p><a href="https://axios-http.com/kr/docs/intro">공식 도움말 페이지</a></p>
+
+      <h2>Promise</h2>
+      <pre><code class="language-js"><!--
+        axios.get('/success-json.data')
+          .then(function (response) {
+            document.querySelector('#result1').innerText = JSON.stringify(response.data);
+          })
+          .catch(function (error) {
+            console.error(error);
+          })
+          .then(function () {
+            console.log('AJAX done')
+          });
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn1">눌러요</button></div>
+        <h4>result1:</h4><p id="result1"></p>
+      </div>
+      
+      <h2>await</h2>
+      <pre><code class="language-js"><!--
+        let response = await axios.get('/success-json.data');
+        document.querySelector('#result2').innerText = JSON.stringify(response.data);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn2">눌러요</button></div>
+        <h4>result2:</h4><p id="result2"></p>
+      </div>
+      
+      <h2>POST 메서드</h2>
+      <pre><code class="language-js"><!--
+        let params = {
+          firstName: 'Fred',
+          lastName: 'Flintstone'
+        };
+        let response = await axios.post('/get-my-request-body.data', params);
+        document.querySelector('#result3').innerText = JSON.stringify(response.data);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn3">누름</button></div>
+        <h4>result3:</h4><p id="result3"></p>
+      </div>
+      
+      <h2>인스턴스 생성 방식</h2>
+      <pre><code class="language-js"><!--
+        const instance = axios.create({
+          baseURL: '/success-json.data',
+          method: 'GET',
+          timeout: 1000
+        });
+        let response = await instance.get();
+        document.querySelector('#result4').innerText = JSON.stringify(response.data);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn4">push me!</button></div>
+        <h4>result4:</h4><p id="result4"></p>
+      </div>
+      
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      // Vue는 안봐도 됨
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "기본 사용법",
+          };
+        },
+        methods: {
+          // Axios 기본 사용법 예시
+          fn1() {
+            axios.get('/success-json.data')
+              .then(function (response) {
+                document.querySelector('#result1').innerText = JSON.stringify(response.data);
+              })
+              .catch(function (error) {
+                console.error(error);
+              })
+              .then(function () {
+                console.log('AJAX done')
+              });
+          },
+          async fn2() {
+            let response = await axios.get('/success-json.data');
+            document.querySelector('#result2').innerText = JSON.stringify(response.data);
+          },
+          async fn3() {
+            let params = {
+              firstName: 'Fred',
+              lastName: 'Flintstone'
+            };
+            let response = await axios.post('/get-my-request-body.data', params);
+            document.querySelector('#result3').innerText = JSON.stringify(response.data);
+          },
+          async fn4() {
+            const instance = axios.create({
+              baseURL: '/success-json.data',
+              method: 'GET',
+              timeout: 1000
+            });
+            let response = await instance.get();
+            document.querySelector('#result4').innerText = JSON.stringify(response.data);
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

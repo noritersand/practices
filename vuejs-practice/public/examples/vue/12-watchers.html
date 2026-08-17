@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>기본 사용법</h2>
+      <pre><code class="language-markup"><!--
+        <span>question old value: </span><span ref="questionsOldValue"></span>
+        <span>question new value: </span><span ref="questionsNewValue"></span>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        watch: {
+          question(n, o) {
+            this.$refs.questionsNewValue.innerText = n;
+            this.$refs.questionsOldValue.innerText = o;
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div>
+          <input type="text" v-model="question">
+        </div>
+        <p><span>question old value: </span><span ref="questionsOldValue"></span></p>
+        <p><span>question new value: </span><span ref="questionsNewValue"></span></p>
+      </div>
+
+      <h2>중첩 객체의 감시</h2>
+      <p>중첩 객체는 객체가 교체되는 경우에만 콜백이 호출됩니다. 만약 객체 내부의 프로퍼티를 감시하고 싶을 땐 <code class="language-js">deep: true</code>를 추가해야 합니다.</p>
+      <p>다만 문제가 있는게, 콜백 함수로 넘어오는 oldValue와 newValue가 같습니다. ☹️ <a href="https://github.com/vuejs/vue/issues/2164" target="_blank">computed와 같이 쓰면 해결된다는 깃허브 댓글</a>이 있긴 한데...</p>
+      <pre><code class="language-markup"><!--
+        <span>obj.qwer old value: </span><span ref="qwersOldValue"></span>
+        <span>obj.qwer new value: </span><span ref="qwersNewValue"></span>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            obj: {
+              qwer: ''
+            }
+          };
+        },
+        watch: {
+          obj: {
+            handler(n, o) {
+              console.log('n:', n);
+              console.log('o:', o);
+              this.$refs.qwersOldValue.innerText = n.qwer;
+              this.$refs.qwersNewValue.innerText = o.qwer;
+            },
+            deep: true
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div>
+          <input type="text" v-model="obj.qwer">
+        </div>
+        <p><span>obj.qwer old value: </span><span ref="qwersOldValue"></span></p>
+        <p><span>obj.qwer new value: </span><span ref="qwersNewValue"></span></p>
+      </div>
+
+      <h2>소제목2</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="null">날 눌러줘요</button>
+          <button type="button" @click="null">나도</button>
+        </div>
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        data() {
+          return {
+            pageTitle: "Watchers",
+            docs: [
+              { title: "Essentials: Watchers", url: "https://vuejs.org/guide/essentials/watchers.html" },
+              { title: "Options API > Options: State > watch", url: "https://vuejs.org/api/options-state.html#watch" },
+            ],
+            message: "Hello Vue! ✌️",
+            question: '',
+            obj: {
+              qwer: ''
+            }
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        watch: {
+          question(n, o) {
+            this.$refs.questionsNewValue.innerText = n;
+            this.$refs.questionsOldValue.innerText = o;
+          },
+          obj: {
+            handler(n, o) {
+              console.log('n:', n);
+              console.log('o:', o);
+              this.$refs.qwersOldValue.innerText = n.qwer;
+              this.$refs.qwersNewValue.innerText = o.qwer;
+            },
+            deep: true
+          }
+        },
+        methods: {
+
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

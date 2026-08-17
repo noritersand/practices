@@ -1,0 +1,73 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 80px
+
+  &.w-150
+    width: 150px
+
+  &.w-300
+    width: 300px
+
+  &.w-450
+    width: 450px
+
+  &.w-200
+    width: 200px
+
+  &.w-400
+    width: 400px
+
+  &.w-600
+    width: 600px
+
+  &.ex01
+    grid-template-columns: 100px 150px 200px
+
+  &.ex02
+    grid-template-columns: 1fr 2fr 3fr
+
+  &.ex03
+    grid-template-columns: repeat(2, 150px)
+
+  &.ex04
+    grid-template-columns: repeat(3, 1fr)
+
+  &.ex05
+    grid-template-columns: 50px auto 50px
+
+  &.ex-template-cols-max-content
+    width: 600px
+    grid-template-columns: 1fr max-content
+
+  &.ex-template-cols-min-content
+    grid-template-columns: 1fr min-content 1fr
+
+  &.ex-minmax
+    grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr)
+
+  // 1. 기본 작동 방식 (minmax + 1fr 조합)
+  &.ex-auto-fill-minmax
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+
+  &.ex-auto-fit-minmax
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+
+  // 2. 컨테이너 너비에 따른 자동 열 개수 조정 (고정 너비)
+  &.ex-auto-fill-fixed
+    grid-template-columns: repeat(auto-fill, 130px)
+
+  &.ex-auto-fit-fixed
+    grid-template-columns: repeat(auto-fit, 130px)

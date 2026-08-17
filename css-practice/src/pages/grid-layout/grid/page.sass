@@ -1,0 +1,28 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  height: 200px
+
+  /* 1. grid-template (명시적 행 / 명시적 열) */
+  &.ex-grid-template
+    grid: repeat(3, 1fr) / repeat(3, 1fr)
+
+  /* 2. explicit rows / implicit columns (명시적 행 / 암시적 열) */
+  &.ex-explicit-rows
+    grid: repeat(3, 1fr) / auto-flow 1fr
+
+  /* 3. implicit rows / explicit columns (암시적 행 / 명시적 열) */
+  &.ex-implicit-rows
+    grid: auto-flow 1fr / repeat(3, 1fr)

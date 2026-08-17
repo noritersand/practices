@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>Tab Index</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Tab Index</h1>
+    <form id="form1" onsubmit="handleSubmit">
+      <p><input type="input" tabindex="0" vale="0" name="testme" />: tabindex="0"</p>
+      <p><input type="input" tabindex="1" vale="1" name="testme" />: tabindex="1"</p>
+      <p><input type="input" tabindex="2" vale="2" name="testme" />: tabindex="2"</p>
+      <p><input type="input" tabindex="3" vale="3" name="testme" />: tabindex="3"</p>
+      <p><input type="input" tabindex="4" vale="4" name="testme" />: tabindex="4"</p>
+      <button type="submit" tabindex="0">tabindex="0"</button>
+    </form>
+    <form id="form2" onsubmit="handleSubmit">
+      <p><input type="radio" tabindex="0" vale="0" name="testme1" />: tabindex="0"</p>
+      <p><input type="radio" tabindex="5" vale="5" name="testme2" />: tabindex="5"</p>
+      <p><input type="radio" tabindex="6" vale="6" name="testme2" />: tabindex="6"</p>
+      <p><input type="radio" tabindex="7" vale="7" name="testme3" />: tabindex="7"</p>
+      <p><input type="radio" tabindex="8" vale="8" name="testme3" />: tabindex="8"</p>
+      <button type="submit" tabindex="0">tabindex="0"</button>
+    </form>
+    <div class="important">
+      <p>탭을 누르면 tabindex가 1인 입력란에 가장 먼저 포커싱함</p>
+      <p>tabindex가 0이면 가장 마지막에, 그리고 요소의 순서에 따라 포커싱</p>
+      <p>
+        라디오 버튼은 좀 특이한 게, <code class="language-js">name</code> 속성의 값을 기준으로
+        tabindex가 가장 빠른 요소에만 포커싱됨
+      </p>
+    </div>
+  </article>
+</main>
+<script>
+  function handleSubmit(e) {
+    console.log('submit!');
+    e.preventDefault();
+  }
+
+  document.querySelector('#form1').addEventListener('submit', handleSubmit);
+</script>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

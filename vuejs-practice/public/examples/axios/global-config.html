@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+      
+      <div class="description">
+        <h4>📢Config의 우선순위</h4>
+        <p>Config는 우선 순위에 따라 병합됩니다. <code class="language-js">lib/defaults.js</code> 라이브러리에서의 기본값, 인스턴스의 <code class="language-js">defaults</code> 속성, 요청의 <code class="language-js">config</code> 인자를 순서대로 찾습니다. 후자가 전자보다 우선순위가 높습니다.</p>
+      </div>
+
+      <p><a href="https://axios-http.com/kr/docs/intro">공식 도움말 페이지</a></p>
+      <h2>Axios 전역 기본값</h2>
+      <pre><code class="language-js"><!--
+        axios.defaults.baseURL = '/return-headers.data'; // URL을 생략했을 때 적용할 주소
+        axios.defaults.headers.common['Authorization'] = "Hello! I'm a token"; // 모든 AJAX 전역 설정
+        axios.defaults.headers.get['X-Custom-Header'] = 'foo'; // get 메서드 전역 설정 
+        axios.defaults.headers.post['X-Custom-Header'] = 'bar'; // post 메서드 전역 설정
+
+        let response = await axios.get();
+        document.querySelector('#result1').innerText = JSON.stringify(response.data);
+
+        let response2 = await axios.post();
+        document.querySelector('#result2').innerText = JSON.stringify(response2.data);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn1">1번: 눌러요</button></div>
+        <h4>result1:</h4>
+        <p id="result1"></p>
+        <h4>result2:</h4>
+        <p id="result2"></p>
+      </div>
+
+      <h2>인스턴스별 기본값</h2>
+      <pre><code class="language-js"><!--
+        // 인스턴스를 생성할때 config 기본값 설정하기
+        const instance = axios.create({
+          baseURL: "/return-headers.data",
+          header: {
+            "X-Custom-Header": "foo"
+          },
+        });
+
+        // 인스턴스를 만든 후 기본값 변경하기
+        instance.defaults.headers.get["X-Custom-Header"] = "bar"
+
+        let response = await instance.get();
+        document.querySelector("#result3").innerText = JSON.stringify(response.data);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn2">2번: 눌러봐요</button></div>
+        <h4>result3:</h4>
+        <p id="result3"></p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      // Vue는 안봐도 됨
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "Config 기본값 설정하기",
+          };
+        },
+        methods: {
+          async fn1() {
+            // Axios 전역 설정 변경하기
+            axios.defaults.baseURL = "/return-headers.data"; // URL을 생략했을 때 적용할 주소
+            axios.defaults.headers.common["Authorization"] = "Hello! I'm a token"; // 모든 AJAX 전역 설정
+            axios.defaults.headers.get["X-Custom-Header"] = "foo"; // get 메서드 전역 설정
+            axios.defaults.headers.post["X-Custom-Header"] = "bar"; // post 메서드 전역 설정
+
+            let response = await axios.get();
+            document.querySelector("#result1").innerText = JSON.stringify(response.data);
+
+            let response2 = await axios.post();
+            document.querySelector("#result2").innerText = JSON.stringify(response2.data);
+          },
+          async fn2() {
+            // 인스턴스를 생성할때 config 기본값 설정하기
+            const instance = axios.create({
+              baseURL: "/return-headers.data",
+              header: {
+                "X-Custom-Header": "foo"
+              },
+            });
+
+            // 인스턴스를 만든 후 기본값 변경하기
+            instance.defaults.headers.get["X-Custom-Header"] = "bar"
+
+            let response = await instance.get();
+            document.querySelector("#result3").innerText = JSON.stringify(response.data);
+          }
+        }
+      }).mount("#app");
+      </script>
+  </body>
+</html>

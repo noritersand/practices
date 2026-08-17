@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <link rel="stylesheet" href="/lib/tom-select/tom-select.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tom-select/tom-select.complete.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>기본 사용법: &lt;input&gt;</code></h2>
+      <pre><code class="language-markup"><!--
+        <input id="input-tags" value="awesome,neat" 
+            autocomplete="off" placeholder="How cool is this?">
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        new TomSelect('#input-tags');
+      --></code></pre>
+      <div class="result">
+        <input id="input-tags" value="awesome,neat" 
+            autocomplete="off" placeholder="How cool is this?">
+      </div>
+
+      <h2>기본 사용법: &lt;select&gt;</h2>
+      <pre><code class="language-markup"><!--
+        <select id="select-beast" placeholder="Select a person..." autocomplete="off">
+          <option value="">Select a person...</option>
+          <option value="4">Thomas Edison</option>
+          <option value="1">Nikola</option>
+          <option value="3">Nikola Tesla</option>
+          <option value="5">Arnold Schwarzenegger</option>
+        </select>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        new TomSelect('#select-beast');
+      --></code></pre>
+      <div class="result">
+        <select id="select-beast" placeholder="Select a person..." autocomplete="off">
+          <option value="">None</option>
+          <option value="4">Thomas Edison</option>
+          <option value="1">Nikola</option>
+          <option value="3" disabled>Nikola Tesla</option>
+          <option value="5">Arnold Schwarzenegger</option>
+        </select>
+      </div>
+
+      <h2>단일 선택 + 검색 + 옵션은 config로</h2>
+      <pre><code class="language-markup"><!--
+        <input id="tom-select-single" />
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        let options = [
+          { value: "A1234", text: "A 조직" },
+          { value: "A2345", text: "A-1 조직" },
+          { value: "A3456", text: "A-1-Z 조직" },
+          { value: "B4567", text: "B 조직" },
+          { value: "B5678", text: "B-1 조직" },
+          { value: "B6789", text: "B-2 조직" }
+        ];
+        new TomSelect('#tom-select-single', {
+          options: options
+        });
+      --></code></pre>
+      <div class="result">
+        <input id="tom-select-single" />
+      </div>
+
+      <h2>다중 선택 + 검색 + 옵션은 config로</h2>
+      <pre><code class="language-markup"><!--
+        <input id="tom-select-multi" />
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        let options = [
+          { value: "A1234", text: "A 조직" },
+          { value: "A2345", text: "A-1 조직" },
+          { value: "A3456", text: "A-1-Z 조직" },
+          { value: "B4567", text: "B 조직" },
+          { value: "B5678", text: "B-1 조직" },
+          { value: "B6789", text: "B-2 조직" }
+        ];
+        new TomSelect('#tom-select-multi', {
+          options: options,
+          maxItems: 99
+        });
+      --></code></pre>
+      <div class="result">
+        <div>
+          
+        </div>
+        <input id="tom-select-multi" />
+      </div>
+
+      <h2>API 활용</h2>
+      <pre><code class="language-markup"><!--
+        <button type="button" @click="addOptions">addOptions()</button>
+        <button type="button" @click="setValue">setValue()</button>
+        <button type="button" @click="getValue">getValue()</button>
+        <button type="button" @click="createItem">createItem()</button>
+        <button type="button" @click="clear">clear()</button>
+        <button type="button" @click="clearOptions">clearOptions()</button>
+        <input id="tom-select-apis" />
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        mounted() {
+          let config = {
+            create(input) {
+              return { value: 'option-' + input[0], text: 'Option ' + input[1] };
+            }
+          };
+          this.apiTommy = new TomSelect('#tom-select-apis', config);
+        },
+        methods: {
+          createItem() {
+            ++this.sequence;
+            this.apiTommy.createItem([this.sequence, this.sequence]);
+          },
+          clear() {
+            this.apiTommy.clear();
+          },
+          addOptions() {
+            ++this.sequence;
+            this.apiTommy.addOptions([
+              { value: 'option-' + this.sequence, text: 'Option ' + this.sequence }
+            ]);
+          },
+          getValue() {
+            document.querySelector('#result1').innerText = this.apiTommy.getValue();
+          },
+          setValue() {
+            this.apiTommy.setValue([ 
+              'option-1', 
+              'option-3', 
+              'option-7' 
+            ]);
+          },
+          clearOptions() {
+            this.apiTommy.clearOptions();
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="addOptions">addOptions()</button>
+          <button type="button" @click="setValue">setValue()</button>
+          <button type="button" @click="getValue">getValue()</button>
+          <button type="button" @click="createItem">createItem()</button>
+          <button type="button" @click="clear">clear()</button>
+          <button type="button" @click="clearOptions">clearOptions()</button>
+        </div>
+        <input id="tom-select-apis" />
+        <p id="result1"></p>
+      </div>
+
+      <h2>컴포넌트: 상위조직 단일 선택</h2>
+      <pre><code class="language-markup"><!--
+        <single-upper-org-picker ref="orgPicker" :pick-this="'A3456'"></single-upper-org-picker>
+        <button type="button" @click="getOrg">선택한 값 받아오기</button>
+        <p id="org-pick-result"></p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { multiPlacePicker } from '/examples/vue/component/multi-place-picker.js';
+      
+        createApp({
+          components: {
+            multiPlacePicker
+          },
+          methods: {
+            getOrg() {
+              document.querySelector('#org-pick-result').innerText = this.$refs.orgPicker.selected;
+            }
+          }
+        });
+      --></code></pre>
+      <div class="result">
+        <single-upper-org-picker ref="orgPicker" :pick-this="'A3456'"></single-upper-org-picker>
+        <h4>org-pick-result</h4>
+        <div>
+          <button type="button" @click="getOrg">선택한 값 받아오기</button>
+        </div>
+        <p id="org-pick-result"></p>
+      </div>
+
+      <h2>컴포넌트: 체크인장소 다중 선택</h2>
+      <pre><code class="language-markup"><!--
+        <multi-place-picker ref="placePicker" :pick-these="['A1234', 'B5678', 'B6789']"></multi-place-picker>
+        <button type="button" @click="getPlaces">선택한 값 받아오기</button>
+        <p id="place-pick-result"></p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { singleUpperOrgPicker } from '/examples/vue/component/single-upper-org-picker.js';
+
+        createApp({
+          components: {
+            singleUpperOrgPicker
+          },
+          methods: {
+            getPlaces() {
+              document.querySelector('#place-pick-result').innerText = this.$refs.placePicker.selected;
+            }
+          }
+        });
+      --></code></pre>
+      <div class="result">
+        <multi-place-picker ref="placePicker" :pick-these="['A1234', 'B5678', 'B6789']"></multi-place-picker>
+        <h4>place-pick-result</h4>
+        <div>
+          <button type="button" @click="getPlaces">선택한 값 받아오기</button>
+        </div>
+        <p id="place-pick-result"></p>
+      </div>
+
+      <h2>연습장#1</h2>
+      <div class="result">
+        <input id="dummy" placeholder="날눌러도열림" @click="openCustomTommy" />
+        <select id="tom-select-scratchpad1" placeholder="상위조직 없음">
+          <option value="">상위조직 없음</option>
+          <option value="A1234">A 조직</option>
+          <option value="A2345">　A-1 조직</option>
+          <option value="A3456">　　A-1-Z 조직</option>
+          <option value="B4567">B 조직</option>
+          <option value="B5678">　B-1 조직</option>
+          <option value="B6789">　B-2 조직</option>
+        </select>
+      </div>
+
+      <h2>연습장#2</h2>
+      <div class="result">
+        <input id="tom-select-scratchpad2" value="A1,B4" placeholder="뭐라도 하나 고르면 안보임"/>
+      </div>
+
+      <h2>연습장#3</h2>
+      <div class="result">
+        <input id="tom-select-scratchpad3" placeholder="계속 보이는 플레이스홀더"/>
+        <div>
+          <button type="button" @click="refreshAndSet('E2')">옵션 날리고 다시 추가하면서 'E2' set</button> 
+          <button type="button" @click="refreshAndSet('H4')">옵션 날리고 다시 추가하면서 'H4' set</button> 
+          <button type="button" @click="disableSomeOptions">A1, A3 비활성화</button> 
+          <button type="button" @click="reset">원래대로되돌리기</button> 
+        </div>
+      </div>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>여백의 미</p>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+      import { multiPlacePicker } from '/examples/vue/component/multi-place-picker.js';
+      import { singleUpperOrgPicker } from '/examples/vue/component/single-upper-org-picker.js';
+
+      window.vm = createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+          multiPlacePicker,
+          singleUpperOrgPicker
+        },
+        data() {
+          return {
+            pageTitle: "Tom Select",
+            docs: [
+              { title: "https://tom-select.js.org/", url: "https://tom-select.js.org/" },
+              { title: "https://github.com/orchidjs/tom-select", url: "https://github.com/orchidjs/tom-select" },
+            ],
+            message: "Hello Vue! ✌️",
+            sequence: 0,
+            tommy: {}
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        mounted() {
+          new TomSelect('#input-tags');
+          
+          new TomSelect('#select-beast', {
+            allowEmptyOption: true
+          });
+
+          let options = [
+            { value: "A1234", text: "A 조직" },
+            { value: "A2345", text: "A-1 조직" },
+            { value: "A3456", text: "A-1-Z 조직" },
+            { value: "B4567", text: "B 조직" },
+            { value: "B5678", text: "B-1 조직" },
+            { value: "B6789", text: "B-2 조직" }
+          ];
+          new TomSelect('#tom-select-single', {
+            options: options,
+            maxItems: 1,
+            closeAfterSelect: true,
+            hideSelected: true
+          });
+
+          new TomSelect('#tom-select-multi', {
+            options: options,
+            maxItems: 99,
+            hideSelected: false
+          });
+
+          window.sp1 = this.sp1 = new TomSelect('#tom-select-scratchpad1', {
+            plugins: ['checkbox_options'],
+            maxItems: 99,
+            hideSelected: false,
+          });
+
+          let options2 = [
+            { value: 'checkAllToggle', depth: 0, text: '전체선택' },
+            { value: "A1", depth: 0, text: "A 조직" },
+            { value: "A2", depth: 1, text: "A-1 조직" },
+            { value: "A3", depth: 2, text: "A-1-Z 조직" },
+            { value: "B4", depth: 0, text: "B 조직" },
+            { value: "B5", depth: 1, text: "B-1 조직" },
+            { value: "B6", depth: 1, text: "B-2 조직" },
+            { value: "C1", depth: 0, text: "A 조직" },
+            { value: "C2", depth: 1, text: "A-1 조직" },
+            { value: "C3", depth: 2, text: "A-1-Z 조직" },
+            { value: "D4", depth: 0, text: "B 조직" },
+            { value: "D5", depth: 1, text: "B-1 조직" },
+            { value: "D6", depth: 1, text: "B-2 조직" },
+            { value: "E1", depth: 0, text: "A 조직" },
+            { value: "E2", depth: 1, text: "A-1 조직" },
+            { value: "E3", depth: 2, text: "A-1-Z 조직" },
+            { value: "F4", depth: 0, text: "B 조직" },
+            { value: "F5", depth: 1, text: "B-1 조직" },
+            { value: "F6", depth: 1, text: "B-2 조직" },
+            { value: "G1", depth: 0, text: "A 조직" },
+            { value: "G2", depth: 1, text: "A-1 조직" },
+            { value: "G3", depth: 2, text: "A-1-Z 조직" },
+            { value: "H4", depth: 0, text: "B 조직" },
+            { value: "H5", depth: 1, text: "B-1 조직" },
+            { value: "H6", depth: 1, text: "B-2 조직" },
+          ];
+          this.options2 = options2;
+          window.sp2 = this.sp2 = new TomSelect('#tom-select-scratchpad2', {
+            plugins: ['checkbox_options'],
+            options: options2,
+            maxItems: 999,
+            hideSelected: false,
+            hidePlaceholder: true,
+            render: {
+              option: function(data, escape) {
+                let blanks = '';
+                for (let i = 0; i < data.depth; i++) {
+                  blanks += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                }
+                return '<div>' +
+                    '<span>' + blanks + '</span>' +
+                    '<span class="url">' + escape(data.text) + '</span>' +
+                  '</div>';
+              },
+            },
+            onInitialize() {
+              this.setValue(['A3', 'B6']);
+            },
+          });
+
+          this.sp3OriginalOptions = { ...options2 };
+          window.sp3 = this.sp3 = new TomSelect('#tom-select-scratchpad3', {
+            plugins: ['checkbox_options'],
+            options: options2,
+            maxItems: 999,
+            hideSelected: false,
+            hidePlaceholder: false,
+            render: {
+              option: function(data, escape) {
+                let blanks = '';
+                for (let i = 0; i < data.depth; i++) {
+                  blanks += '&nbsp;&nbsp;&nbsp;&nbsp;';
+                }
+                return '<div>' +
+                    '<span>' + blanks + '</span>' +
+                    '<span class="url">' + escape(data.text) + '</span>' +
+                  '</div>';
+              },
+            },
+            onInitialize() {
+              this.setValue(['A1', 'A3', 'B6']);
+            },
+          });
+
+          let config = {
+            create(input) {
+              return { value: 'option-' + input[0], text: 'Option ' + input[1] };
+            }
+          };
+          this.apiTommy = new TomSelect('#tom-select-apis', config);
+        },
+        methods: {
+          createItem() {
+            ++this.sequence;
+            this.apiTommy.createItem([this.sequence, this.sequence]);
+          },
+          clear() {
+            this.apiTommy.clear();
+          },
+          addOptions() {
+            ++this.sequence;
+            this.apiTommy.addOptions([
+              { value: 'option-' + this.sequence, text: 'Option ' + this.sequence }
+            ]);
+          },
+          getValue() {
+            document.querySelector('#result1').innerText = this.apiTommy.getValue();
+          },
+          setValue() {
+            this.apiTommy.setValue([ 
+              'option-1', 
+              'option-3', 
+              'option-7' 
+            ]);
+          },
+          clearOptions() {
+            this.apiTommy.clearOptions();
+          },
+          refreshAndSet(value) {
+            this.sp3.clearOptions();
+            this.sp3.clear();
+            this.sp3.addOptions(this.options2);
+            this.sp3.setValue(value);
+          },
+          openCustomTommy() {
+            this.customTommy.open();
+          },
+          getOrg() {
+            document.querySelector('#org-pick-result').innerText = this.$refs.orgPicker.selected;
+          },
+          getPlaces() {
+            document.querySelector('#place-pick-result').innerText = this.$refs.placePicker.selected;
+          },
+          disableSomeOptions() {
+            sp3.setValue(sp3.getValue().split(',').filter(ele => ele != 'A1' && ele != 'A3').join(','));
+            this.sp3.updateOption('A1', { disabled: true, value: "A1", depth: 0, text: "A 조직" });
+            this.sp3.updateOption('A3', { disabled: true, value: "A3", depth: 2, text: "A-1-Z 조직" });
+          },
+          reset() {
+            sp3.clearOptions();
+            sp3.addOptions(this.sp3OriginalOptions);
+            sp3.setValue([ 'A1', 'A3', 'B6' ]);
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

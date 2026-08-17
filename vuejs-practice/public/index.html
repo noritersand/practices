@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js Testbed</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <h2>Vue</h2>
+      <h4>공식 도움말</h4>
+      <ul>
+        <li v-for="item in vueDocs">
+          <a v-bind:href="item.url" v-bind:target="'_blank'">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>작성 예시</h4>
+      <ul>
+        <li v-for="item in vueExamples">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h2>Toast UI Grid</h2>
+      <h4>공식 도움말</h4>
+      <ul>
+        <li v-for="item in toastGridDocs">
+          <a v-bind:href="item.url" v-bind:target="'_blank'">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>작성 예시</h4>
+      <ul>
+        <li v-for="item in toastGridExamples">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h2>기타등등</h2>
+      <h4>Axios</h4>
+      <ul>
+        <li v-for="item in axiosExamples">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>JavaScript</h4>
+      <ul>
+        <li v-for="item in ecmascripts">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>Web APIs</h4>
+      <ul>
+        <li v-for="item in webApis">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>Thirdpaty Libraries</h4>
+      <ul>
+        <li v-for="item in thirdparties">
+          <a v-bind:href="item.url">{{item.title}}</a>
+        </li>
+      </ul>
+      <h4>Misc.</h4>
+      <ul>
+        <li v-for="item in misc">
+          <a v-bind:href="item.url" v-bind:target="'_blank'">{{item.title}}</a>
+        </li>
+      </ul>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      createApp({
+        data() {
+          return {
+            pageTitle: 'Index',
+            vueDocs: [
+              { title: "Vue.js: Guide", url: "https://vuejs.org/guide/introduction.html" },
+              { title: "Vue.js: Tutorial", url: "https://vuejs.org/tutorial/#step-1" },
+              { title: "Vue.js: Examples", url: "https://vuejs.org/examples/#hello-world" },
+              { title: "Vue.js: API Reference", url: "https://vuejs.org/api/" },
+            ],
+            vueExamples: [
+              // { title: "Vue3 Treeselect(안됨)", url: "/examples/vue/vue3-treeselect.html" },
+              { title: "연습장 #1", url: "/examples/vue/scratch-pad.html" },
+              { title: "연습장 #2", url: "/examples/vue/scratch-pad2.html" },
+              { title: "1. Vue 시작하기", url: "/examples/vue/1-vue-basic.html" },
+              { title: "1-1. Vue 3 Composition API setup() 스타일", url: "/examples/vue/1-1-vue-basic-composition-api-setup-function-style.html" },
+              // { title: "1-2. Vue 3 Composition API <script setup> 스타일", url: "/examples/vue/1-2-vue-basic-composition-api-script-setup-style.html" },
+              { title: "2. Template Syntax: Vue 표현식", url: "/examples/vue/2-template-syntax.html" },
+              { title: "3. 조건부 랜더링(공사중)", url: "/examples/vue/3-conditional-rendering.html" },
+              { title: "4. 폼 바인딩", url: "/examples/vue/4-form-binding.html" },
+              { title: "5. 이벤트 핸들링(공사중)", url: "/examples/vue/5-event-handling.html" },
+              { title: "6. Template Refs", url: "/examples/vue/6-template-refs.html" },
+              { title: "7. 컴포넌트: 리터럴(임베드) 템플릿", url: "/examples/vue/7-literal-template.html" },
+              { title: "8. 컴포넌트: 인라인 템플릿", url: "/examples/vue/8-inline-template.html" },
+              { title: "9. <template>이란 무엇인가", url: "/examples/vue/9-about-template-tag.html" },
+              { title: "10. Props(공사중)", url: "/examples/vue/10-props.html"},
+              { title: "11. 리스트 랜더링", url: "/examples/vue/11-list-rendering.html"},
+              { title: "12. Watchers(공사중)", url: "/examples/vue/12-watchers.html"},
+              // { title: "13. Lifecycle Hooks", url: "/examples/vue/13-lifecycle-hooks.html"},
+              // { title: "14. Computed Properties(공사중)", url: "/examples/vue/14-computed-properties.html"},
+              // { title: "15. Class and Style Bindings(공사중)", url: "/examples/vue/14-class-and-style-bindings.html"},
+              // { title: "20. Built-in Directives", url: "/examples/vue/20-built-in-directives.html"},
+              // { title: "21. Built-in Components", url: "/examples/vue/21-built-in-components.html"},
+              // { title: "22. Built-in Special Elements", url: "/examples/vue/22-built-in-special-elements.html"},
+              // { title: "23. Built-in Special Attributes", url: "/examples/vue/23-built-in-special-attributes.html"},
+              { title: "24. Event emitting", url: "/examples/vue/24-event-emitting.html"},
+              { title: "99. 팁 모음", url: "/examples/vue/99-vue-tips.html"},
+            ],
+            toastGridDocs: [
+              { title: "Toast Grid: 튜토리얼", url: "https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/README.md" },
+              { title: "Toast Grid: API", url: "https://nhn.github.io/tui.grid/latest/Grid" },
+              { title: "Toast Grid: Examples", url: "https://nhn.github.io/tui.grid/latest/tutorial-example01-basic" },
+            ],
+            toastGridExamples: [
+              { title: "특정 셀 클릭했는지 확인하기", url: "/examples/grid/probing-event-object.html" },
+              { title: "Scratch Pad", url: "/examples/grid/scratch-pad.html" },
+              { title: "Axios-Vue 테스트(에러남)", url: "/examples/grid/axios-with-vue.html" },
+              { title: "1. 기본", url: "/examples/grid/1-grid-basic.html" },
+              { title: "2. Complex columns", url: "/examples/grid/2-complex-columns.html" },
+              { title: "3. Custom Editor", url: "/examples/grid/3-custom-editor.html" },
+              { title: "4. Custom Renderer", url: "/examples/grid/4-custom-renderer.html" },
+              // { title: "5. Relation between columns", url: "/examples/grid/5-relation-between-columns.html" },
+              { title: "6. Attributes", url: "/examples/grid/6-attributes.html" },
+              { title: "7. Themes", url: "/examples/grid/7-themes.html" },
+              { title: "7-1. 커스텀 테마 만들어보기", url: "/examples/grid/7-1-custom-theme.html" },
+              // { title: "8. DatePicker", url: "/examples/grid/8-datepicker.html" },
+              // { title: "9. Summary", url: "/examples/grid/9-summary.html" },
+              { title: "10. DataSource", url: "/examples/grid/10-datasource.html" },
+              { title: "10-1. DataSource without Vue", url: "/examples/grid/10-1-datasource-without-vue.html" },
+              // { title: "11. Customizing Row headers", url: "/examples/grid/11-customizing-row-headers.html" },
+              // { title: "12. WhiteSpace", url: "/examples/grid/12-whitespace.html" },
+              // { title: "13. Internationalization (i18n)", url: "/examples/grid/13-internationalization-i18n.html" },
+              { title: "14. Tree", url: "/examples/grid/14-tree.html" },
+              // { title: "15. Custom Event", url: "/examples/grid/15-custom-event.html" },
+              // { title: "16. Frozen Columns", url: "/examples/grid/16-frozen-columns.html" },
+              // { title: "17. Dummy Rows", url: "/examples/grid/17-dummy-rows.html" },
+              // { title: "18. Column resize", url: "/examples/grid/18-column-resize.html" },
+              // { title: "19. Sort", url: "/examples/grid/19-sort.html" },
+              // { title: "20. Validation", url: "/examples/grid/20-validation.html" },
+              // { title: "21. Header Align", url: "/examples/grid/21-header-align.html" },
+              // { title: "22. Setting Width, Height", url: "/examples/grid/22-setting-width-height.html" },
+              // { title: "23. Client Pagination", url: "/examples/grid/23-client-pagination.html" },
+              // { title: "24. Filter", url: "/examples/grid/24-filter.html" },
+              // { title: "25. Large Data Performance", url: "/examples/grid/25-large-data-performance.html" },
+              // { title: "26. Infinite scroll", url: "/examples/grid/26-infinite-scroll.html" },
+              // { title: "27. Export", url: "/examples/grid/27-export.html" },
+              // { title: "28. Drag and Drop", url: "/examples/grid/28-drag-and-drop.html" },
+              // { title: "29. Dynamic rowSpan", url: "/examples/grid/29-dynamic-rowspan.html" },
+              { title: "98. columnOptions", url: "/examples/grid/98-columnOptions.html" },
+            ],
+            axiosExamples: [
+              { title: "기본 사용법", url: "/examples/axios/axios-basic.html" },
+              { title: "헤더 추가하기", url: "/examples/axios/add-headers.html" },
+              { title: "Config 기본값 설정하기", url: "/examples/axios/global-config.html" },
+              { title: "인터셉터", url: "/examples/axios/interceptors.html" },
+            ],
+            ecmascripts: [
+              { title: "Modules", url: "/examples/javascript/module/module-test.html" }
+            ],
+            webApis: [
+              { title: "TODO", url: "" }
+            ],
+            thirdparties: [
+              { title: "Tom Select", url: "/examples/thirdparty/tom-select.html" },
+              { title: "Air Datepicker", url: "/examples/thirdparty/air-datepicker.html" }
+            ],
+            misc: [
+              { title: "가이드 페이지 작성 방법", url: "/examples/how-to-write-this-pages.html" }
+            ]
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

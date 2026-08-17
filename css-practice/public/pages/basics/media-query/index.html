@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>CSS media queries</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>CSS media queries</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>
+        브라우저 뷰포트 너비나 높이 같은 사용자 설정에 따라 스타일 적용 여부를 결정하는 at
+        규칙(at-rules) 중 하나.
+      </p>
+    </section>
+
+    <section>
+      <h2>미디어 기능 media features</h2>
+
+      <h3>width</h3>
+      <p>뷰포트의 너비에 따라 적용 여부를 결정한다.</p>
+      <pre><code class="language-js"><!--
+          @media (width <= 600px) {
+              .target {
+                  background-color: green;
+              }
+          }
+          @media (600px < width <= 1200px) {
+              .target {
+                  background-color: yellow;
+              }
+          }
+          @media (1200px < width <= 1800px) {
+              .target {
+                  background-color: red;
+              }
+          }
+          @media (1800px < width <= 2400px) {
+              .target {
+                  background-color: black;
+              }
+          }
+          --></code></pre>
+      <div class="code-result">
+        <div
+          class="target"
+          style="height: 100px; width: 200px; border: 1px black solid; color: white"
+        >
+          브라우저의 너비를 조정해보자
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

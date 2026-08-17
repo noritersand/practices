@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <style type="text/css">
+      .red.tui-grid-cell {
+        background-color: #f8e0e0;
+      }
+      .blue.tui-grid-cell {
+        background-color: #cef6f5;
+      }
+    </style>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <p><code class="language-js">_attributes.rowSpan</code>은 버려졌고 대신 <code class="language-js">rowSpan</code> 옵션을 쓰라고 합니다.</p>
+      <div class="description">The option <code>"_attribute.rowSpan"</code> is deprecated. Please use rowSpan option of column. Follow example: <a href="http://nhn.github.io/tui.grid/latest/tutorial-example29-dynamic-row-span">http://nhn.github.io/tui.grid/latest/tutorial-example29-dynamic-row-span</a></div><br>
+      <div id="grid"></div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "6. Attributes",
+          };
+        },
+      }).mount("#app");
+
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", release: "2016.03.26", type: "Deluxe", genre: "Pop" },
+        {
+          name: "X",
+          artist: "Ed Sheeran",
+          release: "2014.06.24",
+          type: "Deluxe",
+          genre: "Pop",
+          _attributes: {
+            disabled: true, // A current row is disabled
+          },
+        },
+        {
+          name: "Moves Like Jagger",
+          release: "2011.08.08",
+          artist: "Maroon5",
+          type: "Single",
+          genre: "Pop,Rock",
+          _attributes: {
+            checkDisabled: true, // A checkbox is disabled only
+          },
+        },
+        {
+          name: "A Head Full Of Dreams",
+          artist: "Coldplay",
+          release: "2015.12.04",
+          type: "Deluxe",
+          genre: "Rock",
+          _attributes: {
+            checked: true, // A checkbox is already checked while rendering
+            className: {
+              // Add class name on a row
+              row: ["red"], // red 클래스의 배경색은 11라인에 정의돼 있음
+            },
+          },
+        },
+        {
+          name: "19",
+          artist: "Adele",
+          release: "2008.01.27",
+          type: "EP",
+          genre: "Pop,R&B",
+          _attributes: {
+            rowSpan: {
+              // Merge rows
+              artist: 3,
+              genre: 2,
+            },
+          },
+        },
+        {
+          name: "21",
+          artist: "Adele",
+          release: "2011.01.21",
+          type: "Deluxe",
+          genre: "Pop,R&B",
+        },
+        {
+          name: "25",
+          artist: "Adele",
+          release: "2015.11.20",
+          type: "EP",
+          genre: "Pop",
+          _attributes: {
+            className: {
+              // Add class name on each columns
+              column: {
+                type: ["blue"], // blue 클래스의 배경색은 14라인에 정의돼 있음
+                genre: ["blue"],
+              },
+            },
+          },
+        },
+      ];
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        rowHeaders: ["checkbox"],
+        columns: [
+          { header: "Name", name: "name" },
+          { header: "Artist", name: "artist" },
+          { header: "Type", name: "type" },
+          { header: "Release", name: "release" },
+          { header: "Genre", name: "genre" },
+        ],
+      });
+    </script>
+  </body>
+</html>

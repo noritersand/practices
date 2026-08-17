@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-template-areas</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-template-areas</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-template-areas는 grid area에 이름을 부여하고, 2차원 그리드 판을 눈으로 그려보듯 직관적으로 배치할 수 있게 해주는 속성이다.</p>
+      <p>이 프로퍼티를 사용하면 줄(grid line) 번호를 계산할 필요 없이, 시각적으로 레이아웃 구조를 설정할 수 있어서 매우 편리하다.</p>
+      <p>그리드 컨테이너에 지정하며, 기본값은 none이다.</p>
+      <div class="important">
+        <p>ℹ️ grid area는 여러 grid cell로 구성된 영역이다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword value */
+      grid-template-areas: none;
+
+      /* <string> values */
+      grid-template-areas: "a b";
+      grid-template-areas:
+        "a b ."
+        "a c d";
+
+      /* Global values */
+      grid-template-areas: inherit;
+      grid-template-areas: initial;
+      grid-template-areas: revert;
+      grid-template-areas: revert-layer;
+      grid-template-areas: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>문자열로 grid area의 이름을 지정한다. 이름으로 쓰일 값을 토큰이라 하는 모양. <code class="language-css">.</code> 토큰은 이름 없는 빈 grid cell을 의미한다.</p>
+
+      <div class="important">
+        <p>⚠️ grid-area 없이 grid-template-areas만 단독으로 쓰면, 셀이 하나로 합쳐지지 않고 기본 규칙(Auto-placement)에 따라 아이템이 셀을 하나씩 차례대로 차지한다.</p>
+        <p>아래에 보이는 병합된 예시들은 다음 grid-area 설정이 적용된 상태임</p>
+        <pre><code class="language-css"><!--
+        .container .item-header {
+          grid-area: header;
+        }
+        .container .item-side {
+          grid-area: side;
+          background-color: lightcoral;
+        }
+        .container .item-main {
+          grid-area: main;
+          background-color: lightskyblue;
+        }
+        --></code></pre>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      grid-template-areas:
+        'header header header'
+        'side main main'
+        'side main main'
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="container ex01">
+          <div class="item item-header">header</div>
+          <div class="item item-side">side</div>
+          <div class="item item-main">main</div>
+        </div>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      grid-template-areas:
+        'side side header'
+        'side side main'
+        'side side main'
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="container ex02">
+          <div class="item item-header">header</div>
+          <div class="item item-side">side</div>
+          <div class="item item-main">main</div>
+        </div>
+      </div>
+
+      <pre><code class="language-sass"><!--
+      grid-template-areas:
+        'header header .'
+        'header header .'
+        '. side main'
+      --></code></pre>
+
+      <div class="code-result">
+        <div class="container ex03">
+          <div class="item item-header">header</div>
+          <div class="item item-side">side</div>
+          <div class="item item-main">main</div>
+        </div>
+      </div>
+
+      <h2>문법 오류</h2>
+      <p>grid-template-areas의 각 문자열은 한 행을 의미하며, 모든 행은 같은 개수의 토큰을 가져야 한다.</p>
+      <pre><code class="language-sass"><!--
+      //❌ 첫 번째 행은 토큰이 3개, 두 번째 행은 토큰이 2개로 다름
+      grid-template-areas:
+        'header header header'
+        'side main'
+      --></code></pre>
+      <p>같은 이름으로 연결된 grid area는 반드시 직사각형이어야 하며, L자나 T자 형태처럼 끊어진 영역은 유효하지 않다.</p>
+      <pre><code class="language-sass"><!--
+      //❌ 직사각형이 아님
+      grid-template-areas:
+        'a a .'
+        'a . .'
+        '. . .'
+      --></code></pre>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>
+
+

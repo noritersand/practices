@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-template-rows</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-template-rows</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-template-rows는 행의 개수와 높이를 설정할 때 사용한다.</p>
+      <p>그리드 컨테이너에 지정하며, 기본값은 none이다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword value */
+      grid-template-rows: none;
+
+      /* <track-list> values */
+      grid-template-rows: 100px 1fr;
+      grid-template-rows: [line-name] 100px;
+      grid-template-rows: [line-name1] 100px [line-name2 line-name3];
+      grid-template-rows: minmax(100px, 1fr);
+      grid-template-rows: fit-content(40%);
+      grid-template-rows: repeat(3, 200px);
+      grid-template-rows: subgrid;
+      grid-template-rows: masonry;
+
+      /* <auto-track-list> values */
+      grid-template-rows: 200px repeat(auto-fill, 100px) 300px;
+      grid-template-rows:
+        minmax(100px, max-content)
+        repeat(auto-fill, 200px) 20%;
+      grid-template-rows:
+        [line-name1] 100px [line-name2]
+        repeat(auto-fit, [line-name3 line-name4] 300px)
+        100px;
+      grid-template-rows:
+        [line-name1 line-name2] 100px
+        repeat(auto-fit, [line-name1] 300px) [line-name3];
+
+      /* Global values */
+      grid-template-rows: inherit;
+      grid-template-rows: initial;
+      grid-template-rows: revert;
+      grid-template-rows: revert-layer;
+      grid-template-rows: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>grid-template-rows는 특수한 경우가 아니면 보통 grid-template-columns와 같이 사용한다.</p>
+      <p>grid-template-rows만 단독으로 지정하면 명시적 행의 개수와 높이만 정해지고, 열의 크기는 지정하지 않은 상태가 된다. 자동 배치 과정에서 필요한 암시적 열의 너비는 기본적으로 auto로
+        처리된다.</p>
+      <h3>px</h3>
+      <p>행의 높이를 고정 수치로 지정하는 방식.</p>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: 40px 80px 40px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex01">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>fr</h3>
+      <p>행 트랙이 차지할 높이를 비율로 지정하는 방식</p>
+      <p>fr은 Grid Layout에서만 쓰이는 특수한 단위로, 그리드 컨테이너 내부에서 고정 크기를 가진 요소들을 제외한 남은 공간(leftover space) 중 grid track이 차지할
+        비율을 나타내는 값이다.</p>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: 1fr 2fr 3fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex02">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>repeat()</h3>
+      <p>동일한 높이의 행을 반복 지정할 때 사용한다. 첫 번째 인수는 반복 횟수, 두 번째 인수는 반복할 행 높이를 의미한다.</p>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: repeat(2, 80px)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex03">
+          <div class="item">1</div>
+          <div class="item">2</div>
+        </div>
+      </div>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: repeat(3, 1fr)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex04">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>auto</h3>
+      <p>auto는 콘텐츠 크기를 기준으로 행의 높이를 자동으로 결정한다. 컨테이너에 여유 공간이 있으면 정렬/트랙 크기 계산에 따라 늘어날 수 있다.</p>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: 50px auto 50px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex05">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>max-content</h3>
+      <p>행(Row) 트랙의 높이를 해당 행에 포함된 자식 엘리먼트들의 최대 콘텐츠 높이(<code class="language-css">max-content</code>)에 맞춰 설정한다. 내부 콘텐츠의
+        높이에 맞춰 트랙 높이가 결정된다.</p>
+      <p>max-content는 자식 엘리먼트 콘텐츠의 고유 크기(Intrinsic Size)를 최우선으로 보장하기 때문에 컨테이너가 작으면 오버플로우가 발생할 수 있다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-rows: max-content 50px
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-template-rows-max-content">
+          <div class="item">Row 1 (max-content)<br>Line 2<br>Line 3<br>Line 4</div>
+          <div class="item">Row 2 (50px)<br>Line 2</div>
+        </div>
+      </div>
+
+      <h3>min-content</h3>
+      <p>1개의 열 구조에서 행(Row) 트랙의 높이를 최소 콘텐츠 높이(<code class="language-css">min-content</code>)에 맞춘다. 줄바꿈된 콘텐츠가 차지하는 수직
+        높이만큼만 트랙이 딱 맞춰서 축소된다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-rows: min-content min-content
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-template-rows-min-content">
+          <div class="item">
+            Row 1 (min-content)<br>
+            Content height is strictly fitted to this text block.
+          </div>
+          <div class="item">Row 2 (150px Fixed Track)</div>
+        </div>
+      </div>
+
+      <h3>minmax()</h3>
+      <p>행의 최소 높이와 최대 높이를 범위로 지정한다. 첫 번째 인수가 최소 높이, 두 번째 인수가 최대 높이다.</p>
+      <p>이 값을 지정하면 컨테이너의 높이 변화에 따라 행 트랙의 높이가 지정한 범위 안에서 커지거나 줄어든다.</p>
+      <pre><code class="language-sass"><!--
+      min-height: 200px
+      grid-template-rows: minmax(10px, 30px) minmax(50px, 80px) minmax(10px, 100px)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex06">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+        </div>
+      </div>
+
+      <h3>auto-fill과 auto-fit</h3>
+      <p><code class="language-css">grid-template-rows</code>에서 <code class="language-css">repeat()</code> 함수와 함께 사용할 때 명시적인 컨테이너 높이(<code class="language-css">height</code>)에 맞춰 행(Row)의 개수를 자동으로 계산하여 배치한다.</p>
+      <p>수평 축과 달리 행 배치에서는 줄바꿈(Wrap)에 의해 아이템 위치가 가로/세로로 전환되는 반응형 행 변화는 일어나지 않는다. 대신 **컨테이너 높이에 따라 생성되는 트랙의 개수와 남는 수직 공간의 분배 방식**에 차이가 생긴다.</p>
+      <ul>
+        <li><code class="language-css">auto-fill</code>: 아이템이 채워지고 공간이 남더라도, 기준 높이에 맞춰 <strong>빈 행 트랙(Gaps)을 계속 유지하고 생성</strong>한다.</li>
+        <li><code class="language-css">auto-fit</code>: 남는 빈 행 트랙들을 <strong>0px로 축소(Collapse)시키고 기존 아이템 트랙을 확장</strong>하여 컨테이너 수직 공간을 가득 채운다.</li>
+      </ul>
+
+      <p><code class="language-css">minmax(50px, 1fr)</code>처럼 <code class="language-css">1fr</code>과 조합하면 컨테이너 높이에 맞춰 행 트랙이 계산된다. 남는 수직 여백이 발생할 경우 이를 아이템들이 나눠 가가지며 컨테이너 높이를 가득 채운다.</p>
+      <pre><code class="language-sass"><!--
+      // auto-fill: 남는 수직 공간에 빈 행 트랙을 유지하여 1fr이 빈 트랙에도 나뉘어 적용됨
+      grid-template-rows: repeat(auto-fill, minmax(50px, 1fr))
+
+      // auto-fit: 빈 행 트랙을 0px로 접어 기존 아이템들이 수직 전체 공간을 가득 채움
+      grid-template-rows: repeat(auto-fit, minmax(50px, 1fr))
+      --></code></pre>
+      <div class="code-result">
+        <p><strong>auto-fill (repeat(auto-fill, minmax(50px, 1fr)))</strong></p>
+        <div class="container ex-template-rows-auto-fill-minmax h-300">
+          <div class="item">Row 1</div>
+          <div class="item">Row 2</div>
+        </div>
+
+        <p><strong>auto-fit (repeat(auto-fit, minmax(50px, 1fr)))</strong></p>
+        <div class="container ex-template-rows-auto-fit-minmax h-300">
+          <div class="item">Row 1</div>
+          <div class="item">Row 2</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>
+
+
+

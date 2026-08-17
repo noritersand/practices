@@ -1,0 +1,107 @@
+@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  font: 20px bold
+  color: white
+  padding: 10px
+
+  &.small-text
+    font-size: 14px
+
+  &.large-text
+    font-size: 32px
+
+  &.vertical
+    writing-mode: vertical-rl
+
+  &.wide-item
+    width: 220px
+    white-space: nowrap
+
+  // Basic keywords
+  &.ex-auto
+    justify-self: auto
+
+  &.ex-normal
+    justify-self: normal
+
+  &.ex-stretch
+    justify-self: stretch
+
+  // Positional alignment
+  &.ex-center
+    justify-self: center
+
+  &.ex-start
+    justify-self: start
+
+  &.ex-end
+    justify-self: end
+
+  &.ex-flex-start
+    justify-self: flex-start
+
+  &.ex-flex-end
+    justify-self: flex-end
+
+  &.ex-self-start
+    justify-self: self-start
+
+  &.ex-self-end
+    justify-self: self-end
+
+  &.ex-left
+    justify-self: left
+
+  &.ex-right
+    justify-self: right
+
+  // Baseline alignment
+  &.ex-baseline
+    justify-self: baseline
+
+  &.ex-first-baseline
+    justify-self: first baseline
+
+  &.ex-last-baseline
+    justify-self: last baseline
+
+  // Overflow alignment
+  &.ex-safe-center
+    justify-self: safe center
+
+  &.ex-unsafe-center
+    justify-self: unsafe center
+
+.container
+  background-color: moccasin
+  gap: 10px
+  width: 100%
+  min-height: 120px
+  margin-bottom: 15px
+
+  &.block-layout
+    display: block
+
+  &.grid-layout
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+
+  &.grid-layout-3col
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+
+  &.flex-layout
+    display: flex
+
+  &.justify-center
+    justify-items: center
+
+  // Overflow 테스트용 오버플로우 박스
+  &.overflow-box
+    display: grid
+    grid-template-columns: 120px
+    width: 120px
+    overflow-x: auto
+    padding: 10px

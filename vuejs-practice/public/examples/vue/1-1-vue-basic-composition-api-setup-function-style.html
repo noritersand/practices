@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>작성 예시</h2>
+      <pre><code class="language-markup"><!--
+        <p>{{message}}</p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        import { createApp, ref } from '/lib/vue/vue.esm-browser.js';
+
+        createApp({
+          setup() {
+            const message = ref("Hello Vue! ✌️");
+
+            return {
+              message
+            };
+          }
+        }).mount('#app');
+      --></code></pre>
+      <div class="result">
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp, onMounted, ref } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      let app = createApp({
+        setup() {
+          const pageTitle = ref("Vue 3 Composition API setup() 스타일");
+          const message = ref("Hello Vue! ✌️");
+          const docs = ref([
+            { title: "Vue.js 공식 메뉴얼: API 스타일", url: "https://ko.vuejs.org/guide/introduction.html#api-styles" }
+          ]);
+
+          document.title += `: ${pageTitle.value}`;
+
+          return {
+            pageTitle,
+            message,
+            docs
+          };
+        }
+      })
+      app.component('backToHome', backToHome)
+          .component('tableOfContents', tableOfContents);
+      app.mount('#app');
+    </script>
+  </body>
+</html>

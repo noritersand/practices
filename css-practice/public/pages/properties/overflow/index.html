@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>overflow</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>overflow</h1>
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>부모 요소보다 큰 콘텐츠를 어떻게 처리할 지 지정하는 속성. 세부 속성으로
+        <code class="language-js">overflow-x</code>와
+        <code class="language-js">overflow-y</code>가 있다.</p>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>visible</h3>
+      <p>기본값. 넘치는 콘텐츠를 그대로 노출한다.</p>
+      <div
+        style="
+              overflow: visible;
+              background-color: #dfd6d6;
+              height: 150px;
+              width: 250px;
+              margin: 0 0 20px 0;
+            "
+      >
+        <div style="background-color: red; opacity: 0.3; height: 200px; margin: 10px"></div>
+      </div>
+
+      <h3 style="margin-top: 80px">hidden</h3>
+      <p>넘치는 영역은 부모 요소에 맞춰 잘라낸다</p>
+      <div
+        style="
+              overflow: hidden;
+              background-color: #dfd6d6;
+              height: 150px;
+              width: 250px;
+              margin: 0 0 20px 0;
+            "
+      >
+        <div style="background-color: red; opacity: 0.3; height: 200px; margin: 10px"></div>
+      </div>
+      <h3>scroll</h3>
+      <p>콘텐츠를 자르되 나머지를 볼 수 있도록 스크롤을 생성한다.</p>
+      <div
+        style="
+              overflow: scroll;
+              background-color: #dfd6d6;
+              height: 150px;
+              width: 250px;
+              margin: 0 0 20px 0;
+            "
+      >
+        <div style="background-color: red; opacity: 0.3; height: 200px; margin: 10px"></div>
+      </div>
+      <h3>auto</h3>
+      <p>사용자 에이전트(웹에선 브라우저)가 결정하게 한다.</p>
+      <div
+        style="
+              overflow: auto;
+              background-color: #dfd6d6;
+              height: 150px;
+              width: 250px;
+              margin: 0 0 20px 0;
+            "
+      >
+        <div style="background-color: red; opacity: 0.3; height: 200px; margin: 10px"></div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

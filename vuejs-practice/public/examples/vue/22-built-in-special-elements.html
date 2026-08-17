@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>소제목1</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="null">날 눌러줘요</button>
+          <button type="button" @click="null">나도</button>
+        </div>
+        <p>{{message}}</p>
+      </div>
+
+      <h2>소제목2</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="null">날 눌러줘요</button>
+          <button type="button" @click="null">나도</button>
+        </div>
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        data() {
+          return {
+            pageTitle: "Built-in Special Elements",
+            docs: [
+              { title: "어디어디", url: "어디어디" },
+              { title: "어디어디", url: "어디어디" },
+              { title: "어디어디", url: "어디어디" },
+            ],
+            message: "Hello Vue! ✌️"
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

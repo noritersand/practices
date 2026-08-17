@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <div id="grid"></div>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      
+      createApp({
+        data() {
+          return { 
+            pageTitle: "Scratch Pad" 
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        }
+      }).mount("#app");
+
+      let gridData = [
+        { posNm: "사원" },
+        { posNm: "오원" },
+        { posNm: "육원" },
+        { posNm: "칠원" },
+        { posNm: "대리" },
+        { posNm: "중리" },
+        { posNm: "소리" },
+        { posNm: "부장" },
+        { posNm: "부부장" },
+        { posNm: "부부젤라장" },
+        { posNm: "본부장" },
+        { posNm: "안본부장" },
+        { posNm: "이사" },
+        { posNm: "삼사" },
+        { posNm: "오사" },
+        { posNm: "사장" },
+        { posNm: "오장" },
+      ];
+
+      class CustomTextRenderer {
+        constructor(props) {
+          const el = document.createElement('div');
+          el.className = 'tui-grid-cell-content';
+          if (props.value === '사원') {
+            props.value = '4444원'
+          }
+          el.innerText = props.value;
+          this.el = el;
+        }
+        getElement() {
+          return this.el;
+        }
+      }
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: gridData,
+        scrollX: true,
+        scrollY: true,
+        // width: '100%',
+        bodyHeight: 400,
+        rowHeaders: ["rowNum"],
+        formatter(str) {
+          console.log(str);
+        },
+        // data: gridData,
+        columns: [
+          {
+            header: "직무/직급명",
+            name: "posNm",
+            align: "center",
+            minWidth: 1000,
+            renderer: {
+              type: CustomTextRenderer,
+              options: {
+                min: 1,
+                max: 5
+              }
+            }
+          }
+        ]
+        // showDummyRows: true,
+      });
+      // tui.Grid.applyTheme('striped');
+    </script>
+  </body>
+</html>

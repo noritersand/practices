@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>Fetch</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Fetch</h1>
+    <p></p>
+    <button type="button" class="buttons" onclick="fn1()">then() 패턴</button>
+    <button type="button" class="buttons" onclick="fn2()">await 패턴</button>
+    <div class="code-result">
+      <h4>first-then</h4>
+      <p id="first-then"></p>
+    </div>
+    <div class="code-result">
+      <h4>second-then</h4>
+      <p id="second-then"></p>
+    </div>
+    <script>
+      let defaultOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        },
+        body: null
+      };
+
+      function fn1() {
+        let options = {
+          ...defaultOptions,
+          body: JSON.stringify({
+            foo: 'bar',
+            numeric: 1234567890
+          })
+        };
+        fetch('//localhost:8900/return-my-request-body.data', options).then(resp => {
+          console.log('first then:', resp); // Response { type: "basic", url: "http://localhost:8900/return-my-request-body.data", redirected: false, status: 200, ok: true, statusText: "OK", headers: Headers(7), body: ReadableStream, bodyUsed: false }
+          document.querySelector('#first-then').innerHTML = resp;
+          resp.text().then(text => {
+            console.log('second then', text); // {"foo":"bar","numeric":1234567890}
+            document.querySelector('#second-then').innerHTML = text;
+          });
+        });
+      }
+
+      // fn1();
+
+      async function fn2() {
+        let options = {
+          ...defaultOptions,
+          body: JSON.stringify({
+            user: 'waldo'
+          })
+        };
+        let response = await fetch('//localhost:8900/return-my-request-body.data', options);
+        document.querySelector('#first-then').innerHTML = response;
+        let json = await response.json();
+        document.querySelector('#second-then').innerHTML = JSON.stringify(json);
+      }
+
+      // fn2();
+    </script>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

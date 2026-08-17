@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>margin, padding</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>margin, padding</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>마진은 외부 여백, 패딩은 내부 여백이다(들여쓰기와 흡사함).</p>
+    </section>
+
+    <section>
+      <h2>Margin</h2>
+      <p>
+        마진은 요소가 다른 요소가 인접하기까지의 간격을 나타낸다. 마진값이 있다고 해서 요소의
+        크기가 커지는 것은 아님. 간격만 확보되면 되는거라서 만약 다른 요소의 마진값이 같은
+        방향으로 존재할 땐 상쇄(혹은 병합)된다. 그래서 요소 검사를 해보면 두 요소의 전체 높이가
+        210px이다.
+      </p>
+      <div style="background-color: #dfd6d6">
+        <div class="box" style="background-color: rgb(88, 153, 88); margin-bottom: 10px">
+          높이가 100px인 div
+        </div>
+        <div class="box" style="background-color: rgb(159, 170, 63); margin-top: 10px">
+          높이가 100px인 div
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Padding</h2>
+      <p>
+        패딩은 요소 내부 컨텐츠와의 간격이며, 요소의 크기가 패딩값만큼 커지는 효과가 있다.
+        내부간격이므로 마진처럼 다른 요소의 패딩과 병합되는 일은 없다. 요소 검사를 해보면 마진과
+        다르게 이쪽은 220px.
+      </p>
+      <div style="background-color: #dfd6d6">
+        <div class="box" style="background-color: rgb(65, 79, 161); padding-bottom: 10px">
+          높이가 100px인 div
+        </div>
+        <div class="box" style="background-color: rgb(153, 60, 72); padding-top: 10px">
+          높이가 100px인 div
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

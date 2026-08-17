@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <title>list tag test</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>list tag test</h1>
+
+    <section>
+      <div id="toc" class="mrgn-btm"></div>
+    </section>
+
+    <h2>목록 태그 안에서 또 다른 목록이 시작될 때</h2>
+    <div class="important">
+      <p>
+        &lt;ul&gt; 내부의 또 다른 &lt;ul&gt;은 &lt;li&gt; 없이 바로 &lt;ul&gt;로 시작하는 게
+        맞음
+      </p>
+    </div>
+
+    <pre><code class="language-html"><!--
+    <ul>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <ul>
+        <li><a href="http://google.com">google</a><br /></li>
+      </ul>
+    </ul>
+    --></code></pre>
+    <ul>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <ul>
+        <li><a href="http://google.com">google</a><br /></li>
+      </ul>
+    </ul>
+    <div class="important">
+      <p>안그러면 아래처럼 나옴</p>
+    </div>
+    <pre><code class="language-html"><!--
+    <ul>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <li>
+        <ul>
+          <li><a href="http://google.com">google</a><br /></li>
+        </ul>
+      </li>
+    </ul>
+    --></code></pre>
+    <ul>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <li>
+        <ul>
+          <li><a href="http://google.com">google</a><br /></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="important">
+      <p>&lt;ol&gt;도 마찬가지다. 아래를 보자</p>
+    </div>
+    <ol>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <ol>
+        <li><a href="http://google.com">google</a><br /></li>
+      </ol>
+    </ol>
+    <ol>
+      <li><a href="http://daum.net">daum</a><br /></li>
+      <li><a href="http://naver.com">naver</a><br /></li>
+      <li>
+        <ol>
+          <li><a href="http://google.com">google</a><br /></li>
+        </ol>
+      </li>
+    </ol>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+
+</html>

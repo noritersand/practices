@@ -1,0 +1,36 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  min-height: 200px
+
+  &.ex01
+    grid-template-areas: 'header header header' 'side main main' 'side main main'
+
+  &.ex02
+    grid-template-areas: 'side side header' 'side side main' 'side side main'
+
+  &.ex03
+    grid-template-areas: 'header header .' 'header header .' '. side main'
+
+  .item-header
+    grid-area: header
+
+  .item-side
+    grid-area: side
+    background-color: lightcoral
+
+  .item-main
+    grid-area: main
+    background-color: lightskyblue

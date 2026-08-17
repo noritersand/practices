@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid는 모든 명시적(explicit) 및 암시적(implicit) 그리드 속성을 설정하는 단축 프로퍼티(shorthand property)다.</p>
+      <p>grid-template-areas, grid-template-rows, grid-template-columns, grid-auto-flow, grid-auto-rows,
+        grid-auto-columns를 한 번에 설정할 수 있다.</p>
+
+      <p>구문 해석 형태는 세 가지로 나뉜다.</p>
+      <pre><code class="language-sass"><!--
+      // 1. grid-template
+      grid: grid-template-rows / grid-template-columns
+      grid: grid-template-areas
+
+      // 2. explicit rows / implicit columns
+      grid: grid-template-rows / auto-flow
+      grid: grid-template-rows / auto-flow dense
+      grid: grid-template-rows / auto-flow grid-auto-columns
+      grid: grid-template-rows / auto-flow dense grid-auto-columns
+
+      // 3. implicit rows / explicit columns
+      grid: auto-flow / grid-template-columns
+      grid: auto-flow dense / grid-template-columns
+      grid: auto-flow grid-auto-rows / grid-template-columns
+      grid: auto-flow dense grid-auto-rows / grid-template-columns
+      --></code></pre>
+      <div class="important">
+        <p>ℹ️ auto-flow는 grid 단축 프로퍼티(Shorthand) 전용 구문 키워드다. 브라우저가 grid 단축 프로퍼티를 해석할 때 슬래시(/)
+          기준으로 어느 쪽을 자동 흐름(Implicit Grid)으로 처리할지 구분하기 위한 식별자로 쓰인다.</p>
+        <p>슬래시 오른쪽(열 영역)에 auto-flow가 있는 경우 열 방향으로 자동 확장하라는 의미다.</p>
+        <p>반대로, 슬래시 왼쪽(행 영역)에 auto-flow가 있는 경우 행 방향으로 자동 확장하라는 의미가 된다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* <'grid-template'> values */
+      grid: none;
+      grid: "a" 100px "b" 1fr;
+      grid: [line-name1] "a" 100px [line-name2];
+      grid: "a" 200px "b" min-content;
+      grid: "a" minmax(100px, max-content) "b" 20%;
+      grid: 100px / 200px;
+      grid: minmax(400px, min-content) / repeat(auto-fill, 50px);
+
+      /* <'grid-template-rows'> /
+         [ auto-flow && dense? ] <'grid-auto-columns'>? values */
+      grid: 200px / auto-flow;
+      grid: 30% / auto-flow dense;
+      grid: repeat(3, 200px) / auto-flow 300px;
+      grid: [line1] minmax(20em, max-content) / auto-flow dense 40%;
+
+      /* [ auto-flow && dense? ] <'grid-auto-rows'>? /
+         <'grid-template-columns'> values */
+      grid: auto-flow / 200px;
+      grid: auto-flow dense / 30%;
+      grid: auto-flow 300px / repeat(3, 200px);
+      grid: auto-flow dense 40% / [line1] minmax(20em, max-content);
+
+      /* Global values */
+      grid: inherit;
+      grid: initial;
+      grid: revert;
+      grid: revert-layer;
+      grid: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>grid-template</h3>
+      <p>명시적 행과 열만 설정한다. (grid-template-rows / grid-template-columns)</p>
+      <pre><code class="language-sass"><!--
+      grid: repeat(3, 1fr) / repeat(3, 1fr)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-grid-template">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>explicit rows / implicit columns</h3>
+      <p>행의 크기를 명시하고, 열은 auto-flow로 자동 생성하며 암시적 열 크기를 지정한다.</p>
+      <pre><code class="language-sass"><!--
+      grid: repeat(3, 1fr) / auto-flow 1fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-explicit-rows">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>implicit rows / explicit columns</h3>
+      <p>열의 크기를 명시하고, 행은 auto-flow로 자동 생성하며 암시적 행 크기를 지정한다.</p>
+      <pre><code class="language-sass"><!--
+      grid: auto-flow 1fr / repeat(3, 1fr)
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-implicit-rows">
+          <div class="item">Item 1</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

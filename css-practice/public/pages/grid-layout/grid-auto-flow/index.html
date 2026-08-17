@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-auto-flow</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-auto-flow</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-auto-flow는 Grid 컨테이너에서 배치 위치가 명시적으로 지정되지 않은 자동 배치 아이템(auto-placed items)을 어떤
+        방향으로, 어떤 흐름 규칙에 따라 배치할지 결정하는 프로퍼티다.</p>
+      <p>이 프로퍼티는 grid-column이나 grid-row를 지정하지 않은 아이템들의 배치 축(행 또는 열)을 설정하거나, 빈 공간을 채우는
+        재배치 메커니즘을 활성화할 때 사용한다.</p>
+      <p>그리드 컨테이너에 지정한다. 기본값은 row</p>
+    </section>
+
+    <section>
+      <h2>특이사항</h2>
+      <h4>implicit track의 영향</h4>
+      <p>grid-auto-flow: column 설정 시 열 방향으로 트랙이 계속 확장되므로, 명시적 트랙 크기 설정을 원한다면 grid-template-columns 대신
+          grid-auto-columns를 함께 정의해야 크기를 제어할 수 있다.</p>
+    </section>
+
+
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword values */
+      grid-auto-flow: row;
+      grid-auto-flow: column;
+      grid-auto-flow: dense;
+      grid-auto-flow: row dense;
+      grid-auto-flow: column dense;
+
+      /* Global values */
+      grid-auto-flow: inherit;
+      grid-auto-flow: initial;
+      grid-auto-flow: revert;
+      grid-auto-flow: revert-layer;
+      grid-auto-flow: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <p>✅ 배치 효과를 명확히 확인하기 위해 특정 아이템에 크기를 지정하였음</p>
+      <pre><code class="language-sass"><!--
+      .item-wide
+        grid-column: span 2
+        background-color: darkslategrey
+      --></code></pre>
+
+      <h3>row</h3>
+      <p>기본값. 아이템을 행(가로) 방향으로 차례대로 채워 나간다. 한 행이 차면 다음 행으로 이동한다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(3, 1fr)
+      grid-template-rows: repeat(3, 1fr)
+      grid-auto-flow: row
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-row">
+          <div class="item item-wide">Item 1 (span 2)</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>dense (row dense)</h3>
+      <p>Item 2가 2행으로 밀려나면서 1행 우측에 생긴 빈 공간(1칸)을 채우기 위해, 뒤에 나오는 1칸짜리 Item 3을 1행으로 끌어올린다.</p>
+      <div class="important">
+        <h4>dense 키워드의 시각적 순서 변경(Visual Reordering)</h4>
+        <p>dense 알고리즘을 사용하면 DOM 트리의 실제 HTML 요소 순서와 화면에 렌더링되는 시각적 순서가 달라진다. 이는
+          키보드 탭(Tab) 이동 순서나 스크린 리더의 접근성(Accessibility) 읽기 순서에 영향을 줄 수 있으므로 접근성이 중요한 UI 구성 시 주의해야 한다.</p>
+      </div>
+      <div class="code-result">
+        <div class="container ex-dense">
+          <div class="item item-wide">Item 1 (span 2)</div>
+          <div class="item item-wide">Item 2 (span 2)</div>
+          <!-- Item 3이 1행의 남은 1칸으로 올라가 배치됨 -->
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>column</h3>
+      <p>아이템을 열(세로) 방향으로 차례대로 채워 나간다. 한 열이 차면 다음 열로 이동한다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(3, 1fr)
+      grid-template-rows: repeat(3, 1fr)
+      grid-auto-flow: column
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-column">
+          <div class="item item-wide">Item 1 (span 2)</div>
+          <div class="item">Item 2</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+      <h3>column dense</h3>
+      <p>열 방향으로 배치하면서 발생한 세로 방향의 빈 공간에 후순위 아이템을 채워 넣는다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template-columns: repeat(3, 1fr)
+      grid-template-rows: repeat(3, 1fr)
+      grid-auto-flow: column dense
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex-column-dense">
+          <div class="item">Item 1</div>
+          <div class="item item-wide">Item 2 (span 2)</div>
+          <div class="item">Item 3</div>
+          <div class="item">Item 4</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

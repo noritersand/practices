@@ -1,0 +1,29 @@
+# jetbrains
+.idea
+
+# Build and Release Folders
+node_modules
+package-lock.json
+
+# Yarn
+yarn.lock
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
+
+# ETC.
+.vscode
+
+# from Node packages
+.nyc_output
+
+# upload directory
+upload
+
+# jsdoc default output
+out
+jsdoc-out
+
+# test frameworks
+/__tests__/jest/coverage
+.tap

@@ -1,0 +1,88 @@
+@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+  // 정렬에 따른 여백 차이를 시각적으로 확인하기 위해 고정 크기를 설정
+  width: 120px
+  height: 60px
+
+  &.font-small
+    font-size: 14px
+
+  &.font-large
+    font-size: 28px
+
+  // place-self 적용 대상 엘리먼트 구분을 위한 예시용 추가 스타일
+  &.item-target
+    background-color: darkcyan
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 200px
+  grid-template-columns: repeat(2, 1fr)
+
+  // 플렉스 레이아웃 예시 전용
+  &.container-flex
+    display: flex
+
+// Positional alignment 개별 자식 엘리먼트 정렬 예시들
+.item.ex-auto-center
+  place-self: auto center
+
+.item.ex-normal-start
+  place-self: normal start
+
+.item.ex-center-normal
+  place-self: center normal
+
+.item.ex-start-auto
+  place-self: start auto
+
+.item.ex-end-normal
+  place-self: end normal
+
+.item.ex-self-start-auto
+  place-self: self-start auto
+
+.item.ex-self-end-normal
+  place-self: self-end normal
+
+// 플렉스 레이아웃에서의 작동 확인을 위한 설정
+.item.ex-flex-start-auto
+  place-self: flex-start auto
+
+.item.ex-flex-end-normal
+  place-self: flex-end normal
+
+.item.ex-anchor-center
+  place-self: anchor-center
+
+// Baseline alignment 예시들 (높이가 고정되어 있으면 stretch나 baseline이 정상 확인되지 않으므로 height 해제)
+.item.ex-baseline-normal,
+.item.ex-first-baseline-auto,
+.item.ex-last-baseline-normal
+  height: auto
+
+.item.ex-baseline-normal
+  place-self: baseline normal
+
+.item.ex-first-baseline-auto
+  place-self: first baseline auto
+
+.item.ex-last-baseline-normal
+  place-self: last baseline normal
+
+// stretch 작동을 확인하기 위해 높이 고정 해제
+.item.ex-stretch-auto
+  height: auto
+  place-self: stretch auto

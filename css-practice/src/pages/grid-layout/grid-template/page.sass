@@ -1,0 +1,37 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  min-height: 200px
+
+  &.ex01
+    grid-template: none
+    //grid-template: 'a a a' 'b b b'
+
+  &.ex02
+    grid-template: 50px 100px 150px / 2fr 1fr
+
+  &.ex03
+    grid-template: 'a a a' 'b b b'
+
+  &.ex04
+    grid-template: 'header header header' 20% 'left main right' auto
+
+  &.ex05
+    grid-template: 'header header' 2fr 'sidebar main' 1.5fr 'footer footer' 1fr / 2fr 1fr
+
+  &.ex06
+    grid-template-rows: minmax(10px, 30px) minmax(50px, 80px) minmax(10px, 100px)
+
+

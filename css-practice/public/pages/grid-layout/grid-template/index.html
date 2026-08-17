@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>grid-template</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>grid-template</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>grid-template은 grid-template-areas, grid-template-rows, grid-template-columns를 한 번에 설정하는 단축 프로퍼티다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template: grid-template-areas grid-template-rows / grid-template-columns
+      --></code></pre>
+      <p>슬래시를 기준으로 좌측이 grid-template-areas와 grid-template-rows, 우측이 grid-template-columns로 해석된다.</p>
+      <p>그리드 컨테이너에 지정하며, 기본값은 none이다.</p>
+      <p>프로퍼티별 특성은 각 페이지를 확인할 것.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <pre><code class="language-css"><!--
+      /* Keyword value */
+      grid-template: none;
+
+      /* grid-template-rows / grid-template-columns values */
+      grid-template: 100px 1fr / 50px 1fr;
+      grid-template: auto 1fr / auto 1fr auto;
+      grid-template: [line-name] 100px / [column-name1] 30% [column-name2] 70%;
+      grid-template: fit-content(100px) / fit-content(40%);
+
+      /* grid-template-areas grid-template-rows / grid-template-columns values */
+      grid-template:
+        "a a a"
+        "b b b";
+      grid-template:
+        "a a a" 20%
+        "b b b" auto;
+      grid-template:
+        [header-top] "a a a" [header-bottom]
+        [main-top] "b b b" 1fr [main-bottom]
+        / auto 1fr auto;
+
+      /* Global values */
+      grid-template: inherit;
+      grid-template: initial;
+      grid-template: revert;
+      grid-template: revert-layer;
+      grid-template: unset;
+      --></code></pre>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>Keyword value</h3>
+      <p>none이나 전역 상속 제어값(inherit, revert, ...)을 지정하는 형태다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template: none
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex01">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+
+      <h3>grid-template-rows / grid-template-columns values</h3>
+      <p>슬래시 왼쪽이 grid-template-rows, 슬래시 오른쪽이 grid-template-columns로 해석된다.</p>
+      <pre><code class="language-sass"><!--
+      grid-template: 50px 100px 150px / 2fr 1fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex02">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+
+      <h3>grid-template-areas grid-template-rows / grid-template-columns values</h3>
+      <p>grid-template-rows와 grid-template-columns 둘 다 생략하거나, grid-template-columns만 생략할 수 있다.</p>
+      <p>다음 셋 중 하나로 해석된다:</p>
+      <ul>
+        <li>grid-template-areas</li>
+        <li>grid-template-areas grid-template-rows</li>
+        <li>grid-template-areas grid-template-rows / grid-template-column</li>
+      </ul>
+      <pre><code class="language-sass"><!--
+      grid-template:
+        'a a a'
+        'b b b'
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex03">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+      <pre><code class="language-sass"><!--
+      grid-template:
+        'header header header' 20%
+        'left main right' auto
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex04">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+      <pre><code class="language-sass"><!--
+      grid-template:
+        'header header' 2fr
+        'sidebar main' 1.5fr
+        'footer footer' 1fr
+        / 2fr 1fr
+      --></code></pre>
+      <div class="code-result">
+        <div class="container ex05">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+          <div class="item">5</div>
+          <div class="item">6</div>
+        </div>
+      </div>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>
+

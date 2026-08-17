@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>이미지 상대 경로 테스트: parent</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>이미지 상대 경로 테스트: parent</h1>
+    <p>my location is <span id="loc" style="color: blue; font-weight: bold"></span></p>
+    <h4>Page-relative</h4>
+    <img src="images/1.png" alt="안보이쥬?" />
+    <h4>Context-relative</h4>
+    <img src="/static/images/1.png" alt="잘보이쥬" />
+    <h4>Protocol-relative</h4>
+    <img src="//localhost:8800/static/images/2.jpg" alt="잘보이쥬" />
+    <div style="margin-top: 5px">
+      <iframe
+        style="width: 85%; height: 450px; border: 2px solid black"
+        src="https://127.0.0.1:8443/pages/html/relative-path/relative-path-test2.html"
+        title="relative-path-test2"
+      ></iframe>
+    </div>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+<script>
+  document.querySelector('#loc').innerText = location.href;
+</script>
+</body>
+</html>

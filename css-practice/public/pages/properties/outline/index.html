@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>outline</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>outline</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>outline은 엘리먼트의 외곽선을 설정하는 속성이다. border와 달리 외곽선을 위한 별도의 공간을 차지하지 않아 엘리먼트의 크기에 영향을 주지 않는다.</p>
+      <p>ℹ️ border는 외곽선의 두께만큼 엘리먼트의 크기가 커진다.</p>
+    </section>
+
+    <section>
+      <h2>Syntax</h2>
+      <div>
+            <pre><code class="language-css"><!--
+            /* style */
+            outline: solid;
+
+            /* style | color */
+            outline: dashed #f66;
+
+            /* width | style */
+            outline: thick inset;
+
+            /* width | style | color*/
+            outline: 3px solid green;
+
+            /* Global values */
+            outline: inherit;
+            outline: initial;
+            outline: revert;
+            outline: revert-layer;
+            outline: unset;
+            --></code></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>normal</h3>
+      <p>기본값. </p>
+      <div class="code-result">여기는 테스트 결과</div>
+
+      <h3>some-value2</h3>
+      <div class="code-result">여기는 테스트 결과</div>
+
+      <h2>예시 #1: 박스 모델들의 레이아웃 확인하기</h2>
+      <p>외곽선을 위한 공간을 별도로 차지하지 않는다는 점을 활용해서, 화면 개발 시 디버깅 용도로 쓸 수 있다.</p>
+      <pre><code class="language-css"><!--
+          header, nav, main, article, section, aside, footer, div, dt, dd, dl {
+            outline: red solid 1px;
+          }
+          --></code></pre>
+
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

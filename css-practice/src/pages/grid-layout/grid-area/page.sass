@@ -1,0 +1,73 @@
+﻿@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  min-height: 200px
+
+  &.ex01
+    grid-template: 'header header' 1fr 'side main' 2fr 'footer footer' 1fr / 1fr 3fr
+
+    .item-header
+      grid-area: header
+
+    .item-side
+      grid-area: side
+
+    .item-main
+      grid-area: main
+
+    .item-footer
+      grid-area: footer
+
+  &.ex02
+    grid-template-areas: 'header header' 'sidebar main' 'footer footer'
+    grid-template-rows: 1fr 2fr 1fr
+    grid-template-columns: 1fr 3fr
+
+    .item-custom
+      grid-area: sidebar / header
+      /* grid-area: sidebar / header / sidebar / header 와 동일 */
+
+  &.ex03
+    grid-template-rows: [header-start] 1fr [header-end main-start] 2fr [main-end]
+    grid-template-columns: [full-start] 1fr [main-start] 3fr [full-end main-end]
+
+    .item-header
+      grid-area: header-start / full-start
+      /* grid-area: header-start / full-start / header-start / full-start 와 동일 */
+
+    .item-main
+      grid-area: main-start / main-start
+      /* grid-area: main-start / main-start / main-start / main-start 와 동일 */
+
+
+  &.ex04
+    grid-template-rows: [item-line] 50px [item-line] 50px [item-line] 50px [item-line] 50px [item-line] 50px
+    grid-template-columns: 1fr
+
+    .item-target
+      /* 'item-line'이라는 이름을 가진 행 라인 중 4번째 라인에서 시작 */
+      grid-area: 4 item-line
+      /* grid-area: 4 item-line / auto / auto / auto 와 동일 */
+
+
+  &.ex05
+    grid-template-rows: repeat(5, 50px)
+    grid-template-columns: repeat(3, 1fr)
+
+    .item-span
+      /* 행 방향으로 3개 트랙만큼 영역을 차지함 */
+      grid-area: span 3
+      /* grid-area: span 3 / auto / auto / auto 와 동일 */
+

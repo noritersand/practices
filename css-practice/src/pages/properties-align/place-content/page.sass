@@ -1,0 +1,97 @@
+@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+  // place-content 작동 및 정렬 여백을 시각적으로 확인하기 위한 크기 설정
+  width: 120px
+  height: 60px
+
+  &.font-small
+    font-size: 14px
+
+  &.font-large
+    font-size: 28px
+
+  &.width-auto
+    width: auto
+
+  &.height-auto
+    height: auto
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 200px
+  grid-template-columns: repeat(2, 80px)
+
+  // Positional alignment 예시들
+  &.ex-center-start
+    place-content: center start
+
+  &.ex-start-center
+    place-content: start center
+
+  &.ex-end-left
+    place-content: end left
+
+  // 플렉스 레이아웃에서의 작동 확인을 위한 설정 (두 줄 이상 배치)
+  &.ex-flex-start-center,
+  &.ex-flex-end-center
+    display: flex
+    flex-wrap: wrap
+    .item
+      width: 45%
+
+  &.ex-flex-start-center
+    place-content: flex-start center
+
+  &.ex-flex-end-center
+    place-content: flex-end center
+
+  // Baseline alignment 예시들 (높이가 자동이어야 베이스라인 정렬 확인 가능)
+  &.ex-baseline-center,
+  &.ex-first-baseline-space-evenly,
+  &.ex-last-baseline-right
+    .item
+      height: auto
+
+  &.ex-baseline-center
+    place-content: baseline center
+
+  &.ex-first-baseline-space-evenly
+    place-content: first baseline space-evenly
+
+  &.ex-last-baseline-right
+    place-content: last baseline right
+
+  // Distributed alignment 예시들 (수직 정렬 확인을 위한 행 크기 및 고정 높이 적용)
+  &.ex-space-between-space-evenly,
+  &.ex-space-around-space-evenly,
+  &.ex-space-evenly-stretch,
+  &.ex-stretch-space-evenly
+    grid-template-rows: repeat(2, 40px)
+    .item
+      height: 100%
+
+  &.ex-space-between-space-evenly
+    place-content: space-between space-evenly
+
+  &.ex-space-around-space-evenly
+    place-content: space-around space-evenly
+
+  &.ex-space-evenly-stretch
+    grid-template-columns: repeat(2, auto)
+    place-content: space-evenly stretch
+
+  &.ex-stretch-space-evenly
+    grid-template-rows: repeat(2, auto)
+    place-content: stretch space-evenly

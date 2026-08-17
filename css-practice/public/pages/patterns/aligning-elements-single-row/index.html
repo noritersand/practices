@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>CSS: Aligning Elements Single Row</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+  <style>
+      .black-box {
+          border: 2px solid black;
+          margin: 3px;
+          padding: 3px;
+      }
+  </style>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <h1>Aligning Elements Single Row</h1>
+
+    <section>
+      <h4>참고 문서</h4>
+      <ul>
+        <li><a href="어디" target="_blank">어디</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>블록 태그를 한 줄에 나열하는 방법에 대한 글</p>
+    </section>
+
+    <section>
+      <h2>display: flex (Flexbox)</h2>
+      <pre><code class="language-markup"><!--
+        <style>
+        .black-box {
+          border: 2px solid black;
+          margin: 3px;
+          padding: 3px;
+        }
+        </style>
+        <div style="display: flex;">
+          <div style="width: 50%" class="black-box">DIV</div>
+          <div style="width: 50%" class="black-box">DIV</div>
+        </div>
+      --></code></pre>
+      <div style="display: flex">
+        <div style="width: 50%" class="black-box">DIV</div>
+        <div style="width: 50%" class="black-box">DIV</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>display: inline</h2>
+      <pre><code class="language-markup"><!--
+        <div>
+          <div style="display: inline; width: 50%;" class="black-box">DIV</div>
+          <div style="display: inline; width: 50%;" class="black-box">DIV</div>
+        </div>
+      --></code></pre>
+      <div>
+        <div style="display: inline; width: 50%" class="black-box">DIV</div>
+        <div style="display: inline; width: 50%" class="black-box">DIV</div>
+      </div>
+      <div class="important">
+        <p>
+          inline 속성이 지정된 태그는 문장 내의 단어처럼 취급되기 때문에 width와 height 속성은
+          적용되지 않는다.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>display: inline-block</h2>
+      <pre><code class="language-markup"><!--
+        <div>
+          <div style="display: inline-block; width: 50%" class="black-box">DIV</div>
+          <div style="display: inline-block; width: 50%" class="black-box">DIV</div>
+        </div>
+        <div>
+          <div style="display: inline-block; width: 47%" class="black-box">DIV</div>
+          <div style="display: inline-block; width: 47%" class="black-box">DIV</div>
+        </div>
+      --></code></pre>
+      <div class="black-box">
+        <div style="display: inline-block; width: 50%" class="black-box">DIV</div>
+        <div style="display: inline-block; width: 50%" class="black-box">DIV</div>
+      </div>
+      <div class="black-box">
+        <div style="display: inline-block; width: 47%" class="black-box">DIV</div>
+        <div style="display: inline-block; width: 47%" class="black-box">DIV</div>
+      </div>
+      <div class="important">
+        <p>
+          inlick-block 속성이 지정된 태그들이 나열되어 있을 때, 해당 요소들의 전체 너비가 100%를
+          넘으면 공백 등을 기준으로 줄바꿈 처리한다.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>display: grid (Grid Layout)</h2>
+      <pre><code class="language-markup"><!--
+      <div style="display: grid; grid-template-columns: auto auto;">
+        <div style="width: 50%" class="black-box">DIV</div>
+        <div style="width: 50%" class="black-box">DIV</div>
+      </div>
+      --></code></pre>
+      <div style="display: grid; grid-template-columns: auto auto; gap: 5px">
+        <div style="width: 50%" class="black-box">DIV</div>
+        <div style="width: 50%" class="black-box">DIV</div>
+      </div>
+    </section>
+  </article>
+  <footer>
+    <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+  </footer>
+</main>
+</body>
+</html>

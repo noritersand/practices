@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script type="module" src="/static/lib/qr-scanner/qr-scanner.min.js"></script>
+  <script type="module">
+    import QrScanner from '/static/lib/qr-scanner/qr-scanner.min.js';
+
+    window.QrScanner = QrScanner;
+  </script>
+  <script src="/static/lib/axios/axios.min.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Source Map test</h1>
+    <div class="important">
+      <p>
+        콘솔을 열고 <code>QrScanner</code>를 입력하고 소스 따라가기를 해보면 min 파일이 아닌 웬
+        타입스크립트 파일이 보임.
+      </p>
+      <p>Axios는 개발자 도구 디버거나 소스 탭에서 Webpack 항목으로 나타난다.</p>
+    </div>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

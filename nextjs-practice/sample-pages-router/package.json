@@ -1,0 +1,46 @@
+{
+  "name": "default-scaffold-pages-router",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.4",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-image": "^42.0.1",
+    "@ckeditor/ckeditor5-react": "^8.0.0",
+    "@tinymce/tinymce-react": "^5.1.1",
+    "@types/draft-js": "^0.11.18",
+    "@types/react-draft-wysiwyg": "^1.13.8",
+    "@xeger/quill-image-actions": "^0.7.2",
+    "@xeger/quill-image-formats": "^0.7.2",
+    "ckeditor5": "^42.0.1",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "html-to-draftjs": "^1.5.0",
+    "install": "^0.13.0",
+    "next": "14.1.4",
+    "npm": "^10.8.2",
+    "prettier": "^3.3.3",
+    "quill-image-resize-module": "^3.0.0",
+    "quill-image-resize-module-react": "^3.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-quill": "^2.0.0",
+    "react-quilljs": "^2.0.3",
+    "slate": "^0.103.0",
+    "slate-react": "^0.107.1"
+  },
+  "packageManager": "yarn@4.5.1"
+}

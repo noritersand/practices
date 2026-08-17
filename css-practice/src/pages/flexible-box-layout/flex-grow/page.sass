@@ -1,0 +1,38 @@
+﻿@use '../../../styles/global'
+
+.container
+  display: flex
+  gap: 10px
+
+.item
+  height: 50px
+  background-color: #629d3c
+  display: flex
+  justify-content: center
+  align-items: center
+  color: white
+  font-size: 34px
+
+.item.nth1
+  flex-grow: 1
+
+.item.nth2
+  flex-grow: 1.5
+
+.item.nth3
+  flex-grow: 3
+
+.item.nth4
+  flex-grow: 4.5
+
+.item.zero
+  flex-grow: 0
+
+.item.with-width1
+  width: 50px
+  flex-grow: 1
+
+.item.with-width2
+  width: 500px
+  flex-grow: 1
+

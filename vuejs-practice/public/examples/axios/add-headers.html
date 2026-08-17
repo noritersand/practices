@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+      <p><a href="https://axios-http.com/kr/docs/intro">공식 도움말 페이지</a></p>
+      <p><a href="https://axios-http.com/docs/api_intro">Axios API 목록</a></p>
+
+      <h2>인스턴스를 생성하며 기본값으로 헤더 설정</h2>
+      <pre><code class="language-js"><!--
+        const instance = axios.create({
+          baseURL: '/return-headers.data',
+          timeout: 1000,
+          headers: {'X-Custom-Header': 'foobar'},
+          params: {
+            qwer: 1234
+          }
+        });
+        let response = await instance.get();
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn1">1번: 뿡</button></div>
+        <h4>result1</h4>
+        <p id="result1"></p>
+      </div>
+
+      <h2>메서드 호출할 때 config 객체 전달: GET</h2>
+      <pre><code class="language-js"><!--
+        let config = {
+          headers: {
+            'X-Custom-Header': 'foo',
+            'X-Custom-Header2': 'bar'
+          }
+        }
+        let response = await axios.get('/return-headers.data?a=1', config);
+      --></code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn2">2번: 빵</button></div>
+        <h4>result2</h4>
+        <p id="result2"></p>
+      </div>
+      
+      <h2>메서드 호출할 때 config 객체 전달: POST</h2>
+      
+      <pre><code class="language-js"><!--
+        let config = {
+          headers: {
+            'X-Custom-Header': 'foo',
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        }
+        let params = {
+          something: this.something
+        };
+        let response = await axios.post('/get-my-request-body.data', params, config);
+      --></code></pre>
+      <div class="result">
+        <form name="submitMe">
+          <input type="text" readonly v-model="something" />
+          <div><button type="button" @click="fn3">3번: 삥</button></div>
+        </form>
+        <h4>result3</h4>
+        <p id="result3"></p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      // Vue는 안봐도 됨
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "헤더 추가하기",
+            something: '썸띵'
+          };
+        },
+        methods: {
+          async fn1() {
+            const instance = axios.create({
+              baseURL: '/return-headers-and-params.data',
+              timeout: 1000,
+              headers: {'X-Custom-Header': 'foobar'},
+              params: {
+                qwer: 1234
+              }
+            });
+            let response = await instance.get();
+            document.querySelector('#result1').innerText = JSON.stringify(response.data);
+          },
+          async fn2() {
+            let config = {
+              headers: {
+                'X-Custom-Header': 'foo',
+                'X-Custom-Header2': 'bar'
+              }
+            }
+            let response = await axios.get('/return-headers.data?a=1', config);
+            document.querySelector('#result2').innerText = JSON.stringify(response.data);
+          },
+          async fn3() {
+            let config = {
+              headers: {
+                'X-Custom-Header': 'foo',
+                'Content-Type': 'application/json; charset=UTF-8'
+              }
+            }
+            let params = {
+              something: this.something
+            };
+            let response = await axios.post('/get-my-request-body.data', params, config);
+            document.querySelector('#result3').innerText = JSON.stringify(response.data);
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+
+      <!-- <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template> -->
+      <table-of-contents></table-of-contents>
+
+      <div id="grid"></div> 
+
+      <h2>data 초기화 하기</h2>
+      <p><code class="language-js">data</code>의 모든 프로퍼티를 한 방에 초기화하는 방법입니다. 항목이 한 두개면 그냥 하겠지만 뭐 한 20개 정도 되면... 😱</p>
+      <p>기존에는 아래처럼 작성했습니다:</p>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            prop1: '원래값으로돌아갔지롱',
+            prop2: '붑밥붑밥붑밥바'
+          };
+        }
+      --></code></pre>
+      <p>이제부턴 이렇게 안씁니다. 대신 아래처럼 초기화 된 새 객체를 반환하는 별도의 함수를 정의합니다:</p>
+      <pre><code class="language-js"><!--
+        function initialState() {
+          return {
+            prop1: '원래값으로돌아갔지롱',
+            prop2: '붑밥붑밥붑밥바'
+          };
+        }
+      --></code></pre>
+      <p>그리고 이렇게 주입합니다:</p>
+      <pre><code class="language-js"><!--
+        data() {
+          return initialState();
+        }
+      --></code></pre>
+      <p>특정 시점에 작동하는 초기화 메서드를 정의합니다:</p>
+      <pre><code class="language-js"><!--
+        methods: {
+          changeState() {
+            this.prop1 = '여긴어디';
+            this.prop2 = '나는누구';
+          },
+          resetState() {
+            Object.assign(this.$data, initialState());
+          }
+        }
+      --></code></pre>
+      <p>잘 되는지 보죠.</p>
+      <pre><code class="language-markup"><!--
+        <p>{{prop1}}</p>
+        <p>{{prop2}}</p>
+      --></code></pre>
+      <div class="result">
+        <div>
+          <button type="button" @click="changeState">날 먼저 눌러요</button>
+          <button type="button" @click="resetState">초기화</button>
+        </div>
+        <p>{{prop1}}</p>
+        <p>{{prop2}}</p>
+      </div>
+      <div class="description">
+        <p><code class="language-js">Object.assign()</code>을 사용하는 이유는 $data를 할당 연산자로 재할당 할 수 없기 때문입니다.</p>
+        <p>*$data: <code class="language-js">data</code> 옵션을 반환하는 컴포넌트 인스턴스</p>
+      </div>
+
+      <h2>연습장</h2>
+      <pre><code class="language-markup"><!--
+        <마크업/>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        코드
+      --></code></pre>
+      <div class="result">
+        <p>{{message}}</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+      
+      function initialState() {
+        return {
+          // docs: [
+            // { title: "어디어디", url: "어디어디" },
+            // { title: "어디어디", url: "어디어디" },
+            // { title: "어디어디", url: "어디어디" },
+          // ],
+          pageTitle: "99. 팁 모음",
+          message: "Hello Vue! ✌️",
+          prop1: '원래값으로돌아갔지롱',
+          prop2: '붑밥붑밥붑밥바'
+        }
+      }
+
+      window.vm = createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        data() {
+          return initialState();
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        methods: {
+          changeState() {
+            this.prop1 = '여긴어디';
+            this.prop2 = '나는누구';
+          },
+          resetState() {
+            Object.assign(this.$data, initialState());
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+// COPYME에 적용될 파일
+
+@use '../../../styles/global'
+
+.modal-overlay
+  display: none
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: rgba(0, 0, 0, 0.5)
+  z-index: 1000
+  justify-content: center
+  align-items: center
+
+  &.is-active
+    display: flex
+
+.modal-container
+  background-color: #fff
+  width: 90%
+  max-width: 500px
+  // [핵심] 화면 높이의 80%로 제한 후 Flex 구성
+  max-height: 80vh
+  display: flex
+  flex-direction: column
+  border-radius: 8px
+  padding: 20px
+
+.modal-body
+  // [핵심] 본문이 길어지면 내부에서 스크롤 생성
+  overflow-y: auto
+
+  // 모바일/터치 디바이스 스크롤 체이닝 방지
+  overscroll-behavior: contain
+
+// iOS Safari 스크롤 방지용 보완
+body.modal-open
+  overflow: hidden
+  touch-action: none
+  // 터치 디바이스 스크롤 제어

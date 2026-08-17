@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>Dynamic Module Loading</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+  <script src="/static/lib/prism/prism.js"></script>
+  <script type="module" src="./dynamic-module-loading.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Dynamic Module Loading</h1>
+
+    <div class="code-wrapper">
+      <pre><code class="language-js"><!--
+      // dynamic-module-loading.js
+
+      let btn = document.querySelector('button#btn');
+
+      btn.addEventListener('click', () => {
+        import('./messages.js').then((module) => {
+          console.log('module.default.wassup:', module.default.wassup);
+          console.log('module.foo.bar:', module.foo.bar);
+        });
+      });
+      --></code></pre>
+      <pre><code class="language-js"><!--
+      // messages.js
+
+      export default {
+        wassup: 'wassssssssssssup'
+      };
+
+      export const foo = {
+        bar: 'Hello world!'
+      };
+    --></code></pre>
+    </div>
+
+    <div class="code-result">
+      <button class="margin-vertical" class="buttons" type="button" id="btn">
+        개발자 도구 열고 눌러욧
+      </button>
+    </div>
+    <p>버튼을 누르면 <code class="language-js">dynamic-module-loading.js</code>를 불러옴</p>
+    <p>
+      모듈 파일을 한 번 불러왔으면 <code class="language-js">import()</code> 스크립트를 실행해도
+      같은 파일을 다시 불러오지는 않는다. 하지만 스크립트는 실행됨
+    </p>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

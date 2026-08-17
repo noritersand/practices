@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>CSS: Coordinate systems</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>CSS: Coordinate systems</h1>
+    <p>좌표 관련</p>
+    <h4>도움말</h4>
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSSOM_view/Coordinate_systems"
+        >https://developer.mozilla.org/en-US/docs/Web/CSS/CSSOM_view/Coordinate_systems</a
+        >
+      </li>
+    </ul>
+
+    <h2>Basic usage</h2>
+    <div id="parent"></div>
+    <div class="important">ㅁㄴㅇ</div>
+
+    <pre>
+  DOM (Document Object Model)에서 요소의 좌표를 얻기 위해서는 주로 다음과 같은 JavaScript 메서드와 프로퍼티를 사용할 수 있습니다.
+
+  ### `getBoundingClientRect()`
+
+  `getBoundingClientRect()` 메서드는 요소의 크기와 뷰포트에 대한 상대적인 위치 정보를 제공합니다.
+
+  ```javascript
+  const element = document.querySelector("#myElement");
+  const rect = element.getBoundingClientRect();
+  const x = rect.left;
+  const y = rect.top;
+  ```
+
+  이 메서드는 요소의 실제 위치를 픽셀 단위로 반환하므로, 스크롤의 영향을 받습니다.
+
+  ### `offsetTop`와 `offsetLeft`
+
+  `offsetTop`과 `offsetLeft` 프로퍼티는 특정 요소의 상위 요소 (`offsetParent`)에 대한 상대적인 위치를 반환합니다.
+
+  ```javascript
+  const element = document.querySelector("#myElement");
+  const x = element.offsetLeft;
+  const y = element.offsetTop;
+  ```
+
+  이 값은 정수로만 반환되며, 스크롤의 영향을 받지 않습니다.
+
+  ### `pageX`, `pageY`
+
+  이 프로퍼티들은 마우스 이벤트가 발생한 위치의 X, Y 좌표를 나타냅니다.
+
+  ```javascript
+  document.addEventListener("click", function(event) {
+    const x = event.pageX;
+    const y = event.pageY;
+  });
+  ```
+
+  이 방법은 사용자의 마우스 움직임에 따른 좌표를 얻을 때 유용합니다.
+
+  각 메서드와 프로퍼티는 다른 목적과 상황에 따라 유용하므로, 필요에 따라 적절한 것을 선택하면 됩니다.
+
+  ---
+
+  위는 AI 답변임. 
+  
+  MouseEvent 객체가 제공하는 좌표 정보는 이렇게 많음
+
+  - MouseEvent.offsetX
+  - MouseEvent.offsetY
+  - MouseEvent.clientX
+  - MouseEvent.clientY
+  - MouseEvent.pageX
+  - MouseEvent.pageY
+  - MouseEvent.screenX
+  - MouseEvent.screenY
+  - MouseEvent.movementX
+  - MouseEvent.movementY
+  - MouseEvent.layerX(비표준)
+  - MouseEvent.layerY(비표준)
+
+  그리고 좌표와 위치 관련 CSS 프로퍼티로
+
+  - position
+  - top
+  - right
+  - bottom
+  - left
+
+  가 있으니 확인할 것.
+  </pre
+  >
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

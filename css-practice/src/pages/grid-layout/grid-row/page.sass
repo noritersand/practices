@@ -1,0 +1,74 @@
+﻿@use '../../../styles/global'
+
+img
+  max-width: 800px
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 30px bold
+  color: white
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 600px
+  min-height: 200px
+
+  &.ex01
+    grid-template: 1fr 1fr 1fr / 1fr 1fr
+
+    .item1
+      grid-row: 1 / 4
+
+  &.ex02
+    grid-template: 1fr 1fr 1fr / 1fr 1fr
+
+    .item1
+      grid-row: -1 / -3
+
+  &.ex03
+    grid-template: 1fr 1fr 1fr / 1fr 1fr
+
+    .item3
+      grid-row: 2 / span 3
+
+  &.ex04
+    grid-template: 1fr 1fr 1fr / 1fr 1fr
+
+    .item1
+      grid-row: 2
+
+  &.ex05
+    grid-template: 1fr 1fr 1fr / 1fr 1fr
+
+    .item1
+      grid-row: auto / span 3
+
+  &.ex06
+    grid-template: [row1] 1fr [row2] 1fr [row3] 1fr [row4] / [col1] 1fr [col2] 1fr
+
+    .item1
+      grid-row: row1 / row4
+
+    .item2
+      grid-row: row1 / row3
+
+    .item3
+      grid-row: row3 / row4
+
+  &.ex07
+    grid-template: [row] 1fr [row] 1fr [row] 1fr [row] / [col] 1fr [col] 1fr
+
+    .item1
+      grid-row: row 1 / row 4
+
+    .item2
+      grid-row: row 1 / row 3
+
+    .item3
+      grid-row: row 3 / row 4
+

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <h2>단순 배열 반복</h2>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="item in simpleArray">{{item}}</li>
+        </ul>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            simpleArray: ['가', '나', '다']
+          };
+        }
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="item in simpleArray">{{item}}</li>
+        </ul>
+      </div>
+      <p>배열의 인덱스가 필요하면 이렇게 합니다(이름이 꼭 'index'일 필요는 없습니다.):</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="(item, index) in simpleArray">{{index}}: {{item}}</li>
+          <li v-for="(item, qwer) in simpleArray">{{qwer}}: {{item}}</li>
+        </ul>
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="(item, index) in simpleArray">{{index}}: {{item}}</li>
+          <li v-for="(item, qwer) in simpleArray">{{qwer + 4}}: {{item}}</li>
+        </ul>
+      </div>
+      <p><code class="language-js">v-if</code> 때처럼 더미 태그(제어를 위해 사용하고 랜더링 X)가 필요하면 <code class="language-markup"><!--<template>--></code>을 사용합니다:</p>
+      <pre><code class="language-markup"><!--
+        <template v-for="(item, idx) in simpleArray">
+          <span>{{idx}}: {{item}}</span>&nbsp;
+        </template>
+      --></code></pre>
+      <div class="result">
+        <template v-for="(item, idx) in simpleArray">
+          <span>{{idx}}: {{item}}</span>&nbsp;
+        </template>
+      </div>
+
+      <h2>객체 배열 반복</h2>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="item in objectArray">{{item.seq}}: {{item.text}}</li>
+        </ul>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            objectArray: [
+              { seq: 1, text: 'Hello'},
+              { seq: 2, text: 'ooooo'},
+              { seq: 3, text: 'world!'}
+            ]
+          };
+        }
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="item in objectArray">{{item.seq}}: {{item.text}}</li>
+        </ul>
+      </div>
+      <p>인덱스는 단순 배열과 동일합니다:</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="(item, index) in objectArray">{{index}}-{{item.seq}}-{{item.text}}</li>
+        </ul>
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="(item, index) in objectArray">{{index}}-{{item.seq}}-{{item.text}}</li>
+        </ul>
+      </div>
+      <p>배열에서 꺼낸 객체 전체가 아니라, 객체의 특정 프로퍼티를 받고 싶으면 <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">구조분해할당</a>과 비슷한 방식으로 작성하면 됩니다:</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="{text} in objectArray">{{text}}</li>
+          <li v-for="({text}, index) in objectArray">{{index}}: {{text}}</li>
+        </ul>
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="{text} in objectArray">{{text}}</li>
+          <li v-for="({text}, index) in objectArray">{{index}}: {{text}}</li>
+        </ul>
+      </div>
+      
+      <h2>다중 배열</h2>
+      <p>이쯤되면 굳이 설명안해도 되겠쥬?</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="children in complexArray">
+            <span v-for="child in children">{{child.text}}</span>
+          </li>
+        </ul>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        complexArray: [
+          [
+            { seq: 1, text: 'Hello'},
+            { seq: 2, text: 'ooooo'}
+          ],
+          [
+            { seq: 3, text: 'world'},
+            { seq: 4, text: '!'}
+          ]
+        ]
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="children in complexArray">
+            <span v-for="child in children">{{child.text}}</span>
+          </li>
+        </ul>
+      </div>
+
+      <h2>for-of</h2>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="ele of simpleArray">{{ele}}</li>
+        </ul>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        simpleArray: ['가', '나', '다']
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="ele of simpleArray">{{ele}}</li>
+        </ul>
+      </div>
+      <p><code class="language-js">in</code> 연산자 대신 <code class="language-js">of</code>를 사용할 수도 있습니다...만! <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol">Iterable object</a>만 가능하다는 것을 주의하세요.</p>
+      
+      <h2>배열 아니고 그냥 객체</h2>
+      <p>배열이 아닌 것도 반복할 수 있을까요? 네 됩니다. 심지어 인덱스까지! 😎</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="(value, key, index) in plainObject">
+            {{ index }}. {{ key }}: {{ value }}
+          </li>
+        </ul>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            plainObject: {
+              title: 'How to do lists in Vue',
+              author: 'Jane Doe',
+              publishedAt: '2016-04-10'
+            }
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="(value, key, index) in plainObject">
+            {{ index }}.{{ key }}: {{ value }}
+          </li>
+        </ul>
+      </div>
+
+      <h2>범위를 하드코딩으로 지정하기</h2>
+      <pre><code class="language-markup"><!--
+        <span v-for="n in 10">{{n}}&nbsp;</span>
+      --></code></pre>
+      <div class="result">
+        <span v-for="n in 10">{{n}}&nbsp;</span>
+      </div>
+      <div class="description">
+        <p>⚠️ 0이 아니라 1로 초기화되는 것에 주의하세요.</p>
+      </div>
+      
+      <h2>v-for와 v-if</h2>
+      <p><a target="_blank" href="https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for">스타일 가이드</a>에 따르면 같은 태그에 <code class="language-js">v-for</code>와 <code class="language-js">v-if</code>를 사용하면 좋지 않습니다. <code class="language-js">v-if</code>는 한 단계 아래의 태그에 적용하세요.</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <template v-for="user in users">
+            <li v-if="user.isActive">
+              {{ user.name }}
+            </li>
+          </template>
+        </ul>
+      --></code></pre>
+
+      <h2>같은 요소에서 index나 element에 접근</h2>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="(ele, index) in objectArray" :data-seq="ele.seq">{{ele.text}}</li>
+        </ul>
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="(ele, index) in objectArray" :data-seq="ele.seq">{{ele.text}}</li>
+        </ul>
+      </div>
+      <p>잘 되는걸로 ✌️</p>
+
+      <h2>key</h2>
+      <p>리액트의 <code class="language-js">key</code>처럼 Vue도 비슷한 녀섴이 있는데요. 관련글 링크 <a target="_blank" href="https://vuejs.org/style-guide/rules-essential.html#use-keyed-v-for">#1</a>, <a target="_blank" href="https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key"> #2</a></p>
+      <p>가이드에 따르면, 키가 없을 때 Vue는 가능한 하위 요소를 이동하지 않고 제자리에서 패치하려고 시도합니다. 따라서 요소를 이동하거나 삭제해야 하는 경우엔 키를 제공해야 한다고 합니다.</p>
+      <p class="bold">그냥 key를 항상 제공하세요. 🤭</p>
+      <div>
+        <button type="button" @click="updateObjectArray">날 눌러줘요</button>
+      </div>
+      <pre><code class="language-markup"><!--
+        <p>key 없는 것</p>
+        <ul>
+          <li v-for="ele in objectArray">{{ele.text}}</li>
+        </ul>
+        <p>key 있는 것</p>
+        <ul>
+          <li v-for="ele in objectArray" :key="ele.seq">{{ele.text}}</li>
+        </ul>
+        <p ref="result1"></p>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        methods: {
+          updateObjectArray() {
+            this.objectArray[0].seq = 3;
+            this.objectArray[0].text = '오빠 나 좀 달라진 거 없어?';
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p>key 없는 것</p>
+        <ul>
+          <li v-for="ele in objectArray">{{ele.text}}</li>
+        </ul>
+        <p>key 있는 것</p>
+        <ul>
+          <li v-for="ele in objectArray" :key="ele.seq">{{ele.text}}</li>
+        </ul>
+        <p ref="result1"></p>
+      </div>
+      
+      <h2>v-for와 컴포넌트</h2>
+      <p>컴포넌트에도 <code class="language-js">v-for</code>를 쓸 수 있다고 합니다. 아래처럼요:</p>
+      <pre><code class="language-markup"><!--
+        <my-component v-for="item in items" :key="item.id"></my-component>
+      --></code></pre>
+      <pre><code class="language-markup"><!--
+        <my-component
+          v-for="(item, index) in items"
+          :item="item"
+          :index="index"
+          :key="item.id"
+        ></my-component>
+      --></code></pre>
+
+      <h2>자바스크립트 템플릿 리터럴 사용 시 주의할 점</h2>
+      <p>일반적으로 속성 바인딩 시 <a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals">템플릿 리터럴</a>을 사용하는게 문제가 되지 않습니다만, <strong>JSP 파일에선 EL과 표현식이 겹치기 때문에 의도대로 작동하지 않을 수 있습니다.</strong></p>
+      <p>예를 들어 이런 경우죠:</p>
+      <pre><code class="language-markup"><!--
+        <ul>
+          <li v-for="(ele, index) in simpleArray" :key="index" :qw="index" :er="'er' + index" :ty="`ty${index}`">{{index}}: {{ele}}</li>
+        </ul>
+      --></code></pre>
+      <div class="result">
+        <ul>
+          <li v-for="(ele, index) in simpleArray" :key="index" :qw="index" :er="'er' + index" :ty="`ty${index}`">{{index}}: {{ele}}</li>
+        </ul>
+      </div>
+      <p>따라서 JSP에선 템플릿 리터럴 대신 문자열 연산을 해야 합니다:</p>
+      <pre><code class="language-markup"><!--
+        <p :data-custom="'현재시간:' + new Date().toISOString()">난잘된다구욧</p>
+      --></code></pre>
+      <div class="result">
+        <p :data-custom="'현재시간:' + new Date().toISOString()">난잘된다구욧</p>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        data() {
+          return {
+            pageTitle: "리스트 랜더링",
+            docs: [
+              { title: "https://vuejs.org/guide/essentials/list.html", url: "https://vuejs.org/guide/essentials/list.html" },
+            ],
+            message: "Hello Vue! ✌️",
+            simpleArray: ['가', '나', '다'],
+            objectArray: [
+              { seq: 1, text: 'Hello'},
+              { seq: 2, text: 'ooooo'},
+              { seq: 3, text: 'world!'}
+            ],
+            complexArray: [
+              [
+                { seq: 1, text: 'Hello'},
+                { seq: 2, text: 'ooooo'}
+              ],
+              [
+                { seq: 3, text: 'world'},
+                { seq: 4, text: '!'}
+              ]
+            ],
+            plainObject: {
+              title: 'How to do lists in Vue',
+              author: 'Jane Doe',
+              publishedAt: '2016-04-10'
+            }
+          };
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        methods: {
+          updateObjectArray() {
+            this.objectArray[0].seq = 3;
+            this.objectArray[0].text = '오빠 나 좀 달라진 거 없어?';
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

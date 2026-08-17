@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+
+      <template v-if="docs !== undefined">
+        <h4>도움말 페이지</h4>
+        <ul>
+          <li v-for="item in docs">
+            <a :href="item.url" :target="'_blank'">{{item.title}}</a>
+          </li>
+        </ul>
+      </template>
+
+      <div id="grid"></div>
+
+      <h2>개요</h2>
+      <p>셀에 할당할 태그를 생성하고 <code class="language-js">getElement()</code> 메서드에서 이를 반환하도록 하는 프로토타입을 별도로 정의하는 방식입니다:</p>
+      <pre><code class="language-js"><!--
+        class SimpleTextReplaceRenderer {
+          constructor(props) {
+            const el = document.createElement('div');
+            el.className = 'tui-grid-cell-content';
+            let options = props.columnInfo.renderer.options;
+            let value = props.value;
+            options.forEach(ele => {
+              value = value.replace(new RegExp(ele.from, 'gi'), ele.to);
+            });
+            el.innerText = value;
+            this.el = el;
+          }
+          getElement() {
+            return this.el;
+          }
+        }
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        columns: [
+          {
+            header: 'Name',
+            name: 'name',
+            renderer: {
+              type: SimpleTextReplaceRenderer,
+              options: [
+                { from: 'L', to: '엘' },
+                { from: 'C', to: '씨' },
+                { from: 'B', to: '비' },
+                { from: 'D', to: '디' },
+                { from: 'E', to: '이' },
+                { from: 'M', to: '엠' }
+              ]
+            }
+          },
+          ... 생략
+      --></code></pre>
+      <p>사실 꼭 클래스 문법으로 해야하는 건 아니고, 고전적인 방식도 삽가능. 아래 참고:</p>
+      <pre><code class="language-js"><!--
+        function SimpleTextReplaceRenderer(props) {
+          const el = document.createElement('div');
+          
+          ... 중략
+
+          this.el = el;
+        }
+        SimpleTextReplaceRenderer.prototype.getElement = function() {
+          return this.el;
+        }
+      --></code></pre>
+
+      <h2>슈퍼 타입과 상속을 이용한 선언</h2>
+      <pre><code class="language-js"><!--
+        class Renderer {
+          constructor(props) {
+            this.el = document.createElement('div');
+            this.el.className = 'tui-grid-cell-content';
+            this.createElement(props);
+          }
+          createElement(props) {
+            // 이 메서드를 재정의 할 것
+          }
+          getElement() {
+            return this.el;
+          }
+        }
+
+        class EmptyToHyphenRenderer extends Renderer {
+          createElement(props) {
+            this.el.innerText = props.value ? props.value : '-';;
+          }
+        }
+      --></code></pre>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+
+      createApp({
+        components: {
+          backToHome,
+          tableOfContents,
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "4. Custom Renderer",
+            docs: [
+              { title: "https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/custom-renderer.md", url: "https://github.com/nhn/tui.grid/blob/master/packages/toast-ui.grid/docs/ko/custom-renderer.md" },
+            ],
+          };
+        },
+      }).mount("#app");
+
+      class CustomSliderRenderer {
+        constructor(props) {
+          const el = document.createElement('input');
+          const { min, max } = props.columnInfo.renderer.options;
+
+          el.type = 'range';
+          el.min = String(min);
+          el.max = String(max);
+          el.disabled = true;
+
+          this.el = el;
+          this.render(props);
+        }
+        getElement() {
+          return this.el;
+        }
+        render(props) {
+          this.el.value = String(props.value);
+        }
+      }
+      class SimpleTextReplaceRenderer {
+        constructor(props) {
+          const el = document.createElement('div');
+          el.className = 'tui-grid-cell-content';
+          let options = props.columnInfo.renderer.options;
+          let value = props.value;
+          options.forEach(ele => {
+            value = value.replace(new RegExp(ele.from, 'gi'), ele.to);
+          });
+          el.innerText = value;
+          this.el = el;
+        }
+        getElement() {
+          return this.el;
+        }
+      }
+      const grid = new tui.Grid({
+        el: document.getElementById('grid'),
+        scrollX: false,
+        scrollY: false,
+        columns: [
+          {
+            header: 'Name',
+            name: 'name',
+            renderer: {
+              type: SimpleTextReplaceRenderer,
+              options: [
+                { from: 'L', to: '엘' },
+                { from: 'C', to: '씨' },
+                { from: 'B', to: '비' },
+                { from: 'D', to: '디' },
+                { from: 'E', to: '이' },
+                { from: 'M', to: '엠' }
+              ]
+            }
+          },
+          {
+            header: 'Artist',
+            name: 'artist'
+          },
+          {
+            header: 'Grade',
+            name: 'grade',
+            renderer: {
+              type: CustomSliderRenderer,
+              options: {
+                min: 1,
+                max: 5
+              }
+            }
+          }
+        ]
+      });
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", grade: "2" },
+        { name: "X", artist: "Ed Sheeran", grade: "3" },
+        { name: "Moves Like Jagger", artist: "Maroon5", grade: "2" },
+        { name: "A Head Full Of Dreams", artist: "Coldplay", grade: "3" },
+        { name: "21", artist: "Adele", grade: "3" },
+        { name: "Warm On A Cold Night", artist: "HONNE", grade: "2" },
+        { name: "Take Me To The Alley", artist: "Gregory Porter", grade: "3" },
+        { name: "Make Out", artist: "LANY", grade: "2" },
+        { name: "Get Lucky", artist: "Daft Punk", grade: "3" },
+        { name: "Valtari", artist: "Sigur Rós", grade: "3" },
+        { name: "Bush", artist: "Snoop Dogg", grade: "3" },
+        { name: "2", artist: "Beyoncé", grade: "3" }
+      ];
+      grid.resetData(gridData);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>flex-shrink</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>flex-shrink</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>
+        flex-shrink는 Flexbox에서 플렉스 아이템이 자동으로 줄어들 때 얼마나
+        비율적으로 줄어들지를 결정하는 프로퍼티다.
+      </p>
+      <p>모든 플렉스 아이템이 1인 경우 동일한 비율로 줄어들고, 특정 아이템의 shrink 값이 다른 아이템보다 더 크면, 줄어들 때 비율적으로 더 많이
+        줄어든다. 0으로 설정하면 공간이 부족해도 자동으로 줄어들지 않는다.</p>
+      <p>반대 개념의 프로퍼티로 flex-grow가 있다.</p>
+      <p>플렉스 아이템에 직접 지정한다.</p>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+      <p>
+        flex-shrink의 값은 음수를 제외한 number 타입으로 지정할 수 있다. 0.1
+        같은 양의 실수도 가능. 기본값은 1이다.
+      </p>
+      <div class="code-wrapper">
+        <pre><code class="language-css"><!--
+        .item:nth-of-type(1) {
+          flex-shrink: 1;
+        }
+        .item:nth-of-type(2) {
+          flex-shrink: 1.5;
+        }
+        .item:nth-of-type(3) {
+          flex-shrink: 3;
+        }
+        .item:nth-of-type(4) {
+          flex-shrink: 4.5;
+        }
+        --></code></pre>
+        <pre><code class="language-html"><!--
+        <div class="container">
+          <div class="item">1</div>
+          <div class="item">2</div>
+          <div class="item">3</div>
+          <div class="item">4</div>
+        </div>
+        --></code></pre>
+      </div>
+      <div class="code-result">
+        <div class="container">
+          <div class="item nth1">1</div>
+          <div class="item nth2">2</div>
+          <div class="item nth3">3</div>
+          <div class="item nth4">4</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>모든 플렉스 아이템의 값이 1일 때</h2>
+      <p>값을 생략하거나 1로 지정하면 공간이 부족할 때 원래의 비율을 유지하며 줄어든다.</p>
+      <div class="code-wrapper">
+            <pre><code class="language-css"><!--
+            .item2:nth-of-type(1) {
+              flex-shrink: 1;
+            }
+            .item2:nth-of-type(2) {
+              flex-shrink: 1;
+            }
+            .item2:nth-of-type(3) {
+              flex-shrink: 1;
+            }
+            .item2:nth-of-type(4) {
+              flex-shrink: 1;
+            }
+            --></code></pre>
+        <pre><code class="language-html"><!--
+            <div class="container">
+              <div class="item2 nth1">1</div>
+              <div class="item2 nth2">2</div>
+              <div class="item2 nth3">3</div>
+              <div class="item2 nth4">4</div>
+            </div>
+            --></code></pre>
+      </div>
+      <div class="code-result">
+        <div class="container">
+          <div class="item2 nth1">1</div>
+          <div class="item2 nth2">2</div>
+          <div class="item2 nth3">3</div>
+          <div class="item2 nth4">4</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>width와 함께 사용하는 경우</h2>
+      <p>
+        width와 flex-shrink가 같이 지정되면 width는 flex-basis를 대신하여 기본 크기로 작동한다.
+        아이템의 초기 크기는 width의 의해 결정되지만, 공간이 부족한 경우 flex-shrink에 의해
+        비율적으로 줄어든다.
+      </p>
+      <p>
+        아래의 예시에서 두 플렉스 아이템에 화면 너비보다 큰 값을 동일하게 width로 지정했지만 flex-shrink 값이 더 큰쪽이 더 많이 줄어든 것을 확인할 수 있다.
+      </p>
+      <div class="code-wrapper">
+        <pre><code class="language-css"><!--
+          .item.with-width1 {
+            width: 1200px;
+            flex-shrink: 1;
+          }
+          .item.with-width2 {
+            width: 1200px;
+            flex-shrink: 3;
+          }
+        --></code></pre>
+        <pre><code class="language-html"><!--
+          <div class="container">
+            <div class="item with-width1">1</div>
+            <div class="item with-width2">2</div>
+          </div>
+        --></code></pre>
+      </div>
+      <div class="code-result">
+        <div class="container">
+          <div class="item with-width1">1</div>
+          <div class="item with-width2">2</div>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ index로 돌아가기</a>
+</footer>
+</body>
+</html>

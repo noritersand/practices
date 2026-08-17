@@ -1,0 +1,55 @@
+{
+  "name": "js-practice",
+  "version": "1.0.0",
+  "description": "Dis is da Js-Practice",
+  "author": "noritersand",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "none",
+  "directories": {
+    "test": "__tests__",
+    "webRoot": "webroot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noritersand/js-practice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/noritersand/js-practice/issues"
+  },
+  "homepage": "https://github.com/noritersand/js-practice#readme",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "vitest --config __tests__/vitest/vitest.config.js",
+    "test:jest": "jest --config=__tests__/jest/jest.config.js --watchAll",
+    "test:mocha": "mocha __tests__/mocha/**",
+    "test:tap": "tap --bail __tests__/tap/**",
+    "build:jsdoc": "jsdoc src/jsdoc --destination jsdoc-out --configure src/jsdoc/jsdoc-config.json",
+    "preview:jsdoc": "live-server jsdoc-out",
+    "live": "live-server --port=6001 webroot"
+  },
+  "devDependencies": {
+    "chai": "^5.3.3",
+    "jest": "^30.4.2",
+    "jsdoc": "^4.0.5",
+    "live-server": "^1.2.2",
+    "mocha": "^11.7.6",
+    "node-notifier": "^10.0.1",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.9.6",
+    "tap": "^21.7.4",
+    "vitest": "^3.2.7"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dayjs": "^1.11.21",
+    "express": "^5.2.1",
+    "immer": "^10.2.0",
+    "moment": "^2.30.1",
+    "multer": "^2.2.0",
+    "sha1": "^1.1.1",
+    "sha3": "^2.1.4"
+  },
+  "type": "module",
+  "packageManager": "yarn@4.17.1"
+}

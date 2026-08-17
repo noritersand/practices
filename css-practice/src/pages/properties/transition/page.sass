@@ -1,0 +1,45 @@
+﻿@use '../../../styles/global'
+
+.target
+  margin: 10px
+  padding: 10px
+  background-color: yellow
+  transition: background-color 2s 500ms
+
+.target:hover
+  background-color: red
+
+.box
+  margin-bottom: 10px
+  border-style: solid
+  border-width: 1px
+  display: block
+  width: 100px
+  height: 100px
+  background-color: #bbbbe5
+  transition: width 2s
+// width 프로퍼티의 변화가 2초 동안 애니메이션
+// height 2s, // height 프로퍼티의 변화가 2초 동안 애니메이션
+// background-color 2s, // background-color 프로퍼티의 변화가 2초 동안 애니메이션
+// rotate 2s; // rotate 프로퍼티의 변화가 2초 동안 애니메이션
+
+.box:hover
+  background-color: #ffcccc
+  // 배경 색상이 연한 핑크색으로 변경
+  width: 200px
+  // 너비가 200px로 확대
+  height: 200px
+  // 높이가 200px로 확대
+  rotate: 180deg
+// 180도 회전
+
+.box2
+  margin-bottom: 10px
+  border-style: solid
+  border-width: 1px
+  display: block
+  width: 100px
+  height: 100px
+  background-color: #bbbbe5
+  transition: width 2s, height 2s, background-color 2s, transform 2s
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Toast UI Grid</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-pagination.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-pagination.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <p>그리드 설정은 이렇게:</p>
+      <pre><code class="language-js"><!--
+        data: {
+          api: {
+            readData: { url: "/read-paged-grid-data.data", method: "GET" },
+          },
+        },
+        pageOptions: {
+          perPage: 20,
+        }
+      --></code></pre>
+      <p>응답 데이터의 모양은 반드시 다음과 같아야 합니다:</p>
+      <pre><code class="language-json"><!--
+        {
+          result: true,
+          data: {
+            contents: [
+              { ... },
+              { ... },
+              { ... },
+              ...
+            ],
+            pagination: {
+              page: 1,
+              totalCount: 100
+            }
+          }
+        }
+      --></code></pre>
+      <div class="description">
+        <p>⚠️ 데이터소스 API를 설정한 후에는 <code class="language-js">grid.resetData()</code>를 사용할 수 없습니다. 대신 <code class="language-js">grid.readData(1)</code>를 호출하세요</p>
+      </div>
+      <div><button type="button" @click="readData">조회버튼</button></div>
+      <select v-model="perPage" @change="handlePerPageChange" :class="classList">
+        <option :value="5">5개</option>
+        <option :value="10">10개</option>
+        <option :value="20">20개</option>
+        <option :value="50">50개</option>
+        <option :value="100">100개</option>
+        <option :value="200">200개</option>
+        <option :value="300">300개</option>
+        <option :value="500">500개</option>
+      </select>
+      <div id="grid"></div>
+      <div class="description">
+        <p>🤔 totalCount를 분명 100으로 했는데 왜 1페이지만 나오는지는 몲.</p>
+      </div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "10. DataSource",
+            perPage: 10
+          };
+        },
+        methods: {
+          readData() {
+            gridInstance.readData(1);
+          },
+          handlePerPageChange(perPage) {
+            gridInstance.setPerPage(perPage);
+          }
+        }
+      }).mount("#app");
+
+      const gridData = null;
+
+      let gridInstance = window.gridInstance = new tui.Grid({
+        el: document.getElementById("grid"),
+        scrollX: false,
+        scrollY: false,
+        minBodyHeight: 30,
+        rowHeaders: ["rowNum"],
+        data: {
+          api: {
+            readData: { url: "/read-paged-grid-data.data", method: "GET" },
+          },
+        },
+        pageOptions: {
+          perPage: 10
+        },
+        columns: [
+          {
+            header: "RowIndex",
+            name: "rowIndex",
+            align: 'center'
+          },
+          {
+            header: "Name",
+            name: "name",
+          },
+          {
+            header: "Artist",
+            name: "artist",
+          },
+          {
+            header: "Type",
+            name: "type",
+            align: 'center'
+          },
+          {
+            header: "Release",
+            name: "release",
+            align: 'center'
+          },
+          {
+            header: "Genre",
+            name: "genre",
+            align: 'center'
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>

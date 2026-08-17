@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <table-of-contents></table-of-contents>
+      
+      <h2>데이터 바인딩</h2>
+      <p><code class="language-js">v-model</code> 디렉티브를 사용하면 사용자가 입력한 값과 화면에 보이는 값, 그리고 앱의 데이터가 동기화됩니다.</p>
+      <p>아래 입력란의 값을 바꿔보세요.</p>
+      <pre><code class="language-markup"><!--
+        <div id="app">
+          <div><button type="button" @click="fn1">fn1(): 누르면 헬로월드</button></div>
+          <p><input v-model="text" placeholder="Type here"></p>
+          <p>{{text}}</p>
+        </div>
+      --></code></pre>
+      <pre><code class="language-js">
+        createApp({
+          data() {
+            return {
+              text: 'edit me!'
+            }
+          },
+          methods: {
+            fn1() {
+              this.text = 'Hello world!';
+            }
+          }
+        }).mount("#app");
+      </code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn1">fn1(): 누르면 헬로월드</button></div>
+        <p><input v-model="text" placeholder="Type here"></p>
+        <p>{{text}}</p>
+      </div>
+      
+      <h2>라디오 버튼</h2>
+      <p><code class="language-js"><!--<input type="radio">--></code>에 적용할 땐 value는 따로 명시해야 하며, <code class="language-js">name</code>은 생략해도 됩니다.</p>
+      <pre><code class="language-markup"><!--
+        <p>Picked: {{picked}}</p>
+        <input type="radio" id="one" value="One" v-model="picked" /> <label for="one">One</label>
+        <input type="radio" id="two" value="Two" v-model="picked" /> <label for="two">Two</label>
+        <p>already picked: {{alreadyPicked}}</p>
+        <input type="radio" id="three" value="Three" v-model="alreadyPicked" /> <label for="three">Three</label>
+        <input type="radio" id="four" value="Four" v-model="alreadyPicked" /> <label for="four">Four</label>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            picked: null,
+            alreadyPicked: 'Four'
+          }
+        },
+      --></code></pre>
+      <div class="result">
+        <p>Picked: {{picked}}</p>
+        <div>
+          <input type="radio" id="one" value="One" v-model="picked" /> <label for="one">One</label>&nbsp;&nbsp;
+          <input type="radio" id="two" value="Two" v-model="picked" /> <label for="two">Two</label>
+        </div>
+        <p>already picked: {{alreadyPicked}}</p>
+        <div>
+          <input type="radio" id="three" value="Three" v-model="alreadyPicked" /> <label for="three">Three</label>&nbsp;&nbsp;
+          <input type="radio" id="four" value="Four" v-model="alreadyPicked" /> <label for="four">Four</label>
+        </div>
+      </div>
+
+      <h2>체크 박스</h2>
+      <p>체크 박스는 사용법이 두 가지입니다. 체크 박스별 각각의 모델을 할당하는 방법과, 여러 체크 박스를 하나의 모델로 묶는 방법이 있습니다.</p>
+      
+      <h3>개별 모델 할당</h3>
+      <pre><code class="language-markup"><!--
+        <input type="checkbox" id="checkbox" v-model="checked" />
+        <label for="checkbox">{{ checked }}</label>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            checked: false
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <input type="checkbox" id="checkbox" v-model="checked" />&nbsp;
+        <label for="checkbox">{{ checked }}</label>
+      </div>
+
+      <h3>하나의 모델로 묶기</h3>
+      <pre><code class="language-markup"><!--
+        <p>checkedNames: {{ checkedNames }}</p>
+        <div>
+          <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">&nbsp;
+          <label for="jack">Jack</label>
+        </div>
+        <div>
+          <input type="checkbox" id="john" value="John" v-model="checkedNames">&nbsp;
+          <label for="john">John</label>
+        </div>
+        <div>
+          <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">&nbsp;
+          <label for="mike">Mike</label>
+        </div>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            checkedNames: []
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p>checkedNames: {{ checkedNames }}</p>
+        <div>
+          <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">&nbsp;
+          <label for="jack">Jack</label>
+        </div>
+        <div>
+          <input type="checkbox" id="john" value="John" v-model="checkedNames">&nbsp;
+          <label for="john">John</label>
+        </div>
+        <div>
+          <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">&nbsp;
+          <label for="mike">Mike</label>
+        </div>
+      </div>
+
+      <h3>value 지정하기</h3>
+      <p>체크상태에 따른 value의 값을 true/false가 아닌 다른 값으로 설정하고 싶으면 <code class="language-markup">true-value</code>와 <code class="language-markup">false-value</code>를 사용합니다. (값이 문자열이면 콜론과 홑따옴표는 생략해도 됩니다.)</p>
+      <pre><code class="language-markup"><!--
+        <input type="checkbox" v-model="yn" true-value="Y" :false-value="'N'" />
+        <p>yn: {{yn}}</p>
+        <button type="button" @click="toggleYn">toggleYn()</button>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            yn: 'N'
+          },
+        },
+        methods: {
+          toggleYn() {
+            this.yn = this.yn === 'N' ? 'Y' : 'N';
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div style="margin-bottom: 5px;">
+          <input type="checkbox" v-model="yn" true-value="Y" :false-value="'N'" />
+          <p>yn: {{yn}}</p>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <button type="button" @click="toggleYn">toggleYn()</button>
+        </div>
+      </div>
+      <p>단, 이 속성은 v-model이 배열일 경우엔 제대로 작동하지 않습니다.</p>
+      <pre><code class="language-html"><!--
+        <input type="checkbox" v-model="yns" true-value="Y" :false-value="'N'"/>&nbsp;
+        <input type="checkbox" v-model="yns" true-value="Y2" :false-value="'N2'"/>&nbsp;
+        <p>yns: {{yns}}</p>
+        <button type="button" @click="toggleYns">toggleYns()</button>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            yns: []
+          }
+        },
+        methods: {
+          resetYns() {
+            this.yns = [];
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <div style="margin-bottom: 5px;">
+          <input type="checkbox" v-model="yns" true-value="Y" :false-value="'N'"/>&nbsp;
+          <input type="checkbox" v-model="yns" true-value="Y2" :false-value="'N2'"/>&nbsp;
+          <p>yns: {{yns}}</p>
+        </div>
+        <div style="margin-bottom: 5px;">
+          <button type="button" @click="resetYns">resetYns()</button>
+        </div>
+      </div>
+
+      <h3>(v-model이 배열이 아닌) 체크 박스에 value만 있으면?</h3>
+      <p>일단 value 속성이 모델의 값에 어떤 영향을 주는지 다시 한 번 봅시다.</p>
+      <pre><code class="language-markup"><!--
+        <input type="checkbox" v-model="checked2"> {{ checked2 }}
+        <input type="checkbox" value="Y" v-model="checked3"> {{ checked3 }}
+        <input type="checkbox" :value="'YES'" v-model="checked4"> {{ checked4 }}
+      --></code></pre>
+      <div class="result">
+        <div style="margin-bottom: 5px;">
+          <label for="checked2">checked2:&nbsp;</label>
+          <input type="checkbox" id="checked2" v-model="checked2" />&nbsp;{{ checked2 }}
+        </div>
+        <div style="margin-bottom: 5px;">
+          <label for="checked3">checked3:&nbsp;</label>
+          <input type="checkbox" id="checked3" value="Y" v-model="checked3" />&nbsp;{{ checked3 }}
+        </div>
+        <div>
+          <label for="checked4">checked4:&nbsp;</label>
+          <input type="checkbox" id="checked4" :value="'YES'" v-model="checked4" />&nbsp;{{ checked4 }}
+        </div>
+      </div>
+      <p>🤔 아무 의미도 없군요. 위의 예시 중 v-model이 배열인 것과 대조적으로 value가 있건 없건 모델의 값은 true 혹은 false입니다.</p>
+      <p id="focus-here">그럼 submit도 마찬가지일까요?</p>
+      <pre><code class="language-markup"><!--
+        <form method="get" action="#focus-here">
+          <input type="checkbox" name="checked5" v-model="checked5"> {{ checked5 }}
+          <input type="checkbox" name="checked6" value="Y" v-model="checked6"> {{ checked6 }}
+          <input type="checkbox" name="checked7" :value="'YES'" v-model="checked7"> {{ checked7 }}
+          <button type="submit">Submit</button>
+        </form>
+      --></code></pre>
+      <div class="result">
+        <form method="get" action="#focus-here">
+          <div style="margin-bottom: 5px;">
+            <label for="checked5">checked5:&nbsp;</label>
+            <input type="checkbox" name="checked5" id="checked5" v-model="checked5" />&nbsp;{{ checked5 }}
+          </div>
+          <div style="margin-bottom: 5px;">
+            <label for="checked6">checked6:&nbsp;</label>
+            <input type="checkbox" name="checked6" id="checked6" value="Y" v-model="checked6" />&nbsp;{{ checked6 }}
+          </div>
+          <div style="margin-bottom: 5px;">
+            <label for="checked7">checked7:&nbsp;</label>
+            <input type="checkbox" name="checked7" id="checked7" :value="'YES'" v-model="checked7" />&nbsp;{{ checked7 }}
+          </div>
+          <button type="submit" style="margin-top: 5px;">Submit</button>
+        </form>
+      </div>
+      <p>아무거나 체크를 하고 submit 버튼을 눌러보세요.</p>
+      <p>브라우저 네이티브 기능으로 submit을 수행하면 체크 박스의 value 값이 그대로 사용되는 것을 볼 수 있습니다.</p>
+      <div class="description">
+        <p>⚠️ 체크 박스 타입의 value 속성을 생략했을 때 전송되는 값은 'on' 입니다.</p>
+      </div>
+
+      <h2>셀렉트 박스</h2>
+      <p>셀렉트 박스는 <code class="language-js">multiple</code> 속성을 명시해 다중 선택이 가능하므로 체크 박스처럼 사용방법이 둘로 나뉩니다.</p>
+      
+      <h3>단일 선택</h3>
+      <p>value는 레이블과 동일하면 생략, 다르면 명시합니다.</p>
+      <pre><code class="language-markup"><!--
+        <p>selected: {{ selected }}</p>
+        <select v-model="selected">
+          <option disabled value="null">Please select one</option>
+          <option>A조직</option>
+          <option>B조직</option>
+          <option>C조직</option>
+          <option>이상한팀</option>
+          <option>만년뽀로로팀</option>
+          <option>월급루팡팀</option>
+        </select>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            selected: null
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p>selected: {{ selected }}</p>
+        <select v-model="selected">
+          <option disabled value="null">Please select one</option>
+          <option>A조직</option>
+          <option>B조직</option>
+          <option>C조직</option>
+          <option>이상한팀</option>
+          <option>만년뽀로로팀</option>
+          <option>월급루팡팀</option>
+        </select>
+      </div>
+
+      <h3>다중 선택</h3>
+      <pre><code class="language-markup"><!--
+        <p>multipleSelected: {{ multipleSelected }}</p>
+        <select v-model="multipleSelected" multiple>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            multipleSelected: []
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p>multipleSelected: {{ multipleSelected }}</p>
+        <select v-model="multipleSelected" multiple style="width: 100px;">
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+      </div>
+
+      <h3>v-for로 옵션 그리기</h3>
+      <p>옵션을 동적으로 그려야 할 수도 있죠. <code class="language-js">v-for</code>를 써서 반복합니다:</p>
+      <pre><code class="language-markup"><!--
+        <p>selectV4: {{ selectV4.selected }}</p>
+        <select v-model="selectV4.selected" style="width: 100px;">
+          <option v-for="option in selectV4.options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            selectV4: {
+              selected: 'A',
+              options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+              ]
+            }
+          }
+        }
+      --></code></pre>
+      <div class="result">
+        <p>selectV4: {{ selectV4.selected }}</p>
+        <select v-model="selectV4.selected" style="width: 100px;">
+          <option v-for="option in selectV4.options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+      </div>
+
+      <h3><code class="language-js">null</code>을 기본값으로 설정하기</h3>
+      <p></p>
+      <pre><code class="language-markup"><!--
+        <p>Is selected2 null? {{ selected2 === null }}</p>
+        <select v-model="selected2" style="width: 100px;">
+          <option :value="null">널 값</option>
+          <option :value="''">빈 문자열</option>
+          <option :value="'this is not null'">this is not null</option>
+        </select>
+        <button type="button" @click="selected2 = null">let selected2 is null</button>
+      --></code></pre>
+      <div class="result">
+        <p>Is selected2 null? {{ selected2 === null }}</p>
+        <select v-model="selected2" style="width: 100px;">
+          <option :value="null">널 값</option>
+          <option :value="''">빈 문자열</option>
+          <option :value="'this is not null'">this is not null</option>
+        </select>
+        <button type="button" @click="selected2 = null">let selected2 is null</button>
+      </div>
+
+      <h2>프록시는 뭘까</h2>
+      <pre><code class="language-markup"><!--
+        <div id="app">
+          <div><button type="button" @click="fn2">fn2(): 나도 몰라</button></div>
+          obj.a: {{obj.a}}
+        </div>
+      --></code></pre>
+      <pre><code class="language-js">
+        createApp({
+          data() {
+            return {
+              obj: {
+                a: 1,
+                b: 2
+              }
+            }
+          },
+          methods: {
+            fn2() {
+              console.log(this.obj); // Proxy {a: 37, b: 2}
+              this.obj.a = this.obj.a + 1;
+            }
+          }
+        }).mount("#app");
+      </code></pre>
+      <div class="result">
+        <div><button type="button" @click="fn2">fn2(): 나도 몰라</button></div>
+        <p>obj.a: {{obj.a}}</p>
+      </div>
+
+      <h2>Modifiers</h2>
+      <p><a target="_blank" href="https://vuejs.org/guide/essentials/forms.html#modifiers">https://vuejs.org/guide/essentials/forms.html#modifiers</a></p>
+      <ul>
+        <li><code class="language-js">.lazy</code>: 데이터 동기화 시점을 input 이벤트 후가 아니라 change 이벤트 후로 변경합니다.</li>
+        <li><code class="language-js">.number</code>: 사용자 입력을 자동으로 Number 타입으로 변환합니다.</li>
+        <li><code class="language-js">.trim</code>: 모델의 값 앞뒤의 공백 문자를 자동으로 삭제합니다.</li>
+      </ul>
+      <pre><code class="language-markup"><!--
+        <input type="text" v-model.trim="trimMe"/> trimMe.length: {{trimMe.length}}
+        <input type="text" v-model="doNotTrimMe"/> doNotTrimMe.length: {{doNotTrimMe.length}}
+      --></code></pre>
+      <pre><code class="language-js"><!--
+        data() {
+          return {
+            trimMe: '',
+            doNotTrimMe: ''
+          };
+        }
+      --></code></pre>
+      <div class="result">
+        <div>
+          <input type="text" v-model.trim="trimMe" style="width: 50%" placeholder="앞 뒤로 공백을 넣고 입력해보세요."/>&nbsp;trimMe.length: {{trimMe.length}}
+        </div>
+        <div>
+          <input type="text" v-model="doNotTrimMe" style="width: 50%" placeholder="앞 뒤로 공백을 넣고 입력해보세요."/>&nbsp;doNotTrimMe.length: {{doNotTrimMe.length}}
+        </div>
+      </div>
+
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+      import { tableOfContents } from '/examples/vue/component/table-of-contents.js';
+      
+      window.vm = createApp({
+        components: {
+          backToHome,
+          tableOfContents
+        },
+        data() {
+          return {
+            pageTitle: "폼 바인딩",
+            trimMe: '',
+            doNotTrimMe: '',
+            text: 'edit me!',
+            obj: {
+              a: 1,
+              b: 2
+            },
+            picked: null,
+            alreadyPicked: 'Four',
+            checked: false,
+            checked2: null,
+            checked3: null,
+            checked4: null,
+            checked5: null,
+            checked6: null,
+            checked7: null,
+            checkedNames: [],
+            selected: null,
+            multipleSelected: [],
+            selectV4: {
+              selected: 'A',
+              options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+              ]
+            },
+            selected2: '',
+            yn: 'N',
+            yns: []
+          }
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        methods: {
+          fn1() {
+            this.text = 'Hello world!';
+          },
+          fn2() {
+            console.log(this.obj); // Proxy {a: 37, b: 2}
+            this.obj.a = this.obj.a + 1;
+          },
+          toggleYn() {
+            this.yn = this.yn === 'N' ? 'Y' : 'N';
+          },
+          resetYns() {
+            this.yns = [];
+          }
+        }
+      }).mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast UI Grid</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <div id="grid"></div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "3. Custom editor",
+          };
+        },
+      }).mount("#app");
+
+      class CustomTextEditor {
+        constructor(props) {
+          const el = document.createElement("input");
+          const { maxLength } = props.columnInfo.editor.options;
+          el.type = "text";
+          el.maxLength = maxLength;
+          el.value = String(props.value);
+          this.el = el;
+        }
+        getElement() {
+          return this.el;
+        }
+        getValue() {
+          return this.el.value;
+        }
+        mounted() {
+          this.el.select();
+        }
+      }
+
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        scrollX: false,
+        scrollY: false,
+        columns: [
+          {
+            header: "Name",
+            name: "name",
+            editor: "text",
+          },
+          {
+            header: "Artist",
+            name: "artist",
+            editor: {
+              type: CustomTextEditor,
+              options: {
+                maxLength: 10,
+              },
+            },
+          },
+          {
+            header: "Type",
+            name: "typeCode",
+            formatter: "listItemText",
+            editor: {
+              type: "select",
+              options: {
+                listItems: [
+                  { text: "Deluxe", value: "1" },
+                  { text: "EP", value: "2" },
+                  { text: "Single", value: "3" },
+                ],
+              },
+            },
+          },
+          {
+            header: "Genre",
+            name: "genreCode",
+            formatter: "listItemText",
+            editor: {
+              type: "checkbox",
+              options: {
+                listItems: [
+                  { text: "Pop", value: "1" },
+                  { text: "Rock", value: "2" },
+                  { text: "R&B", value: "3" },
+                  { text: "Electronic", value: "4" },
+                  { text: "etc.", value: "5" },
+                ],
+              },
+            },
+            copyOptions: {
+              useListItemText: true, // when this option is used, the copy value is concatenated text
+            },
+          },
+          {
+            header: "Grade",
+            name: "grade",
+            copyOptions: {
+              useListItemText: true,
+            },
+            formatter: "listItemText",
+            editor: {
+              type: "radio",
+              options: {
+                listItems: [
+                  { text: "★☆☆", value: "1" },
+                  { text: "★★☆", value: "2" },
+                  { text: "★★★", value: "3" },
+                ],
+              },
+            },
+          },
+        ],
+      });
+      grid.on("beforeChange", (ev) => {
+        console.log("before change:", ev);
+      });
+      grid.on("afterChange", (ev) => {
+        console.log("after change:", ev);
+      });
+
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", typeCode: "1", genreCode: "1", grade: "2" },
+        { name: "X", artist: "Ed Sheeran", typeCode: "1", genreCode: "1", grade: "3" },
+        { name: "Moves Like Jagger", artist: "Maroon5", typeCode: "3", genreCode: "1,2", grade: "2" },
+        { name: "A Head Full Of Dreams", artist: "Coldplay", typeCode: "1", genreCode: "2", grade: "3" },
+        { name: "21", artist: "Adele", typeCode: "1", genreCode: "1,3", grade: "3" },
+        { name: "Warm On A Cold Night", artist: "HONNE", typeCode: "1", genreCode: "3,4", grade: "2" },
+        { name: "Take Me To The Alley", artist: "Gregory Porter", typeCode: "1", genreCode: "5", grade: "3" },
+        { name: "Make Out", artist: "LANY", typeCode: "2", genreCode: "4", grade: "2" },
+        { name: "Get Lucky", artist: "Daft Punk", typeCode: "3", genreCode: "1,5", grade: "3" },
+        { name: "Valtari", artist: "Sigur Rós", typeCode: "3", genreCode: "2", grade: "3" },
+        { name: "Bush", artist: "Snoop Dogg", typeCode: "2", genreCode: "5", grade: "3" },
+        { name: "2", artist: "Beyoncé", typeCode: "1", genreCode: "1", grade: "3" },
+        { name: "I Won't Give Up", artist: "Jason Mraz", typeCode: "3", genreCode: "1", grade: "2" },
+        { name: "Following My Intuition", artist: "Craig David", typeCode: "1", genreCode: "3,4", grade: "3" },
+        { name: "Blue Skies", artist: "Lenka", typeCode: "3", genreCode: "1,2", grade: "3" },
+        { name: "This Is Acting", artist: "Sia", typeCode: "2", genreCode: "1", grade: "3" },
+        { name: "Blurryface", artist: "Twenty One Pilots", typeCode: "2", genreCode: "2", grade: "1" },
+        { name: "I'm Not The Only One", artist: "Sam Smith", typeCode: "3", genreCode: "1,3", grade: "2" },
+        { name: "The Magic Whip", artist: "Blur", typeCode: "2", genreCode: "2", grade: "3" },
+        { name: "Chaos And The Calm", artist: "James Bay", typeCode: "2", genreCode: "1,2", grade: "3" },
+      ];
+      grid.resetData(gridData);
+    </script>
+  </body>
+</html>

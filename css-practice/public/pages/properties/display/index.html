@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>display</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+
+<main>
+  <article>
+    <h1>display</h1>
+
+    <section>
+      <div id="toc"></div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>어쩌구 introduce</p>
+      <p></p>
+    </section>
+
+    <section>
+      <h2>Values</h2>
+
+      <h3>inline(초기값)</h3>
+      <p>
+        엘리먼트를 앞과 뒤에 줄 바꿈을 생성하지 않는 인라인 상자로 생성한다. 일반적인
+        흐름(normal flow)에서는 공간이 있는 경우 다음 요소를 같은 줄에 배치한다.
+      </p>
+      <p>
+        inline은 width와 height를 지원하지 않기 때문에 컨텐츠가 없으면 외곽선만 표시될 수 있다.
+      </p>
+      <pre><code class="language-html"><!--
+          <div class="box" style="display: inline"></div>
+          <div class="box" style="display: inline">가운데 div 상자</div>
+          <div class="box" style="display: inline">마지막 div 상자</div>
+          --></code></pre>
+      <div class="code-result">
+        <div class="box" style="display: inline"></div>
+        <div class="box" style="display: inline">가운데 div 상자</div>
+        <div class="box" style="display: inline">마지막 div 상자</div>
+      </div>
+
+      <h3>none</h3>
+      <p>레이아웃에 영향을 주지 않도록 엘리먼트를 표시하지 않는다(turns off the display).</p>
+      <pre><code class="language-html"><!--
+          <div class="box" style="display: none"></div>
+          --></code></pre>
+      <div class="code-result">
+        <div class="box" style="display: none"></div>
+      </div>
+
+      <h3>block</h3>
+      <p>
+        엘리먼트를 블록 상자(block box)로 생성하여 일반적인 흐름일 때 엘리먼트의 앞 뒤로 줄
+        바꿈(line breaks)을 생성한다.
+      </p>
+      <pre><code class="language-html"><!--
+          <div class="box" style="display: block"></div>
+          <div class="box" style="display: block"></div>
+          <div class="box" style="display: block"></div>
+          --></code></pre>
+      <div class="code-result">
+        <div class="box" style="display: block"></div>
+        <div class="box" style="display: block"></div>
+        <div class="box" style="display: block"></div>
+      </div>
+
+      <h3>inline-block</h3>
+      <p>
+        엘리먼트를 주변 컨텐츠와 함께 흐르는(flowed with surrounding content) 단일 인라인 상자인
+        것처럼 생성한다. (뭔소리야)
+      </p>
+      <div class="code-result">
+        <div class="box" style="display: inline-block"></div>
+        <div class="box" style="display: inline-block"></div>
+        <div class="box" style="display: inline-block"></div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

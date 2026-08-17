@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>CSS Selectors</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="page.css" />
+  <script src="/lib/prism/prism.js"></script>
+  <script type="module" src="/scripts/fire-when-ready.js"></script>
+</head>
+<body>
+<header>
+  <nav></nav>
+</header>
+<main>
+  <article>
+    <h1>CSS Selectors</h1>
+
+    <section>
+      <div id="toc"></div>
+      <div class="ref-links mrgn-btm">
+        <h4>참고 문서</h4>
+        <ul>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors"
+              target="_blank"
+            >https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors</a
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>개요</h2>
+      <p>CSS 셀렉터 테스트 페이지</p>
+    </section>
+
+    <section class="read-only-test">
+      <h2>:read-only</h2>
+
+      <h3>text</h3>
+      <div class="code-result">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" read-only />
+        <input type="text" readonly />
+        <input type="text" disabled />
+      </div>
+
+      <h3>radio</h3>
+      <div class="code-result">
+        <input type="radio" />&nbsp;&nbsp; <input type="radio" />&nbsp;&nbsp;
+        <input type="radio" readonly />&nbsp;&nbsp; <input type="radio" disalbed />&nbsp;&nbsp;
+      </div>
+
+      <h3>checkbox</h3>
+      <div class="code-result">
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+      </div>
+
+      <h3>select</h3>
+      <div class="code-result">
+        <select style="width: 100px">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <select style="width: 100px" disabled>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+      <div class="important">
+        <p>
+          select는 readonly 속성이 없고 :read-only 셀렉터는 select 태그를 무조건 선택하는 현상이
+          있음.
+        </p>
+        <p>그리고 :read-only 셀렉터는 disabled 속성이 있는 태그도 선택함</p>
+      </div>
+
+      <h3>textarea</h3>
+      <div class="code-result">
+        <textarea cols="5" rows="3"></textarea>
+        <textarea cols="5" rows="3" readonly></textarea>
+        <textarea cols="5" rows="3" disabled></textarea>
+      </div>
+    </section>
+
+    <section class="read-write-test">
+      <h2>:read-write</h2>
+
+      <h3>text</h3>
+      <div class="code-result">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" read-write />
+        <input type="text" readonly />
+        <input type="text" disabled />
+      </div>
+
+      <h3>radio</h3>
+      <div class="code-result">
+        <input type="radio" />&nbsp;&nbsp; <input type="radio" />&nbsp;&nbsp;
+        <input type="radio" readonly />&nbsp;&nbsp; <input type="radio" disalbed />&nbsp;&nbsp;
+      </div>
+
+      <h3>checkbox</h3>
+      <div class="code-result">
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+      </div>
+
+      <h3>select</h3>
+      <div class="code-result">
+        <select style="width: 100px">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <select style="width: 100px" disabled>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+      <div class="important">
+        <p>:read-write는 select 태그를 선택하지 않음</p>
+      </div>
+
+      <h3>textarea</h3>
+      <div class="code-result">
+        <textarea cols="5" rows="3"></textarea>
+        <textarea cols="5" rows="3" readonly></textarea>
+        <textarea cols="5" rows="3" disabled></textarea>
+      </div>
+    </section>
+
+    <section class="disabled-test">
+      <h2>:disabled</h2>
+
+      <h3>text</h3>
+      <div class="code-result">
+        <input type="text" />
+        <input type="text" />
+        <input type="text" read-only />
+        <input type="text" readonly />
+        <input type="text" disabled />
+      </div>
+
+      <h3>radio</h3>
+      <div class="code-result">
+        <input type="radio" />&nbsp;&nbsp; <input type="radio" />&nbsp;&nbsp;
+        <input type="radio" readonly />&nbsp;&nbsp; <input type="radio" disalbed />&nbsp;&nbsp;
+      </div>
+
+      <h3>checkbox</h3>
+      <div class="code-result">
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+        <input type="checkbox" />&nbsp;&nbsp; <input type="checkbox" />&nbsp;&nbsp;
+      </div>
+
+      <h3>select</h3>
+      <div class="code-result">
+        <select style="width: 100px">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <select style="width: 100px" disabled>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      </div>
+
+      <h3>textarea</h3>
+      <div class="code-result">
+        <textarea cols="5" rows="3"></textarea>
+        <textarea cols="5" rows="3" readonly></textarea>
+        <textarea cols="5" rows="3" disabled></textarea>
+      </div>
+    </section>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+</footer>
+</body>
+</html>

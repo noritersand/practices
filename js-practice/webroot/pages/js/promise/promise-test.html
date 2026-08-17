@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <title>Promise</title>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/static/styles/normalize.css" />
+  <link rel="stylesheet" href="/static/styles/letters.css" />
+  <link rel="stylesheet" href="/static/styles/global.css" />
+  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+</head>
+
+<body>
+<main>
+  <article>
+    <h1>Promise</h1>
+    <p></p>
+    <button type="button" class="buttons green" onclick="getSome('//localhost:8900/success.data?a=1&b=2&c=3')">
+      성공 버튼
+    </button>
+    <button type="button" class="buttons" onclick="getSome('//localhost:8900/error500.data?a=1&b=2&c=3')">
+      실패 버튼
+    </button>
+    <button type="button" class="buttons" onclick="wahappend()">이런 것도 있네</button>
+    <div class="code-result">
+      <h4>result1</h4>
+      <p id="result1"></p>
+    </div>
+    <div class="code-result">
+      <h4>result2</h4>
+      <p id="result2"></p>
+    </div>
+    <div class="code-result">
+      <h4>result3</h4>
+      <p id="result3"></p>
+    </div>
+    <script>
+      function getSome(url) {
+        run(url)
+          .then(respText => {
+            document.querySelector('#result1').innerHTML = respText;
+          })
+          .catch(respText => {
+            document.querySelector('#result2').innerHTML = respText;
+          });
+      }
+
+      function run(url) {
+        return new Promise((resolve, reject) => {
+          var xhr = new XMLHttpRequest();
+          xhr.onload = () => {
+            console.log('xhr:', xhr);
+            if (xhr.status === 200) {
+              resolve(xhr.responseText);
+            } else {
+              reject(new Error(xhr.responseText));
+            }
+          };
+          xhr.onerror = () => {
+            console.log('xhr:', xhr);
+            reject(new Error(xhr.responseText));
+          };
+          xhr.open('get', url);
+          xhr.send();
+        });
+      }
+
+      /*
+        let willBeSuccess = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve('success message(or fulfillment value)');
+          }, 1000);
+        });
+
+        willBeSuccess.then((message) => {
+          console.log(message); // 1초 후 'success message(or fulfillment value)' 출력
+        });
+
+        let willBeFail = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // reject('rejection reason');
+            throw new Error('I don\'t know wut the fork is going on.');
+          }, 1500);
+        });
+
+        willBeFail.then(() => { console.log('do nothing'); }, (message) => {
+          console.log(message); // 1.5초 후 'rejection reason' 출력
+        });
+
+        new Promise((resolve, reject) => {
+          console.log('phase one');
+          resolve();
+        }).then(() => {
+          console.log('phase two');
+        });
+         */
+
+      /*
+        function onFulfilled(onFulfilled, onRejected) {
+          console.log('success');
+        }
+        function onRejected(onFulfilled, onRejected) {
+          console.log('fail')
+        }
+
+        var pr = new Promise((resolve, reject) => { resolve(); });
+        var pr2 = pr.then(onFulfilled, onRejected);
+
+        console.log(pr !== pr2); // true
+         */
+
+      // var pr3 = new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     reject('rejection reason');
+      //     // throw new Error();
+      //   }, 1000);
+      // })
+      // var pr4 = pr3.then(() => {
+      //   console.log('moo');
+      // })
+      // var pr5 = pr4.catch((message) => {
+      //   console.log('ya');
+      // });
+      // var pr6 = pr5.then(() => {
+      //   console.log('ho');
+      // });
+
+      // new Promise((resolve, reject) => {
+      //   setTimeout(() => {
+      //     reject('rejection reason');
+      //   }, 500);
+      // }).then((msg) => {
+      //   console.log('moo');
+      // }).catch((reason) => {
+      //   console.log('ya');
+      // }).then((msg) => {
+      //   console.log('ho');
+      // });
+
+      // var pr7 = new Promise((resolve, reject) => {
+      //   resolve('me is result value');
+      // }).finally(() => {
+      //   console.log('알파카로 만든 파카를 팔까말까 고민하면 알파카파카파까?');
+      // });
+      // console.log(pr7); // Promise { <state>: "fulfilled", <value>: "me is result value" }
+
+      // var pr8 = new Promise((resolve, reject) => {
+      //   reject('me is result value');
+      // }).finally(() => {
+      //   console.log('알파카로 만든 파카를 팔까말까 고민하면 알파카파카파까?');
+      // });
+      // console.log(pr8); // Promise { <state>: "rejected", <reason>: "me is result value" }
+
+      // new Promise((resolve, reject) => {
+      //   throw new Error('What?');
+      // }).finally(() => {
+      //   console.log('엄마랑 아들이 택견을 하면 모자이크');
+      // });
+
+      var pr9 = new Promise((resolve, reject) => {
+        resolve(123);
+      });
+      var pr10 = pr9.finally(() => {
+        console.log('엄마랑 아들이 택견을 하면 모자이크');
+      });
+
+      async function fetchJson() {
+        let fetchJsonReturnValue = fetch('//localhost:8900/success-json.data', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({foo: 'bar'})
+        }).then(async resp => {
+          return resp.json();
+        });
+        // debugger;
+        return fetchJsonReturnValue;
+      }
+
+      async function wrapUp() {
+        let wrapReturnValue = fetchJson();
+        // debugger;
+        return wrapReturnValue;
+      }
+
+      async function wahappend() {
+        let result = await wrapUp();
+        // let result = wrapUp();
+        // debugger;
+        window.result = result;
+        let {message} = result; // responseText = { message: 'Everything is okay' }
+        document.querySelector('#result3').innerHTML = message;
+      }
+
+      wahappend(); // call stack: wahappend() -> wrap() -> fetchJson() -> fetch() -> XMLHttpRequest()
+    </script>
+  </article>
+</main>
+<footer>
+  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+</footer>
+</body>
+</html>

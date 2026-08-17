@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <title>Vue.js</title>
+    <script src="/lib/prism/prism.js"></script>
+  </head>
+  <body>
+    <script setup type="module">
+      import { createApp, onMounted, ref } from '/lib/vue/vue.esm-browser.js';
+
+      const pageTitle = ref("Vue 3 Composition API <script setup> 스타일");
+      const message = ref("Hello Vue! ✌️");
+      const docs = ref([
+        { title: "Vue.js 공식 메뉴얼: API 스타일", url: "https://ko.vuejs.org/guide/introduction.html#api-styles" }
+      ]);
+
+      document.title += `: ${pageTitle.value}`;
+
+      // app.component('backToHome', backToHome)
+        // .component('tableOfContents', tableOfContents);
+      // app.mount('#app');
+    </script>
+    <template>
+      <p>이 스타일은 no빌드 환경에서 안되는 걸로 보인다...</p>
+    </template>
+  </body>
+</html>

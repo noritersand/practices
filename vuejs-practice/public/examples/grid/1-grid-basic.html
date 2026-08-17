@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast UI Grid</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/tui/tui-grid.css" />
+    <link rel="stylesheet" href="/lib/prism/prism.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script src="/lib/tui/tui-grid.js"></script>
+  </head>
+  <body>
+    <div class="align-center" id="app" v-cloak>
+      <h1>{{pageTitle}}</h1>
+      <div id="grid"></div>
+      <back-to-home></back-to-home>
+    </div>
+    <script type="module">
+      import { createApp } from '/lib/vue/vue.esm-browser.js';
+      import { backToHome } from '/examples/vue/component/back-to-home.js';
+
+      createApp({
+        components: {
+          backToHome
+        },
+        created() {
+          document.title += `: ${this.pageTitle}`;
+        },
+        data() {
+          return {
+            pageTitle: "1. Basic",
+          };
+        },
+      }).mount("#app");
+
+      // 데이터
+      let gridData = [
+        { name: "Beautiful Lies", artist: "Birdy", type: "Deluxe", release: "2016.03.26", genre: "Pop" },
+        { name: "X", artist: "Ed Sheeran", type: "Deluxe", release: "2014.06.24", genre: "Pop" },
+        { name: "Moves Like Jagger", artist: "Maroon5", type: "Single", release: "2011.08.08", genre: "Pop,Rock" },
+        { name: "A Head Full Of Dreams", artist: "Coldplay", type: "Deluxe", release: "2015.12.04", genre: "Rock" },
+        { name: "21", artist: "Adele", type: "Deluxe", release: "2011.01.21", genre: "Pop,R&B" },
+        { name: "Warm On A Cold Night", artist: "HONNE", type: "EP", release: "2016.07.22", genre: "R&B,Electronic" },
+        { name: "Take Me To The Alley", artist: "Gregory Porter", type: "Deluxe", release: "2016.09.02", genre: "Jazz", },
+        { name: "Make Out", artist: "LANY", type: "EP", release: "2015.12.11", genre: "Electronic" },
+        { name: "Get Lucky", artist: "Daft Punk", type: "Single", release: "2013.04.23", genre: "Pop,Funk" },
+        { name: "Valtari", artist: "Sigur Rós", type: "EP", release: "2012.05.31", genre: "Rock" },
+        { name: "Bush", artist: "Snoop Dogg", type: "EP", release: "2015.05.12", genre: "Hiphop" },
+        { name: "2", artist: "Beyoncé", type: "Deluxe", release: "2011.07.26", genre: "Pop" },
+        { name: "I Won't Give Up", artist: "Jason Mraz", type: "Single", release: "2012.01.03", genre: "Pop" },
+        { name: "Following My Intuition", artist: "Craig David", type: "Deluxe", release: "2016.10.01", genre: "R&B,Electronic" },
+        { name: "Blue Skies", artist: "Lenka", type: "Single", release: "2015.03.18", genre: "Pop,Rock" },
+        { name: "This Is Acting", artist: "Sia", type: "EP", release: "2016.10.22", genre: "Pop" },
+        { name: "Blurryface", artist: "Twenty One Pilots", type: "EP", release: "2015.05.19", genre: "Rock" },
+        { name: "I'm Not The Only One", artist: "Sam Smith", type: "Single", release: "2014.09.15", genre: "Pop,R&B" },
+        { name: "The Magic Whip", artist: "Blur", type: "EP", release: "2015.04.27", genre: "Rock" },
+        { name: "Chaos And The Calm", artist: "James Bay", type: "EP", release: "2015.03.23", genre: "Pop,Rock" },
+      ];
+
+      // 그리드 초기화
+      const grid = new tui.Grid({
+        el: document.getElementById("grid"),
+        data: gridData,
+        scrollX: false,
+        scrollY: false,
+        rowHeaders: ["checkbox", "rowNum"],
+        columns: [
+          { header: "Name", name: "name" },
+          { header: "Artist", name: "artist" },
+          { header: "Type", name: "type" },
+          { header: "Release", name: "release" },
+          { header: "Genre", name: "genre" },
+        ],
+      });
+      tui.Grid.applyTheme("striped"); // 테마 지정: default, striped, clean 셋 중 하나 (커스텀 가능할지도?)
+      // tui.Grid.applyTheme("clean");
+    </script>
+  </body>
+</html>

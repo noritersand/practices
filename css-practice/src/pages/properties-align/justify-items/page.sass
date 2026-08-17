@@ -1,0 +1,98 @@
+@use '../../../styles/global'
+
+.item
+  background-color: seagreen
+  display: flex
+  justify-content: center
+  align-items: center
+  font: 20px bold
+  color: white
+  white-space: nowrap
+  padding: 10px
+
+  &.alt-dir
+    direction: rtl
+
+  &.fs-large
+    font-size: 32px
+
+  &.fs-small
+    font-size: 14px
+
+  &.overflow-text
+    width: 200px // 컨테이너(100px)보다 큰 상태를 연출하기 위한 강제 너비
+
+.container
+  display: grid
+  background-color: moccasin
+  gap: 10px
+  max-width: 100%
+  min-height: 100px
+  margin-bottom: 10px
+
+  // Basic keywords
+  &.ex-normal
+    grid-template-columns: repeat(2, 1fr)
+    justify-items: normal
+
+  &.ex-stretch
+    grid-template-columns: repeat(2, 1fr)
+    justify-items: stretch
+
+  // Positional alignment
+  &.ex-start
+    grid-template-columns: 1fr
+    justify-items: start
+
+  &.ex-center
+    grid-template-columns: 1fr
+    justify-items: center
+
+  &.ex-end
+    grid-template-columns: 1fr
+    justify-items: end
+
+  &.ex-flex-start-grid
+    grid-template-columns: 1fr
+    justify-items: flex-start
+
+  &.ex-flex-end-flexbox
+    display: flex // Flexbox 컨테이너 설정
+    justify-items: flex-end // Flexbox 환경이므로 작동하지 않음 (무시됨)
+
+  &.ex-self-start
+    grid-template-columns: repeat(2, 1fr)
+    justify-items: self-start
+
+  &.ex-left
+    grid-template-columns: 1fr
+    justify-items: left
+
+  &.ex-right
+    grid-template-columns: 1fr
+    justify-items: right
+
+  &.ex-anchor-center
+    grid-template-columns: 1fr
+    justify-items: anchor-center
+
+  // Baseline alignment
+  &.ex-baseline
+    grid-template-columns: repeat(2, 1fr)
+    justify-items: baseline
+
+  // Overflow alignment
+  &.ex-safe
+    grid-template-columns: 100px
+    justify-items: safe center
+    overflow: auto
+
+  &.ex-unsafe
+    grid-template-columns: 100px
+    justify-items: unsafe center
+    overflow: auto
+
+  // Legacy alignment
+  &.ex-legacy
+    grid-template-columns: 1fr
+    justify-items: legacy center
