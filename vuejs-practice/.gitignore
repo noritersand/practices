@@ -1,3 +1,10 @@
+# npm
 node_modules/
 yarn.lock
 package-lock.json
+
+# Yarn
+yarn.lock
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
