@@ -17,4 +17,5 @@ public/styles/**/*.css.map
 public/pages/**/*.css
 public/pages/**/*.css.map
 
-.claude
+.claude/*.local.md
+.claude/*.local.json
