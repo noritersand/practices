@@ -1,86 +1,107 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>CSS: Shaking Button</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>CSS: Shaking Button</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>Shaking Button</h1>
+    <main>
+      <article>
+        <h1>Shaking Button</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>흔들리는 효과와 심장박동 효과 데모 페이지.</p>
-      <p>버튼은 눌러도 아무 일도 일어나지 않습니다.</p>
-      <div class="important">
-        <p>ℹ️ <a href="https://alvarotrigo.com/fullPage/" target="_blank">fullPage.js</a>에서 파쿠리함</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>구현</h2>
-      <div class="code-result">
-        <div class="bg">
-          <div class="configure-button-group">
-            <span class="tooltip-host">
-              <button class="configure-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2"
-                     stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <path
-                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                Shaking Button #1
-              </button>
-              <span class="tooltip">💡 Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah-</span>
-            </span>
-            <button class="configure-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2"
-                   stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path
-                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-              </svg>
-              Shaking Button #2 <span class="tooltip">💡 Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah-</span>
-            </button>
+        <section>
+          <h2>개요</h2>
+          <p>흔들리는 효과와 심장박동 효과 데모 페이지.</p>
+          <p>버튼은 눌러도 아무 일도 일어나지 않습니다.</p>
+          <div class="important">
+            <p>ℹ️ <a href="https://alvarotrigo.com/fullPage/" target="_blank">fullPage.js</a>에서 파쿠리함</p>
           </div>
-          <button type="button" class="btn-buy">
-            <span class="btn-text">👉 Heartbeat Button</span>
-          </button>
-          <p class="demo-text">DEMO</p>
-          <script>
-            (function() {
-              var buttons = document.querySelectorAll('.configure-button');
-              buttons.forEach(function(button) {
-                setInterval(function() {
-                  button.classList.add('shake-once');
-                  setTimeout(function() {
-                    button.classList.remove('shake-once');
-                  }, 2000);
-                }, 4000);
-              });
-            })();
-          </script>
-        </div>
-      </div>
-      <div class="code-wrapper">
-        <pre><code class="language-sass"><!--
+        </section>
+
+        <section>
+          <h2>구현</h2>
+          <div class="code-result">
+            <div class="bg">
+              <div class="configure-button-group">
+                <span class="tooltip-host">
+                  <button class="configure-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="3"></circle>
+                      <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                      ></path>
+                    </svg>
+                    Shaking Button #1
+                  </button>
+                  <span class="tooltip"
+                    >💡 Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                    blah blah blah blah blah blah blah-</span
+                  >
+                </span>
+                <button class="configure-button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                    ></path>
+                  </svg>
+                  Shaking Button #2
+                  <span class="tooltip"
+                    >💡 Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                    blah blah blah blah blah blah blah-</span
+                  >
+                </button>
+              </div>
+              <button type="button" class="btn-buy">
+                <span class="btn-text">👉 Heartbeat Button</span>
+              </button>
+              <p class="demo-text">DEMO</p>
+              <script>
+                (function () {
+                  var buttons = document.querySelectorAll('.configure-button');
+                  buttons.forEach(function (button) {
+                    setInterval(function () {
+                      button.classList.add('shake-once');
+                      setTimeout(function () {
+                        button.classList.remove('shake-once');
+                      }, 2000);
+                    }, 4000);
+                  });
+                })();
+              </script>
+            </div>
+          </div>
+          <div class="code-wrapper">
+            <pre><code class="language-sass"><!--
         // Shaking button
         @keyframes tilt-shaking
           0%
@@ -184,7 +205,7 @@
           box-shadow: 0 4px 24px rgba(103, 151, 255, 0.1), 0 12px 64px rgba(103, 151, 255, 0.1)
           animation: heartbeat 1s ease infinite
         --></code></pre>
-        <pre><code class="language-js"><!--
+            <pre><code class="language-js"><!--
         (function() {
           var buttons = document.querySelectorAll('.configure-button');
           buttons.forEach(function(button) {
@@ -197,14 +218,13 @@
           });
         })();
         --></code></pre>
-      </div>
-    </section>
+          </div>
+        </section>
+      </article>
+    </main>
 
-  </article>
-</main>
-
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

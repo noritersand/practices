@@ -1,51 +1,46 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>Event handle disabled tag</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>Event handle disabled tag</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>Event handle disabled tag</h1>
-    <p>disabled 상태의 버튼에 걸린 이벤트 핸들러는 작동할까?</p>
-    <div class="code-result">
-      <button type="button" class="buttons" disabled id="ipt1" onclick="fn()">눌러봐요</button>
-      <br />
-      <button type="button" class="buttons" disabled id="ipt2">눌러봐요2</button>
-    </div>
-    disabled 상태인 태그는 이벤트가 발생하지 않음
-    <hr class="light" />
-    <p>그럼 input 계열이 아닌 disabled 태그는 어떨까?</p>
-    <div class="code-result">
-      <div
-        id="dv1"
-        disabled
-        onclick="fn()"
-        style="background-color: rgb(130, 203, 206); padding: 5px"
-      >
-        나도 눌러봐
-      </div>
-    </div>
-    div의 이벤트는 disabled 상태여도 멀쩡히 작동한다.
-    <script>
-      function fn() {
-        alert('진짜 누르다니!');
-      }
+  <body>
+    <main>
+      <article>
+        <h1>Event handle disabled tag</h1>
+        <p>disabled 상태의 버튼에 걸린 이벤트 핸들러는 작동할까?</p>
+        <div class="code-result">
+          <button type="button" class="buttons" disabled id="ipt1" onclick="fn()">눌러봐요</button>
+          <br />
+          <button type="button" class="buttons" disabled id="ipt2">눌러봐요2</button>
+        </div>
+        disabled 상태인 태그는 이벤트가 발생하지 않음
+        <hr class="light" />
+        <p>그럼 input 계열이 아닌 disabled 태그는 어떨까?</p>
+        <div class="code-result">
+          <div id="dv1" disabled onclick="fn()" style="background-color: rgb(130, 203, 206); padding: 5px">
+            나도 눌러봐
+          </div>
+        </div>
+        div의 이벤트는 disabled 상태여도 멀쩡히 작동한다.
+        <script>
+          function fn() {
+            alert('진짜 누르다니!');
+          }
 
-      $('#ipt2').click(fn);
-    </script>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+          $('#ipt2').click(fn);
+        </script>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

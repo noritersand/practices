@@ -33,13 +33,12 @@ export default function UseEffectWithUseRefTest(): React.JSX.Element {
       <br />
       <div className="important">
         <p>
-          ref나 ref.current의 변화는 useEffect에서 감지하지 못한다. ref 객체의 참조 동일성을
-          보장하기 때문에, 최초 렌더링 외엔 작동하지 않는다.
+          ref나 ref.current의 변화는 useEffect에서 감지하지 못한다. ref 객체의 참조 동일성을 보장하기 때문에, 최초
+          렌더링 외엔 작동하지 않는다.
         </p>
         <p>
-          ref.current의 변화는 리렌더링을 유발하지 않기 때문에 이 값의 변화 자체로 로그가 출력되진
-          않는다. 다만, rerenderTrigger의 변화로 리렌더링이 발생했을 때, ref.current 값이 변했다면
-          그 때는 useEffect에서 감지한다.
+          ref.current의 변화는 리렌더링을 유발하지 않기 때문에 이 값의 변화 자체로 로그가 출력되진 않는다. 다만,
+          rerenderTrigger의 변화로 리렌더링이 발생했을 때, ref.current 값이 변했다면 그 때는 useEffect에서 감지한다.
         </p>
       </div>
     </section>

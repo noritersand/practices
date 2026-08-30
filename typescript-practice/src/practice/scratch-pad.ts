@@ -13,6 +13,4 @@
   if (typeof o !== 'undefined') {
     console.log('## ', o.a); // XXX test code
   }
-
-
 }

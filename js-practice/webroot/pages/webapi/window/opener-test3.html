@@ -1,38 +1,38 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>opener test 3</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script>
-    var newWindow;
+  <head>
+    <title>opener test 3</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script>
+      var newWindow;
 
-    function openNewWindow() {
-      newWindow = window.open('opener-test4.html', 'newWindow');
-    }
+      function openNewWindow() {
+        newWindow = window.open('opener-test4.html', 'newWindow');
+      }
 
-    function sendMeData(data) {
-      var txt = '<font color=\'red\'>자식창에서 받아온 값 : </font>';
-      document.getElementById('process').innerHTML = txt;
-      document.getElementById('result').innerHTML = data;
-    }
-  </script>
-</head>
+      function sendMeData(data) {
+        var txt = "<font color='red'>자식창에서 받아온 값 : </font>";
+        document.getElementById('process').innerHTML = txt;
+        document.getElementById('result').innerHTML = data;
+      }
+    </script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>opener test #3</h1>
-    <input type="button" value="자식창 열기" onclick="openNewWindow()" /><br />
-    <span id="process"></span><span id="result"></span>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+  <body>
+    <main>
+      <article>
+        <h1>opener test #3</h1>
+        <input type="button" value="자식창 열기" onclick="openNewWindow()" /><br />
+        <span id="process"></span><span id="result"></span>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

@@ -1,47 +1,47 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>animation</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>animation</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>animation</h1>
+    <main>
+      <article>
+        <h1>animation</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>animation은 스타일 사이에 애니메이션을 적용할 때 사용한다.</p>
-      <p>다음 프로퍼티들의 약어다:</p>
-      <ul>
-        <li>animation-name</li>
-        <li>animation-duration</li>
-        <li>animation-timing-function</li>
-        <li>animation-delay</li>
-        <li>animation-iteration-count</li>
-        <li>animation-direction</li>
-        <li>animation-fill-mode</li>
-        <li>animation-play-state</li>
-        <li>animation-timeline</li>
-      </ul>
-    </section>
+        <section>
+          <h2>개요</h2>
+          <p>animation은 스타일 사이에 애니메이션을 적용할 때 사용한다.</p>
+          <p>다음 프로퍼티들의 약어다:</p>
+          <ul>
+            <li>animation-name</li>
+            <li>animation-duration</li>
+            <li>animation-timing-function</li>
+            <li>animation-delay</li>
+            <li>animation-iteration-count</li>
+            <li>animation-direction</li>
+            <li>animation-fill-mode</li>
+            <li>animation-play-state</li>
+            <li>animation-timeline</li>
+          </ul>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-js"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-js"><!--
       /* @keyframes duration | easing-function | delay |
       iteration-count | direction | fill-mode | play-state | name */
       animation: 3s ease-in 1s 2 reverse both paused slidein;
@@ -54,14 +54,14 @@
         3s linear slidein,
         3s ease-out 5s slideout;
       --></code></pre>
-      <div class="important">
-        <p>🚧 아직은 설명하기 너무 복잡해서 예시만 작성하고 보류</p>
-      </div>
-    </section>
+          <div class="important">
+            <p>🚧 아직은 설명하기 너무 복잡해서 예시만 작성하고 보류</p>
+          </div>
+        </section>
 
-    <section>
-      <h2>fadeIn</h2>
-      <div class="code-wrapper">
+        <section>
+          <h2>fadeIn</h2>
+          <div class="code-wrapper">
             <pre><code class="language-html"><!--
 <script>
 function toggleActive() {
@@ -79,7 +79,7 @@ function toggleActive() {
 <div class="fade-in-box blue active"></div>
 <div class="fade-in-box green"></div>
             --></code></pre>
-        <pre><code class="language-css"><!--
+            <pre><code class="language-css"><!--
 .fade-in-box.blue {
   background-color: #2771c6;
 }
@@ -110,33 +110,35 @@ function toggleActive() {
   }
 }
             --></code></pre>
-      </div>
-      <div class="code-result">
-        <script>
-          function toggleActive() {
-            const fadeElements = document.querySelectorAll('.fade-in-box');
-            fadeElements.forEach(function(el) {
-              if (el.classList.contains('active')) {
-                el.classList.remove('active');
-              } else {
-                el.classList.add('active');
+          </div>
+          <div class="code-result">
+            <script>
+              function toggleActive() {
+                const fadeElements = document.querySelectorAll('.fade-in-box');
+                fadeElements.forEach(function (el) {
+                  if (el.classList.contains('active')) {
+                    el.classList.remove('active');
+                  } else {
+                    el.classList.add('active');
+                  }
+                });
               }
-            });
-          }
-        </script>
-        <button class="buttons lightgray size-large" onclick="toggleActive()" style="margin-bottom: 10px">눌러봐</button>
-        <div class="fade-in-box blue active"></div>
-        <div class="fade-in-box green"></div>
-      </div>
-    </section>
+            </script>
+            <button class="buttons lightgray size-large" onclick="toggleActive()" style="margin-bottom: 10px">
+              눌러봐
+            </button>
+            <div class="fade-in-box blue active"></div>
+            <div class="fade-in-box green"></div>
+          </div>
+        </section>
 
-    <section>
-      <h2>sun-rise</h2>
-      <div class="code-wrapper">
+        <section>
+          <h2>sun-rise</h2>
+          <div class="code-wrapper">
             <pre><code class="language-html"><!--
 <div class="sun"></div>
         --></code></pre>
-        <pre><code class="language-css"><!--
+            <pre><code class="language-css"><!--
 .sun {
   background-color: yellow;
   border-radius: 50%; /* creates a circular background */
@@ -156,16 +158,16 @@ function toggleActive() {
   }
 }
         --></code></pre>
-      </div>
-      <div class="code-result">
-        <div class="sun"></div>
-      </div>
-    </section>
-  </article>
-</main>
+          </div>
+          <div class="code-result">
+            <div class="sun"></div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

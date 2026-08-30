@@ -1,65 +1,55 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>CSS: Floating Label</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
-<main>
-  <article>
-    <h1>Floating Label</h1>
+  <head>
+    <title>CSS: Floating Label</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+    <main>
+      <article>
+        <h1>Floating Label</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>입력란에 포커스가 생기면 placeholder를 테두리로 들어올리는 기능</p>
-    </section>
+        <section>
+          <h2>개요</h2>
+          <p>입력란에 포커스가 생기면 placeholder를 테두리로 들어올리는 기능</p>
+        </section>
 
-    <section>
-      <h2>구현</h2>
-      <div class="field">
-        <input
-          type="text"
-          required
-          autocomplete="off"
-          id="username"
-          value="fixalot@example.com"
-        />
-        <label
-          for="username"
-          title="로그인 이메일을 입력하세요"
-          data-title="로그인 이메일"
-        ></label>
-      </div>
+        <section>
+          <h2>구현</h2>
+          <div class="field">
+            <input type="text" required autocomplete="off" id="username" value="fixalot@example.com" />
+            <label for="username" title="로그인 이메일을 입력하세요" data-title="로그인 이메일"></label>
+          </div>
 
-      <div class="field">
-        <input type="password" required autocomplete="off" id="password" />
-        <label for="password" title="비밀번호를 입력하세요" data-title="비밀번호"></label>
-      </div>
+          <div class="field">
+            <input type="password" required autocomplete="off" id="password" />
+            <label for="password" title="비밀번호를 입력하세요" data-title="비밀번호"></label>
+          </div>
 
-      <br />
-      <p>
-        소스 출처:
-        <a href="https://codepen.io/tayfunerbilen/pen/qMKxeQ" target="_blank"
-        >https://codepen.io/tayfunerbilen/pen/qMKxeQ</a
-        >
-      </p>
-    </section>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+          <br />
+          <p>
+            소스 출처:
+            <a href="https://codepen.io/tayfunerbilen/pen/qMKxeQ" target="_blank"
+              >https://codepen.io/tayfunerbilen/pen/qMKxeQ</a
+            >
+          </p>
+        </section>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

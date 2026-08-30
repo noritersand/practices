@@ -23,9 +23,11 @@ export default function ImmerTest1(): React.JSX.Element {
   });
 
   function updateObject(replacement: string): void {
-    setItem(prev => produce(prev, draft => {
-      draft.subItem.shape = replacement
-    }));
+    setItem(prev =>
+      produce(prev, draft => {
+        draft.subItem.shape = replacement;
+      })
+    );
   }
 
   useEffect((): void => {
@@ -36,11 +38,7 @@ export default function ImmerTest1(): React.JSX.Element {
     <section>
       <h2>Immer 테스트</h2>
       <span>{item.subItem.shape}</span>
-      <button
-        className="mini"
-        onClick={() => updateObject('🍉')}
-        aria-label={`아이템을 수박으로 변경하기`}
-      >
+      <button className="mini" onClick={() => updateObject('🍉')} aria-label={`아이템을 수박으로 변경하기`}>
         수박으로 변경하기
       </button>
     </section>

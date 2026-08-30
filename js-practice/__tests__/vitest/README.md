@@ -2,7 +2,6 @@
 
 - [Getting Started | Guide | Vitest](https://vitest.dev/guide/)
 
-
 ## 테스트 케이스 작성법
 
 - 테스트 케이스는 `test()` 안에 작성한다.
@@ -33,7 +32,6 @@ describe('add 함수', () => {
 
 `describe()`는 테스트 케이스를 슈트로 묶어 그룹화, 설명, 특정 슈트 실행/건너뛰기를 위한 도구일 뿐, 그 외에 별도의 기능은 없다. 테스트 로직 자체는 `it()`이나 `test()`가 담당하며, `describe()`는 구조화와 가독성을 위한 보조적인 역할이다.
 
-
 ## true, false 체크는 그냥 true, false로
 
 믿기 힘들겠지만, `.toBe(true)` 는 `.true` 와 같다:
@@ -47,11 +45,9 @@ expect(false).false; // ✅
 expect(2 === 2).false; // ❌
 ```
 
-
 ## toBe()와 toEqual()의 차이
 
 `toBe()`는 값이나 객체의 주소를 비교하고, `toEqual()`은 값이나 객체의 내용을 비교한다.
-
 
 ## 부정문
 
@@ -60,4 +56,3 @@ expect(2 === 2).false; // ❌
 ```js
 expect(original).not.toBe(cloned);
 ```
- 

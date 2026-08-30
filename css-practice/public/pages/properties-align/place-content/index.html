@@ -1,60 +1,75 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>place-content</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>place-content</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>place-content</h1>
+    <main>
+      <article>
+        <h1>place-content</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p><code class="language-css">place-content</code>는 그리드, 플렉스박스, 또는 멀티 컬럼 레이아웃에서 컨테이너(부모 엘리먼트) 내부의 아이템(자식 엘리먼트) 트랙
-        전체에 대해 블록 방향(<code class="language-css">align-content</code>)과 인라인 방향(<code
-          class="language-css">justify-content</code>)의 정렬 및 정렬 공간 배분을 한 번에 설정할 때 사용하는 단축 프로퍼티다.
-      </p>
-      <pre><code class="language-css"><!--
+        <section>
+          <h2>개요</h2>
+          <p>
+            <code class="language-css">place-content</code>는 그리드, 플렉스박스, 또는 멀티 컬럼 레이아웃에서
+            컨테이너(부모 엘리먼트) 내부의 아이템(자식 엘리먼트) 트랙 전체에 대해 블록 방향(<code class="language-css"
+              >align-content</code
+            >)과 인라인 방향(<code class="language-css">justify-content</code>)의 정렬 및 정렬 공간 배분을 한 번에
+            설정할 때 사용하는 단축 프로퍼티다.
+          </p>
+          <pre><code class="language-css"><!--
   place-content: align-content justify-content
   --></code></pre>
-      <p>공백을 기준으로 좌측이 <code class="language-css">align-content</code>, 우측이 <code
-        class="language-css">justify-content</code>로 해석된다.</p>
-      <p>부모 엘리먼트(컨테이너)에 지정하는 프로퍼티이며, 프로퍼티를 생략했을 때의 기본값은 <code class="language-css">normal normal</code>(또는 단축하여 <code
-        class="language-css">normal</code>)이다.</p>
-    </section>
+          <p>
+            공백을 기준으로 좌측이 <code class="language-css">align-content</code>, 우측이
+            <code class="language-css">justify-content</code>로 해석된다.
+          </p>
+          <p>
+            부모 엘리먼트(컨테이너)에 지정하는 프로퍼티이며, 프로퍼티를 생략했을 때의 기본값은
+            <code class="language-css">normal normal</code>(또는 단축하여 <code class="language-css">normal</code>)이다.
+          </p>
+        </section>
 
-    <section>
-      <h2>특이사항</h2>
-      <h4>값 지정 방식</h4>
-      <p>하나의 값만 지정하면 <code class="language-css">align-content</code>와 <code class="language-css">justify-content</code>
-        모두에 동일한 값이 적용된다. 두 개의 값을 지정하면 첫 번째 값은 <code class="language-css">align-content</code>(수직/블록 방향), 두 번째 값은 <code
-          class="language-css">justify-content</code>(수평/인라인 방향)로 작동한다.</p>
-      <h4>레이아웃 방식에 따른 적용 차이</h4>
-      <p>일반 레이아웃(Block/Inline)에서는 기본적으로 콘텐츠 트랙 개념이 없어 작동하지 않는다. 주로 플렉스 컨테이너, 그리드 컨테이너, 멀티 컬럼 컨테이너에서 컨테이너 내부 여유 공간이 존재할 때
-        전체 자식 엘리먼트들의 배치 및 간격을 제어하기 위해 사용한다. 플렉스 컨테이너에서는 주 축 방향의 정렬에 <code class="language-css">justify-content</code>가,
-        교차 축 방향의 정렬(여러 줄 플렉스 라인 분배)에 <code class="language-css">align-content</code>가 작동한다. 또한, <code
-          class="language-css">align-content</code>는 <code class="language-css">left</code>나 <code class="language-css">right</code>
-        값을 지원하지 않으며, <code class="language-css">justify-content</code>는 <code class="language-css">baseline</code> 계열 값을
-        지원하지 않는 특성이 있다.</p>
-    </section>
+        <section>
+          <h2>특이사항</h2>
+          <h4>값 지정 방식</h4>
+          <p>
+            하나의 값만 지정하면 <code class="language-css">align-content</code>와
+            <code class="language-css">justify-content</code> 모두에 동일한 값이 적용된다. 두 개의 값을 지정하면 첫 번째
+            값은 <code class="language-css">align-content</code>(수직/블록 방향), 두 번째 값은
+            <code class="language-css">justify-content</code>(수평/인라인 방향)로 작동한다.
+          </p>
+          <h4>레이아웃 방식에 따른 적용 차이</h4>
+          <p>
+            일반 레이아웃(Block/Inline)에서는 기본적으로 콘텐츠 트랙 개념이 없어 작동하지 않는다. 주로 플렉스 컨테이너,
+            그리드 컨테이너, 멀티 컬럼 컨테이너에서 컨테이너 내부 여유 공간이 존재할 때 전체 자식 엘리먼트들의 배치 및
+            간격을 제어하기 위해 사용한다. 플렉스 컨테이너에서는 주 축 방향의 정렬에
+            <code class="language-css">justify-content</code>가, 교차 축 방향의 정렬(여러 줄 플렉스 라인 분배)에
+            <code class="language-css">align-content</code>가 작동한다. 또한,
+            <code class="language-css">align-content</code>는 <code class="language-css">left</code>나
+            <code class="language-css">right</code> 값을 지원하지 않으며,
+            <code class="language-css">justify-content</code>는 <code class="language-css">baseline</code> 계열 값을
+            지원하지 않는 특성이 있다.
+          </p>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-sass"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-sass"><!--
   // Positional alignment
   place-content: center start;
   place-content: start center;
@@ -80,216 +95,248 @@
   place-content: revert-layer;
   place-content: unset;
   --></code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Values</h2>
+        <section>
+          <h2>Values</h2>
 
-      <h3>Positional Alignment</h3>
+          <h3>Positional Alignment</h3>
 
-      <h4>center start</h4>
-      <p>수직 방향은 중앙(<code class="language-css">center</code>)에 정렬하고, 수평 방향은 시작점(<code class="language-css">start</code>)에
-        정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>center start</h4>
+          <p>
+            수직 방향은 중앙(<code class="language-css">center</code>)에 정렬하고, 수평 방향은 시작점(<code
+              class="language-css"
+              >start</code
+            >)에 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: center start
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-center-start">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-center-start">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>start center</h4>
-      <p>수직 방향은 시작점(<code class="language-css">start</code>)에 정렬하고, 수평 방향은 중앙(<code class="language-css">center</code>)에
-        정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>start center</h4>
+          <p>
+            수직 방향은 시작점(<code class="language-css">start</code>)에 정렬하고, 수평 방향은 중앙(<code
+              class="language-css"
+              >center</code
+            >)에 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: start center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-start-center">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-start-center">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>end left</h4>
-      <p>수직 방향은 끝점(<code class="language-css">end</code>)에 정렬하고, 수평 방향은 왼쪽(<code class="language-css">left</code>) 가장자리에
-        맞춰 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>end left</h4>
+          <p>
+            수직 방향은 끝점(<code class="language-css">end</code>)에 정렬하고, 수평 방향은 왼쪽(<code
+              class="language-css"
+              >left</code
+            >) 가장자리에 맞춰 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: end left
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-end-left">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-end-left">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>flex-start center</h4>
-      <p>플렉스 레이아웃 교차 축 수직 정렬을 플렉스 컨테이너의 시작점(<code class="language-css">flex-start</code>)에 맞추고, 수평 주 축 정렬은 중앙(<code
-        class="language-css">center</code>)에 맞춘다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-start center</h4>
+          <p>
+            플렉스 레이아웃 교차 축 수직 정렬을 플렉스 컨테이너의 시작점(<code class="language-css">flex-start</code>)에
+            맞추고, 수평 주 축 정렬은 중앙(<code class="language-css">center</code>)에 맞춘다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: flex
   flex-wrap: wrap
   place-content: flex-start center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex-start-center">
-          <div class="item">Flex Item 1</div>
-          <div class="item">Flex Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex-start-center">
+              <div class="item">Flex Item 1</div>
+              <div class="item">Flex Item 2</div>
+            </div>
+          </div>
 
-      <h4>flex-end center</h4>
-      <p>플렉스 레이아웃 교차 축 수직 정렬을 플렉스 컨테이너의 끝점(<code class="language-css">flex-end</code>)에 맞추고, 수평 주 축 정렬은 중앙(<code
-        class="language-css">center</code>)에 맞춘다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-end center</h4>
+          <p>
+            플렉스 레이아웃 교차 축 수직 정렬을 플렉스 컨테이너의 끝점(<code class="language-css">flex-end</code>)에
+            맞추고, 수평 주 축 정렬은 중앙(<code class="language-css">center</code>)에 맞춘다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: flex
   flex-wrap: wrap
   place-content: flex-end center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex-end-center">
-          <div class="item">Flex Item 1</div>
-          <div class="item">Flex Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex-end-center">
+              <div class="item">Flex Item 1</div>
+              <div class="item">Flex Item 2</div>
+            </div>
+          </div>
 
-      <h3>Baseline Alignment</h3>
+          <h3>Baseline Alignment</h3>
 
-      <h4>baseline center</h4>
-      <p>수직 방향은 베이스라인(<code class="language-css">baseline</code>)을 기준으로 정렬하고, 수평 방향은 중앙(<code class="language-css">center</code>)
-        정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>baseline center</h4>
+          <p>
+            수직 방향은 베이스라인(<code class="language-css">baseline</code>)을 기준으로 정렬하고, 수평 방향은
+            중앙(<code class="language-css">center</code>) 정렬을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: baseline center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-baseline-center">
-          <div class="item font-small">Text Small</div>
-          <div class="item font-large">Text Large</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-baseline-center">
+              <div class="item font-small">Text Small</div>
+              <div class="item font-large">Text Large</div>
+            </div>
+          </div>
 
-      <h4>first baseline space-evenly</h4>
-      <p>수직 방향은 첫 번째 베이스라인(<code class="language-css">first baseline</code>) 기준 정렬을 적용하고, 수평 방향은 아이템 사이 및 양 끝 여백을 균등하게
-        분배(<code class="language-css">space-evenly</code>)한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>first baseline space-evenly</h4>
+          <p>
+            수직 방향은 첫 번째 베이스라인(<code class="language-css">first baseline</code>) 기준 정렬을 적용하고, 수평
+            방향은 아이템 사이 및 양 끝 여백을 균등하게 분배(<code class="language-css">space-evenly</code>)한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: first baseline space-evenly
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-first-baseline-space-evenly">
-          <div class="item font-small">Text Small</div>
-          <div class="item font-large">Text Large</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-first-baseline-space-evenly">
+              <div class="item font-small">Text Small</div>
+              <div class="item font-large">Text Large</div>
+            </div>
+          </div>
 
-      <h4>last baseline right</h4>
-      <p>수직 방향은 마지막 베이스라인(<code class="language-css">last baseline</code>) 기준 정렬을 적용하고, 수평 방향은 오른쪽(<code
-        class="language-css">right</code>) 정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>last baseline right</h4>
+          <p>
+            수직 방향은 마지막 베이스라인(<code class="language-css">last baseline</code>) 기준 정렬을 적용하고, 수평
+            방향은 오른쪽(<code class="language-css">right</code>) 정렬을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   place-content: last baseline right
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-last-baseline-right">
-          <div class="item font-small">Text<br>Line 2</div>
-          <div class="item font-large">Text<br>Line 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-last-baseline-right">
+              <div class="item font-small">Text<br />Line 2</div>
+              <div class="item font-large">Text<br />Line 2</div>
+            </div>
+          </div>
 
-      <h3>Distributed Alignment</h3>
+          <h3>Distributed Alignment</h3>
 
-      <h4>space-between space-evenly</h4>
-      <p>수직 방향은 첫 번째와 마지막 트랙을 양 끝에 붙이고 사이 여백을 균등하게 분배(<code class="language-css">space-between</code>)하며, 수평 방향은 모든 아이템
-        간격 및 양 끝 간격을 완전히 동일하게 분배(<code class="language-css">space-evenly</code>)한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-between space-evenly</h4>
+          <p>
+            수직 방향은 첫 번째와 마지막 트랙을 양 끝에 붙이고 사이 여백을 균등하게 분배(<code class="language-css"
+              >space-between</code
+            >)하며, 수평 방향은 모든 아이템 간격 및 양 끝 간격을 완전히 동일하게 분배(<code class="language-css"
+              >space-evenly</code
+            >)한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   grid-template-rows: repeat(2, 40px)
   place-content: space-between space-evenly
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-between-space-evenly">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-          <div class="item">Item 4</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-between-space-evenly">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+            </div>
+          </div>
 
-      <h4>space-around space-evenly</h4>
-      <p>수직 방향은 각 트랙 양옆에 동일한 여백을 배치(<code class="language-css">space-around</code>)하고, 수평 방향은 모든 아이템 간격 및 양 끝 간격을 완전히
-        동일하게 분배(<code class="language-css">space-evenly</code>)한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-around space-evenly</h4>
+          <p>
+            수직 방향은 각 트랙 양옆에 동일한 여백을 배치(<code class="language-css">space-around</code>)하고, 수평
+            방향은 모든 아이템 간격 및 양 끝 간격을 완전히 동일하게 분배(<code class="language-css">space-evenly</code
+            >)한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   grid-template-rows: repeat(2, 40px)
   place-content: space-around space-evenly
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-around-space-evenly">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-          <div class="item">Item 4</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-around-space-evenly">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+            </div>
+          </div>
 
-      <h4>space-evenly stretch</h4>
-      <p>수직 방향은 트랙 간격과 양 끝 간격을 균등 분배(<code class="language-css">space-evenly</code>)하고, 수평 방향은 자식 엘리먼트를 트랙에 맞게 늘려
-        배치(<code class="language-css">stretch</code>)한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-evenly stretch</h4>
+          <p>
+            수직 방향은 트랙 간격과 양 끝 간격을 균등 분배(<code class="language-css">space-evenly</code>)하고, 수평
+            방향은 자식 엘리먼트를 트랙에 맞게 늘려 배치(<code class="language-css">stretch</code>)한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, auto)
   grid-template-rows: repeat(2, 40px)
   place-content: space-evenly stretch
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-evenly-stretch">
-          <div class="item width-auto">Item 1</div>
-          <div class="item width-auto">Item 2</div>
-          <div class="item width-auto">Item 3</div>
-          <div class="item width-auto">Item 4</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-evenly-stretch">
+              <div class="item width-auto">Item 1</div>
+              <div class="item width-auto">Item 2</div>
+              <div class="item width-auto">Item 3</div>
+              <div class="item width-auto">Item 4</div>
+            </div>
+          </div>
 
-      <h4>stretch space-evenly</h4>
-      <p>수직 방향은 남은 공간에 맞게 트랙 및 자식 엘리먼트를 늘리고(<code class="language-css">stretch</code>), 수평 방향은 모든 간격을 균등 분배(<code
-        class="language-css">space-evenly</code>)한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>stretch space-evenly</h4>
+          <p>
+            수직 방향은 남은 공간에 맞게 트랙 및 자식 엘리먼트를 늘리고(<code class="language-css">stretch</code>), 수평
+            방향은 모든 간격을 균등 분배(<code class="language-css">space-evenly</code>)한다.
+          </p>
+          <pre><code class="language-sass"><!--
   display: grid
   grid-template-columns: repeat(2, 80px)
   grid-template-rows: repeat(2, auto)
   place-content: stretch space-evenly
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-stretch-space-evenly">
-          <div class="item height-auto">Item 1</div>
-          <div class="item height-auto">Item 2</div>
-          <div class="item height-auto">Item 3</div>
-          <div class="item height-auto">Item 4</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-stretch-space-evenly">
+              <div class="item height-auto">Item 1</div>
+              <div class="item height-auto">Item 2</div>
+              <div class="item height-auto">Item 3</div>
+              <div class="item height-auto">Item 4</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-    </section>
-
-  </article>
-</main>
-
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

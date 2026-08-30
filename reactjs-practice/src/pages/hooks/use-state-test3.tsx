@@ -20,11 +20,15 @@ export default function UseStateTest3(): React.JSX.Element {
   }
 
   function wait(ms) {
-    return new Promise(resolve => setTimeout(() => {resolve(ms)}, ms))
+    return new Promise(resolve =>
+      setTimeout(() => {
+        resolve(ms);
+      }, ms)
+    );
   }
 
   function addSomething(i?: number) {
-    setList(prev => [...prev, (i != null) ? i.toString() : (++seq.current).toString()]);
+    setList(prev => [...prev, i != null ? i.toString() : (++seq.current).toString()]);
   }
 
   function findSomething() {
@@ -32,11 +36,7 @@ export default function UseStateTest3(): React.JSX.Element {
     addSomething();
   }
 
-  useEffect(() => {
-
-  }, []);
-
-
+  useEffect(() => {}, []);
 
   return (
     <article>
@@ -44,12 +44,10 @@ export default function UseStateTest3(): React.JSX.Element {
       <button onClick={findSomething}>찾기</button>
       <button onClick={resetAndAdd}>초기화</button>
       <ul>
-        {
-          list.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))
-        }
+        {list.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
       </ul>
     </article>
-  )
+  );
 }

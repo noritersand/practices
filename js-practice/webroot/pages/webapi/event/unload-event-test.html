@@ -1,68 +1,68 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>unload event test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
-  <script src="/static/lib/prism/prism.js"></script>
-  <script>
-    function openNewWindow(url, name) {
-      var specs = 'left=10,top=10,width=500,height=200';
-      specs += ',toolbar=yes,menubar=no,status=yes,scrollbars=yes,resizable=yes';
-      window.open(url, name, specs);
-    }
+  <head>
+    <title>unload event test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+    <script src="/static/lib/prism/prism.js"></script>
+    <script>
+      function openNewWindow(url, name) {
+        var specs = 'left=10,top=10,width=500,height=200';
+        specs += ',toolbar=yes,menubar=no,status=yes,scrollbars=yes,resizable=yes';
+        window.open(url, name, specs);
+      }
 
-    function fnOfParent() {
-      alert('팝업 창이 죽기 전 함수 호출');
-    }
-  </script>
-</head>
+      function fnOfParent() {
+        alert('팝업 창이 죽기 전 함수 호출');
+      }
+    </script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>unload event test</h1>
-    <p>윈도우가 <code>close</code> 되기 직전에 함수 실행이 가능한지 테스트한다.</p>
-    <section>
-      <div class="code-result">
-        <p>즉시 닫히면서 부모 함수 호출하는 새 창 팝업:</p>
-        <button
-          type="button"
-          class="buttons"
-          onclick="openNewWindow('/pages/webapi/event/close-immediatly-with-invoke-parent.html?e=unload', 'child')"
-        >
-          unload 버전
-        </button>
-        <button
-          type="button"
-          class="buttons"
-          onclick="openNewWindow('/pages/webapi/event/close-immediatly-with-invoke-parent.html?e=beforeunload', 'child')"
-        >
-          beforeunload 버전
-        </button>
-      </div>
-    </section>
-    <section>
-      <div id="resultText" style="color: red"></div>
-    </section>
-    <p>자식 창에서 대충 이런식으로:</p>
-    <pre><code class="language-js"><!--
+  <body>
+    <main>
+      <article>
+        <h1>unload event test</h1>
+        <p>윈도우가 <code>close</code> 되기 직전에 함수 실행이 가능한지 테스트한다.</p>
+        <section>
+          <div class="code-result">
+            <p>즉시 닫히면서 부모 함수 호출하는 새 창 팝업:</p>
+            <button
+              type="button"
+              class="buttons"
+              onclick="openNewWindow('/pages/webapi/event/close-immediatly-with-invoke-parent.html?e=unload', 'child')"
+            >
+              unload 버전
+            </button>
+            <button
+              type="button"
+              class="buttons"
+              onclick="
+                openNewWindow('/pages/webapi/event/close-immediatly-with-invoke-parent.html?e=beforeunload', 'child')
+              "
+            >
+              beforeunload 버전
+            </button>
+          </div>
+        </section>
+        <section>
+          <div id="resultText" style="color: red"></div>
+        </section>
+        <p>자식 창에서 대충 이런식으로:</p>
+        <pre><code class="language-js"><!--
     window.addEventListener('unload', (event) => {
       opener.fnOfParent();
     });
     --></code></pre>
-    <p>
-      하면 됨. 이름이 비슷한 <code>beforeunload</code>는 사용방법이 좀 다르니 해당 문서를 볼 것
-    </p>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+        <p>하면 됨. 이름이 비슷한 <code>beforeunload</code>는 사용방법이 좀 다르니 해당 문서를 볼 것</p>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

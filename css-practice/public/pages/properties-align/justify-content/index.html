@@ -1,53 +1,65 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>justify-content</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>justify-content</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>justify-content</h1>
+    <main>
+      <article>
+        <h1>justify-content</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p><code class="language-css">justify-content</code>는 플렉스 컨테이너나 그리드 컨테이너에서 정렬 주축(Main Axis)을 따라 아이템들 사이의 공간 분배 및
-        정렬 방식을 설정하는 프로퍼티다.</p>
-      <p>부모 엘리먼트(플렉스 컨테이너, 그리드 컨테이너)에 지정하는 프로퍼티다.</p>
-      <p>프로퍼티를 생략했을 때의 기본값은 <code class="language-css">normal</code>이다.</p>
-      <p>일반 블록 레이아웃(Block Layout)이나 인라인 레이아웃에서는 정렬 주축 개념이 없으므로 작동하지 않으며, <code class="language-css">display: flex</code>
-        또는 <code class="language-css">display: grid</code>가 설정된 부모 컨테이너에서만 작동한다.</p>
-    </section>
+        <section>
+          <h2>개요</h2>
+          <p>
+            <code class="language-css">justify-content</code>는 플렉스 컨테이너나 그리드 컨테이너에서 정렬 주축(Main
+            Axis)을 따라 아이템들 사이의 공간 분배 및 정렬 방식을 설정하는 프로퍼티다.
+          </p>
+          <p>부모 엘리먼트(플렉스 컨테이너, 그리드 컨테이너)에 지정하는 프로퍼티다.</p>
+          <p>프로퍼티를 생략했을 때의 기본값은 <code class="language-css">normal</code>이다.</p>
+          <p>
+            일반 블록 레이아웃(Block Layout)이나 인라인 레이아웃에서는 정렬 주축 개념이 없으므로 작동하지 않으며,
+            <code class="language-css">display: flex</code> 또는 <code class="language-css">display: grid</code>가
+            설정된 부모 컨테이너에서만 작동한다.
+          </p>
+        </section>
 
-    <section>
-      <h2>특이사항</h2>
-      <h4>레이아웃 방식에 따른 차이</h4>
-      <p>플렉스박스에서는 <code class="language-css">flex-direction</code>에 의해 결정된 주축(Main Axis) 방향을 따라 플렉스 아이템들을 정렬한다.</p>
-      <p>그리드 레이아웃에서는 그리드 컨테이너 내부의 인라인(Inline/가로) 축을 따라 전체 그리드 트랙을 정렬한다.</p>
-      <h4>flex-start, flex-end와 start, end, left, right</h4>
-      <p><code class="language-css">flex-start</code>와 <code class="language-css">flex-end</code>는 플렉스 컨테이너에서만 의미를 가지는
-        레거시 값이며, 신규 명세인 <code class="language-css">start</code>와 <code class="language-css">end</code>는 논리적
-        방향(writing-mode)을 따르는 범용 정렬 값이다.</p>
-      <p><code class="language-css">left</code>와 <code class="language-css">right</code>는 글자 방향과 관계없이 물리적인 왼쪽, 오른쪽으로 강제
-        정렬한다.</p>
-    </section>
+        <section>
+          <h2>특이사항</h2>
+          <h4>레이아웃 방식에 따른 차이</h4>
+          <p>
+            플렉스박스에서는 <code class="language-css">flex-direction</code>에 의해 결정된 주축(Main Axis) 방향을 따라
+            플렉스 아이템들을 정렬한다.
+          </p>
+          <p>그리드 레이아웃에서는 그리드 컨테이너 내부의 인라인(Inline/가로) 축을 따라 전체 그리드 트랙을 정렬한다.</p>
+          <h4>flex-start, flex-end와 start, end, left, right</h4>
+          <p>
+            <code class="language-css">flex-start</code>와 <code class="language-css">flex-end</code>는 플렉스
+            컨테이너에서만 의미를 가지는 레거시 값이며, 신규 명세인 <code class="language-css">start</code>와
+            <code class="language-css">end</code>는 논리적 방향(writing-mode)을 따르는 범용 정렬 값이다.
+          </p>
+          <p>
+            <code class="language-css">left</code>와 <code class="language-css">right</code>는 글자 방향과 관계없이
+            물리적인 왼쪽, 오른쪽으로 강제 정렬한다.
+          </p>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-sass"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-sass"><!--
 /* Positional alignment */
 justify-content: center
 justify-content: start
@@ -77,88 +89,92 @@ justify-content: revert
 justify-content: revert-layer
 justify-content: unset
       --></code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Values</h2>
+        <section>
+          <h2>Values</h2>
 
-      <h3>Positional alignment</h3>
-      <p>주축 선상을 기준점(중앙, 시작점, 끝점 등)에 맞추어 정렬한다.</p>
+          <h3>Positional alignment</h3>
+          <p>주축 선상을 기준점(중앙, 시작점, 끝점 등)에 맞추어 정렬한다.</p>
 
-      <h4>center</h4>
-      <p>아이템들을 주축의 중앙으로 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>center</h4>
+          <p>아이템들을 주축의 중앙으로 정렬한다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: center
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-center">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-center">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+            </div>
+          </div>
 
-      <h4>start / end</h4>
-      <p>글쓰기 방향(writing-mode)의 시작점 또는 끝점에 맞춰 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>start / end</h4>
+          <p>글쓰기 방향(writing-mode)의 시작점 또는 끝점에 맞춰 정렬한다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: start
 // 또는 justify-content: end
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-start">
-          <div class="item">Item 1 (start)</div>
-          <div class="item">Item 2</div>
-        </div>
-        <div class="container ex-end">
-          <div class="item">Item 1 (end)</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-start">
+              <div class="item">Item 1 (start)</div>
+              <div class="item">Item 2</div>
+            </div>
+            <div class="container ex-end">
+              <div class="item">Item 1 (end)</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>flex-start / flex-end</h4>
-      <p>플렉스 컨테이너의 시작점 또는 끝점에 맞춰 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-start / flex-end</h4>
+          <p>플렉스 컨테이너의 시작점 또는 끝점에 맞춰 정렬한다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: flex-start
 // 또는 justify-content: flex-end
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex-start">
-          <div class="item">Flex Start</div>
-          <div class="item">Item</div>
-        </div>
-        <div class="container ex-flex-end">
-          <div class="item">Flex End</div>
-          <div class="item">Item</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex-start">
+              <div class="item">Flex Start</div>
+              <div class="item">Item</div>
+            </div>
+            <div class="container ex-flex-end">
+              <div class="item">Flex End</div>
+              <div class="item">Item</div>
+            </div>
+          </div>
 
-      <h4>left / right</h4>
-      <p>글쓰기 방향과 무관하게 물리적 왼쪽 또는 오른쪽 가장자리에 맞춘다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>left / right</h4>
+          <p>글쓰기 방향과 무관하게 물리적 왼쪽 또는 오른쪽 가장자리에 맞춘다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: left
 // 또는 justify-content: right
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-left">
-          <div class="item">Left</div>
-          <div class="item">Item</div>
-        </div>
-        <div class="container ex-right">
-          <div class="item">Right</div>
-          <div class="item">Item</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-left">
+              <div class="item">Left</div>
+              <div class="item">Item</div>
+            </div>
+            <div class="container ex-right">
+              <div class="item">Right</div>
+              <div class="item">Item</div>
+            </div>
+          </div>
 
-      <h3>Normal alignment</h3>
+          <h3>Normal alignment</h3>
 
-      <h4>normal</h4>
-      <p>레이아웃 컨텍스트의 기본 정렬을 적용한다. 플렉스박스에서는 <code class="language-css">flex-start</code>처럼 작동하며, 그리드에서는 <code
-        class="language-css">stretch</code>처럼 작동하여 트랙 크기가 <code class="language-css">auto</code>일 때 남는 공간을 채운다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>normal</h4>
+          <p>
+            레이아웃 컨텍스트의 기본 정렬을 적용한다. 플렉스박스에서는
+            <code class="language-css">flex-start</code>처럼 작동하며, 그리드에서는
+            <code class="language-css">stretch</code>처럼 작동하여 트랙 크기가 <code class="language-css">auto</code>일
+            때 남는 공간을 채운다.
+          </p>
+          <pre><code class="language-sass"><!--
 // Flexbox에서의 normal
 display: flex
 justify-content: normal
@@ -168,126 +184,136 @@ display: grid
 grid-template-columns: auto auto
 justify-content: normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-normal-flex">
-          <div class="item">Flex Normal</div>
-          <div class="item">Item</div>
-        </div>
-        <div class="container ex-normal-grid">
-          <div class="item">Grid Normal</div>
-          <div class="item">Item</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-normal-flex">
+              <div class="item">Flex Normal</div>
+              <div class="item">Item</div>
+            </div>
+            <div class="container ex-normal-grid">
+              <div class="item">Grid Normal</div>
+              <div class="item">Item</div>
+            </div>
+          </div>
 
-      <h3>Distributed alignment</h3>
-      <p>아이템들 사이 또는 주변에 여백을 균등 분배한다.</p>
+          <h3>Distributed alignment</h3>
+          <p>아이템들 사이 또는 주변에 여백을 균등 분배한다.</p>
 
-      <h4>space-between</h4>
-      <p>첫 아이템은 시작점에, 마지막 아이템은 끝점에 붙이고 남은 여백을 아이템 사이에 동일하게 배분한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-between</h4>
+          <p>첫 아이템은 시작점에, 마지막 아이템은 끝점에 붙이고 남은 여백을 아이템 사이에 동일하게 배분한다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: space-between
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-between">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-between">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+            </div>
+          </div>
 
-      <h4>space-around</h4>
-      <p>각 아이템의 양옆에 동일한 여백을 부여한다. 양 끝 여백의 크기는 아이템 사이 여백 크기의 절반이 된다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-around</h4>
+          <p>각 아이템의 양옆에 동일한 여백을 부여한다. 양 끝 여백의 크기는 아이템 사이 여백 크기의 절반이 된다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: space-around
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-around">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-around">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+            </div>
+          </div>
 
-      <h4>space-evenly</h4>
-      <p>양 끝 여백을 포함하여 모든 아이템 사이의 여백을 완벽히 동일하게 분배한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>space-evenly</h4>
+          <p>양 끝 여백을 포함하여 모든 아이템 사이의 여백을 완벽히 동일하게 분배한다.</p>
+          <pre><code class="language-sass"><!--
 display: flex
 justify-content: space-evenly
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-space-evenly">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-space-evenly">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+            </div>
+          </div>
 
-      <h4>stretch</h4>
-      <p>아이템의 너비가 <code class="language-css">auto</code>로 설정되어 명시적인 크기가 없을 때, 주축 공간을 채우기 위해 아이템 크기를 늘린다.</p>
-      <div class="important">
-        <p>⛔ stretch의 자동 크기 조절 기능은 Grid Layout 내에서만 적용된다. Flexbox에선 flex-grow가 크기 조절을 담당하며, stretch는 flex-start와 동일하게
-          작동한다.</p>
-      </div>
-      <pre><code class="language-sass"><!--
+          <h4>stretch</h4>
+          <p>
+            아이템의 너비가 <code class="language-css">auto</code>로 설정되어 명시적인 크기가 없을 때, 주축 공간을
+            채우기 위해 아이템 크기를 늘린다.
+          </p>
+          <div class="important">
+            <p>
+              ⛔ stretch의 자동 크기 조절 기능은 Grid Layout 내에서만 적용된다. Flexbox에선 flex-grow가 크기 조절을
+              담당하며, stretch는 flex-start와 동일하게 작동한다.
+            </p>
+          </div>
+          <pre><code class="language-sass"><!--
 display: grid
 grid-template-columns: auto auto
 justify-content: stretch
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-stretch">
-          <div class="item">Stretch 1</div>
-          <div class="item">Stretch 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-stretch">
+              <div class="item">Stretch 1</div>
+              <div class="item">Stretch 2</div>
+            </div>
+          </div>
 
-      <h3>Overflow alignment</h3>
-      <p>컨테이너 공간보다 아이템의 총 너비가 커서 넘칠 때(Overflow) 정렬 기준 방식을 제어한다.</p>
+          <h3>Overflow alignment</h3>
+          <p>컨테이너 공간보다 아이템의 총 너비가 커서 넘칠 때(Overflow) 정렬 기준 방식을 제어한다.</p>
 
-      <h4>safe center</h4>
-      <p>중앙 정렬을 시도하지만, 넘침이 발생하면 정렬 방식을 <code class="language-css">start</code>로 자동 전환한다. 왼쪽 영역이 잘리지 않으므로 스크롤을 내려 모든 아이템을
-        확인할 수 있다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>safe center</h4>
+          <p>
+            중앙 정렬을 시도하지만, 넘침이 발생하면 정렬 방식을
+            <code class="language-css">start</code>로 자동 전환한다. 왼쪽 영역이 잘리지 않으므로 스크롤을 내려 모든
+            아이템을 확인할 수 있다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: flex
       justify-content: safe center
       overflow-x: auto
       width: 800px
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-safe-center">
-          <div class="item">Item 1 (Start visible)</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-          <div class="item">Item 4</div>
-          <div class="item">Item 5</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-safe-center">
+              <div class="item">Item 1 (Start visible)</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+              <div class="item">Item 5</div>
+            </div>
+          </div>
 
-      <h4>unsafe center</h4>
-      <p>넘침 여부와 관계없이 강제로 중앙 정렬을 유지한다. 아이템이 좌우 양쪽으로 넘쳐나며, 왼쪽 밖으로 넘어간 콘텐츠는 스크롤을 풀어도 접근할 수 없어 데이터 손실이 발생한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>unsafe center</h4>
+          <p>
+            넘침 여부와 관계없이 강제로 중앙 정렬을 유지한다. 아이템이 좌우 양쪽으로 넘쳐나며, 왼쪽 밖으로 넘어간
+            콘텐츠는 스크롤을 풀어도 접근할 수 없어 데이터 손실이 발생한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: flex
       justify-content: unsafe center
       overflow-x: auto
       width: 800px
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-unsafe-center">
-          <div class="item">Item 1 (Loss region)</div>
-          <div class="item">Item 2</div>
-          <div class="item">Item 3</div>
-          <div class="item">Item 4</div>
-          <div class="item">Item 5</div>
-        </div>
-      </div>
-    </section>
+          <div class="code-result">
+            <div class="container ex-unsafe-center">
+              <div class="item">Item 1 (Loss region)</div>
+              <div class="item">Item 2</div>
+              <div class="item">Item 3</div>
+              <div class="item">Item 4</div>
+              <div class="item">Item 5</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-  </article>
-</main>
-
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

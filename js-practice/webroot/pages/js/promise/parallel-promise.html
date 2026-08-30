@@ -1,86 +1,86 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>Promise의 병렬 처리</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>Promise의 병렬 처리</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>Promise의 병렬 처리</h1>
-    <p></p>
-    <div class="important">
-      <p>콘솔 패널을 열어서 확인</p>
-    </div>
-  </article>
-</main>
-<script>
-  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-  const wait2 = ms =>
-    new Promise(resolve =>
-      setTimeout(() => {
-        resolve(ms);
-      }, ms)
-    );
-  const wait3 = ms =>
-    new Promise(resolve =>
-      setTimeout(() => {
-        console.log(`${ms}ms timeout done.`);
-        resolve(ms);
-      }, ms)
-    );
+  <body>
+    <main>
+      <article>
+        <h1>Promise의 병렬 처리</h1>
+        <p></p>
+        <div class="important">
+          <p>콘솔 패널을 열어서 확인</p>
+        </div>
+      </article>
+    </main>
+    <script>
+      const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+      const wait2 = ms =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            resolve(ms);
+          }, ms)
+        );
+      const wait3 = ms =>
+        new Promise(resolve =>
+          setTimeout(() => {
+            console.log(`${ms}ms timeout done.`);
+            resolve(ms);
+          }, ms)
+        );
 
-  var concurrent = async () => {
-    let startTime = new Date();
+      var concurrent = async () => {
+        let startTime = new Date();
 
-    let result = wait(3000);
-    let result2 = wait(2000);
-    let result3 = wait(1000);
-    await result;
-    await result2;
-    await result3;
+        let result = wait(3000);
+        let result2 = wait(2000);
+        let result3 = wait(1000);
+        await result;
+        await result2;
+        await result3;
 
-    let endTime = new Date();
-    console.log(`done. It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
-  };
-  // concurrent(); // It takes 3013 milliseconds.
+        let endTime = new Date();
+        console.log(`done. It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
+      };
+      // concurrent(); // It takes 3013 milliseconds.
 
-  var concurrent2 = async () => {
-    return await Promise.all([wait2(3000), wait2(2000), wait2(1000)]);
-  };
-  // concurrent2().then(console.log);
+      var concurrent2 = async () => {
+        return await Promise.all([wait2(3000), wait2(2000), wait2(1000)]);
+      };
+      // concurrent2().then(console.log);
 
-  var concurrent3 = async () => {
-    let startTime = new Date();
+      var concurrent3 = async () => {
+        let startTime = new Date();
 
-    await Promise.all([wait2(3000), wait2(2000), wait2(1000)]).then(console.log);
+        await Promise.all([wait2(3000), wait2(2000), wait2(1000)]).then(console.log);
 
-    let endTime = new Date();
-    console.log(`done. It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
-  };
-  // concurrent3();
+        let endTime = new Date();
+        console.log(`done. It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
+      };
+      // concurrent3();
 
-  var pickOne = async () => {
-    return await Promise.race([wait2(3000), wait2(2000), wait2(1000)]);
-  };
-  // pickOne().then(console.log);
+      var pickOne = async () => {
+        return await Promise.race([wait2(3000), wait2(2000), wait2(1000)]);
+      };
+      // pickOne().then(console.log);
 
-  var parallel = function() {
-    wait2(3000).then(console.log);
-    wait2(2000).then(console.log);
-    wait2(1000).then(console.log);
-  };
-  parallel();
-</script>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+      var parallel = function () {
+        wait2(3000).then(console.log);
+        wait2(2000).then(console.log);
+        wait2(1000).then(console.log);
+      };
+      parallel();
+    </script>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

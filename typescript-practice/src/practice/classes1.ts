@@ -38,10 +38,9 @@
 
   let noob = new Newbie('John', 20);
   noob.getName();
-// noob.name; // ⛔ error TS2341: Property 'name' is private and only accessible within class 'Newbie'.
+  // noob.name; // ⛔ error TS2341: Property 'name' is private and only accessible within class 'Newbie'.
   noob.setName('Waldo');
   noob.getName2();
   noob.setName2('Waldo2');
-// noob.#name; // ⛔ error TS2339: Property '#name' does not exist on type 'Newbie'.
-
+  // noob.#name; // ⛔ error TS2339: Property '#name' does not exist on type 'Newbie'.
 }

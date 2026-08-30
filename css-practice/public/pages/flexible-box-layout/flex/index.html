@@ -1,41 +1,41 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>flex</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>flex</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>flex</h1>
+    <main>
+      <article>
+        <h1>flex</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>flex는 아이템이 컨테이너의 남은 공간에 맞게 어떻게 늘어나거나 줄어드는지를 설정하는 단축 프로퍼티다.</p>
-      <pre><code class="language-sass"><!--
+        <section>
+          <h2>개요</h2>
+          <p>flex는 아이템이 컨테이너의 남은 공간에 맞게 어떻게 늘어나거나 줄어드는지를 설정하는 단축 프로퍼티다.</p>
+          <pre><code class="language-sass"><!--
       flex: flex-grow flex-shrink flex-basis
       --></code></pre>
-      <p>flex-grow, flex-shrink, flex-basis를 한 번에 설정하며 각 프로퍼티는 공백으로 구분한다.</p>
-      <p>이 프로퍼티는 플렉스 아이템에 직접 지정한다.</p>
-      <p>flex의 기본값은 <code class="language-js">0 1 auto</code>다.</p>
-    </section>
+          <p>flex-grow, flex-shrink, flex-basis를 한 번에 설정하며 각 프로퍼티는 공백으로 구분한다.</p>
+          <p>이 프로퍼티는 플렉스 아이템에 직접 지정한다.</p>
+          <p>flex의 기본값은 <code class="language-js">0 1 auto</code>다.</p>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-css"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-css"><!--
       /* Keyword value */
       flex: none; /* 0 0 auto */
 
@@ -65,47 +65,52 @@
       flex: revert-layer;
       flex: unset;
       --></code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Values</h2>
+        <section>
+          <h2>Values</h2>
 
-      <h3>One value</h3>
-      <p>값이 하나일 때는 flex-grow 혹은 flex-basis다. 단위가 없는 숫자로 지정하면 flex-grow로 인식하며 flex-shrink는 1, flex-basis는 0%로 지정된다. 단위가
-        있는 값은 flex-basis로 인식하며 나머지 속성은 1로 지정된다.</p>
-      <div class="code-result">
-        <div class="container">
-          <div class="item" style="flex: 1;">flex: 1</div>
-          <div class="item" style="flex: 2;">flex: 2</div>
-          <div class="item" style="flex: 3;">flex: 3</div>
-          <div class="item" style="flex: 4;">flex: 4</div>
-        </div>
-      </div>
+          <h3>One value</h3>
+          <p>
+            값이 하나일 때는 flex-grow 혹은 flex-basis다. 단위가 없는 숫자로 지정하면 flex-grow로 인식하며 flex-shrink는
+            1, flex-basis는 0%로 지정된다. 단위가 있는 값은 flex-basis로 인식하며 나머지 속성은 1로 지정된다.
+          </p>
+          <div class="code-result">
+            <div class="container">
+              <div class="item" style="flex: 1">flex: 1</div>
+              <div class="item" style="flex: 2">flex: 2</div>
+              <div class="item" style="flex: 3">flex: 3</div>
+              <div class="item" style="flex: 4">flex: 4</div>
+            </div>
+          </div>
 
-      <h3>Two values</h3>
-      <p>값이 둘일 때 첫 번째 자리는 flex-grow가 되고 나머지는 값에 따라 flex-shrink 혹은 flex-basis가 된다. 두 번째 자리를 단위가 없는 숫자로 지정하면 flex-shrink로
-        인식하며 flex-basis는 0%로 지정된다. 단위가 있는 숫자는 flex-basis로 인식하고 flex-shrink는 1이 된다.</p>
-      <div class="code-result">
-        <div class="container">
-          <div class="item" style="flex: 1 1;">flex: 1 1</div>
-          <div class="item" style="flex: 2 200px;">flex: 2 200px</div>
-        </div>
-      </div>
+          <h3>Two values</h3>
+          <p>
+            값이 둘일 때 첫 번째 자리는 flex-grow가 되고 나머지는 값에 따라 flex-shrink 혹은 flex-basis가 된다. 두 번째
+            자리를 단위가 없는 숫자로 지정하면 flex-shrink로 인식하며 flex-basis는 0%로 지정된다. 단위가 있는 숫자는
+            flex-basis로 인식하고 flex-shrink는 1이 된다.
+          </p>
+          <div class="code-result">
+            <div class="container">
+              <div class="item" style="flex: 1 1">flex: 1 1</div>
+              <div class="item" style="flex: 2 200px">flex: 2 200px</div>
+            </div>
+          </div>
 
-      <h3>Three values</h3>
-      <p>값이 셋이면 순서대로 flex-grow, flex-shrink, flex-basis로 인식한다.</p>
-      <div class="code-result">
-        <div class="container">
-          <div class="item" style="flex: 1 1 100px;">flex: 1 1 100px</div>
-          <div class="item" style="flex: 2 2 200px;">flex: 2 2 200px</div>
-        </div>
-      </div>
-    </section>
-  </article>
-</main>
+          <h3>Three values</h3>
+          <p>값이 셋이면 순서대로 flex-grow, flex-shrink, flex-basis로 인식한다.</p>
+          <div class="code-result">
+            <div class="container">
+              <div class="item" style="flex: 1 1 100px">flex: 1 1 100px</div>
+              <div class="item" style="flex: 2 2 200px">flex: 2 2 200px</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

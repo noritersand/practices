@@ -3,21 +3,20 @@
  */
 
 {
-
   interface Database {
     public: {
       Tables: {
         posts: {
           Row: {
-            seq: number
-            title: string
-            content: string
-            created_at: string
-            updated_at: string
-          }
-        }
-      }
-    }
+            seq: number;
+            title: string;
+            content: string;
+            created_at: string;
+            updated_at: string;
+          };
+        };
+      };
+    };
   }
 
   type Post = Database['public']['Tables']['posts']['Row'];
@@ -27,8 +26,8 @@
     title: 'Hello World',
     content: 'This is my first post.',
     created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  }
+    updated_at: new Date().toISOString()
+  };
 
   console.log(post);
 }

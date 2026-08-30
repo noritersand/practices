@@ -1,6 +1,6 @@
 import {PI} from './src/constant';
 
-console.log("Hello via Bun!");
+console.log('Hello via Bun!');
 console.log('PI:', PI);
 
 function fn(n: number) {

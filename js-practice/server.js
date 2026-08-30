@@ -107,6 +107,6 @@ app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: `요청한 경로가 존재하지 않습니다: ${req.originalUrl}`,
-    code: -99,
+    code: -99
   });
 });

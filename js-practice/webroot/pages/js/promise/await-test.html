@@ -1,103 +1,103 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>await</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>await</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>await</h1>
-    <p></p>
-    <div class="important">
-      <p>콘솔 패널을 열어서 확인</p>
-    </div>
-  </article>
-</main>
-<script>
-  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-  const wait2 = ms =>
-    setTimeout(() => {
-      console.log('hel?lo');
-    }, ms);
+  <body>
+    <main>
+      <article>
+        <h1>await</h1>
+        <p></p>
+        <div class="important">
+          <p>콘솔 패널을 열어서 확인</p>
+        </div>
+      </article>
+    </main>
+    <script>
+      const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+      const wait2 = ms =>
+        setTimeout(() => {
+          console.log('hel?lo');
+        }, ms);
 
-  var fn2 = async () => {
-    console.log('개성공단의 반대말은?');
-    await 789;
-    console.log('🤣🤣🤣');
-  };
-  fn2();
-  console.log('고양이실패단');
+      var fn2 = async () => {
+        console.log('개성공단의 반대말은?');
+        await 789;
+        console.log('🤣🤣🤣');
+      };
+      fn2();
+      console.log('고양이실패단');
 
-  var fn2 = async () => {
-    // window.temp1 = await 123;
-    // window.temp2 = Promise.resolve(123).then(() => undefined);
-    // return null;
-    return await 1;
-  };
+      var fn2 = async () => {
+        // window.temp1 = await 123;
+        // window.temp2 = Promise.resolve(123).then(() => undefined);
+        // return null;
+        return await 1;
+      };
 
-  // var r2 = fn2();
+      // var r2 = fn2();
 
-  async function f2() {
-    var y = 20;
-    console.log(y); // 20
-  }
-
-  // f2();
-
-  var timeTest = async () => {
-    let startTime = new Date();
-
-    // await wait(1000);
-    // await wait(1000);
-    // await wait(1000);
-
-    waitSync(2000);
-
-    let endTime = new Date();
-    console.log(`It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
-  };
-  // timeTest();
-
-  var timeTest2 = async () => {
-    let startTime = new Date();
-
-    // let result = wait(1000);
-    // let result2 = wait(1000);
-    // let result3 = wait(1000);
-    // await result;
-    // await result2;
-    // await result3;
-
-    waitSync(2000);
-
-    let endTime = new Date();
-    console.log(`It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
-  };
-
-  // timeTest2();
-
-  function waitSync(ms) {
-    let startTime = new Date();
-    while (true) {
-      let elapsed = new Date().getTime() - startTime.getTime();
-      if (elapsed > ms) {
-        console.log(`After ${elapsed} milliseconds`);
-        return elapsed;
-        break;
+      async function f2() {
+        var y = 20;
+        console.log(y); // 20
       }
-    }
-  }
-</script>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+
+      // f2();
+
+      var timeTest = async () => {
+        let startTime = new Date();
+
+        // await wait(1000);
+        // await wait(1000);
+        // await wait(1000);
+
+        waitSync(2000);
+
+        let endTime = new Date();
+        console.log(`It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
+      };
+      // timeTest();
+
+      var timeTest2 = async () => {
+        let startTime = new Date();
+
+        // let result = wait(1000);
+        // let result2 = wait(1000);
+        // let result3 = wait(1000);
+        // await result;
+        // await result2;
+        // await result3;
+
+        waitSync(2000);
+
+        let endTime = new Date();
+        console.log(`It takes ${endTime.getTime() - startTime.getTime()} milliseconds.`);
+      };
+
+      // timeTest2();
+
+      function waitSync(ms) {
+        let startTime = new Date();
+        while (true) {
+          let elapsed = new Date().getTime() - startTime.getTime();
+          if (elapsed > ms) {
+            console.log(`After ${elapsed} milliseconds`);
+            return elapsed;
+            break;
+          }
+        }
+      }
+    </script>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

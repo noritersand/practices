@@ -112,9 +112,7 @@ test('time zone #1', () => {
   // 한국 시간대 기준으로 dayjs 객체 생성하기
   const someday1 = dayjs('2020-01-01T09:00:00');
   expect(someday1.tz('Asia/Seoul').toISOString()).toBe('2020-01-01T00:00:00.000Z');
-  expect(dayjs.tz('2020-01-01T09:00:00', 'Asia/Seoul').toISOString()).toBe(
-    '2020-01-01T00:00:00.000Z'
-  );
+  expect(dayjs.tz('2020-01-01T09:00:00', 'Asia/Seoul').toISOString()).toBe('2020-01-01T00:00:00.000Z');
 });
 
 test('time zone #2', () => {

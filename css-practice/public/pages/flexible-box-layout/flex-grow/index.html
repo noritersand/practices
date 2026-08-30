@@ -1,48 +1,46 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>flex-grow</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>flex-grow</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>flex-grow</h1>
+    <main>
+      <article>
+        <h1>flex-grow</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>
-        flex-grow는 Flexbox에서 플렉스 아이템이 사용 가능한 남은 공간을 자동으로
-        채울 때, 다른 아이템에 비해 얼마나 더 차지할지를 결정한다.
-      </p>
-      <p>값이 0이면 추가 공간을 차지하지 않고 지정된 크기를 유지한다. 같은 플렉스 컨테이너 내에서 항목들의 grow 값이 다르면, 다르게 지정된 만큼 비율적으로 더
-        차지하려고 한다.
-      </p>
-      <p>반대 개념의 프로퍼티로 flex-shrink가 있다.</p>
-      <p>플렉스 아이템에 직접 지정한다.</p>
-    </section>
+        <section>
+          <h2>개요</h2>
+          <p>
+            flex-grow는 Flexbox에서 플렉스 아이템이 사용 가능한 남은 공간을 자동으로 채울 때, 다른 아이템에 비해 얼마나
+            더 차지할지를 결정한다.
+          </p>
+          <p>
+            값이 0이면 추가 공간을 차지하지 않고 지정된 크기를 유지한다. 같은 플렉스 컨테이너 내에서 항목들의 grow 값이
+            다르면, 다르게 지정된 만큼 비율적으로 더 차지하려고 한다.
+          </p>
+          <p>반대 개념의 프로퍼티로 flex-shrink가 있다.</p>
+          <p>플렉스 아이템에 직접 지정한다.</p>
+        </section>
 
-    <section>
-      <h2>Values</h2>
-      <p>
-        flex-grow 값은 음수를 제외한 number 타입으로 지정할 수 있다. 0.1 같은
-        양의 실수도 가능. 기본값은 0이다.
-      </p>
-      <div class="code-wrapper">
-        <pre><code class="language-css"><!--
+        <section>
+          <h2>Values</h2>
+          <p>flex-grow 값은 음수를 제외한 number 타입으로 지정할 수 있다. 0.1 같은 양의 실수도 가능. 기본값은 0이다.</p>
+          <div class="code-wrapper">
+            <pre><code class="language-css"><!--
         .item:nth-of-type(1) {
           flex-grow: 1;
         }
@@ -56,7 +54,7 @@
           flex-grow: 4.5;
         }
         --></code></pre>
-        <pre><code class="language-html"><!--
+            <pre><code class="language-html"><!--
         <div class="container">
           <div class="item">1</div>
           <div class="item">2</div>
@@ -64,50 +62,48 @@
           <div class="item">4</div>
         </div>
         --></code></pre>
-      </div>
-      <div class="code-result">
-        <div class="container">
-          <div class="item nth1">1</div>
-          <div class="item nth2">2</div>
-          <div class="item nth3">3</div>
-          <div class="item nth4">4</div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h2>값이 0일 때</h2>
-      <p>값을 생략하거나 0으로 지정하면 남는 공간이 있어도 원래의 크기를 유지한다.</p>
-      <div class="code-wrapper">
+          </div>
+          <div class="code-result">
+            <div class="container">
+              <div class="item nth1">1</div>
+              <div class="item nth2">2</div>
+              <div class="item nth3">3</div>
+              <div class="item nth4">4</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>값이 0일 때</h2>
+          <p>값을 생략하거나 0으로 지정하면 남는 공간이 있어도 원래의 크기를 유지한다.</p>
+          <div class="code-wrapper">
             <pre><code class="language-css"><!--
             .item.zero {
               flex-grow: 0;
             }
             --></code></pre>
-        <pre><code class="language-html"><!--
+            <pre><code class="language-html"><!--
             <div class="container">
               <div class="item zero">0</div>
             </div>
             --></code></pre>
-      </div>
-      <div class="code-result">
-        <div class="container">
-          <div class="item zero">안커짐</div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h2>width 프로퍼티를 함께 사용하는 경우</h2>
-      <p>
-        width와 flex-grow가 함께 사용되면 width는 flex-basis를 대신하여 기본 크기로 작동한다.
-        아이템의 초기 크기는 width의 의해 결정되지만, 공간이 남는 경우 flex-grow에 의해
-        비율적으로 커진다.
-      </p>
-      <p>
-        아래의 예시에서는 더 많은 width를 할당받은 아이템이 더 많은 기본 크기를 갖고 시작하지만
-        커지는 비율은 같다.
-      </p>
-      <div class="code-wrapper">
-        <pre><code class="language-css"><!--
+          </div>
+          <div class="code-result">
+            <div class="container">
+              <div class="item zero">안커짐</div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>width 프로퍼티를 함께 사용하는 경우</h2>
+          <p>
+            width와 flex-grow가 함께 사용되면 width는 flex-basis를 대신하여 기본 크기로 작동한다. 아이템의 초기 크기는
+            width의 의해 결정되지만, 공간이 남는 경우 flex-grow에 의해 비율적으로 커진다.
+          </p>
+          <p>
+            아래의 예시에서는 더 많은 width를 할당받은 아이템이 더 많은 기본 크기를 갖고 시작하지만 커지는 비율은 같다.
+          </p>
+          <div class="code-wrapper">
+            <pre><code class="language-css"><!--
         .item.with-width1 {
           width: 50px;
           flex-grow: 1;
@@ -117,25 +113,25 @@
           flex-grow: 1;
         }
         --></code></pre>
-        <pre><code class="language-html"><!--
+            <pre><code class="language-html"><!--
         <div class="container">
           <div class="item with-width1">1</div>
           <div class="item with-width2">2</div>
         </div>
         --></code></pre>
-      </div>
-      <div class="code-result">
-        <div class="container">
-          <div class="item with-width1">1</div>
-          <div class="item with-width2">2</div>
-        </div>
-      </div>
-    </section>
-  </article>
-</main>
+          </div>
+          <div class="code-result">
+            <div class="container">
+              <div class="item with-width1">1</div>
+              <div class="item with-width2">2</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-<footer>
-  <a class="back-button" href="/pages">⬅ index로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ index로 돌아가기</a>
+    </footer>
+  </body>
 </html>

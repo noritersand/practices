@@ -1,34 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
+  <head>
+    <title>browser history test: child</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script>
+      function moveToMother() {
+        location.href = '/pages/webapi/history/browser-history-test.html';
+      }
+    </script>
+  </head>
 
-<head>
-  <title>browser history test: child</title>
-  <meta charset="utf-8">
-  <link rel="icon" type="image/png" href="/static/images/favicon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script>
-    function moveToMother() {
-      location.href = '/pages/webapi/history/browser-history-test.html';
-    }
-  </script>
-</head>
-
-<body>
-<div>
-  <h1>browser history test: child</h1>
-  <button type="button" onclick="history.back()">뒤로 가세요</button>
-  <br>
-  <button type="button" onclick="moveToMother()">이거 누르면 입력란 날라감</button>
-  <br>
-  <div class="important">
-    <h4>테스트 결과</h4>
-    <p><code>history.back()</code>을 사용하면 해당 페이지를 다시 요청하는게 아니라 브라우저에 캐싱된 페이지를 다시 그린다.</p>
-    <p>그런데 입력란이 있는 페이지에서 새로고침 했을 때도 입력값이 보존되는걸 보면 단순히 브라우저 캐싱 페이지를 로딩할 때만 입력값이 보존된다고 볼 수는 없다.</p>
-  </div>
-</div>
-</body>
-
+  <body>
+    <div>
+      <h1>browser history test: child</h1>
+      <button type="button" onclick="history.back()">뒤로 가세요</button>
+      <br />
+      <button type="button" onclick="moveToMother()">이거 누르면 입력란 날라감</button>
+      <br />
+      <div class="important">
+        <h4>테스트 결과</h4>
+        <p>
+          <code>history.back()</code>을 사용하면 해당 페이지를 다시 요청하는게 아니라 브라우저에 캐싱된 페이지를 다시
+          그린다.
+        </p>
+        <p>
+          그런데 입력란이 있는 페이지에서 새로고침 했을 때도 입력값이 보존되는걸 보면 단순히 브라우저 캐싱 페이지를
+          로딩할 때만 입력값이 보존된다고 볼 수는 없다.
+        </p>
+      </div>
+    </div>
+  </body>
 </html>

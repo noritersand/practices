@@ -1,55 +1,55 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>ajaxSetup</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-  <script>
-    function timeoutTest() {
-      $.ajaxSetup({
-        timeout: 5000
-      });
+  <head>
+    <title>ajaxSetup</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+    <script>
+      function timeoutTest() {
+        $.ajaxSetup({
+          timeout: 5000
+        });
 
-      $.ajax({
-        url: '//localhost:8900/uncategorized/read-querystring.data',
-        method: 'get',
-        success: function(data, textStatus, jqXhr) {
-          console.log('[success method]');
-          console.log('data:', data);
-          console.log('textStatus:', textStatus);
-          console.log('jqXhr:', jqXhr);
-        },
-        error: function(jqXhr, textStatus, errorThrown) {
-          console.log('[error method]');
-          console.log('jqXhr:', jqXhr);
-          console.log('textStatus:', textStatus);
-          console.log('errorThrown:', errorThrown);
-        },
-        complete: function(jqXhr, textStatus) {
-          console.log('[complete method]');
-          console.log('jqXhr:', jqXhr);
-          console.log('textStatus:', textStatus);
-        }
-      });
-    }
-  </script>
-</head>
+        $.ajax({
+          url: '//localhost:8900/uncategorized/read-querystring.data',
+          method: 'get',
+          success: function (data, textStatus, jqXhr) {
+            console.log('[success method]');
+            console.log('data:', data);
+            console.log('textStatus:', textStatus);
+            console.log('jqXhr:', jqXhr);
+          },
+          error: function (jqXhr, textStatus, errorThrown) {
+            console.log('[error method]');
+            console.log('jqXhr:', jqXhr);
+            console.log('textStatus:', textStatus);
+            console.log('errorThrown:', errorThrown);
+          },
+          complete: function (jqXhr, textStatus) {
+            console.log('[complete method]');
+            console.log('jqXhr:', jqXhr);
+            console.log('textStatus:', textStatus);
+          }
+        });
+      }
+    </script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>ajaxSetup test</h1>
-    <button type="button" onclick="timeoutTest()">timeoutTest</button>
-    <span>서버에서 브레이크 걸고 눌러봐</span><br />
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+  <body>
+    <main>
+      <article>
+        <h1>ajaxSetup test</h1>
+        <button type="button" onclick="timeoutTest()">timeoutTest</button>
+        <span>서버에서 브레이크 걸고 눌러봐</span><br />
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

@@ -2,7 +2,7 @@
   type AType = {
     a: string;
     b: number;
-  }
+  };
 
   let foo: keyof AType;
   foo = 'a';
@@ -28,7 +28,7 @@
   const person3: Person3 = {
     name: 'John',
     age: 30,
-    city: 'New York',
+    city: 'New York'
   };
 
   function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {

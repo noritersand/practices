@@ -1,13 +1,13 @@
 {
-  type Person = { name: string; age: number };
-  type Human = { breathing: boolean };
+  type Person = {name: string; age: number};
+  type Human = {breathing: boolean};
 
   let waldo: Person & Human;
 
   waldo = {
     name: 'waldo',
     age: 47,
-    breathing: true,
+    breathing: true
   }; // O
 
   // waldo = {
@@ -24,5 +24,4 @@
   // ⛔ error TS2322: Type 'string' is not assignable to type 'never'.
   // foo1 = 123;
   // ⛔ error TS2322: Type 'number' is not assignable to type 'never'.
-
 }

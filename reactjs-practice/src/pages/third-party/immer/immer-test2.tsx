@@ -12,18 +12,20 @@ interface Item {
 
 export default function ImmerTest2(): React.JSX.Element {
   const [list, setList] = useState<Item[]>([
-    { seq: 1, shape: '🍎' },
-    { seq: 2, shape: '🍌' },
-    { seq: 3, shape: '🍊' },
-    { seq: 4, shape: '🍇' }
+    {seq: 1, shape: '🍎'},
+    {seq: 2, shape: '🍌'},
+    {seq: 3, shape: '🍊'},
+    {seq: 4, shape: '🍇'}
   ]);
 
   function updateArray(index: number, replacement: string): void {
-    setList(prev => produce(prev, draft => {
-      if (draft[index]) {
-        draft[index].shape = replacement;
-      }
-    }));
+    setList(prev =>
+      produce(prev, draft => {
+        if (draft[index]) {
+          draft[index].shape = replacement;
+        }
+      })
+    );
   }
 
   useEffect((): void => {

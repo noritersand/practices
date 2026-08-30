@@ -34,8 +34,8 @@ export default function UseEffectTest(): React.JSX.Element {
       <hr />
       <h4>설명:</h4>
       <p>
-        useEffect의 정리 코드(cleanup code)는 컴포넌트가 dismount 될 때 실행되지만, state가 변경되어
-        리렌더링되는 시점에도 실행된다.
+        useEffect의 정리 코드(cleanup code)는 컴포넌트가 dismount 될 때 실행되지만, state가 변경되어 리렌더링되는
+        시점에도 실행된다.
       </p>
     </section>
   );

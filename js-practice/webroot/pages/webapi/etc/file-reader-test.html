@@ -1,210 +1,200 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>FileReader</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
-</head>
+  <head>
+    <title>FileReader</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+  </head>
 
-<body>
-<header>
-  <nav></nav>
-</header>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>FileReader</h1>
+    <main>
+      <article>
+        <h1>FileReader</h1>
 
-    <section>
-      <div id="toc" class="mrgn-btm"></div>
-    </section>
+        <section>
+          <div id="toc" class="mrgn-btm"></div>
+        </section>
 
-    <section>
-      <h2>readAsText()</h2>
-      <div class="code-result">
-        <input type="file" onchange="handleFileChange1(event)" />
-      </div>
-      <p>첨부된 파일을 단순 텍스트로 읽어올 때 사용한다.</p>
-      <div class="code-result" style="max-height: 200px; overflow: scroll">
-        <p id="result1"></p>
-      </div>
-      <script>
-        function handleFileChange1(e) {
-          let files = e.target.files;
+        <section>
+          <h2>readAsText()</h2>
+          <div class="code-result">
+            <input type="file" onchange="handleFileChange1(event)" />
+          </div>
+          <p>첨부된 파일을 단순 텍스트로 읽어올 때 사용한다.</p>
+          <div class="code-result" style="max-height: 200px; overflow: scroll">
+            <p id="result1"></p>
+          </div>
+          <script>
+            function handleFileChange1(e) {
+              let files = e.target.files;
 
-          let file = e.target.files[0];
-          if (!file) {
-            return;
-          }
+              let file = e.target.files[0];
+              if (!file) {
+                return;
+              }
 
-          originalFileName = file.name;
-          var reader = new FileReader();
-          reader.addEventListener('loadend', e => {
-            document.querySelector('#result1').innerText = e.target.result;
-          });
-          reader.readAsText(file);
-        }
-      </script>
-    </section>
+              originalFileName = file.name;
+              var reader = new FileReader();
+              reader.addEventListener('loadend', e => {
+                document.querySelector('#result1').innerText = e.target.result;
+              });
+              reader.readAsText(file);
+            }
+          </script>
+        </section>
 
-    <hr />
+        <hr />
 
-    <section>
-      <h2>readAsBinaryString()</h2>
-      <div class="code-result">
-        <input type="file" onchange="handleFileChange2(event)" />
-      </div>
-      <p>이 메서드는 첨부된 파일 혹은 Blob 데이터를 raw binary data로 읽어올 때 사용한다.</p>
-      <div class="code-result" style="max-height: 200px; overflow: scroll">
-        <p id="result2"></p>
-      </div>
-      <script>
-        function handleFileChange2(e) {
-          let files = e.target.files;
+        <section>
+          <h2>readAsBinaryString()</h2>
+          <div class="code-result">
+            <input type="file" onchange="handleFileChange2(event)" />
+          </div>
+          <p>이 메서드는 첨부된 파일 혹은 Blob 데이터를 raw binary data로 읽어올 때 사용한다.</p>
+          <div class="code-result" style="max-height: 200px; overflow: scroll">
+            <p id="result2"></p>
+          </div>
+          <script>
+            function handleFileChange2(e) {
+              let files = e.target.files;
 
-          let file = e.target.files[0];
-          if (!file) {
-            return;
-          }
+              let file = e.target.files[0];
+              if (!file) {
+                return;
+              }
 
-          originalFileName = file.name;
-          var reader = new FileReader();
-          reader.addEventListener('loadend', e => {
-            document.querySelector('#result2').innerText = e.target.result;
-          });
-          reader.readAsBinaryString(file);
-        }
-      </script>
-    </section>
+              originalFileName = file.name;
+              var reader = new FileReader();
+              reader.addEventListener('loadend', e => {
+                document.querySelector('#result2').innerText = e.target.result;
+              });
+              reader.readAsBinaryString(file);
+            }
+          </script>
+        </section>
 
-    <hr />
+        <hr />
 
-    <section>
-      <h2>readAsDataURL()</h2>
-      <div class="code-result">
-        <input type="file" id="dataUrl" onchange="handleFileChange3(event)" />
-      </div>
-      <p>
-        file input에 첨부된 파일 객체를 FileReader API를 이용해 data URI scheme 형식의 값으로
-        읽기
-      </p>
-      <div class="code-result" style="max-height: 200px; overflow: scroll">
-        <p id="result3"></p>
-      </div>
-      <script>
-        let actualResponse;
-        let originalFileName;
+        <section>
+          <h2>readAsDataURL()</h2>
+          <div class="code-result">
+            <input type="file" id="dataUrl" onchange="handleFileChange3(event)" />
+          </div>
+          <p>file input에 첨부된 파일 객체를 FileReader API를 이용해 data URI scheme 형식의 값으로 읽기</p>
+          <div class="code-result" style="max-height: 200px; overflow: scroll">
+            <p id="result3"></p>
+          </div>
+          <script>
+            let actualResponse;
+            let originalFileName;
 
-        function handleFileChange3(e) {
-          let files = e.target.files;
-          console.debug('files: ', files);
+            function handleFileChange3(e) {
+              let files = e.target.files;
+              console.debug('files: ', files);
 
-          let file = e.target.files[0];
-          if (!file) {
-            return;
-          }
-          console.debug('file.type: ', file.type);
+              let file = e.target.files[0];
+              if (!file) {
+                return;
+              }
+              console.debug('file.type: ', file.type);
 
-          originalFileName = file.name;
-          var reader = new FileReader();
-          reader.addEventListener('loadend', e => {
-            actualResponse = e.target.result;
-            document.querySelector('#result3').innerText = actualResponse;
-          });
-          reader.readAsDataURL(file);
-        }
-      </script>
-    </section>
+              originalFileName = file.name;
+              var reader = new FileReader();
+              reader.addEventListener('loadend', e => {
+                actualResponse = e.target.result;
+                document.querySelector('#result3').innerText = actualResponse;
+              });
+              reader.readAsDataURL(file);
+            }
+          </script>
+        </section>
 
-    <section>
-      <h2>FileReader로 읽어온 값을 이미지 태그 src 속성에 할당하기</h2>
-      <div class="code-result">
-        <div style="width: 200px; height: 100px; border: 1px solid black">
-          <img src alt="이미지 태그 자리" style="width: 100%; height: 100%" />
-        </div>
-        <button type="button" class="buttons" onclick="setImageSrc()">이미지 할당하기</button>
-        <sub>(먼저 readAsDataUrl() 파일 첨부를 할 것)</sub>
-      </div>
-      <script>
-        function setImageSrc() {
-          document.querySelector('img').src = actualResponse;
-        }
-      </script>
-      <p>
-        만약 첨부한 파일이 이미지인 경우 이 Data URI scheme 값을 그대로 이미지 태그에 사용할 수
-        있다.
-      </p>
-    </section>
+        <section>
+          <h2>FileReader로 읽어온 값을 이미지 태그 src 속성에 할당하기</h2>
+          <div class="code-result">
+            <div style="width: 200px; height: 100px; border: 1px solid black">
+              <img src alt="이미지 태그 자리" style="width: 100%; height: 100%" />
+            </div>
+            <button type="button" class="buttons" onclick="setImageSrc()">이미지 할당하기</button>
+            <sub>(먼저 readAsDataUrl() 파일 첨부를 할 것)</sub>
+          </div>
+          <script>
+            function setImageSrc() {
+              document.querySelector('img').src = actualResponse;
+            }
+          </script>
+          <p>만약 첨부한 파일이 이미지인 경우 이 Data URI scheme 값을 그대로 이미지 태그에 사용할 수 있다.</p>
+        </section>
 
-    <section>
-      <h2>FormData로 전송하기</h2>
-      <div class="code-result">
-        <button type="button" onclick="sendFormData()">data URI scheme으로 전송</button>
-        <sub>(먼저 파일 첨부를 할 것)</sub>
-      </div>
-      <script>
-        async function sendFormData() {
-          if (!actualResponse) {
-            console.warn('먼저 파일 첨부를 해주세요.');
-            return;
-          }
+        <section>
+          <h2>FormData로 전송하기</h2>
+          <div class="code-result">
+            <button type="button" onclick="sendFormData()">data URI scheme으로 전송</button>
+            <sub>(먼저 파일 첨부를 할 것)</sub>
+          </div>
+          <script>
+            async function sendFormData() {
+              if (!actualResponse) {
+                console.warn('먼저 파일 첨부를 해주세요.');
+                return;
+              }
 
-          console.debug('actualResponse:', actualResponse); // actualResponse = data URI scheme
-          let blob = await fetch(actualResponse).then(res => res.blob());
+              console.debug('actualResponse:', actualResponse); // actualResponse = data URI scheme
+              let blob = await fetch(actualResponse).then(res => res.blob());
 
-          let formData = new FormData();
-          formData.append('file', blob, originalFileName);
-          console.debug('formData:', formData);
+              let formData = new FormData();
+              formData.append('file', blob, originalFileName);
+              console.debug('formData:', formData);
 
-          fetch('//localhost:8900/upload-file', {
-            method: 'POST',
-            body: formData
-          })
-            .then(response => response.text())
-            .then(data => console.debug(data))
-            .catch(error => console.error(error));
-        }
-      </script>
-      <p>
-        읽어온 값은 FormData를 활용, multipart/form-data 컨텐츠 타입으로 서버에 전송할 수 있음.
-      </p>
+              fetch('//localhost:8900/upload-file', {
+                method: 'POST',
+                body: formData
+              })
+                .then(response => response.text())
+                .then(data => console.debug(data))
+                .catch(error => console.error(error));
+            }
+          </script>
+          <p>읽어온 값은 FormData를 활용, multipart/form-data 컨텐츠 타입으로 서버에 전송할 수 있음.</p>
 
-      <div class="code-result">
-        <button type="button" onclick="sendFormData2()">파일 객체(바이너리)로 전송</button>
-        <sub>(먼저 파일 첨부를 할 것)</sub>
-      </div>
-      <script>
-        function sendFormData2() {
-          let fileObject = document.querySelector('input[type=file]#dataUrl').files[0];
-          if (!actualResponse) {
-            console.warn('먼저 파일 첨부를 해주세요.');
-            return;
-          }
+          <div class="code-result">
+            <button type="button" onclick="sendFormData2()">파일 객체(바이너리)로 전송</button>
+            <sub>(먼저 파일 첨부를 할 것)</sub>
+          </div>
+          <script>
+            function sendFormData2() {
+              let fileObject = document.querySelector('input[type=file]#dataUrl').files[0];
+              if (!actualResponse) {
+                console.warn('먼저 파일 첨부를 해주세요.');
+                return;
+              }
 
-          let formData = new FormData();
-          formData.append('file', fileObject);
-          console.debug('formData:', formData);
+              let formData = new FormData();
+              formData.append('file', fileObject);
+              console.debug('formData:', formData);
 
-          fetch('//localhost:8900/upload-file', {
-            method: 'POST',
-            body: formData
-          })
-            .then(response => response.text())
-            .then(data => console.debug(data))
-            .catch(error => console.error(error));
-        }
-      </script>
-      <p>
-        읽어온 값은 FormData를 활용, multipart/form-data 컨텐츠 타입으로 서버에 전송할 수 있음.
-      </p>
-    </section>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+              fetch('//localhost:8900/upload-file', {
+                method: 'POST',
+                body: formData
+              })
+                .then(response => response.text())
+                .then(data => console.debug(data))
+                .catch(error => console.error(error));
+            }
+          </script>
+          <p>읽어온 값은 FormData를 활용, multipart/form-data 컨텐츠 타입으로 서버에 전송할 수 있음.</p>
+        </section>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

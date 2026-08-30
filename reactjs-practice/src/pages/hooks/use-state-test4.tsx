@@ -33,7 +33,9 @@ export default function UseStateTest4(): React.JSX.Element {
         {list.map((item, index) => (
           <div style={{display: 'flex'}} key={item.seq}>
             <li style={{fontSize: 20}}>{item.shape}</li>
-            <button className="mini" onClick={() => updateArray(index, '🍉')}>수박으로 변경하기</button>
+            <button className="mini" onClick={() => updateArray(index, '🍉')}>
+              수박으로 변경하기
+            </button>
           </div>
         ))}
       </ul>

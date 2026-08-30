@@ -15,23 +15,19 @@ export default function Coins(): React.JSX.Element {
     <section>
       <h2>니꼴라스와 만들어 본 코인 목록 그리기</h2>
       <p>{coins.length}</p>
-      {
-        loading ? (
-          <strong>Loading...</strong>
-        ) : (
-          <select>
-            {coins.map(coin => (
-                <option key={coin.id} value={coin.id}>
-                  {coin.name} ({coin.symbol})
-                </option>
-              )
-            )}
-          </select>
-        )
-      }
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
+        <select>
+          {coins.map(coin => (
+            <option key={coin.id} value={coin.id}>
+              {coin.name} ({coin.symbol})
+            </option>
+          ))}
+        </select>
+      )}
     </section>
   );
 }
 
 // <strong>Loading...</strong>
-

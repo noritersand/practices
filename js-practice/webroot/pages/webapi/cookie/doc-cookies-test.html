@@ -1,89 +1,89 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>cookie util test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-  <script src="/static/scripts/doc-cookies.js"></script>
-  <script>
-    function createCookie() {
-      var nameInput = document.querySelector('#cookieName');
-      var valueInput = document.querySelector('#cookieValue');
-      docCookies.setItem(nameInput.value, valueInput.value, 'Strict', null, '/');
-      drawCookieList();
-      nameInput.value = '';
-      valueInput.value = '';
-      nameInput.focus();
-    }
-
-    function removeAllCookie() {
-      var keys = docCookies.keys();
-      for (var i in keys) {
-        var ele = keys[i];
-        docCookies.removeItem(ele);
-        docCookies.removeItem(ele, '/');
+  <head>
+    <title>cookie util test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+    <script src="/static/scripts/doc-cookies.js"></script>
+    <script>
+      function createCookie() {
+        var nameInput = document.querySelector('#cookieName');
+        var valueInput = document.querySelector('#cookieValue');
+        docCookies.setItem(nameInput.value, valueInput.value, 'Strict', null, '/');
+        drawCookieList();
+        nameInput.value = '';
+        valueInput.value = '';
+        nameInput.focus();
       }
-      drawCookieList();
-      var nameInput = document.querySelector('#cookieName');
-      nameInput.focus();
-    }
 
-    function drawCookieList() {
-      var keys = docCookies.keys();
-      var cookieListUl = document.querySelector('#cookieList');
-      cookieListUl.innerHTML = '';
-      for (var i in keys) {
-        var ele = keys[i];
-        if (!ele) {
-          continue;
+      function removeAllCookie() {
+        var keys = docCookies.keys();
+        for (var i in keys) {
+          var ele = keys[i];
+          docCookies.removeItem(ele);
+          docCookies.removeItem(ele, '/');
         }
-        var li = document.createElement('li');
-        li.innerText = ele + ': ' + docCookies.getItem(ele);
-        cookieListUl.append(li);
+        drawCookieList();
+        var nameInput = document.querySelector('#cookieName');
+        nameInput.focus();
       }
-    }
 
-    window.onload = function() {
-      // drawCookieList();
-      var nameInput = document.querySelector('#cookieName');
-      var valueInput = document.querySelector('#cookieValue');
-      nameInput.onkeyup = function(event) {
-        var keyCode = event.keyCode ? event.keyCode : event.which;
-        if (keyCode == 13) {
-          valueInput.focus();
+      function drawCookieList() {
+        var keys = docCookies.keys();
+        var cookieListUl = document.querySelector('#cookieList');
+        cookieListUl.innerHTML = '';
+        for (var i in keys) {
+          var ele = keys[i];
+          if (!ele) {
+            continue;
+          }
+          var li = document.createElement('li');
+          li.innerText = ele + ': ' + docCookies.getItem(ele);
+          cookieListUl.append(li);
         }
-      };
-      valueInput.onkeyup = function(event) {
-        var keyCode = event.keyCode ? event.keyCode : event.which;
-        if (keyCode == 13) {
-          createCookie();
-        }
-      };
-    };
-  </script>
-</head>
+      }
 
-<body>
-<main>
-  <article>
-    <h1>cookie util test</h1>
-    쿠키이름: <input type="text" id="cookieName" /> 쿠키값:
-    <input type="text" id="cookieValue" />
-    <button type="button" onclick="createCookie()">쿠키 생성</button>
-    <br />
-    <button type="button" onclick="removeAllCookie()">쿠키 모두 삭제</button>
-    <button type="button" onclick="drawCookieList()">쿠키 목록 그리기</button>
-    <h4>쿠키 목록:</h4>
-    <ul id="cookieList"></ul>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+      window.onload = function () {
+        // drawCookieList();
+        var nameInput = document.querySelector('#cookieName');
+        var valueInput = document.querySelector('#cookieValue');
+        nameInput.onkeyup = function (event) {
+          var keyCode = event.keyCode ? event.keyCode : event.which;
+          if (keyCode == 13) {
+            valueInput.focus();
+          }
+        };
+        valueInput.onkeyup = function (event) {
+          var keyCode = event.keyCode ? event.keyCode : event.which;
+          if (keyCode == 13) {
+            createCookie();
+          }
+        };
+      };
+    </script>
+  </head>
+
+  <body>
+    <main>
+      <article>
+        <h1>cookie util test</h1>
+        쿠키이름: <input type="text" id="cookieName" /> 쿠키값:
+        <input type="text" id="cookieValue" />
+        <button type="button" onclick="createCookie()">쿠키 생성</button>
+        <br />
+        <button type="button" onclick="removeAllCookie()">쿠키 모두 삭제</button>
+        <button type="button" onclick="drawCookieList()">쿠키 목록 그리기</button>
+        <h4>쿠키 목록:</h4>
+        <ul id="cookieList"></ul>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

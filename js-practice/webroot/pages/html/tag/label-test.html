@@ -1,35 +1,33 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>label tag test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-</head>
+  <head>
+    <title>label tag test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>label tag test</h1>
-    <input type="checkbox" id="first" /><input type="checkbox" name="first" />
-    <label for="first"
-    >첫 번째 체크박스: id와 name이 같은 인풋이 두 개, id의 체크박스만 체크됨.</label
-    >
-    <br />
-    <br />
-    <input type="checkbox" name="third" />
-    <label for="third">세 번째 체크박스: name만 있는 인풋, 작동 안함</label>
-    <br />
-    <br />
-    <input type="checkbox" id="fourth" />
-    <label for="fourth">네 번째 체크박스: id만 있는 인풋</label>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+  <body>
+    <main>
+      <article>
+        <h1>label tag test</h1>
+        <input type="checkbox" id="first" /><input type="checkbox" name="first" />
+        <label for="first">첫 번째 체크박스: id와 name이 같은 인풋이 두 개, id의 체크박스만 체크됨.</label>
+        <br />
+        <br />
+        <input type="checkbox" name="third" />
+        <label for="third">세 번째 체크박스: name만 있는 인풋, 작동 안함</label>
+        <br />
+        <br />
+        <input type="checkbox" id="fourth" />
+        <label for="fourth">네 번째 체크박스: id만 있는 인풋</label>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

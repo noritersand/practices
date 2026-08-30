@@ -3,11 +3,11 @@
     #myPrivateField: string;
 
     constructor() {
-      this.#myPrivateField = "Hello, world!";
+      this.#myPrivateField = 'Hello, world!';
     }
 
     #myPrivateMethod() {
-      console.log("This is a private method.");
+      console.log('This is a private method.');
     }
 
     public myPublicMethod() {

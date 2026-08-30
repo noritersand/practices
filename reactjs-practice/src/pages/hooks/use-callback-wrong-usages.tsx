@@ -37,8 +37,8 @@ export default function UseCallbackWrongUsages(): React.JSX.Element {
             <p>❓foo는 빈 문자열인가: {flag ? '예' : '아니오'}</p>
           </div>
           <p>
-            '예'는 절대 '아니오'로 변하지 않는다. useCallback으로 생성된 wrongFunction이 최초 렌더링
-            시점의 foo 값을 '캡처'하기 때문이다.
+            '예'는 절대 '아니오'로 변하지 않는다. useCallback으로 생성된 wrongFunction이 최초 렌더링 시점의 foo 값을
+            '캡처'하기 때문이다.
           </p>
         </section>
       </section>

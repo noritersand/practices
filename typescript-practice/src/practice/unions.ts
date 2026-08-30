@@ -39,5 +39,4 @@
   //   hello: 'Hello there!'
   // };
   // ⛔ error TS2353: Object literal may only specify known properties, and 'hello' does not exist in type 'Person | Human'.
-
 }

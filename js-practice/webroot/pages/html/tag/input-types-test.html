@@ -1,216 +1,210 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>Input Types Test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
-</head>
+  <head>
+    <title>Input Types Test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>Input Types Test</h1>
+  <body>
+    <main>
+      <article>
+        <h1>Input Types Test</h1>
 
-    <section>
-      <div id="toc" class="mrgn-btm"></div>
-    </section>
+        <section>
+          <div id="toc" class="mrgn-btm"></div>
+        </section>
 
-    <section>
-      <h2>text</h2>
-      <form method="get">
-        <input type="text" id="t1" name="t1" />
-      </form>
-    </section>
-    <section>
-      <h2>checkbox</h2>
-      <form method="get">
-        <input type="checkbox" id="c1" name="c1" />
-        <label for="c1">value가 없음</label>
-        <input type="checkbox" id="c2" name="c2" value="true" />
-        <label for="c2">value="true"</label>
-        <input type="checkbox" id="c3" name="c3" value="Y" />
-        <label for="c3">value="Y"</label>
-        <button type="submit">submit</button>
-      </form>
-      <div class="important">
-        <p>체크박스의 value는 생략했을 때 체크된 항목의 값이 'on'으로 기본 설정됨.</p>
-        <p>value가 있건 없건 체크하지 않았으면 form submit 때 아무 값도 전송되지 않음.</p>
-      </div>
-    </section>
-    <section>
-      <h2>email</h2>
-      <form method="get">
-        <input type="email" name="d" />
-        <button type="submit">submit</button>
-      </form>
-      <div class="important">
-        <p>
-          email 타입은 form 태그에 novalidate 속성이 없는 한 입력값이 이메일 형식인지 자동으로
-          검사함
-        </p>
-      </div>
-    </section>
-    <section>
-      <h2>number</h2>
-      <form method="get">
-        <input type="number" name="e" />
-        <button type="submit">submit</button>
-      </form>
-      <div class="important">
-        <p>얘도 숫자인지 자동으로 검사함</p>
-      </div>
-    </section>
-    <section>
-      <h2>url</h2>
-      <form method="get">
-        <input type="url" name="h" />
-        <button type="submit">submit</button>
-      </form>
-      <div class="important">
-        <p>얘도 자동으로 검사함</p>
-        <p>URL로 판단되는 형식: 프로토콜://도메인</p>
-      </div>
-    </section>
-    <section>
-      <h2>range</h2>
-      <form method="get">
-        <input type="range" name="f" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>search</h2>
-      <form method="get">
-        <input type="search" name="g" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>tel</h2>
-      <form method="get">
-        <input type="tel" name="i" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>date</h2>
-      <form method="get">
-        <input type="date" name="k" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-<!-- 없어짐 -->
-<!--    <section>-->
-<!--      <h2>datetime</h2>-->
-<!--      <form method="get">-->
-<!--        <input type="datetime" name="l" />-->
-<!--        <button type="submit">submit</button>-->
-<!--      </form>-->
-<!--    </section>-->
-    <section>
-      <h2>datetime-local</h2>
-      <form method="get">
-        <input type="datetime-local" name="m" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>month</h2>
-      <form method="get">
-        <input type="month" name="n" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>time</h2>
-      <form method="get">
-        <input type="time" name="o" step="10" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>week</h2>
-      <form method="get">
-        <input type="week" name="p" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>color</h2>
-      <form method="get">
-        <input type="color" name="q" />
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>image</h2>
-      <form method="get">
-        <input type="image" name="r" />
-      </form>
-    </section>
-    <section>
-      <h2>reset</h2>
-      <form method="get">
-        <input type="text" name="s" /><br />
-        <textarea></textarea><br />
-        <input type="reset" name="t" />
-      </form>
-    </section>
-    <section>
-      <h2>password</h2>
-      <form method="get">
-        id: <input type="text" name="u" /><br />
-        pswd: <input type="password" name="v" />
-        <button type="submit">submit</button>
-      </form>
-      <div class="important">
-        <p>password input은 바로 앞의 text input을 아이디로 간주하는 경향이 있음.</p>
-      </div>
-    </section>
-    <section>
-      <h2>select</h2>
-      <form method="get">
-        <select name="w">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <button type="submit">submit</button>
-      </form>
-    </section>
-    <section>
-      <h2>textarea</h2>
-      <form method="get">
-        <textarea name="x"></textarea>
-        <button type="submit">submit</button>
-      </form>
-    </section>
+        <section>
+          <h2>text</h2>
+          <form method="get">
+            <input type="text" id="t1" name="t1" />
+          </form>
+        </section>
+        <section>
+          <h2>checkbox</h2>
+          <form method="get">
+            <input type="checkbox" id="c1" name="c1" />
+            <label for="c1">value가 없음</label>
+            <input type="checkbox" id="c2" name="c2" value="true" />
+            <label for="c2">value="true"</label>
+            <input type="checkbox" id="c3" name="c3" value="Y" />
+            <label for="c3">value="Y"</label>
+            <button type="submit">submit</button>
+          </form>
+          <div class="important">
+            <p>체크박스의 value는 생략했을 때 체크된 항목의 값이 'on'으로 기본 설정됨.</p>
+            <p>value가 있건 없건 체크하지 않았으면 form submit 때 아무 값도 전송되지 않음.</p>
+          </div>
+        </section>
+        <section>
+          <h2>email</h2>
+          <form method="get">
+            <input type="email" name="d" />
+            <button type="submit">submit</button>
+          </form>
+          <div class="important">
+            <p>email 타입은 form 태그에 novalidate 속성이 없는 한 입력값이 이메일 형식인지 자동으로 검사함</p>
+          </div>
+        </section>
+        <section>
+          <h2>number</h2>
+          <form method="get">
+            <input type="number" name="e" />
+            <button type="submit">submit</button>
+          </form>
+          <div class="important">
+            <p>얘도 숫자인지 자동으로 검사함</p>
+          </div>
+        </section>
+        <section>
+          <h2>url</h2>
+          <form method="get">
+            <input type="url" name="h" />
+            <button type="submit">submit</button>
+          </form>
+          <div class="important">
+            <p>얘도 자동으로 검사함</p>
+            <p>URL로 판단되는 형식: 프로토콜://도메인</p>
+          </div>
+        </section>
+        <section>
+          <h2>range</h2>
+          <form method="get">
+            <input type="range" name="f" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>search</h2>
+          <form method="get">
+            <input type="search" name="g" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>tel</h2>
+          <form method="get">
+            <input type="tel" name="i" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>date</h2>
+          <form method="get">
+            <input type="date" name="k" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <!-- 없어짐 -->
+        <!--    <section>-->
+        <!--      <h2>datetime</h2>-->
+        <!--      <form method="get">-->
+        <!--        <input type="datetime" name="l" />-->
+        <!--        <button type="submit">submit</button>-->
+        <!--      </form>-->
+        <!--    </section>-->
+        <section>
+          <h2>datetime-local</h2>
+          <form method="get">
+            <input type="datetime-local" name="m" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>month</h2>
+          <form method="get">
+            <input type="month" name="n" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>time</h2>
+          <form method="get">
+            <input type="time" name="o" step="10" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>week</h2>
+          <form method="get">
+            <input type="week" name="p" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>color</h2>
+          <form method="get">
+            <input type="color" name="q" />
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>image</h2>
+          <form method="get">
+            <input type="image" name="r" />
+          </form>
+        </section>
+        <section>
+          <h2>reset</h2>
+          <form method="get">
+            <input type="text" name="s" /><br />
+            <textarea></textarea><br />
+            <input type="reset" name="t" />
+          </form>
+        </section>
+        <section>
+          <h2>password</h2>
+          <form method="get">
+            id: <input type="text" name="u" /><br />
+            pswd: <input type="password" name="v" />
+            <button type="submit">submit</button>
+          </form>
+          <div class="important">
+            <p>password input은 바로 앞의 text input을 아이디로 간주하는 경향이 있음.</p>
+          </div>
+        </section>
+        <section>
+          <h2>select</h2>
+          <form method="get">
+            <select name="w">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <button type="submit">submit</button>
+          </form>
+        </section>
+        <section>
+          <h2>textarea</h2>
+          <form method="get">
+            <textarea name="x"></textarea>
+            <button type="submit">submit</button>
+          </form>
+        </section>
 
-    <section>
-      <h2>file</h2>
-      <input type="file" onchange="handleFileChange(event)" />
-      <div class="important">
-        <p>
-          초로미에서는 이미 첨부된 파일이 있는 상태에서 파일 선택을 취소할 때 사용자 첨부 파일이
-          지워진다.
-        </p>
-      </div>
-    </section>
-    <script>
-      function handleFileChange(e) {
-        console.log('files:', e.target.files);
-        console.log('files[0]:', e.target.files[0]);
-      }
-    </script>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/#">⬅ 위로 가기</a>
-</footer>
-</body>
+        <section>
+          <h2>file</h2>
+          <input type="file" onchange="handleFileChange(event)" />
+          <div class="important">
+            <p>초로미에서는 이미 첨부된 파일이 있는 상태에서 파일 선택을 취소할 때 사용자 첨부 파일이 지워진다.</p>
+          </div>
+        </section>
+        <script>
+          function handleFileChange(e) {
+            console.log('files:', e.target.files);
+            console.log('files[0]:', e.target.files[0]);
+          }
+        </script>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/#">⬅ 위로 가기</a>
+    </footer>
+  </body>
 </html>

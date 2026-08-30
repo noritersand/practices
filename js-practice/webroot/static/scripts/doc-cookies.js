@@ -30,9 +30,7 @@ var docCookies = {
       decodeURIComponent(
         document.cookie.replace(
           new RegExp(
-            '(?:(?:^|.*;)\\s*' +
-              encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') +
-              '\\s*\\=\\s*([^;]*).*$)|^.*$'
+            '(?:(?:^|.*;)\\s*' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'
           ),
           '$1'
         )
@@ -52,8 +50,7 @@ var docCookies = {
     if (vEnd) {
       switch (vEnd.constructor) {
         case Number:
-          sExpires =
-            vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
+          sExpires = vEnd === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + vEnd;
           break;
         case String:
           sExpires = '; expires=' + vEnd;
@@ -90,9 +87,9 @@ var docCookies = {
     if (!sKey) {
       return false;
     }
-    return new RegExp(
-      '(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\='
-    ).test(document.cookie);
+    return new RegExp('(?:^|;\\s*)' + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(
+      document.cookie
+    );
   },
   keys: function () {
     var aKeys = document.cookie

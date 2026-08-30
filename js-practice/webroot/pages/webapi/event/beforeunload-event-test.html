@@ -1,64 +1,64 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>beforeunload event test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
-  <script src="/static/lib/prism/prism.js"></script>
-  <script>
-    function beforeunloadHandler(event) {
-      event.preventDefault();
-      event.returnValue = '';
-    }
+  <head>
+    <title>beforeunload event test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+    <script src="/static/lib/prism/prism.js"></script>
+    <script>
+      function beforeunloadHandler(event) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
 
-    function attach() {
-      window.addEventListener('beforeunload', beforeunloadHandler);
-    }
+      function attach() {
+        window.addEventListener('beforeunload', beforeunloadHandler);
+      }
 
-    function detach() {
-      window.removeEventListener('beforeunload', beforeunloadHandler);
-    }
+      function detach() {
+        window.removeEventListener('beforeunload', beforeunloadHandler);
+      }
 
-    attach();
-  </script>
-</head>
+      attach();
+    </script>
+  </head>
 
-<body>
-<main>
-  <h1>beforeunload event test</h1>
-  <p>창의 새로고침이나 닫기, 페이지 이동을 가로막을 수 있는지 테스트</p>
-  <br />
-  <div class="code-result">
-    <div>
-      <button type="button" class="buttons" onclick="attach()">리스너 부착</button>&nbsp;
-      <button type="button" class="buttons" onclick="detach()">리스너 탈착</button>
-      <br /><br />
-      <input
-        type="text"
-        name="123"
-        autofocus
-        placeholder="여기에 아무 값이나 입력해야 컨펌 창 나타남"
-        style="width: 450px"
-      />
-    </div>
-    <div>
-      <div id="resultText" style="color: red"></div>
-    </div>
-  </div>
-  <pre><code class="language-js"><!--
+  <body>
+    <main>
+      <h1>beforeunload event test</h1>
+      <p>창의 새로고침이나 닫기, 페이지 이동을 가로막을 수 있는지 테스트</p>
+      <br />
+      <div class="code-result">
+        <div>
+          <button type="button" class="buttons" onclick="attach()">리스너 부착</button>&nbsp;
+          <button type="button" class="buttons" onclick="detach()">리스너 탈착</button>
+          <br /><br />
+          <input
+            type="text"
+            name="123"
+            autofocus
+            placeholder="여기에 아무 값이나 입력해야 컨펌 창 나타남"
+            style="width: 450px"
+          />
+        </div>
+        <div>
+          <div id="resultText" style="color: red"></div>
+        </div>
+      </div>
+      <pre><code class="language-js"><!--
   window.addEventListener('beforeunload', (event) => {
     event.preventDefault();
     event.returnValue = '';
   });
   --></code></pre>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

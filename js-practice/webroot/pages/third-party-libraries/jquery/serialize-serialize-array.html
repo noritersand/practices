@@ -1,46 +1,46 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>.serialize(), .serializeArray()</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>.serialize(), .serializeArray()</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>.serialize(), .serializeArray()</h1>
-    <form>
-      <input type="checkbox" name="checkbox1" checked value="11" /><br />
-      <input type="text" name="textInput" value="22" /><br />
-      <select name="selected">
-        <option selected value="33">33</option>
-      </select>
-    </form>
-    <div class="code-result">
-      <h4>.serialize()</h4>
-      <p id="result1"></p>
-    </div>
-    <div class="code-result">
-      <h4>.serializeArray()</h4>
-      <p id="result2"></p>
-    </div>
-    <script>
-      console.log($('form').serialize());
-      $('#result1').text($('form').serialize());
+  <body>
+    <main>
+      <article>
+        <h1>.serialize(), .serializeArray()</h1>
+        <form>
+          <input type="checkbox" name="checkbox1" checked value="11" /><br />
+          <input type="text" name="textInput" value="22" /><br />
+          <select name="selected">
+            <option selected value="33">33</option>
+          </select>
+        </form>
+        <div class="code-result">
+          <h4>.serialize()</h4>
+          <p id="result1"></p>
+        </div>
+        <div class="code-result">
+          <h4>.serializeArray()</h4>
+          <p id="result2"></p>
+        </div>
+        <script>
+          console.log($('form').serialize());
+          $('#result1').text($('form').serialize());
 
-      console.log($('form').serializeArray());
-      $('#result2').text($('form').serializeArray());
-    </script>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+          console.log($('form').serializeArray());
+          $('#result2').text($('form').serializeArray());
+        </script>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

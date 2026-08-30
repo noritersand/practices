@@ -1,51 +1,51 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>Shadow DOM: 스타일 격리</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
-  <script src="/static/lib/prism/prism.js"></script>
-  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
-  <style>
+  <head>
+    <title>Shadow DOM: 스타일 격리</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+    <script src="/static/lib/prism/prism.js"></script>
+    <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+    <style>
       p.color-me {
-          color: purple;
-          font-size: 16px;
+        color: purple;
+        font-size: 16px;
       }
-  </style>
-</head>
+    </style>
+  </head>
 
-<body>
-<header>
-  <nav></nav>
-</header>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>Shadow DOM: 스타일 격리</h1>
+    <main>
+      <article>
+        <h1>Shadow DOM: 스타일 격리</h1>
 
-    <section>
-      <div id="toc" class="mrgn-btm"></div>
-    </section>
+        <section>
+          <div id="toc" class="mrgn-btm"></div>
+        </section>
 
-    <section>
-      <p>Shadow DOM의 특성과 기능 중 스타일 격리에 대한 내용.</p>
-    </section>
+        <section>
+          <p>Shadow DOM의 특성과 기능 중 스타일 격리에 대한 내용.</p>
+        </section>
 
-    <section>
-      <h2>기본 사용법</h2>
-      <pre><code class="language-css"><!--
+        <section>
+          <h2>기본 사용법</h2>
+          <pre><code class="language-css"><!--
       p.color-me {
           color: purple;
           font-size: 16px;
       }
       --></code></pre>
-      <pre><code class="language-markup"><!--
+          <pre><code class="language-markup"><!--
       <div id="my-element">
         <p class="color-me">안녕하세요. Regular DOM입니다!</p>
       </div>
@@ -69,19 +69,19 @@
         `;
       </script>
       --></code></pre>
-      <div class="code-result">
-        <div id="my-element">
-          <p class="color-me">안녕하세요. Regular DOM입니다!</p>
-        </div>
-        <script>
-          // 1. Shadow DOM을 붙일 요소 선택
-          const element = document.querySelector('#my-element');
+          <div class="code-result">
+            <div id="my-element">
+              <p class="color-me">안녕하세요. Regular DOM입니다!</p>
+            </div>
+            <script>
+              // 1. Shadow DOM을 붙일 요소 선택
+              const element = document.querySelector('#my-element');
 
-          // 2. Shadow Root 생성
-          const shadowRoot = element.attachShadow({mode: 'open'});
+              // 2. Shadow Root 생성
+              const shadowRoot = element.attachShadow({mode: 'open'});
 
-          // 3. Shadow DOM 내부에 콘텐츠 추가
-          shadowRoot.innerHTML = `
+              // 3. Shadow DOM 내부에 콘텐츠 추가
+              shadowRoot.innerHTML = `
             <style>
               p.color-me {
                 color: green;
@@ -91,16 +91,15 @@
             <slot></slot>
             <p class="color-me">안녕하세요. Shadow DOM입니다!</p>
           `;
-        </script>
-      </div>
-    </section>
+            </script>
+          </div>
+        </section>
+      </article>
+      <aside></aside>
+    </main>
 
-  </article>
-  <aside></aside>
-</main>
-
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

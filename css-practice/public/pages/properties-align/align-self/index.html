@@ -1,57 +1,74 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>align-self</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>align-self</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>align-self</h1>
+    <main>
+      <article>
+        <h1>align-self</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p><code class="language-css">align-self</code>는 단일 아이템의 교차 축(Cross Axis) 또는 블록 축(Block Axis) 정렬 상태를 설정하는 프로퍼티다.
-      </p>
-      <p>부모 요소가 설정한 전체 정렬 속성(<code class="language-css">align-items</code>)을 재정의(Override)하여 개별 아이템만의 독립적인 정렬 위치를 지정할 때
-        사용한다.</p>
-      <p>일반 레이아웃(Block/Inline)에서는 기본적으로 작동하지 않는다.</p>
-      <p>플렉스 아이템이나 그리드 아이템 직접 적용하는 프로퍼티다. 기본값은 <code class="language-css">auto</code></p>
-      <div class="important">
-        <p>ℹ️ 플렉스박스에서 교차 축이 수직(세로)이 될지 수평(가로)이 될지는 flex-direction에 따라 달라진다. flex-direction이 row(기본값)일 때
-          교차 축은 수직이지만, flex-direction이 column일 때의 교차 축은 수평이다.</p>
-      </div>
-    </section>
+        <section>
+          <h2>개요</h2>
+          <p>
+            <code class="language-css">align-self</code>는 단일 아이템의 교차 축(Cross Axis) 또는 블록 축(Block Axis)
+            정렬 상태를 설정하는 프로퍼티다.
+          </p>
+          <p>
+            부모 요소가 설정한 전체 정렬 속성(<code class="language-css">align-items</code>)을 재정의(Override)하여 개별
+            아이템만의 독립적인 정렬 위치를 지정할 때 사용한다.
+          </p>
+          <p>일반 레이아웃(Block/Inline)에서는 기본적으로 작동하지 않는다.</p>
+          <p>
+            플렉스 아이템이나 그리드 아이템 직접 적용하는 프로퍼티다. 기본값은
+            <code class="language-css">auto</code>
+          </p>
+          <div class="important">
+            <p>
+              ℹ️ 플렉스박스에서 교차 축이 수직(세로)이 될지 수평(가로)이 될지는 flex-direction에 따라 달라진다.
+              flex-direction이 row(기본값)일 때 교차 축은 수직이지만, flex-direction이 column일 때의 교차 축은 수평이다.
+            </p>
+          </div>
+        </section>
 
-    <section>
-      <h2>특이사항</h2>
-      <h4>일반 레이아웃</h4>
-      <p>일반적인 Block/Inline 흐름에서는 <code class="language-css">align-self</code>가 적용되지 않는다. 다만, Absolute / Fixed Positional
-        요소에서 Anchor Positioning 스펙을 사용하는 경우 예외적으로 작동할 수 있다.</p>
-      <h4>플렉스박스</h4>
-      <p><code class="language-css">flex-direction</code> 설정에 따라 교차 축의 방향이 달라지므로, <code class="language-css">row</code>일
-        때는 수직 정렬, <code class="language-css">column</code>일 때는 수평 정렬을 제어한다.</p>
-      <h4>그리드</h4>
-      <p>그리드 영역(Grid Area) 내부에서 아이템의 수직(Block Axis) 정렬을 제어한다. (<code class="language-css">justify-self</code>는 Inline
-        Axis 정렬을 담당)</p>
-    </section>
+        <section>
+          <h2>특이사항</h2>
+          <h4>일반 레이아웃</h4>
+          <p>
+            일반적인 Block/Inline 흐름에서는 <code class="language-css">align-self</code>가 적용되지 않는다. 다만,
+            Absolute / Fixed Positional 요소에서 Anchor Positioning 스펙을 사용하는 경우 예외적으로 작동할 수 있다.
+          </p>
+          <h4>플렉스박스</h4>
+          <p>
+            <code class="language-css">flex-direction</code> 설정에 따라 교차 축의 방향이 달라지므로,
+            <code class="language-css">row</code>일 때는 수직 정렬, <code class="language-css">column</code>일 때는 수평
+            정렬을 제어한다.
+          </p>
+          <h4>그리드</h4>
+          <p>
+            그리드 영역(Grid Area) 내부에서 아이템의 수직(Block Axis) 정렬을 제어한다. (<code class="language-css"
+              >justify-self</code
+            >는 Inline Axis 정렬을 담당)
+          </p>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-css"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-css"><!--
   /* Keyword values */
   align-self: auto;
   align-self: normal;
@@ -83,50 +100,58 @@
   align-self: revert-layer;
   align-self: unset;
   --></code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Values</h2>
+        <section>
+          <h2>Values</h2>
 
-      <h3>Keyword Values</h3>
+          <h3>Keyword Values</h3>
 
-      <h4>auto</h4>
-      <p>부모 컨테이너의 정렬 속성(<code class="language-css">align-items</code>) 값을 상속받아 적용한다. 아래 예시에서는 부모의 <code
-        class="language-css">align-items: center</code> 속성을 상속받는다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>auto</h4>
+          <p>
+            부모 컨테이너의 정렬 속성(<code class="language-css">align-items</code>) 값을 상속받아 적용한다. 아래
+            예시에서는 부모의 <code class="language-css">align-items: center</code> 속성을 상속받는다.
+          </p>
+          <pre><code class="language-sass"><!--
   .container
     align-items: center
   .item-target
     align-self: auto
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex ex-parent-center">
-          <div class="item">Item 1</div>
-          <div class="item item-target ex-auto">Auto</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex ex-parent-center">
+              <div class="item">Item 1</div>
+              <div class="item item-target ex-auto">Auto</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>normal</h4>
-      <p>레이아웃 컨텍스트에 따라 기본 작동 방식을 따르며, 플렉스 및 그리드 레이아웃에서는 대체로 <code class="language-css">stretch</code>처럼 작동한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>normal</h4>
+          <p>
+            레이아웃 컨텍스트에 따라 기본 작동 방식을 따르며, 플렉스 및 그리드 레이아웃에서는 대체로
+            <code class="language-css">stretch</code>처럼 작동한다.
+          </p>
+          <pre><code class="language-sass"><!--
   .item-target
     align-self: normal
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item">Item 1</div>
-          <div class="item item-target ex-normal">Normal</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item">Item 1</div>
+              <div class="item item-target ex-normal">Normal</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h3>Positional Alignment</h3>
+          <h3>Positional Alignment</h3>
 
-      <h4>center, start, end</h4>
-      <p>아이템을 교차 축의 시작점(<code class="language-css">start</code>), 중앙(<code class="language-css">center</code>), 끝점(<code
-        class="language-css">end</code>)에 각각 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>center, start, end</h4>
+          <p>
+            아이템을 교차 축의 시작점(<code class="language-css">start</code>), 중앙(<code class="language-css"
+              >center</code
+            >), 끝점(<code class="language-css">end</code>)에 각각 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
   .item-target-1
     align-self: start
   .item-target-2
@@ -134,18 +159,18 @@
   .item-target-3
     align-self: end
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item item-target ex-start">Start</div>
-          <div class="item item-target ex-center">Center</div>
-          <div class="item item-target ex-end">End</div>
-          <div class="item">Default</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item item-target ex-start">Start</div>
+              <div class="item item-target ex-center">Center</div>
+              <div class="item item-target ex-end">End</div>
+              <div class="item">Default</div>
+            </div>
+          </div>
 
-      <h4>self-start & self-end</h4>
-      <p>컨테이너가 아닌 개별 아이템 자신의 쓰기 방향(Writing Mode) 기준 시작점/끝점에 맞춰 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>self-start & self-end</h4>
+          <p>컨테이너가 아닌 개별 아이템 자신의 쓰기 방향(Writing Mode) 기준 시작점/끝점에 맞춰 정렬한다.</p>
+          <pre><code class="language-sass"><!--
   .item-target-1
     writing-mode: vertical-lr
     align-self: self-start
@@ -153,102 +178,111 @@
     writing-mode: vertical-lr
     align-self: self-end
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item item-target ex-self-start">Self Start</div>
-          <div class="item">Item</div>
-          <div class="item item-target ex-self-end">Self End</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item item-target ex-self-start">Self Start</div>
+              <div class="item">Item</div>
+              <div class="item item-target ex-self-end">Self End</div>
+            </div>
+          </div>
 
-      <h4>flex-start & flex-end</h4>
-      <p>플렉스 컨테이너의 시작점 또는 끝점에 맞춰 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-start & flex-end</h4>
+          <p>플렉스 컨테이너의 시작점 또는 끝점에 맞춰 정렬한다.</p>
+          <pre><code class="language-sass"><!--
   .item-target-1
     align-self: flex-start
   .item-target-2
     align-self: flex-end
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item item-target ex-flex-start">Flex Start</div>
-          <div class="item">Item</div>
-          <div class="item item-target ex-flex-end">Flex End</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item item-target ex-flex-start">Flex Start</div>
+              <div class="item">Item</div>
+              <div class="item item-target ex-flex-end">Flex End</div>
+            </div>
+          </div>
 
-      <h4>anchor-center</h4>
-      <p>CSS Anchor Positioning 사양에 따라 지정된 앵커 요소의 중앙에 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>anchor-center</h4>
+          <p>CSS Anchor Positioning 사양에 따라 지정된 앵커 요소의 중앙에 정렬한다.</p>
+          <pre><code class="language-sass"><!--
   .item-target
     align-self: anchor-center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item">Item 1</div>
-          <div class="item item-target ex-anchor-center">Anchor Center</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item">Item 1</div>
+              <div class="item item-target ex-anchor-center">Anchor Center</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h3>Baseline Alignment</h3>
+          <h3>Baseline Alignment</h3>
 
-      <h4>baseline / first baseline / last baseline</h4>
-      <p>아이템 내부 텍스트 베이스라인을 기준으로 정렬한다. <code class="language-css">first baseline</code>은 첫 번째 줄, <code
-        class="language-css">last baseline</code>은 마지막 줄의 텍스트 베이스라인에 맞춘다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>baseline / first baseline / last baseline</h4>
+          <p>
+            아이템 내부 텍스트 베이스라인을 기준으로 정렬한다.
+            <code class="language-css">first baseline</code>은 첫 번째 줄,
+            <code class="language-css">last baseline</code>은 마지막 줄의 텍스트 베이스라인에 맞춘다.
+          </p>
+          <pre><code class="language-sass"><!--
   .item-target-1
     align-self: first baseline
   .item-target-2
     align-self: last baseline
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item item-target ex-first-baseline">First<br>Line</div>
-          <div class="item">Base</div>
-          <div class="item item-target ex-last-baseline">Multi<br>Line<br>Last</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item item-target ex-first-baseline">First<br />Line</div>
+              <div class="item">Base</div>
+              <div class="item item-target ex-last-baseline">Multi<br />Line<br />Last</div>
+            </div>
+          </div>
 
-      <h4>stretch</h4>
-      <p>교차 축 방향으로 컨테이너 높이를 채우도록 크기를 늘린다. (아이템에 명시적 높이가 설정되어 있지 않아야 함)</p>
-      <pre><code class="language-sass"><!--
+          <h4>stretch</h4>
+          <p>
+            교차 축 방향으로 컨테이너 높이를 채우도록 크기를 늘린다. (아이템에 명시적 높이가 설정되어 있지 않아야 함)
+          </p>
+          <pre><code class="language-sass"><!--
   .item-target
     align-self: stretch
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex">
-          <div class="item">Item 1</div>
-          <div class="item item-target ex-stretch">Stretch</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex">
+              <div class="item">Item 1</div>
+              <div class="item item-target ex-stretch">Stretch</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h3>Overflow Alignment</h3>
+          <h3>Overflow Alignment</h3>
 
-      <h4>safe center vs unsafe center</h4>
-      <p><code class="language-css">safe center</code>는 정렬 시 컨테이너를 벗어나 넘치는 부분이 발생하면 <code
-        class="language-css">start</code> 정렬로 전환하여 넘친 콘텐츠가 화면 밖으로 가려지지 않게 보호한다.</p>
-      <p><code class="language-css">unsafe center</code>는 넘침 여부와 상관없이 무조건 중앙 정렬을 강제하여 상단이나 좌측 콘텐츠가 잘릴 수 있다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>safe center vs unsafe center</h4>
+          <p>
+            <code class="language-css">safe center</code>는 정렬 시 컨테이너를 벗어나 넘치는 부분이 발생하면
+            <code class="language-css">start</code> 정렬로 전환하여 넘친 콘텐츠가 화면 밖으로 가려지지 않게 보호한다.
+          </p>
+          <p>
+            <code class="language-css">unsafe center</code>는 넘침 여부와 상관없이 무조건 중앙 정렬을 강제하여 상단이나
+            좌측 콘텐츠가 잘릴 수 있다.
+          </p>
+          <pre><code class="language-sass"><!--
   .item-target-1
     align-self: safe center
   .item-target-2
     align-self: unsafe center
   --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex ex-overflow">
-          <div class="item item-target ex-safe-center">Safe Center</div>
-          <div class="item item-target ex-unsafe-center">Unsafe Center</div>
-        </div>
-      </div>
-    </section>
+          <div class="code-result">
+            <div class="container ex-flex ex-overflow">
+              <div class="item item-target ex-safe-center">Safe Center</div>
+              <div class="item item-target ex-unsafe-center">Unsafe Center</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-  </article>
-</main>
-
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

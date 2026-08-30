@@ -1,70 +1,68 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>submit 이벤트 차단하기</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>submit 이벤트 차단하기</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>submit 이벤트 차단하기</h1>
+  <body>
+    <main>
+      <article>
+        <h1>submit 이벤트 차단하기</h1>
 
-    <section>
-      <h3>#1: 인라인으로 return false</h3>
-      <form onsubmit="return false">
-        <input type="text" name="q" tabindex="9" />
-      </form>
-    </section>
+        <section>
+          <h3>#1: 인라인으로 return false</h3>
+          <form onsubmit="return false;">
+            <input type="text" name="q" tabindex="9" />
+          </form>
+        </section>
 
-    <section>
-      <h3>#2: 인라인으로 event.preventDefault</h3>
-      <form onsubmit="event.preventDefault()">
-        <input type="text" name="q" tabindex="10" />
-      </form>
-    </section>
+        <section>
+          <h3>#2: 인라인으로 event.preventDefault</h3>
+          <form onsubmit="event.preventDefault()">
+            <input type="text" name="q" tabindex="10" />
+          </form>
+        </section>
 
-    <section>
-      <h3>#3: submit 핸들러에서 event.preventDefault()</h3>
-      <form onsubmit="fn1(event)">
-        <input type="text" name="q" tabindex="11" />
-        <button type="button" onclick="fn1(event)">fn1()</button>
-        <script>
-          function fn1(event) {
-            event.preventDefault();
-          }
-        </script>
-      </form>
-    </section>
+        <section>
+          <h3>#3: submit 핸들러에서 event.preventDefault()</h3>
+          <form onsubmit="fn1(event)">
+            <input type="text" name="q" tabindex="11" />
+            <button type="button" onclick="fn1(event)">fn1()</button>
+            <script>
+              function fn1(event) {
+                event.preventDefault();
+              }
+            </script>
+          </form>
+        </section>
 
-    <section>
-      <h3>#4: submit 핸들러에서 return false</h3>
-      <form onsubmit="return fn2()">
-        <input type="text" name="q" tabindex="12" />
-        <button type="button" onclick="fn2()">fn2()</button>
-        <script>
-          function fn2() {
-            return false;
-          }
-        </script>
-      </form>
-    </section>
+        <section>
+          <h3>#4: submit 핸들러에서 return false</h3>
+          <form onsubmit="return fn2();">
+            <input type="text" name="q" tabindex="12" />
+            <button type="button" onclick="fn2()">fn2()</button>
+            <script>
+              function fn2() {
+                return false;
+              }
+            </script>
+          </form>
+        </section>
 
-    <div class="important">
-      <p>
-        onsubmit 핸들러에서 false를 반환하거나, event.preventDefault()를 호출하면 막을 수 있음.
-      </p>
-    </div>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+        <div class="important">
+          <p>onsubmit 핸들러에서 false를 반환하거나, event.preventDefault()를 호출하면 막을 수 있음.</p>
+        </div>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

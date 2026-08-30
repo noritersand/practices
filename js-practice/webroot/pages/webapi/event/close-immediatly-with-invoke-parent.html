@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <title>close immediatly with invoke parent</title>
-</head>
-<body>
-<script>
-  let urlParams = new URLSearchParams(window.location.search);
-  let eventType = urlParams.get('e');
-  alert('eventType: ' + eventType);
-  window.addEventListener(eventType, (event) => {
-    opener.fnOfParent();
-  });
-  close();
-</script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>close immediatly with invoke parent</title>
+  </head>
+  <body>
+    <script>
+      let urlParams = new URLSearchParams(window.location.search);
+      let eventType = urlParams.get('e');
+      alert('eventType: ' + eventType);
+      window.addEventListener(eventType, event => {
+        opener.fnOfParent();
+      });
+      close();
+    </script>
+  </body>
 </html>

@@ -3,7 +3,6 @@
 - [https://jestjs.io/docs/api](https://jestjs.io/docs/api)
 - [https://jestjs.io/docs/expect](https://jestjs.io/docs/expect)
 
-
 ## 테스트 케이스 작성법
 
 - 테스트 케이스는 `test()` 안에 작성한다.
@@ -26,11 +25,9 @@ describe('some test suite', () => {
 });
 ```
 
-
 ## toBe()와 toEqual()의 차이
 
 toBe()는 값이나 객체의 주소를 비교하고, toEqual()은 값이나 객체의 내용을 비교한다.
-
 
 ## 부정문
 
@@ -40,7 +37,6 @@ toBe()는 값이나 객체의 주소를 비교하고, toEqual()은 값이나 객
 expect(original).not.toBe(cloned);
 ```
 
-
 ## 빌드
 
-Yarn berry 버전을 적용했으나 `nodeLinker: pnp`로 빌드하면 아직 에러나는 패키지가 있어서 `nodeLinker: node-modules`로 해놓음. 
+Yarn berry 버전을 적용했으나 `nodeLinker: pnp`로 빌드하면 아직 에러나는 패키지가 있어서 `nodeLinker: node-modules`로 해놓음.

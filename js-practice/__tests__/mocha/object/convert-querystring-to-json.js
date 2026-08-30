@@ -24,10 +24,6 @@ var result1 = convertQuerystringToJSON(querystring);
 
 describe('test convertQuerystringToJSON()', () => {
   it('should be pass', () => {
-    assert.deepStrictEqual(result1, [
-      {proditNo: 'IT369'},
-      {proditNo: 'IT371'},
-      {proditNo: 'IT370'}
-    ]);
+    assert.deepStrictEqual(result1, [{proditNo: 'IT369'}, {proditNo: 'IT371'}, {proditNo: 'IT370'}]);
   });
 });

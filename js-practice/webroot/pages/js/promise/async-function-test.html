@@ -1,102 +1,102 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>async function</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>async function</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>async function</h1>
-    <p></p>
-    <div class="important">
-      <p>콘솔 패널을 열어서 확인</p>
-    </div>
-  </article>
-</main>
-<script>
-  // var hello = async () => {
-  //   return 'Hello!';
-  // };
-  // hello().then(console.log); // Hello!
-  // 이 코드는 아래와 같음
-  // pr().then((msg) => { console.log(msg); });
+  <body>
+    <main>
+      <article>
+        <h1>async function</h1>
+        <p></p>
+        <div class="important">
+          <p>콘솔 패널을 열어서 확인</p>
+        </div>
+      </article>
+    </main>
+    <script>
+      // var hello = async () => {
+      //   return 'Hello!';
+      // };
+      // hello().then(console.log); // Hello!
+      // 이 코드는 아래와 같음
+      // pr().then((msg) => { console.log(msg); });
 
-  // async () => { return 1 };
-  // () => Promise.resolve(1);
+      // async () => { return 1 };
+      // () => Promise.resolve(1);
 
-  // const p = new Promise((res, rej) => {
-  //   res(1);
-  // })
+      // const p = new Promise((res, rej) => {
+      //   res(1);
+      // })
 
-  // async function asyncReturn() {
-  //   return p;
-  // }
-  // console.log(p === asyncReturn()); // false
+      // async function asyncReturn() {
+      //   return p;
+      // }
+      // console.log(p === asyncReturn()); // false
 
-  // function basicReturn() {
-  //   return Promise.resolve(p);
-  // }
-  // console.log(p === basicReturn()); // true
+      // function basicReturn() {
+      //   return Promise.resolve(p);
+      // }
+      // console.log(p === basicReturn()); // true
 
-  const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
+      const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  async function waitAsync(ms) {
-    let startTime = new Date();
-    while (true) {
-      let elapsed = new Date().getTime() - startTime.getTime();
-      if (elapsed > ms) {
-        console.log(`After ${elapsed} milliseconds`);
-        return elapsed;
-        break;
+      async function waitAsync(ms) {
+        let startTime = new Date();
+        while (true) {
+          let elapsed = new Date().getTime() - startTime.getTime();
+          if (elapsed > ms) {
+            console.log(`After ${elapsed} milliseconds`);
+            return elapsed;
+            break;
+          }
+        }
       }
-    }
-  }
 
-  function waitSync(ms) {
-    let startTime = new Date();
-    while (true) {
-      let elapsed = new Date().getTime() - startTime.getTime();
-      if (elapsed > ms) {
-        console.log(`After ${elapsed} milliseconds`);
-        break;
+      function waitSync(ms) {
+        let startTime = new Date();
+        while (true) {
+          let elapsed = new Date().getTime() - startTime.getTime();
+          if (elapsed > ms) {
+            console.log(`After ${elapsed} milliseconds`);
+            break;
+          }
+        }
       }
-    }
-  }
 
-  var fn = async () => {
-    console.log('inside begin');
-    waitSync(200);
-    console.log('inside end');
-  };
-  fn();
-  console.log('outside');
+      var fn = async () => {
+        console.log('inside begin');
+        waitSync(200);
+        console.log('inside end');
+      };
+      fn();
+      console.log('outside');
 
-  var fn2 = async () => {
-    // let a = 0;
-    // setTimeout(() => ++a, 5000);
-    await waitSync(500);
-    // waitAsync(500);
-    console.log('done');
-  };
+      var fn2 = async () => {
+        // let a = 0;
+        // setTimeout(() => ++a, 5000);
+        await waitSync(500);
+        // waitAsync(500);
+        console.log('done');
+      };
 
-  var pr = fn2();
-  console.log(pr);
-  var pr2 = pr.then(console.log);
-  console.log(pr2);
-  fn2().then(console.log);
-  fn2();
-  console.log('hi');
-</script>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+      var pr = fn2();
+      console.log(pr);
+      var pr2 = pr.then(console.log);
+      console.log(pr2);
+      fn2().then(console.log);
+      fn2();
+      console.log('hi');
+    </script>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

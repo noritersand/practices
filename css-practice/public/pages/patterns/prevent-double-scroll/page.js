@@ -28,21 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlay.setAttribute('aria-hidden', 'true');
   };
 
-  openModalBtnArr?.forEach((btn) => {
+  openModalBtnArr?.forEach(btn => {
     btn.addEventListener('click', openModal);
   });
   closeModalBtn?.addEventListener('click', closeModal);
 
   // dimmed 레이어 클릭 시 닫기
-  modalOverlay?.addEventListener('click', (e) => {
+  modalOverlay?.addEventListener('click', e => {
     if (e.target === modalOverlay) {
       closeModal();
     }
   });
 
   // ESC 키 누를 때 모달 닫기
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modalOverlay?.classList.contains("is-active")) {
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modalOverlay?.classList.contains('is-active')) {
       closeModal();
     }
   });

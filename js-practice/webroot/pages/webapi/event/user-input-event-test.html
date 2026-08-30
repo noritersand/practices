@@ -1,116 +1,126 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>사용자 입력 이벤트 테스트</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-</head>
+  <head>
+    <title>사용자 입력 이벤트 테스트</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>input-date event test</h1>
-    <h2>input</h2>
-    <section>
-      <input type="text" oninput="printValue(event, '#text-input-value')" />
-      <input type="checkbox" oninput="printChecked(event, '#checkbox-input-checked')" />
-      <p>value: <span id="text-input-value"></span></p>
-      <p>checked: <span id="checkbox-input-checked"></span></p>
-    </section>
-    <h2>beforeinput</h2>
-    <section>
-      <input type="text" onbeforeinput="printValue(event, '#text-beforeinput-value')" />
-      <input
-        type="checkbox"
-        onbeforeinput="printChecked(event, '#checkbox-beforeinput-checked')"
-      />
-      <input type="radio" name="radio01" value="01"
-             onbeforeinput="printValue(event, '#checkbox-click-radio-checked')" />
-      <input type="radio" name="radio01" value="02"
-             onbeforeinput="printValue(event, '#checkbox-click-radio-checked')" />
-      <p>value: <span id="text-beforeinput-value"></span></p>
-      <p>checked: <span id="checkbox-beforeinput-checked"></span></p>
-      <p>radio checked: <span id="checkbox-click-radio-checked"></span></p>
-      <div class="important">
-        <p>체크박스와 라디오는 beforeinput 이벤트가 발생하지 않음</p>
-      </div>
-    </section>
-    <h2>change</h2>
-    <section>
-      <input type="text" onchange="printValue(event, '#text-change-value')" />
-      <input type="checkbox" onchange="printChecked(event, '#checkbox-change-checked')" />
-      <p>value: <span id="text-change-value"></span></p>
-      <p>checked: <span id="checkbox-change-checked"></span></p>
-    </section>
-    <h2>input vs change</h2>
-    <section>
-      <input type="text"
-             oninput="handleTextInput(event, '#text-input-vs-change-value')"
-             onchange="handleTextChange(event, '#text-input-vs-change-value')" />
-      <input type="checkbox"
-             oninput="handleCheckboxInput(event, '#checkbox-input-vs-change-checked')"
-             onchange="handleCheckboxChange(event, '#checkbox-input-vs-change-checked')" />
-      <p>value: <span id="text-input-vs-change-value"></span></p>
-      <p>checked: <span id="checkbox-input-vs-change-checked"></span></p>
-    </section>
-    <h2>click</h2>
-    <section>
-      <input type="text" onclick="printValue(event, '#text-click-value')" />
-      <input type="checkbox" onclick="printChecked(event, '#checkbox-click-checked')" />
-      <p>value: <span id="text-click-value"></span></p>
-      <p>checked: <span id="checkbox-click-checked"></span></p>
-      체크 안되는 체크박스와 라디오: <input type="checkbox" onclick="preventEvent(event)" /> <input type="radio"
-                                                                                       onclick="preventEvent(event)" />
-      <div class="important">
-        <p>
-          click 이벤트는 event.target.checked에 이미 수정될 값이 들어있지만 event.preventDefault() 호출로 수정을 막을 수 있다.
-        </p>
-      </div>
-    </section>
-  </article>
-</main>
-<script>
-  function printValue(event, selector) {
-    console.log('printValue: ', event.target.value);
-    document.querySelector(selector).innerHTML = event.target.value;
-  }
+  <body>
+    <main>
+      <article>
+        <h1>input-date event test</h1>
+        <h2>input</h2>
+        <section>
+          <input type="text" oninput="printValue(event, '#text-input-value')" />
+          <input type="checkbox" oninput="printChecked(event, '#checkbox-input-checked')" />
+          <p>value: <span id="text-input-value"></span></p>
+          <p>checked: <span id="checkbox-input-checked"></span></p>
+        </section>
+        <h2>beforeinput</h2>
+        <section>
+          <input type="text" onbeforeinput="printValue(event, '#text-beforeinput-value')" />
+          <input type="checkbox" onbeforeinput="printChecked(event, '#checkbox-beforeinput-checked')" />
+          <input
+            type="radio"
+            name="radio01"
+            value="01"
+            onbeforeinput="printValue(event, '#checkbox-click-radio-checked')"
+          />
+          <input
+            type="radio"
+            name="radio01"
+            value="02"
+            onbeforeinput="printValue(event, '#checkbox-click-radio-checked')"
+          />
+          <p>value: <span id="text-beforeinput-value"></span></p>
+          <p>checked: <span id="checkbox-beforeinput-checked"></span></p>
+          <p>radio checked: <span id="checkbox-click-radio-checked"></span></p>
+          <div class="important">
+            <p>체크박스와 라디오는 beforeinput 이벤트가 발생하지 않음</p>
+          </div>
+        </section>
+        <h2>change</h2>
+        <section>
+          <input type="text" onchange="printValue(event, '#text-change-value')" />
+          <input type="checkbox" onchange="printChecked(event, '#checkbox-change-checked')" />
+          <p>value: <span id="text-change-value"></span></p>
+          <p>checked: <span id="checkbox-change-checked"></span></p>
+        </section>
+        <h2>input vs change</h2>
+        <section>
+          <input
+            type="text"
+            oninput="handleTextInput(event, '#text-input-vs-change-value')"
+            onchange="handleTextChange(event, '#text-input-vs-change-value')"
+          />
+          <input
+            type="checkbox"
+            oninput="handleCheckboxInput(event, '#checkbox-input-vs-change-checked')"
+            onchange="handleCheckboxChange(event, '#checkbox-input-vs-change-checked')"
+          />
+          <p>value: <span id="text-input-vs-change-value"></span></p>
+          <p>checked: <span id="checkbox-input-vs-change-checked"></span></p>
+        </section>
+        <h2>click</h2>
+        <section>
+          <input type="text" onclick="printValue(event, '#text-click-value')" />
+          <input type="checkbox" onclick="printChecked(event, '#checkbox-click-checked')" />
+          <p>value: <span id="text-click-value"></span></p>
+          <p>checked: <span id="checkbox-click-checked"></span></p>
+          체크 안되는 체크박스와 라디오: <input type="checkbox" onclick="preventEvent(event)" />
+          <input type="radio" onclick="preventEvent(event)" />
+          <div class="important">
+            <p>
+              click 이벤트는 event.target.checked에 이미 수정될 값이 들어있지만 event.preventDefault() 호출로 수정을
+              막을 수 있다.
+            </p>
+          </div>
+        </section>
+      </article>
+    </main>
+    <script>
+      function printValue(event, selector) {
+        console.log('printValue: ', event.target.value);
+        document.querySelector(selector).innerHTML = event.target.value;
+      }
 
-  function printChecked(event, selector) {
-    console.log('printChecked: ', event.target.checked);
-    document.querySelector(selector).innerHTML = event.target.checked;
-  }
+      function printChecked(event, selector) {
+        console.log('printChecked: ', event.target.checked);
+        document.querySelector(selector).innerHTML = event.target.checked;
+      }
 
-  function handleTextInput(event, selector) {
-    console.log('handleTextInput: ', event.target.value);
-    document.querySelector(selector).innerHTML = event.target.value;
-  }
+      function handleTextInput(event, selector) {
+        console.log('handleTextInput: ', event.target.value);
+        document.querySelector(selector).innerHTML = event.target.value;
+      }
 
-  function handleCheckboxInput(event, selector) {
-    console.log('handleCheckboxInput: ', event.target.checked);
-    document.querySelector(selector).innerHTML = event.target.checked;
-  }
+      function handleCheckboxInput(event, selector) {
+        console.log('handleCheckboxInput: ', event.target.checked);
+        document.querySelector(selector).innerHTML = event.target.checked;
+      }
 
-  function handleTextChange(event, selector) {
-    console.log('handleTextChange: ', event.target.value);
-    document.querySelector(selector).innerHTML = event.target.value;
-  }
+      function handleTextChange(event, selector) {
+        console.log('handleTextChange: ', event.target.value);
+        document.querySelector(selector).innerHTML = event.target.value;
+      }
 
-  function handleCheckboxChange(event, selector) {
-    console.log('handleCheckboxChange: ', event.target.checked);
-    document.querySelector(selector).innerHTML = event.target.checked;
-  }
+      function handleCheckboxChange(event, selector) {
+        console.log('handleCheckboxChange: ', event.target.checked);
+        document.querySelector(selector).innerHTML = event.target.checked;
+      }
 
-  function preventEvent(event, selector) {
-    console.log('preventEvent: ', event.target.checked);
-    event.preventDefault();
-  }
-</script>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+      function preventEvent(event, selector) {
+        console.log('preventEvent: ', event.target.checked);
+        event.preventDefault();
+      }
+    </script>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

@@ -40,9 +40,8 @@ export default function UseRefTest(): React.JSX.Element {
       <div className="important">
         <p>state +1 버튼은 누를 때마다 someState 값이 증가하고 화면이 렌더링된다.</p>
         <p>
-          ref +1 버튼은 누를 때마다 someRef 값이 증가하긴 하지만 화면 렌더링이 발생하진 않는다.
-          증가시킨 값은 someRef.current에 즉시 반영되는 걸 확인할 수 있다. (콘솔 출력 버튼 눌러볼
-          것)
+          ref +1 버튼은 누를 때마다 someRef 값이 증가하긴 하지만 화면 렌더링이 발생하진 않는다. 증가시킨 값은
+          someRef.current에 즉시 반영되는 걸 확인할 수 있다. (콘솔 출력 버튼 눌러볼 것)
         </p>
       </div>
     </section>

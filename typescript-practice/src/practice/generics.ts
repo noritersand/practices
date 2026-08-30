@@ -25,8 +25,8 @@
     },
     get: function () {
       return this.contents;
-    },
-  }
+    }
+  };
 
   const object = backpack.get();
   console.log(object); // []
@@ -59,5 +59,4 @@
       }, 2000);
     });
   }
-
 }

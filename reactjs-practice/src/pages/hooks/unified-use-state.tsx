@@ -34,11 +34,7 @@ export default function UnifiedUseState(): React.JSX.Element {
       <h2>하나의 객체로 여러 상태를 관리하는 방법</h2>
       <div>
         <span>value1: </span>
-        <input
-          type="text"
-          value={values.value1}
-          onChange={e => handleValueChange('value1', e.target.value)}
-        />
+        <input type="text" value={values.value1} onChange={e => handleValueChange('value1', e.target.value)} />
         <hr />
         <span>value2: </span>
         <label>
@@ -66,11 +62,7 @@ export default function UnifiedUseState(): React.JSX.Element {
         <hr />
         <span>value3: </span>
         <label>
-          <input
-            type="checkbox"
-            checked={values.value3}
-            onChange={() => handleCheckboxChange('value3')}
-          />
+          <input type="checkbox" checked={values.value3} onChange={() => handleCheckboxChange('value3')} />
           &nbsp;true
         </label>
         <hr />

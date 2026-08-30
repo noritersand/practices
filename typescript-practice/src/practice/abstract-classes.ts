@@ -3,7 +3,7 @@
     abstract getName(): string;
 
     printName() {
-      console.log("Hello, " + this.getName());
+      console.log('Hello, ' + this.getName());
     }
   }
 
@@ -11,7 +11,7 @@
 
   class Derived extends Base {
     getName() {
-      return "world";
+      return 'world';
     }
   }
 
@@ -22,8 +22,8 @@
   // ⛔ error TS18052: Non-abstract class 'Derived2' does not implement all abstract members of 'Base'
 
   // function greet(ctor: typeof Base) {
-    // const instance = new ctor(); // ⛔ error TS2511: Cannot create an instance of an abstract class.
-    // instance.printName();
+  // const instance = new ctor(); // ⛔ error TS2511: Cannot create an instance of an abstract class.
+  // instance.printName();
   // }
 
   // function greet(ctor: new () => Base) {

@@ -1,80 +1,84 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>연습장 #1</title>
-  <meta charset="utf-8" />
-  <!-- <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline';" /> -->
-  <!-- <meta http-equiv="Content-Security-Policy" content="style-src 'self';" /> -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <link rel="stylesheet" href="/static/lib/prism/prism.css" />
-  <script src="/static/lib/prism/prism.js"></script>
-  <script type="module" src="/static/scripts/fire-when-ready.js"></script>
-</head>
+  <head>
+    <title>연습장 #1</title>
+    <meta charset="utf-8" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="style-src 'self' 'unsafe-inline';" /> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="style-src 'self';" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <link rel="stylesheet" href="/static/lib/prism/prism.css" />
+    <script src="/static/lib/prism/prism.js"></script>
+    <script type="module" src="/static/scripts/fire-when-ready.js"></script>
+  </head>
 
-<body>
-<header>
-  <nav></nav>
-</header>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main class="parent">
-  <article>
-    <h1>연습장 #1</h1>
+    <main class="parent">
+      <article>
+        <h1>연습장 #1</h1>
 
-    <section>
-      <div id="toc" class="mrgn-btm"></div>
-    </section>
+        <section>
+          <div id="toc" class="mrgn-btm"></div>
+        </section>
 
-    <section>
-      <p>콘솔창을 열어볼 것</p>
-      <div id="note"></div>
+        <section>
+          <p>콘솔창을 열어볼 것</p>
+          <div id="note"></div>
 
-      <section id="first">
-        <input type="text" />
-        <br />
-        <input type="text" title="테스트1" />
-        <br />
-        <label for="foo1">야호</label><input type="text" id="foo1" style="display: none" />
-        <br />
-      </section>
+          <section id="first">
+            <input type="text" />
+            <br />
+            <input type="text" title="테스트1" />
+            <br />
+            <label for="foo1">야호</label><input type="text" id="foo1" style="display: none" />
+            <br />
+          </section>
 
-      <section id="second">
-        <button type="button" class="child">버튼1</button>
-        <button type="button" class="child" title="버튼2">btn2</button>
-        <br />
-        <button type="button" class="child" id="btn3">버튼3</button>
-        <button type="button" class="child" id="btn4"><span>버튼4</span>버튼44</button>
-      </section>
-    </section>
-  </article>
-</main>
-<script>
-  const parent = document.querySelector('.parent');
-  const child = document.querySelector('.child');
+          <section id="second">
+            <button type="button" class="child">버튼1</button>
+            <button type="button" class="child" title="버튼2">btn2</button>
+            <br />
+            <button type="button" class="child" id="btn3">버튼3</button>
+            <button type="button" class="child" id="btn4"><span>버튼4</span>버튼44</button>
+          </section>
+        </section>
+      </article>
+    </main>
+    <script>
+      const parent = document.querySelector('.parent');
+      const child = document.querySelector('.child');
 
-  parent.addEventListener('click', () => {
-    console.log('부모 - 캡처링');
-  }, true);  // 캡처링
+      parent.addEventListener(
+        'click',
+        () => {
+          console.log('부모 - 캡처링');
+        },
+        true
+      ); // 캡처링
 
-  parent.addEventListener('click', () => {
-    console.log('부모 - 버블링');
-  }); // 버블링
+      parent.addEventListener('click', () => {
+        console.log('부모 - 버블링');
+      }); // 버블링
 
-  child.addEventListener('click', () => {
-    console.log('자식 - 일반');
-  });
+      child.addEventListener('click', () => {
+        console.log('자식 - 일반');
+      });
 
-  // child 클릭시 로그 순서:
-  // 1. "부모 - 캡처링"    <- useCapture: true라서 가장 먼저 실행
-  // 2. "자식 - 일반"      <- 실제 클릭된 타겟의 리스너
-  // 3. "부모 - 버블링"    <- 버블링 단계에서 실행
-</script>
-</body>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
+      // child 클릭시 로그 순서:
+      // 1. "부모 - 캡처링"    <- useCapture: true라서 가장 먼저 실행
+      // 2. "자식 - 일반"      <- 실제 클릭된 타겟의 리스너
+      // 3. "부모 - 버블링"    <- 버블링 단계에서 실행
+    </script>
+  </body>
+  <footer>
+    <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+  </footer>
 </html>

@@ -29,11 +29,7 @@ export default function UseReducerTest2(): React.JSX.Element {
       <div>
         <label>
           Name:
-          <input
-            type="text"
-            value={state.name}
-            onChange={e => dispatch({keyName: 'name', payload: e.target.value})}
-          />
+          <input type="text" value={state.name} onChange={e => dispatch({keyName: 'name', payload: e.target.value})} />
         </label>
       </div>
       <div>

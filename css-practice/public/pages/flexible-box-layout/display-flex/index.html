@@ -1,70 +1,71 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>display: flex</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
-<main>
-  <article>
-    <h1>display: flex</h1>
+  <head>
+    <title>display: flex</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+    <main>
+      <article>
+        <h1>display: flex</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p>display: flex는 CSS의 Flexible Box Layout(줄여서 Flexbox) 모듈을 활성화하는 프로퍼티로, CSS 박스 모델의 레이아웃을 1차원으로 설정할
-        때 사용한다.</p>
-      <p>기존에 사용하던 float나 inline-box 같은 오래된 프로퍼티 비해 배치와 정렬이 매우 쉽다.</p>
+        <section>
+          <h2>개요</h2>
+          <p>
+            display: flex는 CSS의 Flexible Box Layout(줄여서 Flexbox) 모듈을 활성화하는 프로퍼티로, CSS 박스 모델의
+            레이아웃을 1차원으로 설정할 때 사용한다.
+          </p>
+          <p>기존에 사용하던 float나 inline-box 같은 오래된 프로퍼티 비해 배치와 정렬이 매우 쉽다.</p>
 
-      <div class="important">
-        <img src="/images/flexible-box-layout-concept-diagram.png" />
-        <ul>
-          <li><strong>flex container</strong>: Flexbox Layout의 시작점이자 flex item들을 감싸는 부모 엘리먼트</li>
-          <li><strong>flex item</strong>: flex container 내부에 배치되는 구성 요소이자 자식 엘리먼트</li>
-          <li><strong>main axis</strong>: flex item들이 정렬되는 기본 진행 방향의 축</li>
-          <li><strong>cross axis</strong>: main axis와 수직을 이루는 교차 방향의 축</li>
-        </ul>
-      </div>
+          <div class="important">
+            <img src="/images/flexible-box-layout-concept-diagram.png" />
+            <ul>
+              <li><strong>flex container</strong>: Flexbox Layout의 시작점이자 flex item들을 감싸는 부모 엘리먼트</li>
+              <li><strong>flex item</strong>: flex container 내부에 배치되는 구성 요소이자 자식 엘리먼트</li>
+              <li><strong>main axis</strong>: flex item들이 정렬되는 기본 진행 방향의 축</li>
+              <li><strong>cross axis</strong>: main axis와 수직을 이루는 교차 방향의 축</li>
+            </ul>
+          </div>
 
-      <div class="code-wrapper">
-        <pre><code class="language-css"><!--
+          <div class="code-wrapper">
+            <pre><code class="language-css"><!--
         .container {
           display: flex;
           justify-content: space-between;
         }
         --></code></pre>
-        <pre><code class="language-html"><!--
+            <pre><code class="language-html"><!--
         <div class="container">
           <div>left</div>
           <div>center</div>
           <div>right</div>
         </div>
         --></code></pre>
-      </div>
-      <div class="code-result">
-        <div class="container">
-          <div>left</div>
-          <div>center</div>
-          <div>right</div>
-        </div>
-      </div>
-    </section>
-
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+          </div>
+          <div class="code-result">
+            <div class="container">
+              <div>left</div>
+              <div>center</div>
+              <div>right</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

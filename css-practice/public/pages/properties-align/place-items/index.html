@@ -1,56 +1,69 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>place-items</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="page.css" />
-  <script src="/lib/prism/prism.js"></script>
-  <script type="module" src="/scripts/fire-when-ready.js"></script>
-</head>
-<body>
-<header>
-  <nav></nav>
-</header>
+  <head>
+    <title>place-items</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="page.css" />
+    <script src="/lib/prism/prism.js"></script>
+    <script type="module" src="/scripts/fire-when-ready.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
 
-<main>
-  <article>
-    <h1>place-items</h1>
+    <main>
+      <article>
+        <h1>place-items</h1>
 
-    <section>
-      <div id="toc"></div>
-    </section>
+        <section>
+          <div id="toc"></div>
+        </section>
 
-    <section>
-      <h2>개요</h2>
-      <p><code class="language-css">place-items</code>는 그리드나 플렉스박스 레이아웃에서 컨테이너 내부의 자식 엘리먼트들에 대해 블록 방향(align-items)과 인라인
-        방향(justify-items)의 정렬을 한 번에 설정할 때 사용하는 단축 프로퍼티다.
-      </p>
-      <pre><code class="language-css"><!--
+        <section>
+          <h2>개요</h2>
+          <p>
+            <code class="language-css">place-items</code>는 그리드나 플렉스박스 레이아웃에서 컨테이너 내부의 자식
+            엘리먼트들에 대해 블록 방향(align-items)과 인라인 방향(justify-items)의 정렬을 한 번에 설정할 때 사용하는
+            단축 프로퍼티다.
+          </p>
+          <pre><code class="language-css"><!--
       page-items: align-items justify-items
       --></code></pre>
-      <p>공백을 기준으로 좌측이 <code class="language-css">align-items</code>, 우측이 <code class="language-css">justify-items</code>로
-        해석된다.</p>
-      <p>컨테이너에 지정하는 프로퍼티고, 프로퍼티를 생략했을 때의 기본값은 <code class="language-css">normal</code>이다.</p>
-    </section>
+          <p>
+            공백을 기준으로 좌측이 <code class="language-css">align-items</code>, 우측이
+            <code class="language-css">justify-items</code>로 해석된다.
+          </p>
+          <p>
+            컨테이너에 지정하는 프로퍼티고, 프로퍼티를 생략했을 때의 기본값은
+            <code class="language-css">normal</code>이다.
+          </p>
+        </section>
 
-    <section>
-      <h2>특이사항</h2>
-      <h4>값 지정 방식</h4>
-      <p>하나의 값만 지정하면 <code class="language-css">align-items</code>와 <code class="language-css">justify-items</code> 모두에
-        동일한 값이 적용된다. 두 개의 값을 지정하면 첫 번째 값은 <code class="language-css">align-items</code>(수직/블록 방향), 두 번째 값은 <code
-          class="language-css">justify-items</code>(수평/인라인 방향)로 작동한다.</p>
-      <h4>사실상 그리드 전용 프로퍼티</h4>
-      <p>일반 레이아웃(Block/Inline)에서는 기본적으로 정렬 개념이 적용되지 않거나 효력이 없으므로, 주로 그리드 컨테이너 및 플렉스 컨테이너에서 자식 엘리먼트들의 교차 축 및 주 축 정렬을 제어하기
-        위해 사용한다. 플렉스 컨테이너에서는 <code class="language-css">justify-items</code> 프로퍼티가 작동하지 않으며, 첫 번째 값인 <code
-          class="language-css">align-items</code>만 교차 축 정렬에
-        작동하고, 두 번째 값은 무시된다.</p>
-    </section>
+        <section>
+          <h2>특이사항</h2>
+          <h4>값 지정 방식</h4>
+          <p>
+            하나의 값만 지정하면 <code class="language-css">align-items</code>와
+            <code class="language-css">justify-items</code> 모두에 동일한 값이 적용된다. 두 개의 값을 지정하면 첫 번째
+            값은 <code class="language-css">align-items</code>(수직/블록 방향), 두 번째 값은
+            <code class="language-css">justify-items</code>(수평/인라인 방향)로 작동한다.
+          </p>
+          <h4>사실상 그리드 전용 프로퍼티</h4>
+          <p>
+            일반 레이아웃(Block/Inline)에서는 기본적으로 정렬 개념이 적용되지 않거나 효력이 없으므로, 주로 그리드
+            컨테이너 및 플렉스 컨테이너에서 자식 엘리먼트들의 교차 축 및 주 축 정렬을 제어하기 위해 사용한다. 플렉스
+            컨테이너에서는
+            <code class="language-css">justify-items</code> 프로퍼티가 작동하지 않으며, 첫 번째 값인
+            <code class="language-css">align-items</code>만 교차 축 정렬에 작동하고, 두 번째 값은 무시된다.
+          </p>
+        </section>
 
-    <section>
-      <h2>Syntax</h2>
-      <pre><code class="language-sass"><!--
+        <section>
+          <h2>Syntax</h2>
+          <pre><code class="language-sass"><!--
       // Positional alignment
       place-items: center;
       place-items: normal start;
@@ -76,225 +89,250 @@
       place-items: revert-layer;
       place-items: unset;
       --></code></pre>
-    </section>
+        </section>
 
-    <section>
-      <h2>Values</h2>
+        <section>
+          <h2>Values</h2>
 
-      <h3>Positional Alignment</h3>
+          <h3>Positional Alignment</h3>
 
-      <h4>center</h4>
-      <p>블록 축과 인라인 축 모두 중앙 정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>center</h4>
+          <p>블록 축과 인라인 축 모두 중앙 정렬을 적용한다.</p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: center
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-center">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-center">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>normal start</h4>
-      <p>수직 방향은 기본 정렬 방식인 <code class="language-css">normal</code>을 유지하고, 수평 방향은 <code class="language-css">start</code>(시작점)로
-        정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>normal start</h4>
+          <p>
+            수직 방향은 기본 정렬 방식인 <code class="language-css">normal</code>을 유지하고, 수평 방향은
+            <code class="language-css">start</code>(시작점)로 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: normal start
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-normal-start">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-normal-start">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>center normal</h4>
-      <p>수직 방향은 중앙 정렬을 적용하고, 수평 방향은 기본 정렬 방식인 <code class="language-css">normal</code>로 정렬한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>center normal</h4>
+          <p>
+            수직 방향은 중앙 정렬을 적용하고, 수평 방향은 기본 정렬 방식인
+            <code class="language-css">normal</code>로 정렬한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: center normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-center-normal">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-center-normal">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>start legacy</h4>
-      <p>수직 방향은 <code class="language-css">start</code>로 정렬하고, 수평 방향은 하위 자손 엘리먼트까지 정렬을 상속시키는 <code class="language-css">legacy</code>
-        키워드가 적용된다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>start legacy</h4>
+          <p>
+            수직 방향은 <code class="language-css">start</code>로 정렬하고, 수평 방향은 하위 자손 엘리먼트까지 정렬을
+            상속시키는 <code class="language-css">legacy</code> 키워드가 적용된다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: start legacy
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-start-legacy">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-start-legacy">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>end normal</h4>
-      <p>수직 방향은 <code class="language-css">end</code>(끝점)로 정렬하고, 수평 방향은 기본 정렬 방식인 <code
-        class="language-css">normal</code>을 유지한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>end normal</h4>
+          <p>
+            수직 방향은 <code class="language-css">end</code>(끝점)로 정렬하고, 수평 방향은 기본 정렬 방식인
+            <code class="language-css">normal</code>을 유지한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: end normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-end-normal">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-end-normal">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>self-start legacy</h4>
-      <p>수직 방향은 자식 엘리먼트 자체의 여백 가장자리 시작점(<code class="language-css">self-start</code>)에 맞추고, 수평 방향은 <code
-        class="language-css">legacy</code> 정렬 방식을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>self-start legacy</h4>
+          <p>
+            수직 방향은 자식 엘리먼트 자체의 여백 가장자리 시작점(<code class="language-css">self-start</code>)에
+            맞추고, 수평 방향은 <code class="language-css">legacy</code> 정렬 방식을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: self-start legacy
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-self-start-legacy">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-self-start-legacy">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>self-end normal</h4>
-      <p>수직 방향은 자식 엘리먼트 자체의 여백 가장자리 끝점(<code class="language-css">self-end</code>)에 맞추고, 수평 방향은 <code
-        class="language-css">normal</code> 정렬 방식을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>self-end normal</h4>
+          <p>
+            수직 방향은 자식 엘리먼트 자체의 여백 가장자리 끝점(<code class="language-css">self-end</code>)에 맞추고,
+            수평 방향은 <code class="language-css">normal</code> 정렬 방식을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: self-end normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-self-end-normal">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-self-end-normal">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h4>flex-start legacy</h4>
-      <p>플렉스 레이아웃에서 교차 축 수직 정렬을 플렉스 라인의 시작점(<code class="language-css">flex-start</code>)에 맞춘다. (수평 정렬 값은 무시된다)</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-start legacy</h4>
+          <p>
+            플렉스 레이아웃에서 교차 축 수직 정렬을 플렉스 라인의 시작점(<code class="language-css">flex-start</code>)에
+            맞춘다. (수평 정렬 값은 무시된다)
+          </p>
+          <pre><code class="language-sass"><!--
       display: flex
       place-items: flex-start legacy
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex-start-legacy">
-          <div class="item">Flex Item 1</div>
-          <div class="item">Flex Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex-start-legacy">
+              <div class="item">Flex Item 1</div>
+              <div class="item">Flex Item 2</div>
+            </div>
+          </div>
 
-      <h4>flex-end normal</h4>
-      <p>플렉스 레이아웃에서 교차 축 수직 정렬을 플렉스 라인의 끝점(<code class="language-css">flex-end</code>)에 맞춘다. (수평 정렬 값은 무시된다)</p>
-      <pre><code class="language-sass"><!--
+          <h4>flex-end normal</h4>
+          <p>
+            플렉스 레이아웃에서 교차 축 수직 정렬을 플렉스 라인의 끝점(<code class="language-css">flex-end</code>)에
+            맞춘다. (수평 정렬 값은 무시된다)
+          </p>
+          <pre><code class="language-sass"><!--
       display: flex
       place-items: flex-end normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-flex-end-normal">
-          <div class="item">Flex Item 1</div>
-          <div class="item">Flex Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-flex-end-normal">
+              <div class="item">Flex Item 1</div>
+              <div class="item">Flex Item 2</div>
+            </div>
+          </div>
 
-      <h4>anchor-center</h4>
-      <p>CSS Anchor Positioning 사양에 따라 앵커 엘리먼트의 중심에 맞추어 블록/인라인 축 정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>anchor-center</h4>
+          <p>CSS Anchor Positioning 사양에 따라 앵커 엘리먼트의 중심에 맞추어 블록/인라인 축 정렬을 적용한다.</p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: anchor-center
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-anchor-center">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-anchor-center">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
 
-      <h3>Baseline Alignment</h3>
+          <h3>Baseline Alignment</h3>
 
-      <h4>baseline normal</h4>
-      <p>수직 정렬을 첫 번째 베이스라인(<code class="language-css">baseline</code>)에 맞추고, 수평 정렬은 <code
-        class="language-css">normal</code> 정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>baseline normal</h4>
+          <p>
+            수직 정렬을 첫 번째 베이스라인(<code class="language-css">baseline</code>)에 맞추고, 수평 정렬은
+            <code class="language-css">normal</code> 정렬을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: baseline normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-baseline-normal">
-          <div class="item font-small">Text Small</div>
-          <div class="item font-large">Text Large</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-baseline-normal">
+              <div class="item font-small">Text Small</div>
+              <div class="item font-large">Text Large</div>
+            </div>
+          </div>
 
-      <h4>first baseline legacy</h4>
-      <p>수직 정렬을 가장 첫 번째 베이스라인(<code class="language-css">first baseline</code>)에 맞추고, 수평 정렬은 <code class="language-css">legacy</code>
-        방식으로 처리한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>first baseline legacy</h4>
+          <p>
+            수직 정렬을 가장 첫 번째 베이스라인(<code class="language-css">first baseline</code>)에 맞추고, 수평 정렬은
+            <code class="language-css">legacy</code> 방식으로 처리한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: first baseline legacy
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-first-baseline-legacy">
-          <div class="item font-small">Text Small</div>
-          <div class="item font-large">Text Large</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-first-baseline-legacy">
+              <div class="item font-small">Text Small</div>
+              <div class="item font-large">Text Large</div>
+            </div>
+          </div>
 
-      <h4>last baseline normal</h4>
-      <p>수직 정렬을 가장 마지막 베이스라인(<code class="language-css">last baseline</code>)에 맞추고, 수평 정렬은 <code class="language-css">normal</code>
-        정렬을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>last baseline normal</h4>
+          <p>
+            수직 정렬을 가장 마지막 베이스라인(<code class="language-css">last baseline</code>)에 맞추고, 수평 정렬은
+            <code class="language-css">normal</code> 정렬을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: last baseline normal
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-last-baseline-normal">
-          <div class="item font-small">Text<br>Line 2</div>
-          <div class="item font-large">Text<br>Line 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-last-baseline-normal">
+              <div class="item font-small">Text<br />Line 2</div>
+              <div class="item font-large">Text<br />Line 2</div>
+            </div>
+          </div>
 
-      <h4>stretch legacy</h4>
-      <p>수직 정렬은 트랙의 전체 높이에 맞추어 자식 엘리먼트를 늘리고(<code class="language-css">stretch</code>), 수평 정렬은 <code
-        class="language-css">legacy</code> 정렬 규칙을 적용한다.</p>
-      <pre><code class="language-sass"><!--
+          <h4>stretch legacy</h4>
+          <p>
+            수직 정렬은 트랙의 전체 높이에 맞추어 자식 엘리먼트를 늘리고(<code class="language-css">stretch</code>),
+            수평 정렬은 <code class="language-css">legacy</code> 정렬 규칙을 적용한다.
+          </p>
+          <pre><code class="language-sass"><!--
       display: grid
       grid-template-columns: repeat(2, 1fr)
       place-items: stretch legacy
       --></code></pre>
-      <div class="code-result">
-        <div class="container ex-stretch-legacy">
-          <div class="item">Item 1</div>
-          <div class="item">Item 2</div>
-        </div>
-      </div>
+          <div class="code-result">
+            <div class="container ex-stretch-legacy">
+              <div class="item">Item 1</div>
+              <div class="item">Item 2</div>
+            </div>
+          </div>
+        </section>
+      </article>
+    </main>
 
-    </section>
-
-  </article>
-</main>
-
-<footer>
-  <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
-</footer>
-</body>
+    <footer>
+      <a class="back-button" href="/pages">⬅ pages로 돌아가기</a>
+    </footer>
+  </body>
 </html>

@@ -39,10 +39,7 @@ export default function UseCallbackTest(): React.JSX.Element {
             </p>
             <button onClick={() => setRefresh(prev => !prev)}>callback refresh toggle</button>
           </div>
-          <p>
-            버튼을 누르기 전에는 callback()에서 참조하는 foo의 값이 변화하지 않는다. (실제로는
-            변했어도)
-          </p>
+          <p>버튼을 누르기 전에는 callback()에서 참조하는 foo의 값이 변화하지 않는다. (실제로는 변했어도)</p>
         </section>
         <hr />
         <section>

@@ -13,7 +13,7 @@ yarn sass:build
 # Sass watch 모드로 컴파일
 yarn sass:watch
 
-# Sass watch 모드로 컴파일 + live-server 기동 
+# Sass watch 모드로 컴파일 + live-server 기동
 yarn dev
 ```
 

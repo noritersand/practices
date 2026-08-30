@@ -1,69 +1,67 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>연습장: jQuery 1.x</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>연습장: jQuery 1.x</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>연습장: jQuery 1.x</h1>
-    <form>
-      <div>
-        <input type="checkbox" id="checkbox1" name="checkbox1" checked data-index="1" />test
-        <input type="text" id="text1" name="text" data-index="1" />
-      </div>
-      <div>
-        <input type="checkbox" id="checkbox2" name="checkbox2" checked data-index="2" />test
-        <input type="text" id="text2" name="text" data-index="2" />
-      </div>
-      <div>
-        <input type="checkbox" id="checkbox3" name="checkbox3" checked data-index="3" />test
-        <input type="text" id="text3" name="text" data-index="3" />
-      </div>
-      <div>
-        <input type="radio" name="additionalInfo" id="vipYn" value="N" />
-        <label for="vipYn" class="margin-right-10">VIP</label>
-        <input type="radio" name="additionalInfo" id="careCustYn" value="N" />
-        <label for="careCustYn" class="margin-right-10">관심</label>
-        <input type="radio" name="additionalInfo" id="vendorYn" value="Y" checked="" />
-        <label for="vendorYn" class="margin-right-10">제휴사</label>
-      </div>
-      <div>
-        <button type="button" onclick="showCheckedRadioValue()">체크 하고 눌러요</button>
-        <br />
-        result:
-        <div id="result"></div>
-      </div>
-    </form>
-    <script>
-      // $('form').find('input[type="checkbox"]').change(function() { // 한 단계 걸쳐 검색하는것 외엔 아래줄과 차이 없음
-      $('input[type="checkbox"][data-index]')
-        .change(function() {
-          var $this = $(this);
-          var index = $this.attr('data-index'); // .attr() 대신 .data() 사용 가능
-          var $target = $('input[type=text][data-index="' + index + '"]');
-          $target.prop('disabled', $this.is(':checked'));
-        })
-        .change(); // change(function)으로 핸들러 할당 후 change()로 이벤트 강제 발생시킴
+  <body>
+    <main>
+      <article>
+        <h1>연습장: jQuery 1.x</h1>
+        <form>
+          <div>
+            <input type="checkbox" id="checkbox1" name="checkbox1" checked data-index="1" />test
+            <input type="text" id="text1" name="text" data-index="1" />
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox2" name="checkbox2" checked data-index="2" />test
+            <input type="text" id="text2" name="text" data-index="2" />
+          </div>
+          <div>
+            <input type="checkbox" id="checkbox3" name="checkbox3" checked data-index="3" />test
+            <input type="text" id="text3" name="text" data-index="3" />
+          </div>
+          <div>
+            <input type="radio" name="additionalInfo" id="vipYn" value="N" />
+            <label for="vipYn" class="margin-right-10">VIP</label>
+            <input type="radio" name="additionalInfo" id="careCustYn" value="N" />
+            <label for="careCustYn" class="margin-right-10">관심</label>
+            <input type="radio" name="additionalInfo" id="vendorYn" value="Y" checked="" />
+            <label for="vendorYn" class="margin-right-10">제휴사</label>
+          </div>
+          <div>
+            <button type="button" onclick="showCheckedRadioValue()">체크 하고 눌러요</button>
+            <br />
+            result:
+            <div id="result"></div>
+          </div>
+        </form>
+        <script>
+          // $('form').find('input[type="checkbox"]').change(function() { // 한 단계 걸쳐 검색하는것 외엔 아래줄과 차이 없음
+          $('input[type="checkbox"][data-index]')
+            .change(function () {
+              var $this = $(this);
+              var index = $this.attr('data-index'); // .attr() 대신 .data() 사용 가능
+              var $target = $('input[type=text][data-index="' + index + '"]');
+              $target.prop('disabled', $this.is(':checked'));
+            })
+            .change(); // change(function)으로 핸들러 할당 후 change()로 이벤트 강제 발생시킴
 
-      function showCheckedRadioValue() {
-        document.querySelector('#result').innerHTML = $(
-          'input[name=additionalInfo]:checked'
-        ).val();
-      }
-    </script>
-  </article>
-</main>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+          function showCheckedRadioValue() {
+            document.querySelector('#result').innerHTML = $('input[name=additionalInfo]:checked').val();
+          }
+        </script>
+      </article>
+    </main>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

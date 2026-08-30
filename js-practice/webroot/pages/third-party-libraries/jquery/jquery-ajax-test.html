@@ -1,56 +1,56 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <title>jQuery AJAX test</title>
-  <meta charset="utf-8" />
-  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/static/styles/normalize.css" />
-  <link rel="stylesheet" href="/static/styles/letters.css" />
-  <link rel="stylesheet" href="/static/styles/global.css" />
-  <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
-</head>
+  <head>
+    <title>jQuery AJAX test</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/static/styles/normalize.css" />
+    <link rel="stylesheet" href="/static/styles/letters.css" />
+    <link rel="stylesheet" href="/static/styles/global.css" />
+    <script src="/static/lib/jquery/jquery-1.12.4.js"></script>
+  </head>
 
-<body>
-<main>
-  <article>
-    <h1>jQuery AJAX test</h1>
-    <p>get method response: <span style="color: red" id="result1"></span></p>
-    <p>post method response: <span style="color: red" id="result2"></span></p>
-  </article>
-</main>
-<script>
-  $.ajax({
-    url: '//localhost:8900/uncategorized/read-querystring.data?a=1',
-    data: JSON.stringify({b: 2, c: 3}),
-    method: 'get',
-    contentType: 'application/json',
-    dataType: 'json', // response type
-    success: function(data, textStatus, jqXhr) {
-      $('#result1').text(JSON.stringify(data));
-      console.log('data:', data);
-      console.log('textStatus:', textStatus);
-      console.log('jqXhr:', jqXhr);
-    }
-  });
+  <body>
+    <main>
+      <article>
+        <h1>jQuery AJAX test</h1>
+        <p>get method response: <span style="color: red" id="result1"></span></p>
+        <p>post method response: <span style="color: red" id="result2"></span></p>
+      </article>
+    </main>
+    <script>
+      $.ajax({
+        url: '//localhost:8900/uncategorized/read-querystring.data?a=1',
+        data: JSON.stringify({b: 2, c: 3}),
+        method: 'get',
+        contentType: 'application/json',
+        dataType: 'json', // response type
+        success: function (data, textStatus, jqXhr) {
+          $('#result1').text(JSON.stringify(data));
+          console.log('data:', data);
+          console.log('textStatus:', textStatus);
+          console.log('jqXhr:', jqXhr);
+        }
+      });
 
-  // 파폭은 url에 read-payload를 붙이면 ajax 요청이 안날라가는 이슈가 있음.
-  $.ajax({
-    url: '//localhost:8900/uncategorized/read-body.data?a=1',
-    data: JSON.stringify({d: 4, f: 5}),
-    method: 'post',
-    contentType: 'application/json',
-    dataType: 'json', // response type
-    success: function(data, textStatus, jqXhr) {
-      $('#result2').text(JSON.stringify(data));
-      console.log('data:', data);
-      console.log('textStatus:', textStatus);
-      console.log('jqXhr:', jqXhr);
-    }
-  });
-</script>
-<footer>
-  <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
-</footer>
-</body>
+      // 파폭은 url에 read-payload를 붙이면 ajax 요청이 안날라가는 이슈가 있음.
+      $.ajax({
+        url: '//localhost:8900/uncategorized/read-body.data?a=1',
+        data: JSON.stringify({d: 4, f: 5}),
+        method: 'post',
+        contentType: 'application/json',
+        dataType: 'json', // response type
+        success: function (data, textStatus, jqXhr) {
+          $('#result2').text(JSON.stringify(data));
+          console.log('data:', data);
+          console.log('textStatus:', textStatus);
+          console.log('jqXhr:', jqXhr);
+        }
+      });
+    </script>
+    <footer>
+      <a class="back-button" href="/">⬅ 홈으로 돌아가기</a>
+    </footer>
+  </body>
 </html>

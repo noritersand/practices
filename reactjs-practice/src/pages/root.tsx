@@ -105,9 +105,7 @@ export default function Root() {
           <p>React Router</p>
           <ul>
             <li>
-              <Link to={'/third-party/react-router/react-router-hooks/foo?bar=123'}>
-                React Router's hooks
-              </Link>
+              <Link to={'/third-party/react-router/react-router-hooks/foo?bar=123'}>React Router's hooks</Link>
             </li>
           </ul>
           <p>Vercel</p>

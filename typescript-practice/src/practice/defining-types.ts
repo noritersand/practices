@@ -16,7 +16,7 @@
 
   const user: User = {
     name: 'Hayes',
-    id: 0,
+    id: 0
   };
 
   // console.log(4 / []);
